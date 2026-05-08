@@ -1,0 +1,104 @@
+{
+  "args": {
+    "config": "config.yaml",
+    "profile": "recipe_poc_2day",
+    "data_dir": "./data_recipe_poc_2day",
+    "runs_dir": null,
+    "checkpoint": [
+      "./Model_Checkpoints/best_step41000.pt"
+    ],
+    "checkpoint_dir": "./Model_Checkpoints",
+    "output_dir": "./test_outputs",
+    "recipe": "chicken butter masala",
+    "prefix": null,
+    "ingredients_only": false,
+    "num_samples": 3,
+    "length": 160,
+    "top_k": 20,
+    "temperature": 0.75,
+    "seed": 22
+  },
+  "results": [
+    {
+      "checkpoint": "/Volumes/Auxilary/Side_Projects/Diffusion_Testing/Diffusion_Testing_April_23rd/Model_Checkpoints/best_step41000.pt",
+      "checkpoint_name": "best_step41000.pt",
+      "loaded_step": 41000,
+      "prompt": "<RECIPE_START> <TITLE_START> Chicken Butter Masala <TITLE_END> <INPUT_START>",
+      "samples": [
+        {
+          "title": "Chicken Butter Masala",
+          "ingredients": [
+            "crust",
+            "sugar",
+            "butter",
+            "eggs",
+            "flour",
+            "soda",
+            "salt",
+            "vanilla",
+            "vinegar",
+            "unbaked pie crust"
+          ],
+          "steps": [
+            "Beat sugar and margarine",
+            "Add flour, soda, salt and eggs",
+            "Add vinegar and vanilla",
+            "Add sugar"
+          ],
+          "formatted": "Chicken Butter Masala\n\nIngredients:\n- crust\n- sugar\n- butter\n- eggs\n- flour\n- soda\n- salt\n- vanilla\n- vinegar\n- unbaked pie crust\n\nInstructions:\n1. Beat sugar and margarine\n2. Add flour, soda, salt and eggs\n3. Add vinegar and vanilla\n4. Add sugar",
+          "quality_score": 14,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Chicken Butter Masala <TITLE_END> <INPUT_START>[EOS]<RECIPE_START> <INPUT_START> crust <NEXT_INPUT> sugar <NEXT_INPUT> butter <NEXT_INPUT> eggs <NEXT_INPUT> flour <NEXT_INPUT> soda <NEXT_INPUT> sugar <NEXT_INPUT> salt <NEXT_INPUT> vanilla <NEXT_INPUT> vinegar <NEXT_INPUT> vanilla <NEXT_INPUT> unbaked pie crust <INPUT_END> <INSTR_START> Beat sugar and margarine. <NEXT_INSTR> Add flour, soda, salt and eggs. <NEXT_INSTR> Add vinegar and vanilla <NEXT_INSTR> <NEXT_INSTR> Add sugar. <NEXT_INSTR>",
+          "sample_index": 1
+        },
+        {
+          "title": "Chicken Butter Masala",
+          "ingredients": [
+            "broccoli",
+            "butter",
+            "onion",
+            "Cheddar cheese"
+          ],
+          "steps": [
+            "Cook broccoli and onion in butter until tender and remove",
+            "Add flour, salt and pepper",
+            "Add cheese, stirring, stirring well",
+            "Add broccoli",
+            "Cook for 5 minutes",
+            "Remove from heat",
+            "Add in broccoli",
+            "Cook until thick, stirring"
+          ],
+          "formatted": "Chicken Butter Masala\n\nIngredients:\n- broccoli\n- butter\n- onion\n- Cheddar cheese\n\nInstructions:\n1. Cook broccoli and onion in butter until tender and remove\n2. Add flour, salt and pepper\n3. Add cheese, stirring, stirring well\n4. Add broccoli\n5. Cook for 5 minutes\n6. Remove from heat\n7. Add in broccoli\n8. Cook until thick, stirring",
+          "quality_score": 9,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Chicken Butter Masala <TITLE_END> <INPUT_START>[EOS]<RECIPE_START> <INPUT_START> broccoli <NEXT_INPUT> butter <NEXT_INPUT> onion <NEXT_INPUT> Cheddar cheese <NEXT_INPUT> Cheddar cheese <NEXT_INPUT> broccoli <NEXT_INPUT> <INSTR_START> Cook broccoli and onion in butter until tender and remove. <NEXT_INSTR> Add flour, salt and pepper. <NEXT_INSTR> Add cheese, stirring, stirring well. <NEXT_INSTR> Add broccoli. <NEXT_INSTR> Cook for 5 minutes. <NEXT_INSTR> Remove from heat. <NEXT_INSTR> Add in broccoli. <NEXT_INSTR> Cook until thick, stirring",
+          "sample_index": 2
+        },
+        {
+          "title": "Chicken Butter Masala",
+          "ingredients": [
+            "chicken",
+            "margarine",
+            "celery",
+            "onion",
+            "salt",
+            "pepper",
+            "flour",
+            "butter",
+            "cream of chicken soup"
+          ],
+          "steps": [
+            "Put chicken in a pan",
+            "Add margarine",
+            "Add celery, salt and pepper",
+            "Cook until tender",
+            "Add onion, salt, pepper"
+          ],
+          "formatted": "Chicken Butter Masala\n\nIngredients:\n- chicken\n- margarine\n- celery\n- onion\n- salt\n- pepper\n- flour\n- butter\n- cream of chicken soup\n\nInstructions:\n1. Put chicken in a pan\n2. Add margarine\n3. Add celery, salt and pepper\n4. Cook until tender\n5. Add onion, salt, pepper",
+          "quality_score": 14,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Chicken Butter Masala <TITLE_END> <INPUT_START>[EOS]<RECIPE_START> <INPUT_START> chicken <NEXT_INPUT> margarine <NEXT_INPUT> celery <NEXT_INPUT> onion <NEXT_INPUT> salt <NEXT_INPUT> pepper <NEXT_INPUT> pepper <NEXT_INPUT> flour <NEXT_INPUT> butter <NEXT_INPUT> celery <NEXT_INPUT> cream of chicken soup <INPUT_END> <INSTR_START> Put chicken in a pan. <NEXT_INSTR> Add margarine. <NEXT_INSTR> Add celery, salt and pepper. <NEXT_INSTR> Cook until tender. <NEXT_INSTR> Add onion, salt, pepper. <NEXT_INSTR",
+          "sample_index": 3
+        }
+      ]
+    }
+  ]
+}

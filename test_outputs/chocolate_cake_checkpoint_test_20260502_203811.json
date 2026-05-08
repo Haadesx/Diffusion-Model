@@ -1,0 +1,182 @@
+{
+  "args": {
+    "config": "config.yaml",
+    "profile": "recipe_poc_2day",
+    "data_dir": "./data_recipe_poc_2day",
+    "runs_dir": null,
+    "checkpoint": [
+      "./Model_Checkpoints/best_step503000.pt"
+    ],
+    "checkpoint_dir": "./Model_Checkpoints",
+    "output_dir": "./test_outputs",
+    "recipe": "chocolate cake",
+    "prefix": "<RECIPE_START> <TITLE_START> Detailed Chocolate Cake <TITLE_END> <INPUT_START> all-purpose flour <NEXT_INPUT> sugar <NEXT_INPUT> cocoa powder <NEXT_INPUT> baking soda <NEXT_INPUT> baking powder <NEXT_INPUT> salt <NEXT_INPUT> eggs <NEXT_INPUT> milk <NEXT_INPUT> vegetable oil <NEXT_INPUT> vanilla extract <NEXT_INPUT> boiling water <NEXT_INPUT> chocolate frosting <INPUT_END> <INSTR_START>",
+    "ingredients_only": false,
+    "num_samples": 5,
+    "length": 520,
+    "top_k": 18,
+    "temperature": 0.55,
+    "seed": 63
+  },
+  "results": [
+    {
+      "checkpoint": "/Volumes/Auxilary/Side_Projects/Diffusion_Testing/Diffusion_Testing_April_23rd/Model_Checkpoints/best_step503000.pt",
+      "checkpoint_name": "best_step503000.pt",
+      "loaded_step": 503000,
+      "prompt": "<RECIPE_START> <TITLE_START> Detailed Chocolate Cake <TITLE_END> <INPUT_START> all-purpose flour <NEXT_INPUT> sugar <NEXT_INPUT> cocoa powder <NEXT_INPUT> baking soda <NEXT_INPUT> baking powder <NEXT_INPUT> salt <NEXT_INPUT> eggs <NEXT_INPUT> milk <NEXT_INPUT> vegetable oil <NEXT_INPUT> vanilla extract <NEXT_INPUT> boiling water <NEXT_INPUT> chocolate frosting <INPUT_END> <INSTR_START>",
+      "samples": [
+        {
+          "title": "Detailed Chocolate Cake",
+          "ingredients": [
+            "all-purpose flour",
+            "sugar",
+            "cocoa powder",
+            "baking soda",
+            "baking powder",
+            "salt",
+            "eggs",
+            "milk",
+            "vegetable oil",
+            "vanilla extract",
+            "boiling water",
+            "chocolate frosting"
+          ],
+          "steps": [
+            "Mix the first 4 ingredients; add eggs and next 3 ingredients",
+            "Stir well",
+            "Bake in a 9- 13-inch cake. 350 degrees for 30 minutes or",
+            "until done",
+            "Add tsp",
+            "soda salt buttermilk sugar milk vanilla Mix cake and pour into pan",
+            "Bake in a 350 oven"
+          ],
+          "formatted": "Detailed Chocolate Cake\n\nIngredients:\n- all-purpose flour\n- sugar\n- cocoa powder\n- baking soda\n- baking powder\n- salt\n- eggs\n- milk\n- vegetable oil\n- vanilla extract\n- boiling water\n- chocolate frosting\n\nInstructions:\n1. Mix the first 4 ingredients; add eggs and next 3 ingredients\n2. Stir well\n3. Bake in a 9- 13-inch cake. 350 degrees for 30 minutes or\n4. until done\n5. Add tsp\n6. soda salt buttermilk sugar milk vanilla Mix cake and pour into pan\n7. Bake in a 350 oven",
+          "quality_score": 17,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Detailed Chocolate Cake <TITLE_END> <INPUT_START> all-purpose flour <NEXT_INPUT> sugar <NEXT_INPUT> cocoa powder <NEXT_INPUT> baking soda <NEXT_INPUT> baking powder <NEXT_INPUT> salt <NEXT_INPUT> eggs <NEXT_INPUT> milk <NEXT_INPUT> vegetable oil <NEXT_INPUT> vanilla extract <NEXT_INPUT> boiling water <NEXT_INPUT> chocolate frosting <INPUT_END> <INSTR_START> Mix the first 4 ingredients; add eggs and next 3 ingredients. <NEXT_INSTR> Stir well. <NEXT_INSTR> Bake in a 9- 13-inch cake. 350 degrees for 30 minutes or <NEXT_INSTR> until done. Add tsp. <NEXT_INSTR> soda <NEXT_INPUT> salt <NEXT_INPUT> buttermilk <NEXT_INPUT> sugar <NEXT_INPUT> milk <NEXT_INPUT> vanilla <INPUT_END> <INSTR_START> Mix cake and pour into pan. <NEXT_INSTR> Bake in a 350 oven. <INSTR_END> <TITLE_START> Chocolate Cake <TITLE_END> <RECIPE_END>[EOS]<RECIPE_>__. < of to, < we a or or and for,, a for and of, and, of will or the it that, or a, you the of for for will you a the it and, a them,, for or it you for,, it it up to, up a he it the,,, the it,, of up for it the, will, to he of he you or the and,,, it it,, it, to,,,,. you, it,, with, the,,, up,,,,,,,,,,,,,,,,,, and,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, it,,,,,,,,,,,,,,,,, it it, it,,,, it,,, it, it,n,nn...,nn itnnn,,,nm,,n,pn, nown it, good,n it,nnn dayn,nnn,nnn itnn,nnn,,n,n",
+          "sample_index": 1
+        },
+        {
+          "title": "Detailed Chocolate Cake",
+          "ingredients": [
+            "all-purpose flour",
+            "sugar",
+            "cocoa powder",
+            "baking soda",
+            "baking powder",
+            "salt",
+            "eggs",
+            "milk",
+            "vegetable oil",
+            "vanilla extract",
+            "boiling water",
+            "chocolate frosting"
+          ],
+          "steps": [
+            "Combine all ingredients",
+            "Stir well",
+            "Pour into greased well-greased tube pan",
+            "Bake at 350 for 45 minutes",
+            "Top with a dollop of chocolate frosting"
+          ],
+          "formatted": "Detailed Chocolate Cake\n\nIngredients:\n- all-purpose flour\n- sugar\n- cocoa powder\n- baking soda\n- baking powder\n- salt\n- eggs\n- milk\n- vegetable oil\n- vanilla extract\n- boiling water\n- chocolate frosting\n\nInstructions:\n1. Combine all ingredients\n2. Stir well\n3. Pour into greased well-greased tube pan\n4. Bake at 350 for 45 minutes\n5. Top with a dollop of chocolate frosting",
+          "quality_score": 17,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Detailed Chocolate Cake <TITLE_END> <INPUT_START> all-purpose flour <NEXT_INPUT> sugar <NEXT_INPUT> cocoa powder <NEXT_INPUT> baking soda <NEXT_INPUT> baking powder <NEXT_INPUT> salt <NEXT_INPUT> eggs <NEXT_INPUT> milk <NEXT_INPUT> vegetable oil <NEXT_INPUT> vanilla extract <NEXT_INPUT> boiling water <NEXT_INPUT> chocolate frosting <INPUT_END> <INSTR_START> Combine all ingredients. <NEXT_INSTR> Stir well. <NEXT_INSTR> Pour into greased well-greased tube pan. <NEXT_INSTR> Bake at 350 for 45 minutes. Top with a dollop of chocolate frosting. <INSTR_END> <TITLE_START> Cocoa-Chocolate Cake <TITLE_END> <RECIPE_END>[EOS]<RECIPE_START> <INPUT_START> butter <NEXT_INPUT> sugar <NEXT_INPUT> eggs <NEXT_INPUT> eggs <NEXT_INPUT> flour <NEXT_INPUT> salt <NEXT_INPUT>[EOS] <NEXT_INPUT> vanilla <INPUT_END>INSTR_START> Cream first 4 ingredients. <NEXT_INSTR>_ (_ we) it to to for that with you or or. and a. them it the or of them we it a it you for that and you we or for and in them it, we them to of them up you a, them you they up we them up for they them to a to it the them up it it up it it he we it them he you them he them, and you it and it, and you it they it it a and up you and up you the have we it them, up them and it., up, you they them. we them up and you you. them you it up,, you. you a,, you you,, and. you up he it it you and, it you it, you you you a to them you and it. you.. and and in. and you. you we., we. them and he., to it and it,,. we you, them,,,,, we,, he you, you them and you it let them you,,,,,,,,,, and,,,,,. up,,, you,,,,,,.,,,,,, you,,,,,. it,, it,",
+          "sample_index": 2
+        },
+        {
+          "title": "Detailed Chocolate Cake",
+          "ingredients": [
+            "all-purpose flour",
+            "sugar",
+            "cocoa powder",
+            "baking soda",
+            "baking powder",
+            "salt",
+            "eggs",
+            "milk",
+            "vegetable oil",
+            "vanilla extract",
+            "boiling water",
+            "chocolate frosting"
+          ],
+          "steps": [
+            "Fill with boiling water",
+            "Sprinkle with a little of",
+            "A day, we to eat them",
+            "sugar mayonnaise sugar milk water Mix in the order",
+            "Mix well",
+            "Pour into greased oblong pan",
+            "Bake in moderate oven"
+          ],
+          "formatted": "Detailed Chocolate Cake\n\nIngredients:\n- all-purpose flour\n- sugar\n- cocoa powder\n- baking soda\n- baking powder\n- salt\n- eggs\n- milk\n- vegetable oil\n- vanilla extract\n- boiling water\n- chocolate frosting\n\nInstructions:\n1. Fill with boiling water\n2. Sprinkle with a little of\n3. A day, we to eat them\n4. sugar mayonnaise sugar milk water Mix in the order\n5. Mix well\n6. Pour into greased oblong pan\n7. Bake in moderate oven",
+          "quality_score": 17,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Detailed Chocolate Cake <TITLE_END> <INPUT_START> all-purpose flour <NEXT_INPUT> sugar <NEXT_INPUT> cocoa powder <NEXT_INPUT> baking soda <NEXT_INPUT> baking powder <NEXT_INPUT> salt <NEXT_INPUT> eggs <NEXT_INPUT> milk <NEXT_INPUT> vegetable oil <NEXT_INPUT> vanilla extract <NEXT_INPUT> boiling water <NEXT_INPUT> chocolate frosting <INPUT_END> <INSTR_START> Fill with boiling water. <NEXT_INSTR> Sprinkle with a little of. <NEXT_INSTR> A day, we to eat them. <NEXT_INSTR>. <NEXT_INPUT> sugar <NEXT_INPUT> mayonnaise <NEXT_INPUT> sugar <NEXT_INPUT> milk <__INPUT> water <INPUT_END> <INSTR_START> Mix in the order. <NEXT_INSTR> Mix well. <NEXT_INSTR> Pour into greased oblong pan. <NEXT_INSTR> Bake in moderate oven. <INSTR_END> <TITLE_START> Chocolate Mayonnaise Cake <TITLE_END>) <TITLE_END> <RECIPE_END>[EOS]<RECIPE_STARTINSTR the, a or and of of and in and one them and. it and of a one it and the you to to. them them it the or and them the a and you a. the you up for and you up the a up you it up up them for, them, you. you you to you up them will you them you them. for it you them you to the them up you to you you them you. it them. you. you, you you.. you you them it. them. you you they you to you you them you. you it them it you it you you them you them you all and up it you you you them. you. you you you them. do you. you. will you. you.. them it up it. them they you them them you. you you you them. up you. them. it them you take them they. you. them to them you you you you.. n them them you you..... you do you them. they do them you. them them you them. it you it it it them.... you. you. them u. you u it you. you... them you.... you them.... you..... do",
+          "sample_index": 3
+        },
+        {
+          "title": "Detailed Chocolate Cake",
+          "ingredients": [
+            "all-purpose flour",
+            "sugar",
+            "cocoa powder",
+            "baking soda",
+            "baking powder",
+            "salt",
+            "eggs",
+            "milk",
+            "vegetable oil",
+            "vanilla extract",
+            "boiling water",
+            "chocolate frosting"
+          ],
+          "steps": [
+            "Preheat oven to ingredients",
+            "Mix well",
+            "Pour into into a 13 x 13-inch cake pan",
+            "Bake for to for the recipe",
+            "When with a,, spread the frosting over the cake. <NEXT_ Bake> Bake 20 minutes. <NEXT_ Bake> Serve immediately",
+            "cake is a dessert",
+            "Good for a 9-inch cake",
+            "Great for, etc, etc END>"
+          ],
+          "formatted": "Detailed Chocolate Cake\n\nIngredients:\n- all-purpose flour\n- sugar\n- cocoa powder\n- baking soda\n- baking powder\n- salt\n- eggs\n- milk\n- vegetable oil\n- vanilla extract\n- boiling water\n- chocolate frosting\n\nInstructions:\n1. Preheat oven to ingredients\n2. Mix well\n3. Pour into into a 13 x 13-inch cake pan\n4. Bake for to for the recipe\n5. When with a,, spread the frosting over the cake. <NEXT_ Bake> Bake 20 minutes. <NEXT_ Bake> Serve immediately\n6. cake is a dessert\n7. Good for a 9-inch cake\n8. Great for, etc, etc END>",
+          "quality_score": 17,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Detailed Chocolate Cake <TITLE_END> <INPUT_START> all-purpose flour <NEXT_INPUT> sugar <NEXT_INPUT> cocoa powder <NEXT_INPUT> baking soda <NEXT_INPUT> baking powder <NEXT_INPUT> salt <NEXT_INPUT> eggs <NEXT_INPUT> milk <NEXT_INPUT> vegetable oil <NEXT_INPUT> vanilla extract <NEXT_INPUT> boiling water <NEXT_INPUT> chocolate frosting <INPUT_END> <INSTR_START> Preheat oven to ingredients. <NEXT_INSTR> Mix well. <NEXT_INSTR> Pour into into a 13 x 13-inch cake pan. <NEXT_INSTR> Bake for to for the recipe. <NEXT_INSTR> When with a,, spread the frosting over the cake. <NEXT_ Bake> Bake 20 minutes. <NEXT_ Bake> Serve immediately. <NEXT_INSTR>: <NEXT_INSTR cake is a dessert. <NEXT_INSTR> Good for a 9-inch cake. <NEXT_INSTR> Great for, etc, etc <._INSTR>END> <TITLE_START> Chocolate Mayonnaise Cake <TITLE_END> <RECIPE_END>[EOS]<RECIPE. the the the the the the the the the the or the the of you the the the to you the the the of the the the the the_ the the the the it the and the the the the the of the the the the the the the the to the. the the the the the the it the the the the it to the the the the the the. the, and... the. the the the the the. the you the of of it the the it on the.. of/ in of the. the the the the the the it cake the the. cake. a the the the next of. the,. the the the the. and the the the the.. your the of the the it the the the you the. the the the the the it the the a. the the the of the. the it it. on your. the the. your. the cake the the the the. the the. your on the now the. the it your the the you.. the on the the the cake it the the of the:. a. the. the of/../ your the your the the. your. your.. it... your. the. on. itn the.. the the your your a. your it it",
+          "sample_index": 4
+        },
+        {
+          "title": "Detailed Chocolate Cake",
+          "ingredients": [
+            "all-purpose flour",
+            "sugar",
+            "cocoa powder",
+            "baking soda",
+            "baking powder",
+            "salt",
+            "eggs",
+            "milk",
+            "vegetable oil",
+            "vanilla extract",
+            "boiling water",
+            "chocolate frosting"
+          ],
+          "steps": [
+            "Combine first 5 ingredients",
+            "Add eggs and milk",
+            "Stir well",
+            "Add oil and vanilla",
+            "Add to dry mixture,, one tablespoon at a mixture",
+            "Pour into into greased 9 x 9inch baking pan",
+            "Fill with boiling water",
+            "Bake at 350 for well done",
+            "Frost with chocolate frosting"
+          ],
+          "formatted": "Detailed Chocolate Cake\n\nIngredients:\n- all-purpose flour\n- sugar\n- cocoa powder\n- baking soda\n- baking powder\n- salt\n- eggs\n- milk\n- vegetable oil\n- vanilla extract\n- boiling water\n- chocolate frosting\n\nInstructions:\n1. Combine first 5 ingredients\n2. Add eggs and milk\n3. Stir well\n4. Add oil and vanilla\n5. Add to dry mixture,, one tablespoon at a mixture\n6. Pour into into greased 9 x 9inch baking pan\n7. Fill with boiling water\n8. Bake at 350 for well done\n9. Frost with chocolate frosting",
+          "quality_score": 17,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Detailed Chocolate Cake <TITLE_END> <INPUT_START> all-purpose flour <NEXT_INPUT> sugar <NEXT_INPUT> cocoa powder <NEXT_INPUT> baking soda <NEXT_INPUT> baking powder <NEXT_INPUT> salt <NEXT_INPUT> eggs <NEXT_INPUT> milk <NEXT_INPUT> vegetable oil <NEXT_INPUT> vanilla extract <NEXT_INPUT> boiling water <NEXT_INPUT> chocolate frosting <INPUT_END> <INSTR_START> Combine first 5 ingredients. <NEXT_INSTR> Add eggs and milk. <NEXT_INSTR> Stir well.. <NEXT_INSTR> Add oil and vanilla. <NEXT_INSTR> Stir well. <NEXT_INSTR> Add to dry mixture,, one tablespoon at a mixture. <NEXT_INSTR> Stir well. <NEXT_INSTR> Pour into into greased 9 x 9inch baking pan. <NEXT_INSTR> Fill with boiling water. <NEXT_INSTR> Bake at 350 for well done. <NEXT_INSTR> Frost with chocolate frosting. <INSTR_END> <TITLE_START> Chocolate Cake <TITLE_END> <RECIPE_END>[EOS]<RECIPE_START>>INSTR_ Sprinkle>NEXT__INSTR ( with., each,) to,,, or,, with,,,,,, for,,,,,,th,,,,,,,,,,,,,,,,, 1,, 2,, 2, 4 2 2 1 4, 1 1 1 2 1 3 1 4 2 1 1 2 4 2 3 5, 4 2: 1, 1 4,,, 2 1 3 1 4 1 4 4 4 4, 5 4, 4 2 4 2 5, 2, 3, 4 3 1, 3 4 5 4 4 9 2 9, 3, 4 4, 4,, 2, 5, 4,, 4,,, 4 4 3 4 4,,,,,, 4 2 5,, 4 4, 3 3 4 3 4 4 2 2 9 9,,,, 4, 6,,, 2, 4, 9,,, 10,,2 4 4,,, 2, 4 6,, 1 6 9 4 2,,,, 4,,,, 5 5, 9 3 5 4 6, 8,,,, 4,,,, 1,,,,,,,, 5,,, 9,, 1",
+          "sample_index": 5
+        }
+      ]
+    }
+  ]
+}

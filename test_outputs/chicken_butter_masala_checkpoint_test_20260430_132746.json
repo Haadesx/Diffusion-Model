@@ -1,0 +1,282 @@
+{
+  "args": {
+    "config": "config.yaml",
+    "profile": "recipe_poc_2day",
+    "data_dir": "./data_recipe_poc_2day",
+    "runs_dir": null,
+    "checkpoint": null,
+    "checkpoint_dir": "./Model_Checkpoints",
+    "output_dir": "./test_outputs",
+    "recipe": "chicken butter masala",
+    "prefix": null,
+    "ingredients_only": true,
+    "num_samples": 5,
+    "length": 160,
+    "top_k": 20,
+    "temperature": 0.75,
+    "seed": 7
+  },
+  "results": [
+    {
+      "checkpoint": "/Volumes/Auxilary/Side_Projects/Diffusion_Testing/Diffusion_Testing_April_23rd/Model_Checkpoints/checkpoint_step40000.pt",
+      "checkpoint_name": "checkpoint_step40000.pt",
+      "loaded_step": 40000,
+      "prompt": "<RECIPE_START> <TITLE_START> Chicken Butter Masala <TITLE_END> <INPUT_START>",
+      "samples": [
+        {
+          "title": "Chicken Butter Masala",
+          "ingredients": [
+            "peanut oil",
+            "milk",
+            "sugar",
+            "vanilla",
+            "butter",
+            "eggs",
+            "salt",
+            "pecans",
+            "peanut butter"
+          ],
+          "steps": [
+            "In a large bowl, mix milk, peanut oil, sugar, vanilla, butter, eggs, vanilla and salt (if using)",
+            "In a large mixer, beat eggs, sugar and pecans, mixing until smooth"
+          ],
+          "formatted": "- peanut oil\n- milk\n- sugar\n- vanilla\n- butter\n- eggs\n- salt\n- pecans\n- peanut butter",
+          "quality_score": 11,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Chicken Butter Masala <TITLE_END> <INPUT_START>[EOS]<RECIPE_START> <INPUT_START> peanut oil <NEXT_INPUT> milk <NEXT_INPUT> <NEXT_INPUT> sugar <NEXT_INPUT> vanilla <NEXT_INPUT> butter <NEXT_INPUT> eggs <NEXT_INPUT> vanilla <NEXT_INPUT> salt <NEXT_INPUT> pecans <NEXT_INPUT> peanut butter <INPUT_END> <INSTR_START> In a large bowl, mix milk, peanut oil, sugar, vanilla, butter, eggs, vanilla and salt (if using). <NEXT_INSTR> In a large mixer, beat eggs, sugar and pecans, mixing until smooth. <NEXT_INSTR> In",
+          "sample_index": 1
+        },
+        {
+          "title": "Chicken Butter Masala",
+          "ingredients": [
+            "yeast",
+            "water",
+            "sugar",
+            "salt",
+            "flour"
+          ],
+          "steps": [
+            "Soften yeast in warm water",
+            "Add sugar, water, salt and flour",
+            "Cook to 15 minutes",
+            "Add water and water",
+            "Add yeast and flour",
+            "Boil 5 minutes",
+            "Add yeast, water and yeast",
+            "Place in"
+          ],
+          "formatted": "- yeast\n- water\n- sugar\n- salt\n- flour",
+          "quality_score": 10,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Chicken Butter Masala <TITLE_END> <INPUT_START>[EOS]<RECIPE_START> <INPUT_START> yeast <NEXT_INPUT> water <NEXT_INPUT> sugar <NEXT_INPUT> water <NEXT_INPUT> yeast <NEXT_INPUT> salt <NEXT_INPUT> flour <NEXT_INPUT> <INSTR_START> Soften yeast in warm water. <NEXT_INSTR> Add sugar, water, salt and flour. <NEXT_INSTR> Cook to 15 minutes. <NEXT_INSTR> Add water and water. <NEXT_INSTR> Add yeast and flour. <NEXT_INSTR> Boil 5 minutes. <NEXT_INSTR> Add yeast, water and yeast. <NEXT_INSTR> Place in",
+          "sample_index": 2
+        },
+        {
+          "title": "Chicken Butter Masala",
+          "ingredients": [
+            "sugar",
+            "butter",
+            "eggs",
+            "flour"
+          ],
+          "steps": [
+            "Cream the sugar and butter in the pan",
+            "When the butter is melted, add the eggs, milk and flour",
+            "Pour this mixture over the cake",
+            "Sprinkle the cinnamon over the top",
+            "Sprinkle the top of the caramel cake, then pour the caramel cake over the top of the top of the cake",
+            "Put the rest of cake"
+          ],
+          "formatted": "- sugar\n- butter\n- eggs\n- flour",
+          "quality_score": 9,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Chicken Butter Masala <TITLE_END> <INPUT_START>[EOS]<RECIPE_START> <INPUT_START> sugar <NEXT_INPUT> butter <NEXT_INPUT> eggs <NEXT_INPUT> flour <INPUT_END> <INSTR_START> Cream the sugar and butter in the pan. <NEXT_INSTR> When the butter is melted, add the eggs, milk and flour. <NEXT_INSTR> Pour this mixture over the cake. <NEXT_INSTR> Sprinkle the cinnamon over the top. <NEXT_INSTR> Sprinkle the top of the caramel cake, then pour the caramel cake over the top of the top of the cake. <NEXT_INSTR> Put the rest of cake. <NEXT_INSTR>",
+          "sample_index": 3
+        },
+        {
+          "title": "Chicken Butter Masala",
+          "ingredients": [
+            "butter",
+            "sugar",
+            "eggs",
+            "flour",
+            "milk",
+            "vanilla"
+          ],
+          "steps": [
+            "Cream butter and sugar",
+            "Beat in eggs",
+            "Add flour and cream; gradually add sugar and vanilla",
+            "Blend well",
+            "Add milk gradually",
+            "Pour into greased and floured tube pan",
+            "Place in 350 oven",
+            "Bake for 15 minutes"
+          ],
+          "formatted": "- butter\n- sugar\n- eggs\n- flour\n- milk\n- vanilla",
+          "quality_score": 11,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Chicken Butter Masala <TITLE_END> <INPUT_START>[EOS]<RECIPE_START> <INPUT_START> butter <NEXT_INPUT> sugar <NEXT_INPUT> eggs <NEXT_INPUT> flour <NEXT_INPUT> milk <NEXT_INPUT> vanilla <INPUT_END> <INSTR_START> Cream butter and sugar. <NEXT_INSTR> Beat in eggs. <NEXT_INSTR> Add flour and cream; gradually add sugar and vanilla. <NEXT_INSTR> Blend well. <NEXT_INSTR> Add milk gradually. <NEXT_INSTR> Pour into greased and floured tube pan. <NEXT_INSTR> Place in 350 oven. <NEXT_INSTR> Bake for 15 minutes. <NEXT_INSTR",
+          "sample_index": 4
+        },
+        {
+          "title": "Chicken Butter Masala",
+          "ingredients": [
+            "butter",
+            "flour",
+            "brown sugar",
+            "egg",
+            "vanilla",
+            "buttermilk",
+            "salt",
+            "milk",
+            "cooking oil"
+          ],
+          "steps": [
+            "Cream butter, flour, egg, vanilla, flour and salt",
+            "Add sugar, oil and milk",
+            "Boil, boil for 10 minutes",
+            "Remove from heat and add to mixture and cook on"
+          ],
+          "formatted": "- butter\n- flour\n- brown sugar\n- egg\n- vanilla\n- buttermilk\n- salt\n- milk\n- cooking oil",
+          "quality_score": 13,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Chicken Butter Masala <TITLE_END> <INPUT_START>[EOS]<RECIPE_START> <INPUT_START> butter <NEXT_INPUT> flour <NEXT_INPUT> brown sugar <NEXT_INPUT> egg <NEXT_INPUT> egg <NEXT_INPUT> vanilla <NEXT_INPUT> buttermilk <NEXT_INPUT> salt <NEXT_INPUT> milk <NEXT_INPUT> milk <NEXT_INPUT> cooking oil <INPUT_END> <INSTR_START> Cream butter, flour, egg, vanilla, flour and salt. <NEXT_INSTR> Add sugar, oil and milk. <NEXT_INSTR> Boil, boil for 10 minutes. <NEXT_INSTR> Remove from heat and add to mixture and cook on",
+          "sample_index": 5
+        }
+      ]
+    },
+    {
+      "checkpoint": "/Volumes/Auxilary/Side_Projects/Diffusion_Testing/Diffusion_Testing_April_23rd/Model_Checkpoints/best_step41000.pt",
+      "checkpoint_name": "best_step41000.pt",
+      "loaded_step": 41000,
+      "prompt": "<RECIPE_START> <TITLE_START> Chicken Butter Masala <TITLE_END> <INPUT_START>",
+      "samples": [
+        {
+          "title": "Chicken Butter Masala",
+          "ingredients": [
+            "water",
+            "sugar",
+            "flour",
+            "raisins",
+            "soda",
+            "cinnamon",
+            "cocoa",
+            "margarine",
+            "salt",
+            "milk",
+            "vanilla"
+          ],
+          "steps": [
+            "in boiling water",
+            "Add sugar and mix until dissolved",
+            "Add flour, raisins, cinnamon, salt, soda",
+            "Cook 2 minutes. <"
+          ],
+          "formatted": "- water\n- sugar\n- flour\n- raisins\n- soda\n- cinnamon\n- cocoa\n- margarine\n- salt\n- milk\n- vanilla",
+          "quality_score": 15,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Chicken Butter Masala <TITLE_END> <INPUT_START>[EOS]<RECIPE_START> <INPUT_START> water <NEXT_INPUT> sugar <NEXT_INPUT> flour <NEXT_INPUT> raisins <NEXT_INPUT> soda <NEXT_INPUT> cinnamon <NEXT_INPUT> cocoa <NEXT_INPUT> margarine <NEXT_INPUT> salt <NEXT_INPUT> milk <NEXT_INPUT> vanilla <NEXT_INPUT> sugar <NEXT_INPUT> salt <INPUT_END> <INSTR_START> in boiling water. <NEXT_INSTR> Add sugar and mix until dissolved. <NEXT_INSTR> Add flour, raisins, cinnamon, salt, soda. <NEXT_INSTR> Cook 2 minutes. <",
+          "sample_index": 1
+        },
+        {
+          "title": "Chicken Butter Masala",
+          "ingredients": [
+            "shortening",
+            "milk",
+            "eggs",
+            "flour",
+            "soda",
+            "salt",
+            "cinnamon",
+            "nuts",
+            "vanilla",
+            "pineapple"
+          ],
+          "steps": [
+            "Cream shortening and sugar",
+            "Add milk, eggs, flour, soda, salt",
+            "Mix well",
+            "Add pineapple and vanilla",
+            "Add to creamed mixture"
+          ],
+          "formatted": "- shortening\n- milk\n- eggs\n- flour\n- soda\n- salt\n- cinnamon\n- nuts\n- vanilla\n- pineapple",
+          "quality_score": 15,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Chicken Butter Masala <TITLE_END> <INPUT_START>[EOS]<RECIPE_START> <INPUT_START> <NEXT_INPUT> shortening <NEXT_INPUT> milk <NEXT_INPUT> eggs <NEXT_INPUT> flour <NEXT_INPUT> soda <NEXT_INPUT> salt <NEXT_INPUT> cinnamon <NEXT_INPUT> nuts <NEXT_INPUT> vanilla <NEXT_INPUT> pineapple <NEXT_INPUT> nuts <INPUT_END> <INSTR_START> Cream shortening and sugar. <NEXT_INSTR> Add milk, eggs, flour, soda, salt. <NEXT_INSTR> Mix well. <NEXT_INSTR> Add pineapple and vanilla. <NEXT_INSTR> Add to creamed mixture.",
+          "sample_index": 2
+        },
+        {
+          "title": "Chicken Butter Masala",
+          "ingredients": [
+            "flour",
+            "sugar",
+            "margarine",
+            "eggs",
+            "vanilla",
+            "milk",
+            "salt",
+            "soda",
+            "cinnamon"
+          ],
+          "steps": [
+            "Mix flour, sugar, oleo, eggs and vanilla",
+            "Add eggs",
+            "Add salt, soda to flour mixture",
+            "Beat well well",
+            "Add flour",
+            "Beat well",
+            "Add milk and"
+          ],
+          "formatted": "- flour\n- sugar\n- margarine\n- eggs\n- vanilla\n- milk\n- salt\n- soda\n- cinnamon",
+          "quality_score": 14,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Chicken Butter Masala <TITLE_END> <INPUT_START>[EOS]<RECIPE_START> <INPUT_START> flour <NEXT_INPUT> sugar <NEXT_INPUT> margarine <NEXT_INPUT> eggs <NEXT_INPUT> vanilla <NEXT_INPUT> milk <NEXT_INPUT> milk <NEXT_INPUT> salt <NEXT_INPUT> soda <NEXT_INPUT> cinnamon <INPUT_END> <INSTR_START> Mix flour, sugar, oleo, eggs and vanilla. <NEXT_INSTR> Add eggs. <NEXT_INSTR> Add salt, soda to flour mixture. <NEXT_INSTR> Beat well well. <NEXT_INSTR> Add flour. <NEXT_INSTR> Beat well. Add milk and",
+          "sample_index": 3
+        },
+        {
+          "title": "Chicken Butter Masala",
+          "ingredients": [
+            "water",
+            "strawberries",
+            "orange",
+            "lemon juice",
+            "pineapple",
+            "sugar"
+          ],
+          "steps": [
+            "Boil 2 cups water in 1/8 cup of water to boiling water",
+            "Add cranberry juice",
+            "Chill 1 hour",
+            "Add strawberries, pineapple, pineapple, lemon juice",
+            "Stir until dissolved",
+            "Remove from heat",
+            "Chill the refrigerator 2 to 3 hours"
+          ],
+          "formatted": "- water\n- strawberries\n- orange\n- lemon juice\n- pineapple\n- sugar",
+          "quality_score": 11,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Chicken Butter Masala <TITLE_END> <INPUT_START>[EOS]<RECIPE_START> <INPUT_START> water <NEXT_INPUT> strawberries <NEXT_INPUT> orange <NEXT_INPUT> lemon juice <NEXT_INPUT> pineapple <NEXT_INPUT> sugar <NEXT_INPUT> <INSTR_START> Boil 2 cups water in 1/8 cup of water to boiling water. <NEXT_INSTR> Add cranberry juice. <NEXT_INSTR> Chill 1 hour. <NEXT_INSTR> Add strawberries, pineapple, pineapple, lemon juice. <NEXT_INSTR> Stir until dissolved. <NEXT_INSTR> Remove from heat. <NEXT_INSTR> Chill the refrigerator 2 to 3 hours. <NEXT_INSTR",
+          "sample_index": 4
+        },
+        {
+          "title": "Chicken Butter Masala",
+          "ingredients": [
+            "flour",
+            "soda",
+            "salt",
+            "baking powder",
+            "cinnamon",
+            "sugar",
+            "milk",
+            "shortening",
+            "brown sugar",
+            "butter",
+            "egg",
+            "vanilla"
+          ],
+          "steps": [
+            "Combine flour, sugar, baking powder, salt and cinnamon",
+            "Melt shortening",
+            "Add butter, sugar, egg and milk <"
+          ],
+          "formatted": "- flour\n- soda\n- salt\n- baking powder\n- cinnamon\n- sugar\n- milk\n- shortening\n- brown sugar\n- butter\n- egg\n- vanilla",
+          "quality_score": 15,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Chicken Butter Masala <TITLE_END> <INPUT_START>[EOS]<RECIPE_START> <INPUT_START> flour <NEXT_INPUT> soda <NEXT_INPUT> salt <NEXT_INPUT> baking powder <NEXT_INPUT> cinnamon <NEXT_INPUT> sugar <NEXT_INPUT> milk <NEXT_INPUT> shortening <NEXT_INPUT> brown sugar <NEXT_INPUT> butter <NEXT_INPUT> sugar <NEXT_INPUT> milk <NEXT_INPUT> egg <NEXT_INPUT> vanilla <INPUT_END> <INSTR_START> Combine flour, sugar, baking powder, salt and cinnamon. <NEXT_INSTR> Melt shortening. <NEXT_INSTR> Add butter, sugar, egg and milk <",
+          "sample_index": 5
+        }
+      ]
+    }
+  ]
+}

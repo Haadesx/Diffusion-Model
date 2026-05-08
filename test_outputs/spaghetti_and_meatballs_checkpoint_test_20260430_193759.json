@@ -1,0 +1,107 @@
+{
+  "args": {
+    "config": "config.yaml",
+    "profile": "recipe_poc_2day",
+    "data_dir": "./data_recipe_poc_2day",
+    "runs_dir": null,
+    "checkpoint": [
+      "./Model_Checkpoints/best_step88000.pt"
+    ],
+    "checkpoint_dir": "./Model_Checkpoints",
+    "output_dir": "./test_outputs",
+    "recipe": "spaghetti and meatballs",
+    "prefix": null,
+    "ingredients_only": true,
+    "num_samples": 3,
+    "length": 150,
+    "top_k": 20,
+    "temperature": 0.75,
+    "seed": 52
+  },
+  "results": [
+    {
+      "checkpoint": "/Volumes/Auxilary/Side_Projects/Diffusion_Testing/Diffusion_Testing_April_23rd/Model_Checkpoints/best_step88000.pt",
+      "checkpoint_name": "best_step88000.pt",
+      "loaded_step": 88000,
+      "prompt": "<RECIPE_START> <TITLE_START> Spaghetti and Meatballs <TITLE_END> <INPUT_START>",
+      "samples": [
+        {
+          "title": "Spaghetti and Meatballs",
+          "ingredients": [
+            "butter",
+            "brown sugar",
+            "eggs",
+            "flour",
+            "soda",
+            "nutmeg",
+            "cinnamon",
+            "cloves",
+            "salt",
+            "baking powder",
+            "vanilla",
+            "carrots"
+          ],
+          "steps": [
+            "Cream butter and sugars",
+            "Add eggs, one at a time, beating well",
+            "Add dry ingredients"
+          ],
+          "formatted": "- butter\n- brown sugar\n- eggs\n- flour\n- soda\n- nutmeg\n- cinnamon\n- cloves\n- salt\n- baking powder\n- vanilla\n- carrots",
+          "quality_score": 15,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Spaghetti and Meatballs <TITLE_END> <INPUT_START>[EOS]<RECIPE_START> <INPUT_START> butter <NEXT_INPUT> brown sugar <NEXT_INPUT> eggs <NEXT_INPUT> flour <NEXT_INPUT> soda <NEXT_INPUT> nutmeg <NEXT_INPUT> cinnamon <NEXT_INPUT> cloves <NEXT_INPUT> salt <NEXT_INPUT> baking powder <NEXT_INPUT> vanilla <NEXT_INPUT> carrots <NEXT_INPUT> carrots <INPUT_END> <INSTR_START> Cream butter and sugars. <NEXT_INSTR> Add eggs, one at a time, beating well. <NEXT_INSTR> Add dry ingredients,",
+          "sample_index": 1
+        },
+        {
+          "title": "Spaghetti and Meatballs",
+          "ingredients": [
+            "hamburger",
+            "onion",
+            "garlic",
+            "chili powder",
+            "cumin",
+            "oregano",
+            "salt",
+            "sugar",
+            "paprika",
+            "tomatoes",
+            "water"
+          ],
+          "steps": [
+            "Combine all ingredients",
+            "Simmer slowly for 1 1/2 hours or until meat is tender",
+            "Makes 3 quarts",
+            "Can be frozen. <NEXT"
+          ],
+          "formatted": "- hamburger\n- onion\n- garlic\n- chili powder\n- cumin\n- oregano\n- salt\n- sugar\n- paprika\n- tomatoes\n- water",
+          "quality_score": 15,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Spaghetti and Meatballs <TITLE_END> <INPUT_START>[EOS]<RECIPE_START> <INPUT_START> hamburger <NEXT_INPUT> onion <NEXT_INPUT> garlic <NEXT_INPUT> chili powder <NEXT_INPUT> cumin <NEXT_INPUT> oregano <NEXT_INPUT> salt <NEXT_INPUT> sugar <NEXT_INPUT> paprika <NEXT_INPUT> tomatoes <NEXT_INPUT> water <INPUT_END> <INSTR_START> Combine all ingredients. <NEXT_INSTR> Simmer slowly for 1 1/2 hours or until meat is tender. <NEXT_INSTR> Makes 3 quarts. <NEXT_INSTR> Can be frozen. <NEXT",
+          "sample_index": 2
+        },
+        {
+          "title": "Spaghetti and Meatballs",
+          "ingredients": [
+            "butter",
+            "chicken breasts",
+            "salt",
+            "cream of mushroom soup",
+            "milk",
+            "rice",
+            "lemon juice",
+            "Parmesan cheese",
+            "paprika"
+          ],
+          "steps": [
+            "Melt butter; add chicken",
+            "Add salt and pepper",
+            "Pour soup mixture over chicken",
+            "Mix together soup and milk. <NEXT_"
+          ],
+          "formatted": "- butter\n- chicken breasts\n- salt\n- cream of mushroom soup\n- milk\n- rice\n- lemon juice\n- Parmesan cheese\n- paprika",
+          "quality_score": 13,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Spaghetti and Meatballs <TITLE_END> <INPUT_START>[EOS]<RECIPE_START> <INPUT_START> butter <NEXT_INPUT> chicken breasts <NEXT_INPUT> salt <NEXT_INPUT> cream of mushroom soup <NEXT_INPUT> cream of mushroom soup <NEXT_INPUT> milk <NEXT_INPUT> rice <NEXT_INPUT> lemon juice <NEXT_INPUT> Parmesan cheese <NEXT_INPUT> paprika <INPUT_END> <INSTR_START> Melt butter; add chicken. <NEXT_INSTR> Add salt and pepper. <NEXT_INSTR> Pour soup mixture over chicken. <NEXT_INSTR> Mix together soup and milk. <NEXT_",
+          "sample_index": 3
+        }
+      ]
+    }
+  ]
+}

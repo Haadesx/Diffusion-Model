@@ -1,0 +1,150 @@
+{
+  "args": {
+    "config": "config.yaml",
+    "profile": "recipe_poc_2day",
+    "data_dir": "./data_recipe_poc_2day",
+    "runs_dir": null,
+    "checkpoint": [
+      "./Model_Checkpoints/best_step419000.pt",
+      "./Model_Checkpoints/checkpoint_step425000.pt"
+    ],
+    "checkpoint_dir": "./Model_Checkpoints",
+    "output_dir": "./test_outputs",
+    "recipe": "chocolate cake",
+    "prefix": null,
+    "ingredients_only": false,
+    "num_samples": 2,
+    "length": 220,
+    "top_k": 25,
+    "temperature": 0.7,
+    "seed": 31
+  },
+  "results": [
+    {
+      "checkpoint": "/Volumes/Auxilary/Side_Projects/Diffusion_Testing/Diffusion_Testing_April_23rd/Model_Checkpoints/best_step419000.pt",
+      "checkpoint_name": "best_step419000.pt",
+      "loaded_step": 419000,
+      "prompt": "<RECIPE_START> <TITLE_START> Chocolate Cake <TITLE_END> <INPUT_START>",
+      "samples": [
+        {
+          "title": "Chocolate Cake",
+          "ingredients": [
+            "red <",
+            "cheddar cheese",
+            "celery",
+            "pimientos",
+            "parsley",
+            "dill",
+            "mayonnaise",
+            "vinegar",
+            "sugar",
+            "salt",
+            "pepper",
+            "paprika"
+          ],
+          "steps": [
+            "In a large bowl, combine the potatoes, cheese, onion, celery, pimientos, parsley and dill",
+            "Combine mayonnaise, vinegar, salt and pepper; add to potato mixture and toss to coat",
+            "Cover and refrigerate for 2 hours before serving"
+          ],
+          "formatted": "Chocolate Cake\n\nIngredients:\n- red <\n- cheddar cheese\n- celery\n- pimientos\n- parsley\n- dill\n- mayonnaise\n- vinegar\n- sugar\n- salt\n- pepper\n- paprika\n\nInstructions:\n1. In a large bowl, combine the potatoes, cheese, onion, celery, pimientos, parsley and dill\n2. Combine mayonnaise, vinegar, salt and pepper; add to potato mixture and toss to coat\n3. Cover and refrigerate for 2 hours before serving",
+          "quality_score": 15,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Chocolate Cake <TITLE_END> <INPUT_START>[EOS]<RECIPE_START> <INPUT_START> red < <NEXT_INPUT> cheddar cheese <NEXT_INPUT> red < <NEXT_INPUT> celery <NEXT_INPUT> pimientos <NEXT_INPUT> pimientos <NEXT_INPUT> parsley <NEXT_INPUT> dill <NEXT_INPUT> mayonnaise <NEXT_INPUT> vinegar <NEXT_INPUT> sugar <NEXT_INPUT> salt <NEXT_INPUT> pepper <NEXT_INPUT> paprika <INPUT_END> <INSTR_START> In a large bowl, combine the potatoes, cheese, onion, celery, pimientos, parsley and dill. Combine mayonnaise, vinegar, salt and pepper; add to potato mixture and toss to coat. <NEXT_INSTR> Cover and refrigerate for 2 hours before serving. <INSTR_END> <TITLE_START> Cheese Potato Salad <TITLE_END> <RECIPE_END>[EOS]<RECIPE_START> <INPUT_START> potatoes <NEXT_INPUT> cream",
+          "sample_index": 1
+        },
+        {
+          "title": "Chocolate Cake",
+          "ingredients": [
+            "vegetable <",
+            "brown sugar",
+            "eggs",
+            "flour",
+            "cream of tartar",
+            "baking soda",
+            "salt",
+            "cinnamon",
+            "nutmeg",
+            "oats",
+            "raisins"
+          ],
+          "steps": [
+            "Preheat oven to 375",
+            "Lightly grease a cookie sheet",
+            "In a large bowl, beat together the oil, brown sugar and eggs",
+            "Sift together the flour, cream of tartar, baking soda, salt, cinnamon and nutmeg",
+            "Add to creamed mixture",
+            "Stir in the oats and raisins",
+            "Drop by rounded tablespoons full onto prepared cookie sheet",
+            "Bake for 12 to 15 minutes or until set"
+          ],
+          "formatted": "Chocolate Cake\n\nIngredients:\n- vegetable <\n- brown sugar\n- eggs\n- flour\n- cream of tartar\n- baking soda\n- salt\n- cinnamon\n- nutmeg\n- oats\n- raisins\n\nInstructions:\n1. Preheat oven to 375\n2. Lightly grease a cookie sheet\n3. In a large bowl, beat together the oil, brown sugar and eggs\n4. Sift together the flour, cream of tartar, baking soda, salt, cinnamon and nutmeg\n5. Add to creamed mixture\n6. Stir in the oats and raisins\n7. Drop by rounded tablespoons full onto prepared cookie sheet\n8. Bake for 12 to 15 minutes or until set",
+          "quality_score": 16,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Chocolate Cake <TITLE_END> <INPUT_START>[EOS]<RECIPE_START> <INPUT_START> vegetable < <NEXT_INPUT> brown sugar <NEXT_INPUT> eggs <NEXT_INPUT> flour <NEXT_INPUT> cream of tartar <NEXT_INPUT> baking soda <NEXT_INPUT> salt <NEXT_INPUT> cinnamon <NEXT_INPUT> nutmeg <NEXT_INPUT> oats <NEXT_INPUT> raisins <INPUT_END> <INSTR_START> Preheat oven to 375. <NEXT_INSTR> Lightly grease a cookie sheet. <NEXT_INSTR> In a large bowl, beat together the oil, brown sugar and eggs. <NEXT_INSTR> Sift together the flour, cream of tartar, baking soda, salt, cinnamon and nutmeg. <NEXT_INSTR> Add to creamed mixture. <NEXT_INSTR> Stir in the oats and raisins. <NEXT_INSTR> Drop by rounded tablespoons full onto prepared cookie sheet. <NEXT_INSTR> Bake for 12 to 15 minutes or until set",
+          "sample_index": 2
+        }
+      ]
+    },
+    {
+      "checkpoint": "/Volumes/Auxilary/Side_Projects/Diffusion_Testing/Diffusion_Testing_April_23rd/Model_Checkpoints/checkpoint_step425000.pt",
+      "checkpoint_name": "checkpoint_step425000.pt",
+      "loaded_step": 425000,
+      "prompt": "<RECIPE_START> <TITLE_START> Chocolate Cake <TITLE_END> <INPUT_START>",
+      "samples": [
+        {
+          "title": "Chocolate Cake",
+          "ingredients": [
+            "shortening",
+            "sugar",
+            "eggs",
+            "flour",
+            "baking powder",
+            "salt",
+            "ground cinnamon",
+            "nutmeg",
+            "cloves",
+            "milk",
+            "carrots",
+            "raisins walnuts"
+          ],
+          "steps": [
+            "Preheat oven to 350F",
+            "Combine shortening, sugar and eggs, and beat well",
+            "Sift together flour, baking powder, salt, cinnamon, nutmeg and cloves",
+            "Add to creamed mixture alternately with milk",
+            "Stir in carrots and raisins, and nuts",
+            "Pour batter into 2 greased and floured 8-inch layer pans",
+            "Bake 35 to 40 minutes or until tester inserted in center comes out clean"
+          ],
+          "formatted": "Chocolate Cake\n\nIngredients:\n- shortening\n- sugar\n- eggs\n- flour\n- baking powder\n- salt\n- ground cinnamon\n- nutmeg\n- cloves\n- milk\n- carrots\n- raisins walnuts\n\nInstructions:\n1. Preheat oven to 350F\n2. Combine shortening, sugar and eggs, and beat well\n3. Sift together flour, baking powder, salt, cinnamon, nutmeg and cloves\n4. Add to creamed mixture alternately with milk\n5. Stir in carrots and raisins, and nuts\n6. Pour batter into 2 greased and floured 8-inch layer pans\n7. Bake 35 to 40 minutes or until tester inserted in center comes out clean",
+          "quality_score": 17,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Chocolate Cake <TITLE_END> <INPUT_START> shortening <NEXT_INPUT> sugar <NEXT_INPUT> eggs <NEXT_INPUT> flour <NEXT_INPUT> baking powder <NEXT_INPUT> salt <NEXT_INPUT> ground cinnamon <NEXT_INPUT> nutmeg <NEXT_INPUT> cloves <NEXT_INPUT> milk <NEXT_INPUT> carrots <NEXT_INPUT> raisins <NEXT_END> walnuts <INPUT_END> <INSTR_START> Preheat oven to 350F. <NEXT_INSTR> Combine shortening, sugar and eggs, and beat well. <NEXT_INSTR> Sift together flour, baking powder, salt, cinnamon, nutmeg and cloves. <NEXT_INSTR> Add to creamed mixture alternately with milk. <NEXT_INSTR> Stir in carrots and raisins, and nuts. <NEXT_INSTR> Pour batter into 2 greased and floured 8-inch layer pans. <NEXT_INSTR> Bake 35 to 40 minutes or until tester inserted in center comes out clean. <NEXT_INSTR>",
+          "sample_index": 1
+        },
+        {
+          "title": "Chocolate Cake",
+          "ingredients": [
+            "butter",
+            "eggs",
+            "vanilla",
+            "milk",
+            "sugar",
+            "flour",
+            "salt"
+          ],
+          "steps": [
+            "Cream butter and sugar until fluffy",
+            "Add eggs, one at a time",
+            "Add vanilla",
+            "Add flour and milk alternately",
+            "Add salt",
+            "Bake 1 hour at 350"
+          ],
+          "formatted": "Chocolate Cake\n\nIngredients:\n- butter\n- eggs\n- vanilla\n- milk\n- sugar\n- flour\n- salt\n\nInstructions:\n1. Cream butter and sugar until fluffy\n2. Add eggs, one at a time\n3. Add vanilla\n4. Add flour and milk alternately\n5. Add salt\n6. Bake 1 hour at 350",
+          "quality_score": 12,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Chocolate Cake <TITLE_END> <INPUT_START> butter <NEXT_INPUT> eggs <NEXT_INPUT> vanilla <NEXT_INPUT> milk <NEXT_INPUT> sugar <NEXT_INPUT> flour <NEXT_INPUT> salt <INPUT_END> <INSTR_START> Cream butter and sugar until fluffy..NEXT_INSTR> Add eggs, one at a time. <NEXT_INSTR> Add vanilla. <NEXT_INSTR> Add flour and milk alternately. <NEXT_INSTR> Add salt. <NEXT_INSTR> Bake 1 hour at 350. <INSTR_END> <TITLE_START> Pound Cake <TITLE_END> <RECIPE_END>[EOS]<RECIPE_START> <INPUT_START> all-purpose <NEXT_INPUT> sugar <NEXT_INPUT> butter <NEXT_INPUT> shortening <NEXT_INPUT> eggs <NEXT_INPUT> milk <NEXT_INPUT> vanilla <INPUT_END> <INSTR_START> In a large bowl, combine flour and sugar.",
+          "sample_index": 2
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "args": {
+    "config": "config.yaml",
+    "profile": "recipe_poc_2day",
+    "data_dir": "./data_recipe_poc_2day",
+    "runs_dir": null,
+    "checkpoint": [
+      "./Model_Checkpoints/best_step88000.pt"
+    ],
+    "checkpoint_dir": "./Model_Checkpoints",
+    "output_dir": "./test_outputs",
+    "recipe": "macaroni and cheese",
+    "prefix": null,
+    "ingredients_only": true,
+    "num_samples": 3,
+    "length": 150,
+    "top_k": 20,
+    "temperature": 0.75,
+    "seed": 52
+  },
+  "results": [
+    {
+      "checkpoint": "/Volumes/Auxilary/Side_Projects/Diffusion_Testing/Diffusion_Testing_April_23rd/Model_Checkpoints/best_step88000.pt",
+      "checkpoint_name": "best_step88000.pt",
+      "loaded_step": 88000,
+      "prompt": "<RECIPE_START> <TITLE_START> Macaroni and Cheese <TITLE_END> <INPUT_START>",
+      "samples": [
+        {
+          "title": "Macaroni and Cheese",
+          "ingredients": [
+            "potatoes",
+            "salt",
+            "flour",
+            "butter",
+            "milk",
+            "water",
+            "onion"
+          ],
+          "steps": [
+            "Boil potatoes in water with salt until soft, then peel",
+            "Mash in a bowl with flour and butter",
+            "Heat milk to boiling",
+            "Add potato to mixture",
+            "Cook, stirring constantly, until mixture is thick",
+            "Stir and"
+          ],
+          "formatted": "- potatoes\n- salt\n- flour\n- butter\n- milk\n- water\n- onion",
+          "quality_score": 12,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Macaroni and Cheese <TITLE_END> <INPUT_START>[EOS]<RECIPE_START> <INPUT_START> potatoes <NEXT_INPUT> salt <NEXT_INPUT> flour <NEXT_INPUT> butter <NEXT_INPUT> milk <NEXT_INPUT> water <NEXT_INPUT> onion <INPUT_END> <INSTR_START> Boil potatoes in water with salt until soft, then peel. <NEXT_INSTR> Mash in a bowl with flour and butter. <NEXT_INSTR> Heat milk to boiling. <NEXT_INSTR> Add potato to mixture. <NEXT_INSTR> Cook, stirring constantly, until mixture is thick. <NEXT_INSTR> Stir and",
+          "sample_index": 1
+        },
+        {
+          "title": "Macaroni and Cheese",
+          "ingredients": [
+            "hamburg",
+            "onion",
+            "butter",
+            "potatoes",
+            "tomatoes",
+            "ketchup",
+            "cream of mushroom soup",
+            "water",
+            "pepper",
+            "salt",
+            "Worcestershire sauce"
+          ],
+          "steps": [
+            "Brown hamburg and onions in butter",
+            "Add ketchup, tomatoes, salt, pepper and Worcestershire sauce",
+            "Stir to simmer",
+            "Slice potatoes"
+          ],
+          "formatted": "- hamburg\n- onion\n- butter\n- potatoes\n- tomatoes\n- ketchup\n- cream of mushroom soup\n- water\n- pepper\n- salt\n- Worcestershire sauce",
+          "quality_score": 15,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Macaroni and Cheese <TITLE_END> <INPUT_START>[EOS]<RECIPE_START> <INPUT_START> hamburg <NEXT_INPUT> onion <NEXT_INPUT> butter <NEXT_INPUT> potatoes <NEXT_INPUT> tomatoes <NEXT_INPUT> ketchup <NEXT_INPUT> cream of mushroom soup <NEXT_INPUT> water <NEXT_INPUT> pepper <NEXT_INPUT> salt <NEXT_INPUT> Worcestershire sauce <INPUT_END> <INSTR_START> Brown hamburg and onions in butter. <NEXT_INSTR> Add ketchup, tomatoes, salt, pepper and Worcestershire sauce. <NEXT_INSTR> Stir to simmer. <NEXT_INSTR> Slice potatoes",
+          "sample_index": 2
+        },
+        {
+          "title": "Macaroni and Cheese",
+          "ingredients": [
+            "cream cheese",
+            "condensed milk",
+            "onion",
+            "Worcestershire sauce",
+            "chili powder",
+            "garlic",
+            "ground beef",
+            "green pepper"
+          ],
+          "steps": [
+            "Blend cream cheese, milk, onion, Worcestershire sauce, chili powder and garlic powder",
+            "Stir in ground beef",
+            "Form into 2 balls",
+            "Roll in onion and green pepper. <"
+          ],
+          "formatted": "- cream cheese\n- condensed milk\n- onion\n- Worcestershire sauce\n- chili powder\n- garlic\n- ground beef\n- green pepper",
+          "quality_score": 12,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Macaroni and Cheese <TITLE_END> <INPUT_START>[EOS]<RECIPE_START> <INPUT_START> cream cheese <NEXT_INPUT> condensed milk <NEXT_INPUT> onion <NEXT_INPUT> Worcestershire sauce <NEXT_INPUT> chili powder <NEXT_INPUT> garlic <NEXT_INPUT> ground beef <NEXT_INPUT> onion <NEXT_INPUT> green pepper <INPUT_END> <INSTR_START> Blend cream cheese, milk, onion, Worcestershire sauce, chili powder and garlic powder. <NEXT_INSTR> Stir in ground beef. <NEXT_INSTR> Form into 2 balls. <NEXT_INSTR> Roll in onion and green pepper. <",
+          "sample_index": 3
+        }
+      ]
+    }
+  ]
+}

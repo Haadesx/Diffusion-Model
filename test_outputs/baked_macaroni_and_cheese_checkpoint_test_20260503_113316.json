@@ -1,0 +1,215 @@
+{
+  "args": {
+    "config": "config.yaml",
+    "profile": "recipe_poc_2day",
+    "data_dir": "./data_recipe_poc_2day",
+    "runs_dir": null,
+    "checkpoint": [
+      "./Model_Checkpoints/best_step654000.pt",
+      "./Model_Checkpoints/checkpoint_step690000.pt"
+    ],
+    "checkpoint_dir": "./Model_Checkpoints",
+    "output_dir": "./test_outputs",
+    "recipe": "baked macaroni and cheese",
+    "prefix": "<RECIPE_START> <TITLE_START> Baked Macaroni and Cheese <TITLE_END> <INPUT_START> elbow macaroni <NEXT_INPUT> butter <NEXT_INPUT> flour <NEXT_INPUT> milk <NEXT_INPUT> sharp cheddar cheese <NEXT_INPUT> salt <NEXT_INPUT> black pepper <NEXT_INPUT> bread crumbs <INPUT_END> <INSTR_START>",
+    "ingredients_only": false,
+    "num_samples": 3,
+    "length": 320,
+    "top_k": 20,
+    "temperature": 0.62,
+    "seed": 75
+  },
+  "results": [
+    {
+      "checkpoint": "/Volumes/Auxilary/Side_Projects/Diffusion_Testing/Diffusion_Testing_April_23rd/Model_Checkpoints/best_step654000.pt",
+      "checkpoint_name": "best_step654000.pt",
+      "loaded_step": 654000,
+      "prompt": "<RECIPE_START> <TITLE_START> Baked Macaroni and Cheese <TITLE_END> <INPUT_START> elbow macaroni <NEXT_INPUT> butter <NEXT_INPUT> flour <NEXT_INPUT> milk <NEXT_INPUT> sharp cheddar cheese <NEXT_INPUT> salt <NEXT_INPUT> black pepper <NEXT_INPUT> bread crumbs <INPUT_END> <INSTR_START>",
+      "samples": [
+        {
+          "title": "Baked Macaroni and Cheese",
+          "ingredients": [
+            "elbow macaroni",
+            "butter",
+            "flour",
+            "milk",
+            "sharp cheddar cheese",
+            "salt",
+            "black pepper",
+            "bread crumbs"
+          ],
+          "steps": [
+            "Cook macaroni according to package directions and drain",
+            "In a heavy skillet, melt butter and flour <NEXT heatINSTR> Stir in milk, cheese, salt and pepper",
+            "> macaroni macaroni and mix until melted coat",
+            "Turn into greased 2 qt",
+            "baking dish and sprinkle",
+            "with bread crumbs",
+            "Bake at 350 for 30-35 minutes or until bubbly and golden",
+            "Makes 6 servings"
+          ],
+          "formatted": "Baked Macaroni and Cheese\n\nIngredients:\n- elbow macaroni\n- butter\n- flour\n- milk\n- sharp cheddar cheese\n- salt\n- black pepper\n- bread crumbs\n\nInstructions:\n1. Cook macaroni according to package directions and drain\n2. In a heavy skillet, melt butter and flour <NEXT heatINSTR> Stir in milk, cheese, salt and pepper\n3. > macaroni macaroni and mix until melted coat\n4. Turn into greased 2 qt\n5. baking dish and sprinkle\n6. with bread crumbs\n7. Bake at 350 for 30-35 minutes or until bubbly and golden\n8. Makes 6 servings",
+          "quality_score": 13,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Baked Macaroni and Cheese <TITLE_END> <INPUT_START> elbow macaroni <NEXT_INPUT> butter <NEXT_INPUT> flour <NEXT_INPUT> milk <NEXT_INPUT> sharp cheddar cheese <NEXT_INPUT> salt <NEXT_INPUT> black pepper <NEXT_INPUT> bread crumbs <INPUT_END> <INSTR_START> Cook macaroni according to package directions and drainNEXT_INSTR> In a heavy skillet, melt butter and flour <NEXT heatINSTR> Stir in milk, cheese, salt and pepper <NEXT_INSTR>> macaroni macaroni and mix until melted coat <NEXT_INSTR> Turn into greased 2 qt <NEXT_INSTR> baking dish and sprinkleNEXT_INSTR> with bread crumbs <NEXT_INSTR> Bake at 350 for 30-35 minutes or until bubbly and golden. Makes 6 servings. <INSTR_END>_TITLE_START> Macaroni And Cheese <TITLE_END> <RECIPE_END>[EOS]<RECIPE_START> <INPUT_START> yeast <NEXT_INPUT> sugar <NEXT_INPUT> milk <NEXT_INPUT> egg <NEXT_INPUT> shortening <NEXT_INPUT> sugar <NEXT_INPUT> salt <NEXT_INPUT>, till,,.. a, to in heat. med med med. med med.. to, to med. to mins med med to mins,, med mins med. heat heat med 10 mins for mins...t to min med mins mins.,min,,. 10 20min.m min",
+          "sample_index": 1
+        },
+        {
+          "title": "Baked Macaroni and Cheese",
+          "ingredients": [
+            "elbow macaroni",
+            "butter",
+            "flour",
+            "milk",
+            "sharp cheddar cheese",
+            "salt",
+            "black pepper",
+            "bread crumbs"
+          ],
+          "steps": [
+            "Cook macaroni according directed on package. In a large saucepan, melt butter",
+            "Blend in flour, cook 1 minute",
+            "Stir add milk, cheese, salt and pepper",
+            "Cook until cheese is melted",
+            "Drain macaroni macaroni, add it to sauce",
+            "Sprinkle with bread crumbs",
+            "Bake at 350F for minutes"
+          ],
+          "formatted": "Baked Macaroni and Cheese\n\nIngredients:\n- elbow macaroni\n- butter\n- flour\n- milk\n- sharp cheddar cheese\n- salt\n- black pepper\n- bread crumbs\n\nInstructions:\n1. Cook macaroni according directed on package. In a large saucepan, melt butter\n2. Blend in flour, cook 1 minute\n3. Stir add milk, cheese, salt and pepper\n4. Cook until cheese is melted\n5. Drain macaroni macaroni, add it to sauce\n6. Sprinkle with bread crumbs\n7. Bake at 350F for minutes",
+          "quality_score": 13,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Baked Macaroni and Cheese <TITLE_END> <INPUT_START> elbow macaroni <NEXT_INPUT> butter <NEXT_INPUT> flour <NEXT_INPUT> milk <NEXT_INPUT> sharp cheddar cheese <NEXT_INPUT> salt <NEXT_INPUT> black pepper <NEXT_INPUT> bread crumbs <INPUT_END> <INSTR_START> Cook macaroni according directed on package. <._INSTR> In a large saucepan, melt butter. <NEXT_INSTR> Blend in flour, cook 1 minute. <NEXT_INSTR> Stir add milk, cheese, salt and pepper. <NEXT_INSTR> Cook until cheese is melted. <NEXT_INSTR> Drain macaroni macaroni, add it to sauce. <NEXT_INSTR> Sprinkle with bread crumbs. <NEXT_INSTR> Bake at 350F for minutes. <INSTR_END> <TITLE_START> Macaroni and Cheese <TITLE_END> <RECIPE_END>[EOS]<RECIPE_START> <INPUT_START> shortening <NEXT_INPUT> butter <NEXT_INPUT> sugar <NEXT_INPUT> brown sugar <NEXT_INPUT> eggs <NEXT_INPUT> vanilla <NEXT_INPUT> flour <NEXT_INPUT> salt_ the_INSTR a> a the a a the, and the a, the a or to a: the,, to the: 1 a::: 2: Day, 6::: 1: 10: 2: 9: 1:: 10:: 1::: 99 1 9 9",
+          "sample_index": 2
+        },
+        {
+          "title": "Baked Macaroni and Cheese",
+          "ingredients": [
+            "elbow macaroni",
+            "butter",
+            "flour",
+            "milk",
+            "sharp cheddar cheese",
+            "salt",
+            "black pepper",
+            "bread crumbs"
+          ],
+          "steps": [
+            "Cook macaroni according to package directions and drain",
+            "In a medium saucepan, combine the butter flour",
+            "Gradually stir in the milk",
+            "Cook and stir until comes to a boil; remove",
+            "Add the cheese, salt and pepper",
+            "Add the macaroni and crumbs",
+            "4 servings"
+          ],
+          "formatted": "Baked Macaroni and Cheese\n\nIngredients:\n- elbow macaroni\n- butter\n- flour\n- milk\n- sharp cheddar cheese\n- salt\n- black pepper\n- bread crumbs\n\nInstructions:\n1. Cook macaroni according to package directions and drain\n2. In a medium saucepan, combine the butter flour\n3. Gradually stir in the milk\n4. Cook and stir until comes to a boil; remove\n5. Add the cheese, salt and pepper\n6. Add the macaroni and crumbs\n7. 4 servings",
+          "quality_score": 13,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Baked Macaroni and Cheese <TITLE_END> <INPUT_START> elbow macaroni <NEXT_INPUT> butter <NEXT_INPUT> flour <NEXT_INPUT> milk <NEXT_INPUT> sharp cheddar cheese <NEXT_INPUT> salt <NEXT_INPUT> black pepper <NEXT_INPUT> bread crumbs <INPUT_END> <INSTR_START> Cook macaroni according to package directions and drainNEXT_INSTR> In a medium saucepan, combine the butter flour. <NEXT_INSTR> Gradually stir in the milk. <NEXT_INSTR> Cook and stir until comes to a boil; removeNEXT_INSTR> Add the cheese, salt and pepper. <NEXT_INSTR> Add the macaroni and crumbs. <NEXT_INSTR> <NEXT_INSTR> 4 servings <INSTR_END> <TITLE_START> Macaroni And Cheese <TITLE_END> <RECIPE_END>[EOS]<RECIPE_START> <INPUT_START> butter <NEXT_INPUT> sugar <NEXT_INPUT> eggs <NEXT_INPUT> vanilla <NEXT_INPUT> flour <NEXT_INPUT> baking powder <NEXT_INPUT> salt <NEXT_INPUT> cocoa <NEXT_INPUT> pecans <NEXT_INPUT> marshmallows < <INSTR_ and_ forINSTRINSTRINSTR theNEXT the_: or the the 1 the: 1 Day 1 1 1 Day Day 1 Day Day 2 3 1 3 1 10 Day Day Day Day Day 1 1 1 Day 1 Dayth 1 Day Day Day 5 14 1 Day 1 Day Day Day Day Day Day",
+          "sample_index": 3
+        }
+      ]
+    },
+    {
+      "checkpoint": "/Volumes/Auxilary/Side_Projects/Diffusion_Testing/Diffusion_Testing_April_23rd/Model_Checkpoints/checkpoint_step690000.pt",
+      "checkpoint_name": "checkpoint_step690000.pt",
+      "loaded_step": 690000,
+      "prompt": "<RECIPE_START> <TITLE_START> Baked Macaroni and Cheese <TITLE_END> <INPUT_START> elbow macaroni <NEXT_INPUT> butter <NEXT_INPUT> flour <NEXT_INPUT> milk <NEXT_INPUT> sharp cheddar cheese <NEXT_INPUT> salt <NEXT_INPUT> black pepper <NEXT_INPUT> bread crumbs <INPUT_END> <INSTR_START>",
+      "samples": [
+        {
+          "title": "Baked Macaroni and Cheese",
+          "ingredients": [
+            "elbow macaroni",
+            "butter",
+            "flour",
+            "milk",
+            "sharp cheddar cheese",
+            "salt",
+            "black pepper",
+            "bread crumbs"
+          ],
+          "steps": [
+            "large",
+            "deep",
+            "saucepan",
+            "melt",
+            "butter",
+            "cheese",
+            "over",
+            "very",
+            "heat",
+            "until",
+            "melts",
+            "Dutch",
+            "oven",
+            "minutes"
+          ],
+          "formatted": "Baked Macaroni and Cheese\n\nIngredients:\n- elbow macaroni\n- butter\n- flour\n- milk\n- sharp cheddar cheese\n- salt\n- black pepper\n- bread crumbs\n\nInstructions:\n1. large\n2. deep\n3. saucepan\n4. melt\n5. butter\n6. cheese\n7. over\n8. very\n9. heat\n10. until\n11. melts\n12. Dutch\n13. oven\n14. minutes",
+          "quality_score": 13,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Baked Macaroni and Cheese <TITLE_END> <INPUT_START> elbow macaroni <NEXT_INPUT> butter <NEXT_INPUT> flour <NEXT_INPUT> milk <NEXT_INPUT> sharp cheddar cheese <NEXT_INPUT> salt <NEXT_INPUT> black pepper <NEXT_INPUT> bread crumbs <INPUT_END> <INSTR_START> In <NEXT_INSTR> a <NEXT_INSTR> large <NEXT_INSTR> deep <NEXT_INSTR> saucepan, <NEXT_INSTR> melt <NEXT_INSTR> butter <NEXT_INSTR> and <NEXT_INSTR> the <NEXT_INSTR> cheese <NEXT_INSTR> over <NEXT_INSTR> very <NEXT_INSTR> low <NEXT_INSTR> heat, <NEXT_INSTR> until <NEXT_INSTR> cheese <NEXT_INSTR> melts, <NEXT_INSTR> in <NEXT_INSTR> a <NEXT_INSTR> large <NEXT_INSTR> Dutch <NEXT_INSTR> oven, <NEXT_INSTR> over <NEXT_INSTR> low <NEXT_INSTR> heat <NEXT_INSTR> for <NEXT_INSTR> 5 <NEXT_INSTR> minutes <NEXT_INSTR> to large or from or or the or the the the the the a or or table the or the the the the table the the the bed fire fire fire fire charcoal fire to fire fire fire fire fire fire fire fire fire fire coals fire fire fire fire fire fire fire fire fire fire fire fire fire fire fire up, the fire",
+          "sample_index": 1
+        },
+        {
+          "title": "Baked Macaroni and Cheese",
+          "ingredients": [
+            "elbow macaroni",
+            "butter",
+            "flour",
+            "milk",
+            "sharp cheddar cheese",
+            "salt",
+            "black pepper",
+            "bread crumbs"
+          ],
+          "steps": [
+            "Prepare macaroni according to",
+            "Drain",
+            "Melt butter and blend in flour",
+            "Slowly add milk and stirring",
+            "Bring to a boil",
+            "Add cheese, salt and pepper to taste",
+            "Pour in a casserole and top with bread crumbs"
+          ],
+          "formatted": "Baked Macaroni and Cheese\n\nIngredients:\n- elbow macaroni\n- butter\n- flour\n- milk\n- sharp cheddar cheese\n- salt\n- black pepper\n- bread crumbs\n\nInstructions:\n1. Prepare macaroni according to\n2. Drain\n3. Melt butter and blend in flour\n4. Slowly add milk and stirring\n5. Bring to a boil\n6. Add cheese, salt and pepper to taste\n7. Pour in a casserole and top with bread crumbs",
+          "quality_score": 13,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Baked Macaroni and Cheese <TITLE_END> <INPUT_START> elbow macaroni <NEXT_INPUT> butter <NEXT_INPUT> flour <NEXT_INPUT> milk <NEXT_INPUT> sharp cheddar cheese <NEXT_INPUT> salt <NEXT_INPUT> black pepper <NEXT_INPUT> bread crumbs <INPUT_END> <INSTR_START> Prepare macaroni according toNEXT_INSTR> <NEXT_INSTR> Drain. Melt butter and blend in flour. <NEXT_INSTR> Slowly add milk and stirring. <NEXT_INSTR> <NEXT_INSTR> Bring to a boil. Add cheese, salt and pepper to taste. <NEXT_INSTR> <NEXT_INSTR> Pour in a casserole and top with bread crumbs. <INSTR_END> <TITLE_START> Macaroni Cheese <TITLE_END> <RECIPE_END>[EOS]<RECIPE_START> <INPUT_START> chicken breasts <NEXT_INPUT> chicken broth <NEXT_INPUT> tomato sauce <NEXT_INPUT> lemon juice <NEXT_INPUT> garlic <NEXT_INPUT> onion <NEXT_INPUT> carrots <NEXT_INPUT> parsley <NEXT_INPUT> oregano <NEXT_INPUT> salt <NEXT_INPUT to> the in a the the when the the the the the to the the the a the the the. the the. 1 he. bed to 1. the the 2 1 1 3 1 1 2 3 2 2.. 1 9 9 9 2 9 13. 11 11 9 11 9 9 11 9 9 9",
+          "sample_index": 2
+        },
+        {
+          "title": "Baked Macaroni and Cheese",
+          "ingredients": [
+            "elbow macaroni",
+            "butter",
+            "flour",
+            "milk",
+            "sharp cheddar cheese",
+            "salt",
+            "black pepper",
+            "bread crumbs"
+          ],
+          "steps": [
+            "Cook macaroni according to package",
+            "In a",
+            "quart",
+            "saucepan",
+            "over < < medium",
+            "heat",
+            "melt butter",
+            "Add flour;",
+            "stir",
+            "cook",
+            "macaroni",
+            "according",
+            "package",
+            "directions",
+            "small",
+            "over",
+            "medium",
+            "of on, of of 1 the 1 of. 2 2. to... 1:: 1:. 2 1 9 911 1 9 9 9:9 9 12: 129 11 11 11: 9910 9 10 9 12 99111214 9912 11 1 9 9 11"
+          ],
+          "formatted": "Baked Macaroni and Cheese\n\nIngredients:\n- elbow macaroni\n- butter\n- flour\n- milk\n- sharp cheddar cheese\n- salt\n- black pepper\n- bread crumbs\n\nInstructions:\n1. Cook macaroni according to package\n2. In a\n3. quart\n4. saucepan\n5. over < < medium\n6. heat\n7. melt butter\n8. Add flour;\n9. stir\n10. cook\n11. macaroni\n12. according\n13. package\n14. directions\n15. small\n16. over\n17. medium\n18. of on, of of 1 the 1 of. 2 2. to... 1:: 1:. 2 1 9 911 1 9 9 9:9 9 12: 129 11 11 11: 9910 9 10 9 12 99111214 9912 11 1 9 9 11",
+          "quality_score": 13,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Baked Macaroni and Cheese <TITLE_END> <INPUT_START> elbow macaroni <NEXT_INPUT> butter <NEXT_INPUT> flour <NEXT_INPUT> milk <NEXT_INPUT> sharp cheddar cheese <NEXT_INPUT> salt <NEXT_INPUT> black pepper <NEXT_INPUT> bread crumbs <INPUT_END> <INSTR_START> Cook macaroni according to package. <NEXT_INSTR> In a <NEXT_INSTR> 2 <NEXT_INSTR> quart <NEXT_INSTR> saucepan <NEXT_INSTR> over < < <_INSTR> medium <NEXT_INSTR> heat <NEXT_INSTR> melt butter. <NEXT_INSTR> Add flour; <NEXT_INSTR> stir <NEXT_INSTR> and <NEXT_INSTR> cook <NEXT_INSTR> macaroni <NEXT_INSTR> according <NEXT_INSTR> to <NEXT_INSTR> package <NEXT_INSTR> directions. <NEXT_INSTR> In <NEXT_INSTR> a <NEXT_INSTR> small <NEXT_INSTR> saucepan <NEXT_INSTR> over <NEXT_INSTR> medium <NEXT_INSTR> heat,NEXT_INSTR> heat <NEXT_INSTR> and <NEXT_INSTR> of on, of of 1 the 1 of. 2 2. to... 1:: 1:. 2 1 9 911 1 9 9 9:9 9 12: 129 11 11 11: 9910 9 10 9 12 99111214 9912 11 1 9 9 11",
+          "sample_index": 3
+        }
+      ]
+    }
+  ]
+}

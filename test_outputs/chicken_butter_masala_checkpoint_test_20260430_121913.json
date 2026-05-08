@@ -1,0 +1,57 @@
+{
+  "args": {
+    "config": "config.yaml",
+    "profile": "recipe_poc_2day",
+    "data_dir": "./data_recipe_poc_2day",
+    "runs_dir": null,
+    "checkpoint": [
+      "./Model_Checkpoints/best_step41000.pt"
+    ],
+    "checkpoint_dir": "./Model_Checkpoints",
+    "output_dir": "./test_outputs",
+    "recipe": "chicken butter masala",
+    "prefix": "chicken butter masala",
+    "ingredients_only": true,
+    "num_samples": 2,
+    "length": 128,
+    "top_k": 20,
+    "temperature": 0.75,
+    "seed": 11
+  },
+  "results": [
+    {
+      "checkpoint": "/Volumes/Auxilary/Side_Projects/Diffusion_Testing/Diffusion_Testing_April_23rd/Model_Checkpoints/best_step41000.pt",
+      "checkpoint_name": "best_step41000.pt",
+      "loaded_step": 41000,
+      "prompt": "chicken butter masala",
+      "samples": [
+        {
+          "title": "Chicken Butter Masala",
+          "ingredients": [
+            "ground beef",
+            "tomatoes"
+          ],
+          "steps": [],
+          "formatted": "- ground beef\n- tomatoes",
+          "quality_score": 2,
+          "raw": "[BOS]chicken butter masala <INPUT_END> <INSTR_START> In a small bowl, combine the milk, sugar, curry powder, salt, pepper, cayenne, ginger, ginger, thyme, parsley, and coriander. <NEXT_INSTR> Bring to a boil. <NEXT_INSTR> Reduce heat to a simmer and simmer 20 minutes. <NEXT_INSTR> Serve with rice, rice and rice. <INSTR_END> <TITLE_START> Baked Rice <TITLE_END> <RECIPE_END>[EOS]<RECIPE_START> <INPUT_START> ground beef <NEXT_INPUT> tomatoes <NEXT_INPUT",
+          "sample_index": 1
+        },
+        {
+          "title": "Chicken Butter Masala",
+          "ingredients": [],
+          "steps": [
+            "Saute, onion, garlic, onion in a medium saucepan",
+            "Add cumin, oregano, salt and pepper",
+            "Beat in flour, parsley, oregano, oregano, and cayenne",
+            "Stir in zucchini"
+          ],
+          "formatted": "(no ingredients parsed)",
+          "quality_score": 4,
+          "raw": "[BOS]chicken butter masala <NEXT_INPUT> olive oil <NEXT_INPUT> red onion <NEXT_INPUT> garlic <NEXT_INPUT> oregano <NEXT_INPUT> oregano <NEXT_INPUT> oregano <NEXT_INPUT> salt <NEXT_INPUT> pepper <NEXT_INPUT> bread <NEXT_INPUT> flour <INPUT_END> <INSTR_START> Saute, onion, garlic, onion in a medium saucepan. <NEXT_INSTR> Add cumin, oregano, salt and pepper. <NEXT_INSTR> Beat in flour, parsley, oregano, oregano, and cayenne. <NEXT_INSTR> Stir in zucchini",
+          "sample_index": 2
+        }
+      ]
+    }
+  ]
+}

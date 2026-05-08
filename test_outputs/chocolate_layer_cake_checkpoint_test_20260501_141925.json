@@ -1,0 +1,152 @@
+{
+  "args": {
+    "config": "config.yaml",
+    "profile": "recipe_poc_2day",
+    "data_dir": "./data_recipe_poc_2day",
+    "runs_dir": null,
+    "checkpoint": [
+      "./Model_Checkpoints/best_step142000.pt",
+      "./Model_Checkpoints/checkpoint_step155000.pt"
+    ],
+    "checkpoint_dir": "./Model_Checkpoints",
+    "output_dir": "./test_outputs",
+    "recipe": "chocolate layer cake",
+    "prefix": null,
+    "ingredients_only": false,
+    "num_samples": 2,
+    "length": 320,
+    "top_k": 30,
+    "temperature": 0.68,
+    "seed": 21
+  },
+  "results": [
+    {
+      "checkpoint": "/Volumes/Auxilary/Side_Projects/Diffusion_Testing/Diffusion_Testing_April_23rd/Model_Checkpoints/best_step142000.pt",
+      "checkpoint_name": "best_step142000.pt",
+      "loaded_step": 142000,
+      "prompt": "<RECIPE_START> <TITLE_START> Chocolate Layer Cake <TITLE_END> <INPUT_START>",
+      "samples": [
+        {
+          "title": "Chocolate Layer Cake",
+          "ingredients": [
+            "flour onion",
+            "shortening",
+            "water",
+            "salt"
+          ],
+          "steps": [
+            "Dissolve shortening in water",
+            "Add onion, flour and salt",
+            "Beat with fork until",
+            "smooth. and < a ball",
+            "into",
+            "squares and drop into boiling broth",
+            "Cook 1 minute",
+            "Drain",
+            "broth",
+            "Save broth",
+            "Measure 1 cup of broth",
+            "Bring soup to a boil",
+            "Cook for <NEXT_",
+            "20 minutes",
+            "Add 1 cup chicken broth and cook until thick",
+            "Serve",
+            "Serves 6 to 8"
+          ],
+          "formatted": "Chocolate Layer Cake\n\nIngredients:\n- flour onion\n- shortening\n- water\n- salt\n\nInstructions:\n1. Dissolve shortening in water\n2. Add onion, flour and salt\n3. Beat with fork until\n4. smooth. and < a ball\n5. into\n6. squares and drop into boiling broth\n7. Cook 1 minute\n8. Drain\n9. broth\n10. Save broth\n11. Measure 1 cup of broth\n12. Bring soup to a boil\n13. Cook for <NEXT_\n14. 20 minutes\n15. Add 1 cup chicken broth and cook until thick\n16. Serve\n17. Serves 6 to 8",
+          "quality_score": 9,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Chocolate Layer Cake <TITLE_END> <INPUT_START>[EOS]<RECIPE_START> <INPUT_START> flour <NEXT__INPUT> onion <NEXT_INPUT> shortening <NEXT_INPUT> water <NEXT_INPUT> salt <INPUT_END> <INSTR_START> Dissolve shortening in water. <NEXT_INSTR> Add onion, flour and salt. <NEXT_INSTR> Beat with fork until <NEXT_INSTR> smooth. and < a ball. <NEXT_INSTR> Cut <NEXT_INSTR> into <NEXT_INSTR> squares and drop into boiling broth. Cook 1 minute. <NEXT_INSTR> Drain. <NEXT_INSTR> broth. <NEXT_INSTR> Save broth. <NEXT_INSTR> Measure 1 cup of broth. <NEXT_INSTR> Bring soup to a boil. <NEXT_INSTR> Cook for <NEXT_ <NEXT_INSTR> for <NEXT_INSTR> 20 minutes. <NEXT_INSTR> Add 1 cup chicken broth and cook until thick. <NEXT_INSTR> Serve. <NEXT_INSTR> Serves 6 to 8. <INSTR_END> <TITLE_START> Chicken And Dumplings <TITLE_END> <>INSTR.' 1INSTR/m4t 1/223 1434813 14428 11142 14g37S41641118 1A- 11- 11/ A3-1 1- 1. A",
+          "sample_index": 1
+        },
+        {
+          "title": "Chocolate Layer Cake",
+          "ingredients": [
+            "potatoes eggs",
+            "sugar",
+            "flour",
+            "salt",
+            "vanilla"
+          ],
+          "steps": [
+            "Mash together mashed potatoes, add in the egg sugar vanilla thoroughly. Add in flour, salt and soda",
+            "Mix well",
+            "Add in nuts",
+            "Drop by spoonfuls on a greased cookie sheet",
+            "Bake at 375 degrees for 10 min 10 min",
+            "Makes 3 dozen dozen large cookies"
+          ],
+          "formatted": "Chocolate Layer Cake\n\nIngredients:\n- potatoes eggs\n- sugar\n- flour\n- salt\n- vanilla\n\nInstructions:\n1. Mash together mashed potatoes, add in the egg sugar vanilla thoroughly. Add in flour, salt and soda\n2. Mix well\n3. Add in nuts\n4. Drop by spoonfuls on a greased cookie sheet\n5. Bake at 375 degrees for 10 min 10 min\n6. Makes 3 dozen dozen large cookies",
+          "quality_score": 10,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Chocolate Layer Cake <TITLE_END> <INPUT_START>[EOS]<RECIPE_START> <INPUT_START> potatoes <NEXT__INPUT> eggs <NEXT_INPUT> sugar <NEXT_INPUT> flour <NEXT_INPUT> salt <NEXT_INPUT> vanilla <INPUT_INPUT> <INSTR_START> Mash together mashed potatoes, add in the egg sugar vanilla thoroughly. <NEXT.INSTR> Add in flour, salt and soda. <NEXT_INSTR> Mix well. <NEXT_INSTR> Add in nuts. <NEXT_INSTR> Drop by spoonfuls on a greased cookie sheet. <NEXT_INSTR> Bake at 375 degrees for 10 min 10 min. <NEXT_INSTR> Makes 3 dozen dozen large cookies. <NEXT_INSTR> <TITLE_START> Sweet Potato Cookies Recipe <TITLE_END> <RECIPE_END>[EOS]<RECIPE_START> <INPUT_START> flour <NEXT_INPUT> sugar <NEXT_INPUT> soda <NEXT_INPUT> salt <NEXT_INPUT> cinnamon <NEXT_INPUT> oil <NEXT_INPUT> eggs <NEXT_INPUT> water <NEXT_INPUT> vanilla <NEXT_INPUT> carrots <NEXT_INPUT>INSTRs428934434673---27936543959998-99-95--94995\"9--913-9--X---------",
+          "sample_index": 2
+        }
+      ]
+    },
+    {
+      "checkpoint": "/Volumes/Auxilary/Side_Projects/Diffusion_Testing/Diffusion_Testing_April_23rd/Model_Checkpoints/checkpoint_step155000.pt",
+      "checkpoint_name": "checkpoint_step155000.pt",
+      "loaded_step": 155000,
+      "prompt": "<RECIPE_START> <TITLE_START> Chocolate Layer Cake <TITLE_END> <INPUT_START>",
+      "samples": [
+        {
+          "title": "Chocolate Layer Cake",
+          "ingredients": [
+            "shortening",
+            "butter sugar",
+            "eggs",
+            "vanilla",
+            "flour",
+            "salt",
+            "soda",
+            "bananas",
+            "nuts"
+          ],
+          "steps": [
+            "Cream shortening and butter",
+            "Add eggs, one at a",
+            "Add vanilla and mix",
+            "Sift flour and baking powder",
+            "Add to creamed mixture",
+            "Combine soda and salt and add to creamed mixture",
+            "Stir in mashed bananas",
+            "Bake at 350 for 1 hour"
+          ],
+          "formatted": "Chocolate Layer Cake\n\nIngredients:\n- shortening\n- butter sugar\n- eggs\n- vanilla\n- flour\n- salt\n- soda\n- bananas\n- nuts\n\nInstructions:\n1. Cream shortening and butter\n2. Add eggs, one at a\n3. Add vanilla and mix\n4. Sift flour and baking powder\n5. Add to creamed mixture\n6. Combine soda and salt and add to creamed mixture\n7. Stir in mashed bananas\n8. Bake at 350 for 1 hour",
+          "quality_score": 14,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Chocolate Layer Cake <TITLE_END> <INPUT_START> shortening <NEXT_INPUT> butter <NEXT__INPUT> sugar <NEXT_INPUT> eggs <NEXT_INPUT> vanilla <NEXT_INPUT> flour <NEXT_INPUT> salt <NEXT_INPUT> soda <NEXT_INPUT> bananas <NEXT_INPUT> nuts <NEXT_END> <INSTR_START> Cream shortening and butter. <NEXT_INSTR> Add eggs, one at a. <NEXT_INSTR> Add vanilla and mixNEXT_INSTR> Sift flour and baking powder. <NEXT_INSTR> Add to creamed mixture. <NEXT_INSTR> Combine soda and salt and add to creamed mixture. <NEXT_INSTR> Stir in mashed bananasNEXT_INSTR> and <NEXT_INSTR. <NEXT_INSTR> Bake at 350 for 1 hour. <INSTR_END> <TITLE_START> Banana Bread <TITLE_END> <RECIPE_END>[EOS]<RECIPE_START> <INPUT_START> chickpeas <NEXT_INPUT> garlic <NEXT_INPUT>> <NEXT_INPUT> lemon <NEXT_INPUT> olive oil <NEXT_INPUT> olive oil <NEXT_INPUT> salt <INPUTEND <INSTR < < < with the the the the, the the,,,,,, in,,, of,,,,,, by,>>, and andth, third following, the and, in, and first first in in the first first in in first first the the, the",
+          "sample_index": 1
+        },
+        {
+          "title": "Chocolate Layer Cake",
+          "ingredients": [
+            "sugar",
+            "flour",
+            "INPUT <",
+            "vegetable < oil",
+            "water",
+            "eggs",
+            "vanilla",
+            "walnuts",
+            "semi-sweet chocolate chips"
+          ],
+          "steps": [
+            "Heat oven to 350",
+            "Grease and flour two 9-inchinch",
+            "Mix dry ingredients in large bowl",
+            "In blender, water, oil, eggs and vanilla",
+            "Pour mixture into pans",
+            "Bake 25 minutes",
+            "Cool",
+            "Frost completely with",
+            "chocolate frosting",
+            "Yields"
+          ],
+          "formatted": "Chocolate Layer Cake\n\nIngredients:\n- sugar\n- flour\n- INPUT <\n- vegetable < oil\n- water\n- eggs\n- vanilla\n- walnuts\n- semi-sweet chocolate chips\n\nInstructions:\n1. Heat oven to 350\n2. Grease and flour two 9-inchinch\n3. Mix dry ingredients in large bowl\n4. In blender, water, oil, eggs and vanilla\n5. Pour mixture into pans\n6. Bake 25 minutes\n7. Cool\n8. Frost completely with\n9. chocolate frosting\n10. Yields",
+          "quality_score": 14,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Chocolate Layer Cake <TITLE_END> <INPUT_START> sugar <NEXT_INPUT> flour <NEXT_INPUT>INPUT < <NEXT_INPUT> vegetable < oil <NEXT_INPUT> water <NEXT_INPUT> eggs <NEXT_INPUT> vanilla <NEXT_INPUT> walnuts <NEXT_INPUT> semi-sweet chocolate chips <INPUT_END> <INSTR_START> Heat oven to 350. <NEXT_INSTR> Grease and flour two 9-inchinch. <NEXT_INSTR> Mix dry ingredients in large bowl. <NEXT_INSTR> In blender, water, oil, eggs and vanilla. <NEXT_INSTR> Pour mixture into pans..NEXT_INSTR> Bake 25 minutes. <NEXT_INSTR> Cool. <NEXT_INSTR> Frost completely with <NEXT_INSTR> chocolate frosting. <NEXT_INSTR> Yields <NEXT_INSTR> 24 <NEXT_INSTR> <INSTRINSTR_END> <TITLE_START> Chocolate Cake <TITLE_END> <RECIPE_END>[EOS]<RECIPE_START> <INPUT_START> flour <NEXT_INPUT> sugar <NEXT_INPUT> cinnamon <NEXT_INPUT> eggs <NEXT_INPUT> apples <NEXT_ < <INSTR_NEXT <NEXT fromNEXTNEXT <NEXT < <,NEXT_INSTR> <> to aNEXT_NEXT_>NEXTNEXTNEXTINSTR>NEXT__NEXT__NEXTNEXT>INSTR_NEXT_NEXTNEXTINSTR_NEXTNEXTNEXT___NEXT__INSTR_INSTR",
+          "sample_index": 2
+        }
+      ]
+    }
+  ]
+}

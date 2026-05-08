@@ -1,0 +1,161 @@
+{
+  "args": {
+    "config": "config.yaml",
+    "profile": "recipe_poc_2day",
+    "data_dir": "./data_recipe_poc_2day",
+    "runs_dir": null,
+    "checkpoint": [
+      "./Model_Checkpoints/best_step419000.pt",
+      "./Model_Checkpoints/checkpoint_step425000.pt"
+    ],
+    "checkpoint_dir": "./Model_Checkpoints",
+    "output_dir": "./test_outputs",
+    "recipe": "butter chicken",
+    "prefix": null,
+    "ingredients_only": false,
+    "num_samples": 2,
+    "length": 220,
+    "top_k": 25,
+    "temperature": 0.7,
+    "seed": 35
+  },
+  "results": [
+    {
+      "checkpoint": "/Volumes/Auxilary/Side_Projects/Diffusion_Testing/Diffusion_Testing_April_23rd/Model_Checkpoints/best_step419000.pt",
+      "checkpoint_name": "best_step419000.pt",
+      "loaded_step": 419000,
+      "prompt": "<RECIPE_START> <TITLE_START> Butter Chicken <TITLE_END> <INPUT_START>",
+      "samples": [
+        {
+          "title": "Butter Chicken",
+          "ingredients": [
+            "vegetable <",
+            "eggs",
+            "sugar",
+            "pumpkin",
+            "water",
+            "applesauce",
+            "flour",
+            "baking soda",
+            "cinnamon",
+            "ginger",
+            "cloves",
+            "salt",
+            "nutmeg",
+            "raisins",
+            "walnuts"
+          ],
+          "steps": [
+            "Preheat oven to 350 degrees",
+            "Beat oil and sugar until smooth and well blended",
+            "Beat in eggs, one at a time",
+            "Beat in pumpkin, water and applesauce",
+            "Sift together dry ingredients and pour into pumpkin mixture",
+            "Stir in raisins and walnuts",
+            "Bake 1 hour"
+          ],
+          "formatted": "Butter Chicken\n\nIngredients:\n- vegetable <\n- eggs\n- sugar\n- pumpkin\n- water\n- applesauce\n- flour\n- baking soda\n- cinnamon\n- ginger\n- cloves\n- salt\n- nutmeg\n- raisins\n- walnuts\n\nInstructions:\n1. Preheat oven to 350 degrees\n2. Beat oil and sugar until smooth and well blended\n3. Beat in eggs, one at a time\n4. Beat in pumpkin, water and applesauce\n5. Sift together dry ingredients and pour into pumpkin mixture\n6. Stir in raisins and walnuts\n7. Bake 1 hour",
+          "quality_score": 20,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Butter Chicken <TITLE_END> <INPUT_START>[EOS]<RECIPE_START> <INPUT_START> vegetable < <NEXT_INPUT> eggs <NEXT_INPUT> sugar <NEXT_INPUT> pumpkin <NEXT_INPUT> water <NEXT_INPUT> applesauce <NEXT_INPUT> flour <NEXT_INPUT> flour <NEXT_INPUT> baking soda <NEXT_INPUT> cinnamon <NEXT_INPUT> ginger <NEXT_INPUT> cloves <NEXT_INPUT> salt <NEXT_INPUT> nutmeg <NEXT_INPUT> raisins <NEXT_INPUT> walnuts <INPUT_END> <INSTR_START> Preheat oven to 350 degrees. <NEXT_INSTR> Beat oil and sugar until smooth and well blended. <NEXT_INSTR> Beat in eggs, one at a time. <NEXT_INSTR> Beat in pumpkin, water and applesauce. <NEXT_INSTR> Sift together dry ingredients and pour into pumpkin mixture. <NEXT_INSTR> Stir in raisins and walnuts. <NEXT_INSTR> Bake 1 hour.",
+          "sample_index": 1
+        },
+        {
+          "title": "Butter Chicken",
+          "ingredients": [
+            "eggs",
+            "butter",
+            "sugar",
+            "flour",
+            "baking <",
+            "salt",
+            "allspice",
+            "cinnamon",
+            "cloves",
+            "nutmeg",
+            "mace",
+            "milk",
+            "vanilla",
+            "apples",
+            "raisins",
+            "nuts"
+          ],
+          "steps": [
+            "In a small bowl, beat eggs until light",
+            "Add butter and sugar",
+            "Combine flour, baking powder, salt and spices",
+            "Add to creamed mixture alternately with milk",
+            "Stir in vanilla and apples",
+            "Pour into a well-greased 9 x 5-inch loaf pan"
+          ],
+          "formatted": "Butter Chicken\n\nIngredients:\n- eggs\n- butter\n- sugar\n- flour\n- baking <\n- salt\n- allspice\n- cinnamon\n- cloves\n- nutmeg\n- mace\n- milk\n- vanilla\n- apples\n- raisins\n- nuts\n\nInstructions:\n1. In a small bowl, beat eggs until light\n2. Add butter and sugar\n3. Combine flour, baking powder, salt and spices\n4. Add to creamed mixture alternately with milk\n5. Stir in vanilla and apples\n6. Pour into a well-greased 9 x 5-inch loaf pan",
+          "quality_score": 21,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Butter Chicken <TITLE_END> <INPUT_START>[EOS]<RECIPE_START> <INPUT_START> eggs <NEXT_INPUT> butter <NEXT_INPUT> sugar <NEXT_INPUT> flour <NEXT_INPUT> baking < <NEXT_INPUT> salt <NEXT_INPUT> allspice <NEXT_INPUT> cinnamon <NEXT_INPUT> cloves <NEXT_INPUT> nutmeg <NEXT_INPUT> allspice <NEXT_INPUT> mace <NEXT_INPUT> milk <NEXT_INPUT> vanilla <NEXT_INPUT> apples <NEXT_INPUT> raisins <NEXT_INPUT> nuts <INPUT_END> <INSTR_START> In a small bowl, beat eggs until light. <NEXT_INSTR> Add butter and sugar. <NEXT_INSTR> Combine flour, baking powder, salt and spices. <NEXT_INSTR> Add to creamed mixture alternately with milk. <NEXT_INSTR> Stir in vanilla and apples. <NEXT_INSTR> Pour into a well-greased 9 x 5-inch loaf pan.",
+          "sample_index": 2
+        }
+      ]
+    },
+    {
+      "checkpoint": "/Volumes/Auxilary/Side_Projects/Diffusion_Testing/Diffusion_Testing_April_23rd/Model_Checkpoints/checkpoint_step425000.pt",
+      "checkpoint_name": "checkpoint_step425000.pt",
+      "loaded_step": 425000,
+      "prompt": "<RECIPE_START> <TITLE_START> Butter Chicken <TITLE_END> <INPUT_START>",
+      "samples": [
+        {
+          "title": "Butter Chicken",
+          "ingredients": [
+            "sugar",
+            "margarine",
+            "eggs",
+            "vanilla",
+            "bananas>",
+            "nuts",
+            "flour",
+            "soda",
+            "salt",
+            "INPUT buttermilk"
+          ],
+          "steps": [
+            "Mix sugar, margarine, eggs, vanilla, bananas and nuts",
+            "Add flour and soda and salt",
+            "Mix well",
+            "Pour into a greased and floured 9 x 13-inch pan",
+            "Bake at 375 for 45 minutes or until done"
+          ],
+          "formatted": "Butter Chicken\n\nIngredients:\n- sugar\n- margarine\n- eggs\n- vanilla\n- bananas>\n- nuts\n- flour\n- soda\n- salt\n- INPUT buttermilk\n\nInstructions:\n1. Mix sugar, margarine, eggs, vanilla, bananas and nuts\n2. Add flour and soda and salt\n3. Mix well\n4. Pour into a greased and floured 9 x 13-inch pan\n5. Bake at 375 for 45 minutes or until done",
+          "quality_score": 15,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Butter Chicken <TITLE_END> <INPUT_START> sugar <NEXT_INPUT> margarine <NEXT_INPUT> eggs <NEXT_INPUT> vanilla <NEXT_INPUT> bananas>NEXT_INPUT> nuts <NEXT_INPUT> flour <NEXT_INPUT> soda <NEXT_INPUT> salt <NEXT_INPUTINPUT buttermilk <INPUT_END> <INSTR_START> Mix sugar, margarine, eggs, vanilla, bananas and nuts. <NEXT_INSTR> Add flour and soda and salt. <NEXT_INSTR> Mix well. <NEXT_INSTR> Pour into a greased and floured 9 x 13-inch pan. <NEXT_INSTR> Bake at 375 for 45 minutes or until done. <INSTR_END> <TITLE_START> Banana Nut Cake <TITLE_END> <RECIPE_END>[EOS]<RECIPE_START> <INPUT_START> milk <NEXT_INPUT> eggs <NEXT_INPUT> sugar <NEXT_INPUT> vanilla <INPUT_END> <INSTR_START> Scald milk <",
+          "sample_index": 1
+        },
+        {
+          "title": "Butter Chicken",
+          "ingredients": [
+            "cranberries",
+            "sugar",
+            "orange juice",
+            "water",
+            "orange",
+            "lemon",
+            "cloves",
+            "cinnamon"
+          ],
+          "steps": [
+            "Put cranberries in a large saucepan",
+            "Bring to a boil",
+            "Reduce heat and simmer until cranberries pop",
+            "Remove from heat",
+            "Cover and let stand 5 minutes",
+            "Remove and discard cranberries",
+            "Mix juice, water, peel, lemon juice, cloves and cinnamon sticks",
+            "Bring to a boil and simmer 5 minutes",
+            "Serve hot or cold with cinnamon sticks",
+            "Yields 12 servings"
+          ],
+          "formatted": "Butter Chicken\n\nIngredients:\n- cranberries\n- sugar\n- orange juice\n- water\n- orange\n- lemon\n- cloves\n- cinnamon\n\nInstructions:\n1. Put cranberries in a large saucepan\n2. Bring to a boil\n3. Reduce heat and simmer until cranberries pop\n4. Remove from heat\n5. Cover and let stand 5 minutes\n6. Remove and discard cranberries\n7. Mix juice, water, peel, lemon juice, cloves and cinnamon sticks\n8. Bring to a boil and simmer 5 minutes\n9. Serve hot or cold with cinnamon sticks\n10. Yields 12 servings",
+          "quality_score": 13,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Butter Chicken <TITLE_END> <INPUT_START> cranberries <NEXT_INPUT> sugar <NEXT_INPUT> orange juice <NEXT_INPUT> water <NEXT_INPUT> orange <NEXT_INPUT> lemon <NEXT_INPUT> cloves <NEXT_INPUT> cinnamon <INPUT_INPUT> <INSTR_START> Put cranberries in a large saucepan. <NEXT_INSTR> Bring to a boil. <NEXT_INSTR> Reduce heat and simmer until cranberries pop. <NEXT_INSTR> Remove from heat. <NEXT_INSTR> Cover and let stand 5 minutes. <NEXT_INSTR> Remove and discard cranberries. <NEXT_INSTR> Mix juice, water, peel, lemon juice, cloves and cinnamon sticks. <NEXT_INSTR> Bring to a boil and simmer 5 minutes. <NEXT_INSTR> Serve hot or cold with cinnamon sticks. <NEXT_INSTR> Yields 12 servings. <INSTR_END> <TITLE_START> Hot Cranberry Punch <TITLE_END> <RECIPE_END>[EOS]<RECIPE",
+          "sample_index": 2
+        }
+      ]
+    }
+  ]
+}

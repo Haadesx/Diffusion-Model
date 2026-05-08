@@ -1,0 +1,47 @@
+{
+  "args": {
+    "config": "config.yaml",
+    "profile": "recipe_poc_2day",
+    "data_dir": "./data_recipe_poc_2day",
+    "runs_dir": null,
+    "checkpoint": [
+      "./Model_Checkpoints/best_step41000.pt"
+    ],
+    "checkpoint_dir": "./Model_Checkpoints",
+    "output_dir": "./test_outputs",
+    "recipe": "chicken butter masala",
+    "prefix": null,
+    "ingredients_only": true,
+    "num_samples": 1,
+    "length": 96,
+    "top_k": 20,
+    "temperature": 0.75,
+    "seed": 7
+  },
+  "results": [
+    {
+      "checkpoint": "/Volumes/Auxilary/Side_Projects/Diffusion_Testing/Diffusion_Testing_April_23rd/Model_Checkpoints/best_step41000.pt",
+      "checkpoint_name": "best_step41000.pt",
+      "loaded_step": 41000,
+      "prompt": "<RECIPE_START> <TITLE_START> Chicken Butter Masala <TITLE_END> <INPUT_START>",
+      "samples": [
+        {
+          "title": "Chicken Butter Masala",
+          "ingredients": [
+            "Rice",
+            "Cinnamon"
+          ],
+          "steps": [
+            "Mix together the oil, cinnamon, nutmeg, nutmeg and cinnamon in a medium bowl",
+            "Add the rice and the flour until blended and continue cooking until smooth",
+            "Add the rice"
+          ],
+          "formatted": "- Rice\n- Cinnamon",
+          "quality_score": 5,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Chicken Butter Masala <TITLE_END> <INPUT_START>[EOS]<RECIPE_START> <INPUT_START> Rice <NEXT_INPUT> Cinnamon <NEXT_END> <INSTR_START> Mix together the oil, cinnamon, nutmeg, nutmeg and cinnamon in a medium bowl. <NEXT_INSTR> Add the rice and the flour until blended and continue cooking until smooth. <NEXT_INSTR> Add the rice",
+          "sample_index": 1
+        }
+      ]
+    }
+  ]
+}

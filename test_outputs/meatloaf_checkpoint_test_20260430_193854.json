@@ -1,0 +1,112 @@
+{
+  "args": {
+    "config": "config.yaml",
+    "profile": "recipe_poc_2day",
+    "data_dir": "./data_recipe_poc_2day",
+    "runs_dir": null,
+    "checkpoint": [
+      "./Model_Checkpoints/best_step88000.pt"
+    ],
+    "checkpoint_dir": "./Model_Checkpoints",
+    "output_dir": "./test_outputs",
+    "recipe": "meatloaf",
+    "prefix": null,
+    "ingredients_only": true,
+    "num_samples": 3,
+    "length": 150,
+    "top_k": 20,
+    "temperature": 0.75,
+    "seed": 52
+  },
+  "results": [
+    {
+      "checkpoint": "/Volumes/Auxilary/Side_Projects/Diffusion_Testing/Diffusion_Testing_April_23rd/Model_Checkpoints/best_step88000.pt",
+      "checkpoint_name": "best_step88000.pt",
+      "loaded_step": 88000,
+      "prompt": "<RECIPE_START> <TITLE_START> Meatloaf <TITLE_END> <INPUT_START>",
+      "samples": [
+        {
+          "title": "Meatloaf",
+          "ingredients": [
+            "salad oil",
+            "sugar",
+            "cinnamon",
+            "nutmeg",
+            "eggs",
+            "apples",
+            "raisins",
+            "vanilla",
+            "flour",
+            "salt",
+            "soda",
+            "nuts"
+          ],
+          "steps": [
+            "Mix first 5 ingredients",
+            "Add remaining ingredients",
+            "Blend well",
+            "Pour into greased 1 1/2-quart casserole"
+          ],
+          "formatted": "- salad oil\n- sugar\n- cinnamon\n- nutmeg\n- eggs\n- apples\n- raisins\n- vanilla\n- flour\n- salt\n- soda\n- nuts",
+          "quality_score": 16,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Meatloaf <TITLE_END> <INPUT_START> salad oil <NEXT_INPUT> sugar <NEXT_INPUT> cinnamon <NEXT_INPUT> nutmeg <NEXT_INPUT> eggs <NEXT_INPUT> apples <NEXT_INPUT> raisins <NEXT_INPUT> vanilla <NEXT_INPUT> flour <NEXT_INPUT> salt <NEXT_INPUT> soda <NEXT_INPUT> nuts <NEXT_INPUT> raisins <INPUT_END> <INSTR_START> Mix first 5 ingredients. <NEXT_INSTR> Add remaining ingredients. <NEXT_INSTR> Blend well. <NEXT_INSTR> Pour into greased 1 1/2-quart casserole. <NEXT_INSTR> Set",
+          "sample_index": 1
+        },
+        {
+          "title": "Meatloaf",
+          "ingredients": [
+            "shortening",
+            "sugar",
+            "eggs",
+            "pumpkin",
+            "vanilla",
+            "water",
+            "flour",
+            "soda",
+            "salt",
+            "cinnamon",
+            "cloves",
+            "raisins"
+          ],
+          "steps": [
+            "Combine first 3 ingredients",
+            "Beat well",
+            "Add remaining ingredients",
+            "Bake in greased and floured 10 x 15-inch pan. <"
+          ],
+          "formatted": "- shortening\n- sugar\n- eggs\n- pumpkin\n- vanilla\n- water\n- flour\n- soda\n- salt\n- cinnamon\n- cloves\n- raisins",
+          "quality_score": 16,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Meatloaf <TITLE_END> <INPUT_START>[EOS]<RECIPE_START> <INPUT_START> shortening <NEXT_INPUT> sugar <NEXT_INPUT> eggs <NEXT_INPUT> pumpkin <NEXT_INPUT> vanilla <NEXT_INPUT> water <NEXT_INPUT> flour <NEXT_INPUT> soda <NEXT_INPUT> salt <NEXT_INPUT> cinnamon <NEXT_INPUT> cloves <NEXT_INPUT> raisins <INPUT_END> <INSTR_START> Combine first 3 ingredients. <NEXT_INSTR> Beat well. <NEXT_INSTR> Add remaining ingredients. <NEXT_INSTR> Bake in greased and floured 10 x 15-inch pan. <",
+          "sample_index": 2
+        },
+        {
+          "title": "Meatloaf",
+          "ingredients": [
+            "margarine",
+            "sugar",
+            "eggs",
+            "molasses",
+            "vanilla",
+            "buttermilk",
+            "flour",
+            "baking soda",
+            "cloves",
+            "salt",
+            "ginger",
+            "cinnamon"
+          ],
+          "steps": [
+            "Cream the margarine and sugar",
+            "Add eggs, molasses and vanilla",
+            "Add the dry ingredients",
+            "Add alternately with the buttermilk"
+          ],
+          "formatted": "- margarine\n- sugar\n- eggs\n- molasses\n- vanilla\n- buttermilk\n- flour\n- baking soda\n- cloves\n- salt\n- ginger\n- cinnamon",
+          "quality_score": 16,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Meatloaf <TITLE_END> <INPUT_START>[EOS]<RECIPE_START> <INPUT_START> margarine <NEXT_INPUT> sugar <NEXT_INPUT> eggs <NEXT_INPUT> molasses <NEXT_INPUT> vanilla <NEXT_INPUT> buttermilk <NEXT_INPUT> flour <NEXT_INPUT> baking soda <NEXT_INPUT> cloves <NEXT_INPUT> salt <NEXT_INPUT> ginger <NEXT_INPUT> cinnamon <INPUT_END> <INSTR_START> Cream the margarine and sugar. <NEXT_INSTR> Add eggs, molasses and vanilla. <NEXT_INSTR> Add the dry ingredients. <NEXT_INSTR> Add alternately with the buttermilk,",
+          "sample_index": 3
+        }
+      ]
+    }
+  ]
+}

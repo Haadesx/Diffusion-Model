@@ -1,0 +1,207 @@
+{
+  "args": {
+    "config": "config.yaml",
+    "profile": "recipe_poc_2day",
+    "data_dir": "./data_recipe_poc_2day",
+    "runs_dir": null,
+    "checkpoint": [
+      "./Model_Checkpoints/best_step503000.pt",
+      "./Model_Checkpoints/checkpoint_step515000.pt"
+    ],
+    "checkpoint_dir": "./Model_Checkpoints",
+    "output_dir": "./test_outputs",
+    "recipe": "chocolate cake",
+    "prefix": "<RECIPE_START> <TITLE_START> Chocolate Cake <TITLE_END> <INPUT_START> flour <NEXT_INPUT> sugar <NEXT_INPUT> cocoa powder <NEXT_INPUT> baking soda <NEXT_INPUT> salt <NEXT_INPUT> eggs <NEXT_INPUT> milk <NEXT_INPUT> vegetable oil <NEXT_INPUT> vanilla <NEXT_INPUT> boiling water <INPUT_END> <INSTR_START>",
+    "ingredients_only": false,
+    "num_samples": 3,
+    "length": 320,
+    "top_k": 20,
+    "temperature": 0.62,
+    "seed": 51
+  },
+  "results": [
+    {
+      "checkpoint": "/Volumes/Auxilary/Side_Projects/Diffusion_Testing/Diffusion_Testing_April_23rd/Model_Checkpoints/best_step503000.pt",
+      "checkpoint_name": "best_step503000.pt",
+      "loaded_step": 503000,
+      "prompt": "<RECIPE_START> <TITLE_START> Chocolate Cake <TITLE_END> <INPUT_START> flour <NEXT_INPUT> sugar <NEXT_INPUT> cocoa powder <NEXT_INPUT> baking soda <NEXT_INPUT> salt <NEXT_INPUT> eggs <NEXT_INPUT> milk <NEXT_INPUT> vegetable oil <NEXT_INPUT> vanilla <NEXT_INPUT> boiling water <INPUT_END> <INSTR_START>",
+      "samples": [
+        {
+          "title": "Chocolate Cake",
+          "ingredients": [
+            "flour",
+            "sugar",
+            "cocoa powder",
+            "baking soda",
+            "salt",
+            "eggs",
+            "milk",
+            "vegetable oil",
+            "vanilla",
+            "boiling water"
+          ],
+          "steps": [
+            "Sift oven ingredients to 350 degrees",
+            "In a medium bowl, combine dry ingredients; add eggs, milk oil and vanilla. Mix well",
+            "Add boiling ingredients to dry ingredients and mix well",
+            "For each cup of batter, pour 1/3 cup batter and a greased 13 x 9 x 2 inch pan",
+            "Bake for 350 for 25 minutes or until toothpick inserted in toothpick comes out clean",
+            "Cool for 10 minutes",
+            "Remove to wire rack and cool completely"
+          ],
+          "formatted": "Chocolate Cake\n\nIngredients:\n- flour\n- sugar\n- cocoa powder\n- baking soda\n- salt\n- eggs\n- milk\n- vegetable oil\n- vanilla\n- boiling water\n\nInstructions:\n1. Sift oven ingredients to 350 degrees\n2. In a medium bowl, combine dry ingredients; add eggs, milk oil and vanilla. Mix well\n3. Add boiling ingredients to dry ingredients and mix well\n4. For each cup of batter, pour 1/3 cup batter and a greased 13 x 9 x 2 inch pan\n5. Bake for 350 for 25 minutes or until toothpick inserted in toothpick comes out clean\n6. Cool for 10 minutes\n7. Remove to wire rack and cool completely",
+          "quality_score": 15,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Chocolate Cake <TITLE_END> <INPUT_START> flour <NEXT_INPUT> sugar <NEXT_INPUT> cocoa powder <NEXT_INPUT> baking soda <NEXT_INPUT> salt <NEXT_INPUT> eggs <NEXT_INPUT> milk <NEXT_INPUT> vegetable oil <NEXT_INPUT> vanilla <NEXT_INPUT> boiling water <INPUT_END> <INSTR_START> Sift oven ingredients to 350 degrees. <NEXT_INSTR> In a medium bowl, combine dry ingredients; add eggs, milk oil and vanilla. <NEXT_.> Mix well. <NEXT_INSTR> Add boiling ingredients to dry ingredients and mix well. <NEXT_INSTR> For each cup of batter, pour 1/3 cup batter and a greased 13 x 9 x 2 inch pan. <NEXT_INSTR> Bake for 350 for 25 minutes or until toothpick inserted in toothpick comes out clean. <NEXT_INSTR> Cool for 10 minutes. <NEXT_INSTR> Remove to wire rack and cool completely. <INSTR_END> <TITLE_START> Quick- Easy Chocolate Cake <TITLE_END> <RECIPE_END>[EOS]<RECIPE_START> <INPUT_START> sugar <NEXT_./ c w 1 1_.NEXT. w/3/1.32/3/32333332333333/333333333.333/33333p33 13 1.3.",
+          "sample_index": 1
+        },
+        {
+          "title": "Chocolate Cake",
+          "ingredients": [
+            "flour",
+            "sugar",
+            "cocoa powder",
+            "baking soda",
+            "salt",
+            "eggs",
+            "milk",
+            "vegetable oil",
+            "vanilla",
+            "boiling water"
+          ],
+          "steps": [
+            "In a, mixing bowl, combine flour, sugar, cocoa, baking soda and salt",
+            "In a separate bowl, combine eggs, milk and vanilla",
+            "Add pour wet and ingredients into dry ingredients",
+            "Stir until just combined",
+            "Spoon into greased 9-. square pan",
+            "Bake 350 for 35>40 minutes"
+          ],
+          "formatted": "Chocolate Cake\n\nIngredients:\n- flour\n- sugar\n- cocoa powder\n- baking soda\n- salt\n- eggs\n- milk\n- vegetable oil\n- vanilla\n- boiling water\n\nInstructions:\n1. In a, mixing bowl, combine flour, sugar, cocoa, baking soda and salt\n2. In a separate bowl, combine eggs, milk and vanilla\n3. Add pour wet and ingredients into dry ingredients\n4. Stir until just combined\n5. Spoon into greased 9-. square pan\n6. Bake 350 for 35>40 minutes",
+          "quality_score": 15,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Chocolate Cake <TITLE_END> <INPUT_START> flour <NEXT_INPUT> sugar <NEXT_INPUT> cocoa powder <NEXT_INPUT> baking soda <NEXT_INPUT> salt <NEXT_INPUT> eggs <NEXT_INPUT> milk <NEXT_INPUT> vegetable oil <NEXT_INPUT> vanilla <NEXT_INPUT> boiling water <INPUT_END> <INSTR_START> In a, mixing bowl, combine flour, sugar, cocoa, baking soda and salt. <NEXT_INSTR> In a separate bowl, combine eggs, milk and vanilla. <NEXT_INSTR> Add pour wet and ingredients into dry ingredients. <NEXT_INSTR> Stir until just combined. <NEXT_INSTR> Spoon into greased 9-. square pan. Bake 350 for 35>40 minutes. <INSTR_END> <TITLE_START> Double Chocolate Cake <TITLE_END> <RECIPE_END>[EOS]<RECIPE_START> <INPUT_START> butter <NEXT_INPUT> sugar <NEXT_INPUT> eggs <NEXT_INPUT> flour <NEXT_INPUT> cocoa <NEXT_INPUT> vanilla <INPUT_INPUT> <INSTR_START> Cream butter and sugar. <NEXT_ <. <INSTR all._ <NEXT, <//.///////////// ingredients44_4343/43334234/2433333333333331434",
+          "sample_index": 2
+        },
+        {
+          "title": "Chocolate Cake",
+          "ingredients": [
+            "flour",
+            "sugar",
+            "cocoa powder",
+            "baking soda",
+            "salt",
+            "eggs",
+            "milk",
+            "vegetable oil",
+            "vanilla",
+            "boiling water"
+          ],
+          "steps": [
+            "In oven large pan",
+            "In large mixing bowl, combine flour, sugar, cocoa powder, baking soda and salt",
+            "In eggs add milk, oil and vanilla and beat",
+            "Add to dry ingredients and mix well",
+            "Beat well",
+            "Stir and add water",
+            "Pour into greased and floured baking pan",
+            "Bake for 350 for 30 minutes"
+          ],
+          "formatted": "Chocolate Cake\n\nIngredients:\n- flour\n- sugar\n- cocoa powder\n- baking soda\n- salt\n- eggs\n- milk\n- vegetable oil\n- vanilla\n- boiling water\n\nInstructions:\n1. In oven large pan\n2. In large mixing bowl, combine flour, sugar, cocoa powder, baking soda and salt\n3. In eggs add milk, oil and vanilla and beat\n4. Add to dry ingredients and mix well\n5. Beat well\n6. Stir and add water\n7. Pour into greased and floured baking pan\n8. Bake for 350 for 30 minutes",
+          "quality_score": 15,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Chocolate Cake <TITLE_END> <INPUT_START> flour <NEXT_INPUT> sugar <NEXT_INPUT> cocoa powder <NEXT_INPUT> baking soda <NEXT_INPUT> salt <NEXT_INPUT> eggs <NEXT_INPUT> milk <NEXT_INPUT> vegetable oil <NEXT_INPUT> vanilla <NEXT_INPUT> boiling water <INPUT_END> <INSTR_START> In oven large pan. <NEXT_INSTR> In large mixing bowl, combine flour, sugar, cocoa powder, baking soda and salt. <NEXT_INSTR> In eggs add milk, oil and vanilla and beatNEXT_INSTR> Add to dry ingredients and mix well. <NEXT_INSTR> Beat well. <NEXT_INSTR> Stir and add water. <NEXT_INSTR> Pour into greased and floured baking pan. <NEXT_INSTR> Bake for 350 for 30 minutes. <INSTR_END> <TITLE_START> Easy Chocolate Cake <TITLE_END> <RECIPE_END>[EOS][EOS]__START> <INPUT_START> flour <NEXT_INPUT> sugar <NEXT_INPUT> salt <NEXT_INPUT> soda <NEXT_INPUT> cinnamon <NEXT_INPUT> nutmeg <NEXT.INSTRINSTRNEXT <__INSTR < < < <INSTR 3 3 1 1 2 1 1/ 1 1 2 1//. 1 <//./ 35 1 22///682223322233333433543",
+          "sample_index": 3
+        }
+      ]
+    },
+    {
+      "checkpoint": "/Volumes/Auxilary/Side_Projects/Diffusion_Testing/Diffusion_Testing_April_23rd/Model_Checkpoints/checkpoint_step515000.pt",
+      "checkpoint_name": "checkpoint_step515000.pt",
+      "loaded_step": 515000,
+      "prompt": "<RECIPE_START> <TITLE_START> Chocolate Cake <TITLE_END> <INPUT_START> flour <NEXT_INPUT> sugar <NEXT_INPUT> cocoa powder <NEXT_INPUT> baking soda <NEXT_INPUT> salt <NEXT_INPUT> eggs <NEXT_INPUT> milk <NEXT_INPUT> vegetable oil <NEXT_INPUT> vanilla <NEXT_INPUT> boiling water <INPUT_END> <INSTR_START>",
+      "samples": [
+        {
+          "title": "Chocolate Cake",
+          "ingredients": [
+            "flour",
+            "sugar",
+            "cocoa powder",
+            "baking soda",
+            "salt",
+            "eggs",
+            "milk",
+            "vegetable oil",
+            "vanilla",
+            "boiling water"
+          ],
+          "steps": [
+            "Combine the dry ingredients the dry ingredients except the vanilla. Add the eggs, milk, oil and vanilla",
+            "Mix until smooth",
+            "Pour in an 8x8 pan",
+            "Bake at 350 degrees for 30 to 35 minutes",
+            "Frost with your favorite icing and serve warm"
+          ],
+          "formatted": "Chocolate Cake\n\nIngredients:\n- flour\n- sugar\n- cocoa powder\n- baking soda\n- salt\n- eggs\n- milk\n- vegetable oil\n- vanilla\n- boiling water\n\nInstructions:\n1. Combine the dry ingredients the dry ingredients except the vanilla. Add the eggs, milk, oil and vanilla\n2. Mix until smooth\n3. Pour in an 8x8 pan\n4. Bake at 350 degrees for 30 to 35 minutes\n5. Frost with your favorite icing and serve warm",
+          "quality_score": 15,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Chocolate Cake <TITLE_END> <INPUT_START> flour <NEXT_INPUT> sugar <NEXT_INPUT> cocoa powder <NEXT_INPUT> baking soda <NEXT_INPUT> salt <NEXT_INPUT> eggs <NEXT_INPUT> milk <NEXT_INPUT> vegetable oil <NEXT_INPUT> vanilla <NEXT_INPUT> boiling water <INPUT_END> <INSTR_START> Combine the dry ingredients the dry ingredients except the vanilla. <NEXTNEXT_INSTR> Add the eggs, milk, oil and vanilla. <NEXT_INSTR> Mix until smooth. <NEXT_INSTR> Pour in an 8x8 pan. <NEXT_INSTR> Bake at 350 degrees for 30 to 35 minutes. <NEXT_INSTR> Frost with your favorite icing and serve warm. <INSTR_END> <TITLE_START> Hot Fudge Cake <TITLE_END> <RECIPE_END>[EOS]<RECIPE_START> <INPUT_START> sugar <NEXT_INPUT> margarine <NEXT_INPUT> eggs <NEXT_INPUT> vanilla <NEXT_INPUT> cake flour <NEXT_INPUT> salt <NEXT_INPUT> milk <INPUT_END> <INSTR_START> Cream together sugar andNEXT_ theNEXT <. the the <INSTR the the the the the the the the top the the the the the the the the the4 the the the 3 5 the/ 1 3/33//3333 4 4 4 33333333333333",
+          "sample_index": 1
+        },
+        {
+          "title": "Chocolate Cake",
+          "ingredients": [
+            "flour",
+            "sugar",
+            "cocoa powder",
+            "baking soda",
+            "salt",
+            "eggs",
+            "milk",
+            "vegetable oil",
+            "vanilla",
+            "boiling water"
+          ],
+          "steps": [
+            "In the bowl bowl you want the cake",
+            "In a large bowl mix the first five ingredients",
+            "In a medium bowl mix the eggs, milk, oil and vanilla",
+            "Add the wet ingredients to the dry ingredients and stir till just combined",
+            "Pour the batter into a greased and floured 9 x 13 pan",
+            "Bake at 350 degrees for 30 to 35 minutes or until a toothpick comes out clean and comes out clean",
+            "Remove from oven and cool on racks"
+          ],
+          "formatted": "Chocolate Cake\n\nIngredients:\n- flour\n- sugar\n- cocoa powder\n- baking soda\n- salt\n- eggs\n- milk\n- vegetable oil\n- vanilla\n- boiling water\n\nInstructions:\n1. In the bowl bowl you want the cake\n2. In a large bowl mix the first five ingredients\n3. In a medium bowl mix the eggs, milk, oil and vanilla\n4. Add the wet ingredients to the dry ingredients and stir till just combined\n5. Pour the batter into a greased and floured 9 x 13 pan\n6. Bake at 350 degrees for 30 to 35 minutes or until a toothpick comes out clean and comes out clean\n7. Remove from oven and cool on racks",
+          "quality_score": 15,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Chocolate Cake <TITLE_END> <INPUT_START> flour <NEXT_INPUT> sugar <NEXT_INPUT> cocoa powder <NEXT_INPUT> baking soda <NEXT_INPUT> salt <NEXT_INPUT> eggs <NEXT_INPUT> milk <NEXT_INPUT> vegetable oil <NEXT_INPUT> vanilla <NEXT_INPUT> boiling water <INPUT_END> <INSTR_START> In the bowl bowl you want the cake <NEXT_INSTR> In a large bowl mix the first five ingredients. <NEXT_INSTR> In a medium bowl mix the eggs, milk, oil and vanilla. <NEXT_INSTR> Add the wet ingredients to the dry ingredients and stir till just combined. <NEXT_INSTR> Pour the batter into a greased and floured 9 x 13 pan. <NEXT_INSTR> Bake at 350 degrees for 30 to 35 minutes or until a toothpick comes out clean and comes out clean. <NEXT_INSTR> Remove from oven and cool on racks. <INSTR_END> <TITLE_START> Mom's Aunt Pam's German Chocolate Cake <TITLE_END> <RECIPE_END>[EOS]<RECIPE_START> <INPUT_START> sugar <NEXT_INPUT> water the theINSTRNEXTINSTR <INSTR the youINSTR < the the it you the it it you it water to then take and is you the it it is it you you and you it it you you it it it it you it it you it it you you you the you the it you. you when you you it",
+          "sample_index": 2
+        },
+        {
+          "title": "Chocolate Cake",
+          "ingredients": [
+            "flour",
+            "sugar",
+            "cocoa powder",
+            "baking soda",
+            "salt",
+            "eggs",
+            "milk",
+            "vegetable oil",
+            "vanilla",
+            "boiling water"
+          ],
+          "steps": [
+            "In a mixing bowl, combine flour, sugar, cocoa powder, baking soda and salt;",
+            "mix a well in the center",
+            "In a small, combine eggs, milk, oil and vanilla;",
+            "stir into the well ingredients and stir just until moistened",
+            "Pour",
+            "into a greased 9-in square baking pan",
+            "at 350 for 35-40 minutes or until a toothpick inserted near the center comes out clean",
+            "Cool 10 minutes before removing from the pan"
+          ],
+          "formatted": "Chocolate Cake\n\nIngredients:\n- flour\n- sugar\n- cocoa powder\n- baking soda\n- salt\n- eggs\n- milk\n- vegetable oil\n- vanilla\n- boiling water\n\nInstructions:\n1. In a mixing bowl, combine flour, sugar, cocoa powder, baking soda and salt;\n2. mix a well in the center\n3. In a small, combine eggs, milk, oil and vanilla;\n4. stir into the well ingredients and stir just until moistened\n5. Pour\n6. into a greased 9-in square baking pan\n7. at 350 for 35-40 minutes or until a toothpick inserted near the center comes out clean\n8. Cool 10 minutes before removing from the pan",
+          "quality_score": 15,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Chocolate Cake <TITLE_END> <INPUT_START> flour <NEXT_INPUT> sugar <NEXT_INPUT> cocoa powder <NEXT_INPUT> baking soda <NEXT_INPUT> salt <NEXT_INPUT> eggs <NEXT_INPUT> milk <NEXT_INPUT> vegetable oil <NEXT_INPUT> vanilla <NEXT_INPUT> boiling water <INPUT_END> <INSTR_START> In a mixing bowl, combine flour, sugar, cocoa powder, baking soda and salt; <NEXT_INSTR> mix a well in the center. <NEXT_INSTR> In a small, combine eggs, milk, oil and vanilla; <NEXT_INSTR> stir into the well ingredients and stir just until moistened. Pour <NEXT_INSTR> into a greased 9-in square baking pan <NEXT_INSTR> . <NEXT_INSTR> . <NEXT_INSTR> . at 350 for 35-40 minutes or until a toothpick inserted near the center comes out clean. <NEXT_INSTR> Cool 10 minutes before removing from the pan. <INSTR_END> <TITLE_START>> Fudge Brownies <TITLE_END> <RECIPE_END>[EOS]<RECIPE_START> <INPUT_START>NEXT_. the. water. not bowl. a.... bowl the a a the stir the mix water. the .. bowl stir it it. it will. it will. it it it batter. batter will. will it... it to it it it not stir it it it will not",
+          "sample_index": 3
+        }
+      ]
+    }
+  ]
+}

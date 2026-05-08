@@ -1,0 +1,230 @@
+{
+  "args": {
+    "config": "config.yaml",
+    "profile": "recipe_poc_2day",
+    "data_dir": "./data_recipe_poc_2day",
+    "runs_dir": null,
+    "checkpoint": [
+      "./Model_Checkpoints/best_step654000.pt",
+      "./Model_Checkpoints/checkpoint_step690000.pt"
+    ],
+    "checkpoint_dir": "./Model_Checkpoints",
+    "output_dir": "./test_outputs",
+    "recipe": "butter chicken",
+    "prefix": "<RECIPE_START> <TITLE_START> Butter Chicken <TITLE_END> <INPUT_START> chicken breast <NEXT_INPUT> butter <NEXT_INPUT> onion <NEXT_INPUT> garlic <NEXT_INPUT> ginger <NEXT_INPUT> tomato sauce <NEXT_INPUT> garam masala <NEXT_INPUT> cumin <NEXT_INPUT> chili powder <NEXT_INPUT> heavy cream <NEXT_INPUT> salt <NEXT_INPUT> cilantro <INPUT_END> <INSTR_START>",
+    "ingredients_only": false,
+    "num_samples": 3,
+    "length": 320,
+    "top_k": 20,
+    "temperature": 0.62,
+    "seed": 71
+  },
+  "results": [
+    {
+      "checkpoint": "/Volumes/Auxilary/Side_Projects/Diffusion_Testing/Diffusion_Testing_April_23rd/Model_Checkpoints/best_step654000.pt",
+      "checkpoint_name": "best_step654000.pt",
+      "loaded_step": 654000,
+      "prompt": "<RECIPE_START> <TITLE_START> Butter Chicken <TITLE_END> <INPUT_START> chicken breast <NEXT_INPUT> butter <NEXT_INPUT> onion <NEXT_INPUT> garlic <NEXT_INPUT> ginger <NEXT_INPUT> tomato sauce <NEXT_INPUT> garam masala <NEXT_INPUT> cumin <NEXT_INPUT> chili powder <NEXT_INPUT> heavy cream <NEXT_INPUT> salt <NEXT_INPUT> cilantro <INPUT_END> <INSTR_START>",
+      "samples": [
+        {
+          "title": "Butter Chicken",
+          "ingredients": [
+            "chicken breast",
+            "butter",
+            "onion",
+            "garlic",
+            "ginger",
+            "tomato sauce",
+            "garam masala",
+            "cumin",
+            "chili powder",
+            "heavy cream",
+            "salt",
+            "cilantro"
+          ],
+          "steps": [
+            "Slice chicken breast into thin slices",
+            "Melt butter in a large saute pan or wok",
+            "Add onions, garlic and ginger and saute until tender",
+            "Add chicken, tomato sauce, masala, cumin and chili powder",
+            "Simmer 5 more minutes",
+            "Add cream and simmer for 3-5 minutes.NEXT>_INSTR> Stir in cilantro and lime immediately. < <>>"
+          ],
+          "formatted": "Butter Chicken\n\nIngredients:\n- chicken breast\n- butter\n- onion\n- garlic\n- ginger\n- tomato sauce\n- garam masala\n- cumin\n- chili powder\n- heavy cream\n- salt\n- cilantro\n\nInstructions:\n1. Slice chicken breast into thin slices\n2. Melt butter in a large saute pan or wok\n3. Add onions, garlic and ginger and saute until tender\n4. Add chicken, tomato sauce, masala, cumin and chili powder\n5. Simmer 5 more minutes\n6. Add cream and simmer for 3-5 minutes.NEXT>_INSTR> Stir in cilantro and lime immediately. < <>>",
+          "quality_score": 17,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Butter Chicken <TITLE_END> <INPUT_START> chicken breast <NEXT_INPUT> butter <NEXT_INPUT> onion <NEXT_INPUT> garlic <NEXT_INPUT> ginger <NEXT_INPUT> tomato sauce <NEXT_INPUT> garam masala <NEXT_INPUT> cumin <NEXT_INPUT> chili powder <NEXT_INPUT> heavy cream <NEXT_INPUT> salt <NEXT_INPUT> cilantro <INPUT_END> <INSTR_START> Slice chicken breast into thin slices. <NEXT_INSTR> Melt butter in a large saute pan or wok. <NEXT_INSTR> Add onions, garlic and ginger and saute until tender. <NEXT_INSTR> Add chicken, tomato sauce, masala, cumin and chili powder. <NEXT_INSTR> Simmer 5 more minutes. <NEXT_INSTR> Add cream and simmer for 3-5 minutes.NEXT>_INSTR> Stir in cilantro and lime immediately. < <_>> <TITLE_START> Curried Chicken in Tomato and Coconut Sauce <TITLE_END> <RECIPE_END>[EOS]<RECIPE_START> <INPUT_START> flour <NEXT_INPUT> sugar <NEXT_INPUT> salt <NEXT_INPUT> soda < and and to and to and and,/, 1 mins mins_ mins mins in minsINSTR 1 mins mins mins of mins mins of mins or mins mins mins 12 mins mins mins 1 1 1 mins mins 1 mins2 1 mins mins mins 2 mins mins 1 mins 1 1 mins 1 mins 1 1 1 1 10",
+          "sample_index": 1
+        },
+        {
+          "title": "Butter Chicken",
+          "ingredients": [
+            "chicken breast",
+            "butter",
+            "onion",
+            "garlic",
+            "ginger",
+            "tomato sauce",
+            "garam masala",
+            "cumin",
+            "chili powder",
+            "heavy cream",
+            "salt",
+            "cilantro"
+          ],
+          "steps": [
+            "cook chicken breast in butter",
+            "add onion and garlic till tender add ginger",
+            "cook for 5 min",
+            "add tomato sauce and spices then add chicken stock",
+            "cook about 10-15 min",
+            "add cream cream and cilantro",
+            "when hot, serve over rice"
+          ],
+          "formatted": "Butter Chicken\n\nIngredients:\n- chicken breast\n- butter\n- onion\n- garlic\n- ginger\n- tomato sauce\n- garam masala\n- cumin\n- chili powder\n- heavy cream\n- salt\n- cilantro\n\nInstructions:\n1. cook chicken breast in butter\n2. add onion and garlic till tender add ginger\n3. cook for 5 min\n4. add tomato sauce and spices then add chicken stock\n5. cook about 10-15 min\n6. add cream cream and cilantro\n7. when hot, serve over rice",
+          "quality_score": 17,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Butter Chicken <TITLE_END> <INPUT_START> chicken breast <NEXT_INPUT> butter <NEXT_INPUT> onion <NEXT_INPUT> garlic <NEXT_INPUT> ginger <NEXT_INPUT> tomato sauce <NEXT_INPUT> garam masala <NEXT_INPUT> cumin <NEXT_INPUT> chili powder <NEXT_INPUT> heavy cream <NEXT_INPUT> salt <NEXT_INPUT> cilantro <INPUT_END> <INSTR_START> cook chicken breast in butter <NEXT_INSTR> add onion and garlic till tender <INSTR_INSTR> add ginger <NEXT_INSTR> cook for 5 min. <NEXT_INSTR> add tomato sauce and spices <NEXTNEXT_INSTR> then add chicken stock <NEXT_INSTR> cook about 10-15 min. <NEXT_INSTR> add cream cream and cilantro. <NEXT_INSTR> when hot, serve over rice. <INSTR_END> <TITLE_START> Indian Chicken <TITLE_END> <RECIPE_END>[EOS]<RECIPE_START> <INPUT_START> yeast <NEXT_INPUT> water <NEXT_INPUT> sugar <NEXT_INPUT> sugar <NEXT_INPUT> egg <NEXT_INPUT>,_>INSTR of or <,INSTRINSTR to_ for,.NEXT, or,,/,.,,/, wne., min.mm.//m,. mins,h12..h mins 1 hrs 1 hrs4., hrs,min., 1",
+          "sample_index": 2
+        },
+        {
+          "title": "Butter Chicken",
+          "ingredients": [
+            "chicken breast",
+            "butter",
+            "onion",
+            "garlic",
+            "ginger",
+            "tomato sauce",
+            "garam masala",
+            "cumin",
+            "chili powder",
+            "heavy cream",
+            "salt",
+            "cilantro"
+          ],
+          "steps": [
+            "In a skillet melt butter",
+            "Add onion and cook until tender",
+            "Drain",
+            "Add garlic and ginger and cook 1 minute more",
+            "Add tomato sauce and spices",
+            "Cover and cook 5 minutes",
+            "Add cream and cook, stirring minutes, until thickened",
+            "Cool",
+            "Add chopped",
+            "Serve with rice"
+          ],
+          "formatted": "Butter Chicken\n\nIngredients:\n- chicken breast\n- butter\n- onion\n- garlic\n- ginger\n- tomato sauce\n- garam masala\n- cumin\n- chili powder\n- heavy cream\n- salt\n- cilantro\n\nInstructions:\n1. In a skillet melt butter\n2. Add onion and cook until tender\n3. Drain\n4. Add garlic and ginger and cook 1 minute more\n5. Add tomato sauce and spices\n6. Cover and cook 5 minutes\n7. Add cream and cook, stirring minutes, until thickened\n8. Cool\n9. Add chopped\n10. Serve with rice",
+          "quality_score": 17,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Butter Chicken <TITLE_END> <INPUT_START> chicken breast <NEXT_INPUT> butter <NEXT_INPUT> onion <NEXT_INPUT> garlic <NEXT_INPUT> ginger <NEXT_INPUT> tomato sauce <NEXT_INPUT> garam masala <NEXT_INPUT> cumin <NEXT_INPUT> chili powder <NEXT_INPUT> heavy cream <NEXT_INPUT> salt <NEXT_INPUT> cilantro <INPUT_END> <INSTR_START> In a skillet melt butter. <NEXT_INSTR> Add onion and cook until tender. Drain. <NEXT_INSTR> Add garlic and ginger and cook 1 minute more. <NEXT_INSTR> Add tomato sauce and spices. <NEXT_INSTR> Cover and cook 5 minutes. <NEXT_INSTR> Add cream and cook, stirring minutes, until thickened. Cool. <NEXT_INSTR> Add chopped. <NEXT_INSTR> Serve with rice. <INSTR_END> <TITLE_START> Chicken Curry <TITLE_END> <RECIPE_END>[EOS]<RECIPE_START> <INPUT_START> eggs <NEXT_INPUT> flour <NEXT_INPUT> butter <NEXT_INPUT> salt <NEXT_INPUT> pepper < or it. and a.. and., a a an the. to. a. the and... the....... a..... a the.. a 2.......... 9..... a...",
+          "sample_index": 3
+        }
+      ]
+    },
+    {
+      "checkpoint": "/Volumes/Auxilary/Side_Projects/Diffusion_Testing/Diffusion_Testing_April_23rd/Model_Checkpoints/checkpoint_step690000.pt",
+      "checkpoint_name": "checkpoint_step690000.pt",
+      "loaded_step": 690000,
+      "prompt": "<RECIPE_START> <TITLE_START> Butter Chicken <TITLE_END> <INPUT_START> chicken breast <NEXT_INPUT> butter <NEXT_INPUT> onion <NEXT_INPUT> garlic <NEXT_INPUT> ginger <NEXT_INPUT> tomato sauce <NEXT_INPUT> garam masala <NEXT_INPUT> cumin <NEXT_INPUT> chili powder <NEXT_INPUT> heavy cream <NEXT_INPUT> salt <NEXT_INPUT> cilantro <INPUT_END> <INSTR_START>",
+      "samples": [
+        {
+          "title": "Butter Chicken",
+          "ingredients": [
+            "chicken breast",
+            "butter",
+            "onion",
+            "garlic",
+            "ginger",
+            "tomato sauce",
+            "garam masala",
+            "cumin",
+            "chili powder",
+            "heavy cream",
+            "salt",
+            "cilantro"
+          ],
+          "steps": [
+            "In butter, onion, garlic and ginger sautee till",
+            "Add chicken breast and cook 3 min",
+            "Add to pan and cook for 3 more min",
+            "In separate pan, heat cream",
+            "Add tomato sauce and spices and simmer for 5 min",
+            "Add to chicken mixture",
+            "Heat through. > Add cilantro"
+          ],
+          "formatted": "Butter Chicken\n\nIngredients:\n- chicken breast\n- butter\n- onion\n- garlic\n- ginger\n- tomato sauce\n- garam masala\n- cumin\n- chili powder\n- heavy cream\n- salt\n- cilantro\n\nInstructions:\n1. In butter, onion, garlic and ginger sautee till\n2. Add chicken breast and cook 3 min\n3. Add to pan and cook for 3 more min\n4. In separate pan, heat cream\n5. Add tomato sauce and spices and simmer for 5 min\n6. Add to chicken mixture\n7. Heat through. > Add cilantro",
+          "quality_score": 17,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Butter Chicken <TITLE_END> <INPUT_START> chicken breast <NEXT_INPUT> butter <NEXT_INPUT> onion <NEXT_INPUT> garlic <NEXT_INPUT> ginger <NEXT_INPUT> tomato sauce <NEXT_INPUT> garam masala <NEXT_INPUT> cumin <NEXT_INPUT> chili powder <NEXT_INPUT> heavy cream <NEXT_INPUT> salt <NEXT_INPUT> cilantro <INPUT_END> <INSTR_START> In butter, onion, garlic and ginger sautee tillNEXT_INSTR> Add chicken breast and cook 3 min. <NEXT_INSTR> Add to pan and cook for 3 more min. <NEXT_INSTR>. <NEXT_INSTR> In separate pan, heat cream <NEXT_INSTR> Add tomato sauce and spices and simmer for 5 min. <NEXT_INSTR> Add to chicken mixture. <NEXT_INSTR> Heat through. <NEXT_>> Add cilantro. <INSTR_END> <TITLE_START> Chicken Curry <TITLE_END> <RECIPE_END>[EOS]<RECIPE_START> <INPUT_INPUT> butter <NEXT_INPUT> sugar <NEXT_INPUT> shortening <NEXT_INPUT> eggs <NEXT_INSTRNEXTINSTR>>NEXTINSTR to_>___ 1 1INSTR <_/INSTR 1/__ 1_ 1_ <_.__. 1_1_/ 1/4__3_// 1/2 1 1 1//2/3333 1 1",
+          "sample_index": 1
+        },
+        {
+          "title": "Butter Chicken",
+          "ingredients": [
+            "chicken breast",
+            "butter",
+            "onion",
+            "garlic",
+            "ginger",
+            "tomato sauce",
+            "garam masala",
+            "cumin",
+            "chili powder",
+            "heavy cream",
+            "salt",
+            "cilantro"
+          ],
+          "steps": [
+            "In 1- of water,, saute onion",
+            "Add garlic and ginger",
+            "Add chicken breast and saute",
+            "Add tomato sauce, garam masala salt, chili powder and cumin",
+            "Add cream and stir together",
+            "Add chopped cilantro",
+            "Cook on low heat, stirring for 5 minutes",
+            "Serve with rice rice"
+          ],
+          "formatted": "Butter Chicken\n\nIngredients:\n- chicken breast\n- butter\n- onion\n- garlic\n- ginger\n- tomato sauce\n- garam masala\n- cumin\n- chili powder\n- heavy cream\n- salt\n- cilantro\n\nInstructions:\n1. In 1- of water,, saute onion\n2. Add garlic and ginger\n3. Add chicken breast and saute\n4. Add tomato sauce, garam masala salt, chili powder and cumin\n5. Add cream and stir together\n6. Add chopped cilantro\n7. Cook on low heat, stirring for 5 minutes\n8. Serve with rice rice",
+          "quality_score": 17,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Butter Chicken <TITLE_END> <INPUT_START> chicken breast <NEXT_INPUT> butter <NEXT_INPUT> onion <NEXT_INPUT> garlic <NEXT_INPUT> ginger <NEXT_INPUT> tomato sauce <NEXT_INPUT> garam masala <NEXT_INPUT> cumin <NEXT_INPUT> chili powder <NEXT_INPUT> heavy cream <NEXT_INPUT> salt <NEXT_INPUT> cilantro <INPUT_END> <INSTR_START> In 1- of water,, saute onion. <NEXT_INSTR> Add garlic and ginger. <NEXT_INSTR> Add chicken breast and saute. <NEXT_INSTR> Add tomato sauce, garam masala salt, chili powder and cumin. <NEXT_INSTR> Add cream and stir together. <NEXT_INSTR> Add chopped cilantro. <NEXT_INSTR> Cook on low heat, stirring for 5 minutes. <NEXT_INSTR> Serve with rice rice. <INSTR_END> <TITLE_START> Chicken Or <TITLE_END> <RECIPE_END>[EOS]<RECIPE_START> <INPUT_START> butter <NEXT_INPUT> eggs <NEXT_INPUT> water <NEXT_INPUT> salt <NEXT_INPUT> to the add the 2, the the a the to 5 the the::: 1: Day:: 2 4:. 3 9 1 9 7 9 9 9 9: 9:: 9: Day 11: 9 1 11 9 6 11 9 14 9:: 9 8 11 9 11 5 11 7 11",
+          "sample_index": 2
+        },
+        {
+          "title": "Butter Chicken",
+          "ingredients": [
+            "chicken breast",
+            "butter",
+            "onion",
+            "garlic",
+            "ginger",
+            "tomato sauce",
+            "garam masala",
+            "cumin",
+            "chili powder",
+            "heavy cream",
+            "salt",
+            "cilantro"
+          ],
+          "steps": [
+            "melt",
+            "butter;",
+            "onion",
+            "garlic",
+            "ginger and saute until soft",
+            "Add curry",
+            "masala",
+            "cumin",
+            "cayenne",
+            "chili",
+            "simmer",
+            "until",
+            "soft",
+            "of.... to p c 1m.. 2 w p 1 p p p p p p p p. p p. p...2.. p. p p p p p... p.2. p... p p p.. p. p 11 p"
+          ],
+          "formatted": "Butter Chicken\n\nIngredients:\n- chicken breast\n- butter\n- onion\n- garlic\n- ginger\n- tomato sauce\n- garam masala\n- cumin\n- chili powder\n- heavy cream\n- salt\n- cilantro\n\nInstructions:\n1. melt\n2. butter;\n3. onion\n4. garlic\n5. ginger and saute until soft\n6. Add curry\n7. masala\n8. cumin\n9. cayenne\n10. chili\n11. simmer\n12. until\n13. soft\n14. of.... to p c 1m.. 2 w p 1 p p p p p p p p. p p. p...2.. p. p p p p p... p.2. p... p p p.. p. p 11 p",
+          "quality_score": 17,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Butter Chicken <TITLE_END> <INPUT_START> chicken breast <NEXT_INPUT> butter <NEXT_INPUT> onion <NEXT_INPUT> garlic <NEXT_INPUT> ginger <NEXT_INPUT> tomato sauce <NEXT_INPUT> garam masala <NEXT_INPUT> cumin <NEXT_INPUT> chili powder <NEXT_INPUT> heavy cream <NEXT_INPUT> salt <NEXT_INPUT> cilantro <INPUT_END> <INSTR_START> In <NEXT_INSTR> melt <NEXT_INSTR> butter; <NEXT_INSTR> Add <NEXT_INSTR> onion <NEXT_INSTR> garlic <NEXT_INSTR ginger and saute until soft. <NEXT_INSTR> Add curry. <NEXT_INSTR> Add <NEXT_INSTR> masala, <NEXT_INSTR> cumin <NEXT_INSTR> and <NEXT_INSTR> cayenne <NEXT_INSTR> and <NEXT_INSTR> chili <NEXT_INSTR> and <NEXT_INSTR> simmer <NEXT_INSTR> onion <NEXT_INSTR> and <NEXT_INSTR> garlic <NEXT_INSTR> until <NEXT_INSTR> soft <NEXT_INSTR> and <NEXT_INSTR> add <NEXT_INSTR of.... to p c 1m.. 2 w p 1 p p p p p p p p. p p. p...2.. p. p p p p p... p.2. p... p p p.. p. p 11 p.",
+          "sample_index": 3
+        }
+      ]
+    }
+  ]
+}

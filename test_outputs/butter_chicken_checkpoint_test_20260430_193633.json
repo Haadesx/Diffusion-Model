@@ -1,0 +1,155 @@
+{
+  "args": {
+    "config": "config.yaml",
+    "profile": "recipe_poc_2day",
+    "data_dir": "./data_recipe_poc_2day",
+    "runs_dir": null,
+    "checkpoint": [
+      "./Model_Checkpoints/best_step88000.pt"
+    ],
+    "checkpoint_dir": "./Model_Checkpoints",
+    "output_dir": "./test_outputs",
+    "recipe": "butter chicken",
+    "prefix": null,
+    "ingredients_only": false,
+    "num_samples": 5,
+    "length": 180,
+    "top_k": 20,
+    "temperature": 0.75,
+    "seed": 41
+  },
+  "results": [
+    {
+      "checkpoint": "/Volumes/Auxilary/Side_Projects/Diffusion_Testing/Diffusion_Testing_April_23rd/Model_Checkpoints/best_step88000.pt",
+      "checkpoint_name": "best_step88000.pt",
+      "loaded_step": 88000,
+      "prompt": "<RECIPE_START> <TITLE_START> Butter Chicken <TITLE_END> <INPUT_START>",
+      "samples": [
+        {
+          "title": "Butter Chicken",
+          "ingredients": [
+            "eggs",
+            "sugar",
+            "flour",
+            "margarine",
+            "shell",
+            "milk",
+            "vanilla"
+          ],
+          "steps": [
+            "Separate eggs",
+            "Beat yolks",
+            "Add sugar and beat well",
+            "Combine flour and margarine and add to egg mixture",
+            "Blend well",
+            "Add milk and vanilla; beat well",
+            "Pour into unbaked pie shell",
+            "Bake at 350 for 50 minutes or until knife comes out clean"
+          ],
+          "formatted": "Butter Chicken\n\nIngredients:\n- eggs\n- sugar\n- flour\n- margarine\n- shell\n- milk\n- vanilla\n\nInstructions:\n1. Separate eggs\n2. Beat yolks\n3. Add sugar and beat well\n4. Combine flour and margarine and add to egg mixture\n5. Blend well\n6. Add milk and vanilla; beat well\n7. Pour into unbaked pie shell\n8. Bake at 350 for 50 minutes or until knife comes out clean",
+          "quality_score": 12,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Butter Chicken <TITLE_END> <INPUT_START> <INPUT_START> <INPUT_START> eggs <NEXT_INPUT> sugar <NEXT_INPUT> flour <NEXT_INPUT> margarine <NEXT_INPUT> shell <NEXT_INPUT> milk <NEXT_INPUT> vanilla <INPUT_END> <INSTR_START> Separate eggs. <NEXT_INSTR> Beat yolks. <NEXT_INSTR> Add sugar and beat well. <NEXT_INSTR> Combine flour and margarine and add to egg mixture. <NEXT_INSTR> Blend well. <NEXT_INSTR> Add milk and vanilla; beat well. <NEXT_INSTR> Pour into unbaked pie shell. <NEXT_INSTR> Bake at 350 for 50 minutes or until knife comes out clean. <INSTR_END> <TITLE_START> Egg Pie <",
+          "sample_index": 1
+        },
+        {
+          "title": "Butter Chicken",
+          "ingredients": [
+            "butter",
+            "sugar",
+            "eggs",
+            "vanilla",
+            "flour",
+            "cocoa",
+            "soda",
+            "baking powder",
+            "salt"
+          ],
+          "steps": [
+            "Cream butter and sugar",
+            "Add eggs and vanilla",
+            "Sift flour, cocoa, baking powder, soda and salt",
+            "Add to creamed mixture",
+            "Mix well",
+            "Pour into a 9 x 13-inch pan which has been greased",
+            "Bake at 350 for 25 minutes",
+            "Turn out of oven and cool 10 minutes. <NEXT"
+          ],
+          "formatted": "Butter Chicken\n\nIngredients:\n- butter\n- sugar\n- eggs\n- vanilla\n- flour\n- cocoa\n- soda\n- baking powder\n- salt\n\nInstructions:\n1. Cream butter and sugar\n2. Add eggs and vanilla\n3. Sift flour, cocoa, baking powder, soda and salt\n4. Add to creamed mixture\n5. Mix well\n6. Pour into a 9 x 13-inch pan which has been greased\n7. Bake at 350 for 25 minutes\n8. Turn out of oven and cool 10 minutes. <NEXT",
+          "quality_score": 14,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Butter Chicken <TITLE_END> <INPUT_START> <INPUT_START> butter <NEXT_INPUT> sugar <NEXT_INPUT> eggs <NEXT_INPUT> vanilla <NEXT_INPUT> flour <NEXT_INPUT> cocoa <NEXT_INPUT> soda <NEXT_INPUT> baking powder <NEXT_INPUT> salt <INPUT_END> <INSTR_START> Cream butter and sugar. <NEXT_INSTR> Add eggs and vanilla. <NEXT_INSTR> Sift flour, cocoa, baking powder, soda and salt. <NEXT_INSTR> Add to creamed mixture. <NEXT_INSTR> Mix well. <NEXT_INSTR> Pour into a 9 x 13-inch pan which has been greased. Bake at 350 for 25 minutes. <NEXT_INSTR> Turn out of oven and cool 10 minutes. <NEXT",
+          "sample_index": 2
+        },
+        {
+          "title": "Butter Chicken",
+          "ingredients": [
+            "Chicken",
+            "Salt",
+            "Butter",
+            "Pepper"
+          ],
+          "steps": [
+            "Flatten chicken breasts and season with salt and pepper",
+            "Dip chicken in melted butter, then dredge in flour, then in flour",
+            "Fry chicken breasts in hot oil until done",
+            "Serve with rice"
+          ],
+          "formatted": "Butter Chicken\n\nIngredients:\n- Chicken\n- Salt\n- Butter\n- Pepper\n\nInstructions:\n1. Flatten chicken breasts and season with salt and pepper\n2. Dip chicken in melted butter, then dredge in flour, then in flour\n3. Fry chicken breasts in hot oil until done\n4. Serve with rice",
+          "quality_score": 8,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Butter Chicken <TITLE_END> <INPUT_START> <INPUT_START> Chicken <NEXT_INPUT> Salt <NEXT_INPUT> Butter <NEXT_INPUT> Pepper <INPUT_END> <INSTR_START> Flatten chicken breasts and season with salt and pepper. <NEXT_INSTR> Dip chicken in melted butter, then dredge in flour, then in flour. <NEXT_INSTR> Fry chicken breasts in hot oil until done. <NEXT_INSTR> Serve with rice. <INSTR_END> <TITLE_START> Chicken Breast <TITLE_END> <RECIPE_END>[EOS]<RECIPE_START> <INPUT_START> flour <NEXT_INPUT> sugar <NEXT_INPUT> shortening <NEXT_INPUT> salt <NEXT_INPUT> cinnamon <NEXT_INPUT> raisins <NEXT_INPUT> egg",
+          "sample_index": 3
+        },
+        {
+          "title": "Butter Chicken",
+          "ingredients": [
+            "chickens",
+            "onion",
+            "black pepper",
+            "butter",
+            "cream of mushroom soup"
+          ],
+          "steps": [
+            "Place the chicken in an oblong pan",
+            "Sprinkle the onion, and black pepper on top",
+            "Spread the soup over the chicken",
+            "Spread the rice evenly over the chicken",
+            "Spread the soup mixture over this, and dot it with butter",
+            "Cover with aluminum foil",
+            "Bake at 350 for 1 hour",
+            "Remove the foil from the pan",
+            "Remove the chicken, and set aside"
+          ],
+          "formatted": "Butter Chicken\n\nIngredients:\n- chickens\n- onion\n- black pepper\n- butter\n- cream of mushroom soup\n\nInstructions:\n1. Place the chicken in an oblong pan\n2. Sprinkle the onion, and black pepper on top\n3. Spread the soup over the chicken\n4. Spread the rice evenly over the chicken\n5. Spread the soup mixture over this, and dot it with butter\n6. Cover with aluminum foil\n7. Bake at 350 for 1 hour\n8. Remove the foil from the pan\n9. Remove the chicken, and set aside",
+          "quality_score": 10,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Butter Chicken <TITLE_END> <INPUT_START> <INPUT_START> chickens <NEXT_INPUT> onion <NEXT_INPUT> black pepper <NEXT_INPUT> butter <NEXT_INPUT> cream of mushroom soup <INPUT_END> <INSTR_START> Place the chicken in an oblong pan. <NEXT_INSTR> Sprinkle the onion, and black pepper on top. <NEXT_INSTR> Spread the soup over the chicken. <NEXT_INSTR> Spread the rice evenly over the chicken. <NEXT_INSTR> Spread the soup mixture over this, and dot it with butter. <NEXT_INSTR> Cover with aluminum foil. <NEXT_INSTR> Bake at 350 for 1 hour. <NEXT_INSTR> Remove the foil from the pan. <NEXT_INSTR> Remove the chicken, and set aside.",
+          "sample_index": 4
+        },
+        {
+          "title": "Butter Chicken",
+          "ingredients": [
+            "flour",
+            "salt",
+            "butter",
+            "Crisco",
+            "milk",
+            "egg",
+            "Worcestershire sauce"
+          ],
+          "steps": [
+            "Combine dry ingredients in large bowl",
+            "Cut in Crisco",
+            "Stir in milk",
+            "Add egg to make batter",
+            "Spread on floured surface",
+            "Roll out on board to 1/4 to 1/2-inch thickness",
+            "Cut with biscuit cutter",
+            "Bake at 425 for 15 minutes"
+          ],
+          "formatted": "Butter Chicken\n\nIngredients:\n- flour\n- salt\n- butter\n- Crisco\n- milk\n- egg\n- Worcestershire sauce\n\nInstructions:\n1. Combine dry ingredients in large bowl\n2. Cut in Crisco\n3. Stir in milk\n4. Add egg to make batter\n5. Spread on floured surface\n6. Roll out on board to 1/4 to 1/2-inch thickness\n7. Cut with biscuit cutter\n8. Bake at 425 for 15 minutes",
+          "quality_score": 12,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Butter Chicken <TITLE_END> <INPUT_START> <INPUT_START> flour <NEXT_INPUT> salt <NEXT_INPUT> butter <NEXT_INPUT> Crisco <NEXT_INPUT> flour <NEXT_INPUT> milk <NEXT_INPUT> egg <NEXT_INPUT> Worcestershire sauce <INPUT_END> <INSTR_START> Combine dry ingredients in large bowl. <NEXT_INSTR> Cut in Crisco. <NEXT_INSTR> Stir in milk. <NEXT_INSTR> Add egg to make batter. <NEXT_INSTR> Spread on floured surface. <NEXT_INSTR> Roll out on board to 1/4 to 1/2-inch thickness. <NEXT_INSTR> Cut with biscuit cutter. <NEXT_INSTR> Bake at 425 for 15 minutes. <INSTR_END> <TITLE_START",
+          "sample_index": 5
+        }
+      ]
+    }
+  ]
+}

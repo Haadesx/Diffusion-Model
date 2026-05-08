@@ -1,0 +1,140 @@
+{
+  "args": {
+    "config": "config.yaml",
+    "profile": "recipe_poc_2day",
+    "data_dir": "./data_recipe_poc_2day",
+    "runs_dir": null,
+    "checkpoint": [
+      "./Model_Checkpoints/best_step142000.pt",
+      "./Model_Checkpoints/checkpoint_step155000.pt"
+    ],
+    "checkpoint_dir": "./Model_Checkpoints",
+    "output_dir": "./test_outputs",
+    "recipe": "butter chicken",
+    "prefix": null,
+    "ingredients_only": false,
+    "num_samples": 2,
+    "length": 180,
+    "top_k": 20,
+    "temperature": 0.75,
+    "seed": 13
+  },
+  "results": [
+    {
+      "checkpoint": "/Volumes/Auxilary/Side_Projects/Diffusion_Testing/Diffusion_Testing_April_23rd/Model_Checkpoints/best_step142000.pt",
+      "checkpoint_name": "best_step142000.pt",
+      "loaded_step": 142000,
+      "prompt": "<RECIPE_START> <TITLE_START> Butter Chicken <TITLE_END> <INPUT_START>",
+      "samples": [
+        {
+          "title": "Butter Chicken",
+          "ingredients": [
+            "water",
+            "potatoes",
+            "salt",
+            "butter",
+            "black pepper",
+            "milk"
+          ],
+          "steps": [
+            "Pour the water into a large pot and add the potatoes, butter, pepper, and salt",
+            "Bring to a boil, then reduce heat to simmer, and cook for 20 minutes until tender",
+            "Drain the potatoes, and mash with a potato masher",
+            "Add the milk and butter; mash until smooth",
+            "Serve"
+          ],
+          "formatted": "Butter Chicken\n\nIngredients:\n- water\n- potatoes\n- salt\n- butter\n- black pepper\n- milk\n\nInstructions:\n1. Pour the water into a large pot and add the potatoes, butter, pepper, and salt\n2. Bring to a boil, then reduce heat to simmer, and cook for 20 minutes until tender\n3. Drain the potatoes, and mash with a potato masher\n4. Add the milk and butter; mash until smooth\n5. Serve",
+          "quality_score": 11,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Butter Chicken <TITLE_END> <INPUT_START> water <NEXT_INPUT> potatoes <NEXT_INPUT> salt <NEXT_INPUT> butter <NEXT_INPUT> black pepper <NEXT_INPUT> salt <NEXT_INPUT> milk <INPUT_END> <INSTR_START> Pour the water into a large pot and add the potatoes, butter, pepper, and salt. <NEXT_INSTR> Bring to a boil, then reduce heat to simmer, and cook for 20 minutes until tender. <NEXT_INSTR> Drain the potatoes, and mash with a potato masher. <NEXT_INSTR> Add the milk and butter; mash until smooth. <NEXT_INSTR> Serve. <INSTR_END> <TITLE_START> Creamy Mashed Potato Soup <TITLE_END> <RECIPE_END>[EOS]<RECIPE_",
+          "sample_index": 1
+        },
+        {
+          "title": "Butter Chicken",
+          "ingredients": [
+            "chicken bouillon cubes",
+            "water",
+            "flour",
+            "Cheddar cheese",
+            "milk",
+            "pepper",
+            "salt"
+          ],
+          "steps": [
+            "Dissolve bouillon cubes in water",
+            "Add the flour and cook over low heat, stirring constantly, until mixture thickens",
+            "Add cheese; stir until melted",
+            "Add salt and pepper",
+            "Stir in milk",
+            "Cook until hot"
+          ],
+          "formatted": "Butter Chicken\n\nIngredients:\n- chicken bouillon cubes\n- water\n- flour\n- Cheddar cheese\n- milk\n- pepper\n- salt\n\nInstructions:\n1. Dissolve bouillon cubes in water\n2. Add the flour and cook over low heat, stirring constantly, until mixture thickens\n3. Add cheese; stir until melted\n4. Add salt and pepper\n5. Stir in milk\n6. Cook until hot",
+          "quality_score": 12,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Butter Chicken <TITLE_END> <INPUT_START> chicken bouillon cubes <NEXT_INPUT> water <NEXT_INPUT> flour <NEXT_INPUT> Cheddar cheese <NEXT_INPUT> milk <NEXT_INPUT> pepper <NEXT_INPUT> salt <INPUT_END> <INSTR_START> Dissolve bouillon cubes in water. <NEXT_INSTR> Add the flour and cook over low heat, stirring constantly, until mixture thickens. <NEXT_INSTR> Add cheese; stir until melted. <NEXT_INSTR> Add salt and pepper. <NEXT_INSTR> Stir in milk. <NEXT_INSTR> Cook until hot. <INSTR_END> <TITLE_START> Cream-Cheese Soup <TITLE_END> <RECIPE_END>[EOS]<RECIPE_START> <INPUT_START> margarine <NEXT_INPUT",
+          "sample_index": 2
+        }
+      ]
+    },
+    {
+      "checkpoint": "/Volumes/Auxilary/Side_Projects/Diffusion_Testing/Diffusion_Testing_April_23rd/Model_Checkpoints/checkpoint_step155000.pt",
+      "checkpoint_name": "checkpoint_step155000.pt",
+      "loaded_step": 155000,
+      "prompt": "<RECIPE_START> <TITLE_START> Butter Chicken <TITLE_END> <INPUT_START>",
+      "samples": [
+        {
+          "title": "Butter Chicken",
+          "ingredients": [
+            "flour",
+            "eggs",
+            "milk",
+            "pumpkin",
+            "sugar",
+            "butter",
+            "pecans",
+            "cinnamon",
+            "vanilla",
+            "salt"
+          ],
+          "steps": [
+            "Preheat oven to 375 degrees",
+            "Grease a pie pan",
+            "In a mixing bowl, beat together first 5 ingredients until smooth",
+            "In a separate bowl, combine sugar, cinnamon, vanilla, 1/2 teaspoon salt",
+            "Stir into pumpkin mixture",
+            "Transfer to pie pan",
+            "Bake until a knife blade inserted in the middle comes"
+          ],
+          "formatted": "Butter Chicken\n\nIngredients:\n- flour\n- eggs\n- milk\n- pumpkin\n- sugar\n- butter\n- pecans\n- cinnamon\n- vanilla\n- salt\n\nInstructions:\n1. Preheat oven to 375 degrees\n2. Grease a pie pan\n3. In a mixing bowl, beat together first 5 ingredients until smooth\n4. In a separate bowl, combine sugar, cinnamon, vanilla, 1/2 teaspoon salt\n5. Stir into pumpkin mixture\n6. Transfer to pie pan\n7. Bake until a knife blade inserted in the middle comes",
+          "quality_score": 15,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Butter Chicken <TITLE_END> <INPUT_START> flour <NEXT_INPUT> eggs <NEXT_INPUT> milk <NEXT_INPUT> pumpkin <NEXT_INPUT> sugar <NEXT_INPUT> butter <NEXT_INPUT> pecans <NEXT_INPUT> cinnamon <NEXT_INPUT> vanilla <NEXT_INPUT> salt <INPUT_END> <INSTR_START> Preheat oven to 375 degrees. <NEXT_INSTR> Grease a pie pan. <NEXT_INSTR> In a mixing bowl, beat together first 5 ingredients until smooth. <NEXT_INSTR> In a separate bowl, combine sugar, cinnamon, vanilla, 1/2 teaspoon salt. <NEXT_INSTR> Stir into pumpkin mixture. <NEXT_INSTR> Transfer to pie pan. <NEXT_INSTR> Bake until a knife blade inserted in the middle comes",
+          "sample_index": 1
+        },
+        {
+          "title": "Butter Chicken",
+          "ingredients": [
+            "flour",
+            "cinnamon",
+            "sugar",
+            "baking powder",
+            "salt",
+            "egg",
+            "milk",
+            "canola oil",
+            "vanilla"
+          ],
+          "steps": [
+            "In a small bowl, combine the flour, baking powder and salt",
+            "In another large bowl, beat the egg, milk, oil and vanilla",
+            "Add to dry ingredients and stir just until moistened",
+            "Transfer to a greased 9-in. square baking dish",
+            "Bake at 325 for 30-35 minutes or until a toothpick inserted in the center comes out clean",
+            "In a small bowl, combine the sugar and cinnamon; sprinkle over batter"
+          ],
+          "formatted": "Butter Chicken\n\nIngredients:\n- flour\n- cinnamon\n- sugar\n- baking powder\n- salt\n- egg\n- milk\n- canola oil\n- vanilla\n\nInstructions:\n1. In a small bowl, combine the flour, baking powder and salt\n2. In another large bowl, beat the egg, milk, oil and vanilla\n3. Add to dry ingredients and stir just until moistened\n4. Transfer to a greased 9-in. square baking dish\n5. Bake at 325 for 30-35 minutes or until a toothpick inserted in the center comes out clean\n6. In a small bowl, combine the sugar and cinnamon; sprinkle over batter",
+          "quality_score": 14,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Butter Chicken <TITLE_END> <INPUT_START> flour <NEXT_INPUT> cinnamon <NEXT_INPUT> sugar <NEXT_INPUT> baking powder <NEXT_INPUT> salt <NEXT_INPUT> egg <NEXT_INPUT> egg <NEXT_INPUT> milk <NEXT_INPUT> canola oil <NEXT_INPUT> vanilla <INPUT_END> <INSTR_START> In a small bowl, combine the flour, baking powder and salt. In another large bowl, beat the egg, milk, oil and vanilla. Add to dry ingredients and stir just until moistened. Transfer to a greased 9-in. square baking dish. Bake at 325 for 30-35 minutes or until a toothpick inserted in the center comes out clean. <NEXT_INSTR> In a small bowl, combine the sugar and cinnamon; sprinkle over batter",
+          "sample_index": 2
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "args": {
+    "config": "config.yaml",
+    "profile": "recipe_poc_2day",
+    "data_dir": "./data_recipe_poc_2day",
+    "runs_dir": null,
+    "checkpoint": null,
+    "checkpoint_dir": "./Model_Checkpoints",
+    "output_dir": "./test_outputs",
+    "recipe": "chicken butter masala",
+    "prefix": null,
+    "ingredients_only": true,
+    "num_samples": 1,
+    "length": 96,
+    "top_k": 20,
+    "temperature": 0.75,
+    "seed": 13
+  },
+  "results": [
+    {
+      "checkpoint": "/Volumes/Auxilary/Side_Projects/Diffusion_Testing/Diffusion_Testing_April_23rd/Model_Checkpoints/checkpoint_step40000.pt",
+      "checkpoint_name": "checkpoint_step40000.pt",
+      "loaded_step": 40000,
+      "prompt": "<RECIPE_START> <TITLE_START> Chicken Butter Masala <TITLE_END> <INPUT_START>",
+      "samples": [
+        {
+          "title": "Chicken Butter Masala",
+          "ingredients": [
+            "flour",
+            "sugar",
+            "salt",
+            "milk",
+            "vanilla"
+          ],
+          "steps": [
+            "Mix the dry ingredients together",
+            "Add the egg and the milk to make the batter"
+          ],
+          "formatted": "- flour\n- sugar\n- salt\n- milk\n- vanilla",
+          "quality_score": 7,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Chicken Butter Masala <TITLE_END> <INPUT_START>[EOS]<RECIPE_START> <INPUT_START> flour <NEXT_INPUT> sugar <NEXT_INPUT> salt <NEXT_INPUT> milk <NEXT_INPUT> vanilla <NEXT_INPUT> <INPUT_END> <INSTR_START> Mix the dry ingredients together. <NEXT_INSTR> Add the egg and the milk to make the batter",
+          "sample_index": 1
+        }
+      ]
+    },
+    {
+      "checkpoint": "/Volumes/Auxilary/Side_Projects/Diffusion_Testing/Diffusion_Testing_April_23rd/Model_Checkpoints/best_step41000.pt",
+      "checkpoint_name": "best_step41000.pt",
+      "loaded_step": 41000,
+      "prompt": "<RECIPE_START> <TITLE_START> Chicken Butter Masala <TITLE_END> <INPUT_START>",
+      "samples": [
+        {
+          "title": "Chicken Butter Masala",
+          "ingredients": [
+            "butter",
+            "sugar",
+            "vanilla",
+            "milk",
+            "eggs",
+            "flour",
+            "salt",
+            "cinnamon",
+            "shell"
+          ],
+          "steps": [
+            "Preheat oven"
+          ],
+          "formatted": "- butter\n- sugar\n- vanilla\n- milk\n- eggs\n- flour\n- salt\n- cinnamon\n- shell",
+          "quality_score": 10,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Chicken Butter Masala <TITLE_END> <INPUT_START>[EOS]<RECIPE_START> <INPUT_START> butter <NEXT_INPUT> sugar <NEXT_INPUT> vanilla <NEXT_INPUT> milk <NEXT_INPUT> eggs <NEXT_INPUT> flour <NEXT_INPUT> salt <NEXT_INPUT> cinnamon <NEXT_INPUT> shell <INPUT_END> <INSTR_START> Preheat oven",
+          "sample_index": 1
+        }
+      ]
+    }
+  ]
+}

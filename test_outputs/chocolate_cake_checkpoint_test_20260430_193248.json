@@ -1,0 +1,161 @@
+{
+  "args": {
+    "config": "config.yaml",
+    "profile": "recipe_poc_2day",
+    "data_dir": "./data_recipe_poc_2day",
+    "runs_dir": null,
+    "checkpoint": [
+      "./Model_Checkpoints/best_step88000.pt"
+    ],
+    "checkpoint_dir": "./Model_Checkpoints",
+    "output_dir": "./test_outputs",
+    "recipe": "chocolate cake",
+    "prefix": null,
+    "ingredients_only": true,
+    "num_samples": 5,
+    "length": 160,
+    "top_k": 20,
+    "temperature": 0.75,
+    "seed": 32
+  },
+  "results": [
+    {
+      "checkpoint": "/Volumes/Auxilary/Side_Projects/Diffusion_Testing/Diffusion_Testing_April_23rd/Model_Checkpoints/best_step88000.pt",
+      "checkpoint_name": "best_step88000.pt",
+      "loaded_step": 88000,
+      "prompt": "<RECIPE_START> <TITLE_START> Chocolate Cake <TITLE_END> <INPUT_START>",
+      "samples": [
+        {
+          "title": "Chocolate Cake",
+          "ingredients": [
+            "butter",
+            "sugar",
+            "eggs",
+            "flour",
+            "baking powder",
+            "salt",
+            "soda",
+            "cocoa",
+            "milk",
+            "vanilla",
+            "buttermilk",
+            "coconut"
+          ],
+          "steps": [
+            "Cream butter and sugar; cream well",
+            "Add eggs, one at a time, beating well after each addition",
+            "Add dry ingredients",
+            "Mix well"
+          ],
+          "formatted": "- butter\n- sugar\n- eggs\n- flour\n- baking powder\n- salt\n- soda\n- cocoa\n- milk\n- vanilla\n- buttermilk\n- coconut",
+          "quality_score": 16,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Chocolate Cake <TITLE_END> <INPUT_START>[EOS]<RECIPE_START> <INPUT_START> butter <NEXT_INPUT> sugar <NEXT_INPUT> eggs <NEXT_INPUT> flour <NEXT_INPUT> baking powder <NEXT_INPUT> salt <NEXT_INPUT> soda <NEXT_INPUT> cocoa <NEXT_INPUT> milk <NEXT_INPUT> vanilla <NEXT_INPUT> buttermilk <NEXT_INPUT> coconut <INPUT_END> <INSTR_START> Cream butter and sugar; cream well. <NEXT_INSTR> Add eggs, one at a time, beating well after each addition. <NEXT_INSTR> Add dry ingredients. <NEXT_INSTR> Mix well. <NEXT_INSTR",
+          "sample_index": 1
+        },
+        {
+          "title": "Chocolate Cake",
+          "ingredients": [
+            "eggs",
+            "buttermilk",
+            "vegetable oil",
+            "sugar",
+            "vanilla",
+            "salt",
+            "flour",
+            "cinnamon",
+            "nutmeg",
+            "allspice",
+            "baking soda"
+          ],
+          "steps": [
+            "Mix together eggs, buttermilk, oil, sugar and vanilla",
+            "Sift flour together with salt, spices and soda",
+            "Add to egg mixture",
+            "Stir until well blended"
+          ],
+          "formatted": "- eggs\n- buttermilk\n- vegetable oil\n- sugar\n- vanilla\n- salt\n- flour\n- cinnamon\n- nutmeg\n- allspice\n- baking soda",
+          "quality_score": 15,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Chocolate Cake <TITLE_END> <INPUT_START>[EOS]<RECIPE_START> <INPUT_START> eggs <NEXT_INPUT> buttermilk <NEXT_INPUT> vegetable oil <NEXT_INPUT> sugar <NEXT_INPUT> vanilla <NEXT_INPUT> salt <NEXT_INPUT> flour <NEXT_INPUT> cinnamon <NEXT_INPUT> nutmeg <NEXT_INPUT> allspice <NEXT_INPUT> baking soda <INPUT_END> <INSTR_START> Mix together eggs, buttermilk, oil, sugar and vanilla. <NEXT_INSTR> Sift flour together with salt, spices and soda. <NEXT_INSTR> Add to egg mixture. <NEXT_INSTR> Stir until well blended. <NEXT_INSTR> <",
+          "sample_index": 2
+        },
+        {
+          "title": "Chocolate Cake",
+          "ingredients": [
+            "pumpkin",
+            "condensed milk",
+            "eggs",
+            "sugar",
+            "salt",
+            "cinnamon",
+            "nutmeg",
+            "cloves"
+          ],
+          "steps": [
+            "Combine first 4 ingredients in large bowl",
+            "Combine eggs, sugar, salt and spices; beat well",
+            "Pour over pumpkin mixture",
+            "Stir until blended",
+            "Pour into greased tube pan",
+            "Bake at 350 for 1 hour",
+            "Reduce"
+          ],
+          "formatted": "- pumpkin\n- condensed milk\n- eggs\n- sugar\n- salt\n- cinnamon\n- nutmeg\n- cloves",
+          "quality_score": 13,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Chocolate Cake <TITLE_END> <INPUT_START><RECIPE_START> <INPUT_START> pumpkin <NEXT_INPUT> condensed milk <NEXT_INPUT> eggs <NEXT_INPUT> sugar <NEXT_INPUT> salt <NEXT_INPUT> cinnamon <NEXT_INPUT> nutmeg <NEXT_INPUT> cloves <NEXT_END> <INSTR_START> Combine first 4 ingredients in large bowl. <NEXT_INSTR> Combine eggs, sugar, salt and spices; beat well. <NEXT_INSTR> Pour over pumpkin mixture. <NEXT_INSTR> Stir until blended. <NEXT_INSTR> Pour into greased tube pan. <NEXT_INSTR> Bake at 350 for 1 hour. <NEXT_INSTR> Reduce",
+          "sample_index": 3
+        },
+        {
+          "title": "Chocolate Cake",
+          "ingredients": [
+            "cream cheese",
+            "brown sugar",
+            "eggs",
+            "vanilla",
+            "flour",
+            "soda",
+            "cocoa"
+          ],
+          "steps": [
+            "Mix cream cheese and brown sugar until smooth",
+            "Add egg and vanilla",
+            "Stir in flour, baking soda",
+            "Blend in cocoa",
+            "Shape into 1/2-inch balls",
+            "Place on ungreased cookie sheet",
+            "Bake at 375 for 10 minutes"
+          ],
+          "formatted": "- cream cheese\n- brown sugar\n- eggs\n- vanilla\n- flour\n- soda\n- cocoa",
+          "quality_score": 12,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Chocolate Cake <TITLE_END> <INPUT_START>[EOS]<RECIPE_START> <INPUT_START> cream cheese <NEXT_INPUT> brown sugar <NEXT_INPUT> eggs <NEXT_INPUT> vanilla <NEXT_INPUT> flour <NEXT_INPUT> soda <NEXT_INPUT> cocoa <INPUT_END> <INSTR_START> Mix cream cheese and brown sugar until smooth. <NEXT_INSTR> Add egg and vanilla. <NEXT_INSTR> Stir in flour, baking soda. <NEXT_INSTR> Blend in cocoa. <NEXT_INSTR> Shape into 1/2-inch balls. <NEXT_INSTR> Place on ungreased cookie sheet. <NEXT_INSTR> Bake at 375 for 10 minutes.",
+          "sample_index": 4
+        },
+        {
+          "title": "Chocolate Cake",
+          "ingredients": [
+            "margarine",
+            "Crisco",
+            "sugar",
+            "eggs",
+            "buttermilk",
+            "soda",
+            "flour",
+            "salt",
+            "cocoa",
+            "water",
+            "vanilla"
+          ],
+          "steps": [
+            "Cream margarine, Crisco and sugar",
+            "Add eggs, buttermilk, soda, salt and flour together",
+            "Add to first mixture",
+            "Add cocoa, sugar and vanilla. <NEXT_"
+          ],
+          "formatted": "- margarine\n- Crisco\n- sugar\n- eggs\n- buttermilk\n- soda\n- flour\n- salt\n- cocoa\n- water\n- vanilla",
+          "quality_score": 15,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Chocolate Cake <TITLE_END> <INPUT_START>[EOS]<RECIPE_START> <INPUT_START> margarine <NEXT_INPUT> Crisco <NEXT_INPUT> sugar <NEXT_INPUT> eggs <NEXT_INPUT> buttermilk <NEXT_INPUT> soda <NEXT_INPUT> flour <NEXT_INPUT> salt <NEXT_INPUT> cocoa <NEXT_INPUT> water <NEXT_INPUT> sugar <NEXT_INPUT> vanilla <INPUT_END> <INSTR_START> Cream margarine, Crisco and sugar. <NEXT_INSTR> Add eggs, buttermilk, soda, salt and flour together. <NEXT_INSTR> Add to first mixture. <NEXT_INSTR> Add cocoa, sugar and vanilla. <NEXT_",
+          "sample_index": 5
+        }
+      ]
+    }
+  ]
+}

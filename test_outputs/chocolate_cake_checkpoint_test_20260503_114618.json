@@ -1,0 +1,285 @@
+{
+  "args": {
+    "config": "config.yaml",
+    "profile": "recipe_poc_2day",
+    "data_dir": "./data_recipe_poc_2day",
+    "runs_dir": null,
+    "checkpoint": [
+      "./Model_Checkpoints/best_step654000.pt",
+      "./Model_Checkpoints/checkpoint_step690000.pt"
+    ],
+    "checkpoint_dir": "./Model_Checkpoints",
+    "output_dir": "./test_outputs",
+    "recipe": "chocolate cake",
+    "prefix": "<RECIPE_START> <TITLE_START> Chocolate Cake With Frosting <TITLE_END> <INPUT_START> flour <NEXT_INPUT> sugar <NEXT_INPUT> cocoa powder <NEXT_INPUT> baking soda <NEXT_INPUT> salt <NEXT_INPUT> eggs <NEXT_INPUT> milk <NEXT_INPUT> vegetable oil <NEXT_INPUT> vanilla <NEXT_INPUT> boiling water <NEXT_INPUT> chocolate frosting <INPUT_END> <INSTR_START> Preheat oven to 350 degrees. Grease and flour a 9 x 13 inch pan. <NEXT_INSTR>",
+    "ingredients_only": false,
+    "num_samples": 4,
+    "length": 390,
+    "top_k": 18,
+    "temperature": 0.58,
+    "seed": 81
+  },
+  "results": [
+    {
+      "checkpoint": "/Volumes/Auxilary/Side_Projects/Diffusion_Testing/Diffusion_Testing_April_23rd/Model_Checkpoints/best_step654000.pt",
+      "checkpoint_name": "best_step654000.pt",
+      "loaded_step": 654000,
+      "prompt": "<RECIPE_START> <TITLE_START> Chocolate Cake With Frosting <TITLE_END> <INPUT_START> flour <NEXT_INPUT> sugar <NEXT_INPUT> cocoa powder <NEXT_INPUT> baking soda <NEXT_INPUT> salt <NEXT_INPUT> eggs <NEXT_INPUT> milk <NEXT_INPUT> vegetable oil <NEXT_INPUT> vanilla <NEXT_INPUT> boiling water <NEXT_INPUT> chocolate frosting <INPUT_END> <INSTR_START> Preheat oven to 350 degrees. Grease and flour a 9 x 13 inch pan. <NEXT_INSTR>",
+      "samples": [
+        {
+          "title": "Chocolate Cake With Frosting",
+          "ingredients": [
+            "flour",
+            "sugar",
+            "cocoa powder",
+            "baking soda",
+            "salt",
+            "eggs",
+            "milk",
+            "vegetable oil",
+            "vanilla",
+            "boiling water",
+            "chocolate frosting"
+          ],
+          "steps": [
+            "Preheat oven to 350 degrees",
+            "Grease and flour a 9 x 13 inch pan",
+            "In a large bowl, mix together first 5 ingredients",
+            "In a small bowl, combine eggs, milk, oil and vanilla",
+            "Pour into dry ingredients and mix well smooth. Stir in boiling water",
+            "Pour into the greased and floured 9 x",
+            "Bake at 350 degrees for about 40 minutes",
+            "Cool 10 minutes then cool 10 minutes",
+            "Frost with whipped cream or Cool Whip"
+          ],
+          "formatted": "Chocolate Cake With Frosting\n\nIngredients:\n- flour\n- sugar\n- cocoa powder\n- baking soda\n- salt\n- eggs\n- milk\n- vegetable oil\n- vanilla\n- boiling water\n- chocolate frosting\n\nInstructions:\n1. Preheat oven to 350 degrees\n2. Grease and flour a 9 x 13 inch pan\n3. In a large bowl, mix together first 5 ingredients\n4. In a small bowl, combine eggs, milk, oil and vanilla\n5. Pour into dry ingredients and mix well smooth. Stir in boiling water\n6. Pour into the greased and floured 9 x\n7. Bake at 350 degrees for about 40 minutes\n8. Cool 10 minutes then cool 10 minutes\n9. Frost with whipped cream or Cool Whip",
+          "quality_score": 16,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Chocolate Cake With Frosting <TITLE_END> <INPUT_START> flour <NEXT_INPUT> sugar <NEXT_INPUT> cocoa powder <NEXT_INPUT> baking soda <NEXT_INPUT> salt <NEXT_INPUT> eggs <NEXT_INPUT> milk <NEXT_INPUT> vegetable oil <NEXT_INPUT> vanilla <NEXT_INPUT> boiling water <NEXT_INPUT> chocolate frosting <INPUT_END> <INSTR_START> Preheat oven to 350 degrees. Grease and flour a 9 x 13 inch pan. <NEXT_INSTR> In a large bowl, mix together first 5 ingredients. <NEXT_INSTR> In a small bowl, combine eggs, milk, oil and vanilla. <NEXT_INSTR> Pour into dry ingredients and mix well smooth. <NEXT_END> Stir in boiling water. <NEXT_INSTR> Pour into the greased and floured 9 x <NEXT_INSTR> Bake at 350 degrees for about 40 minutes. <NEXT_INSTR> Cool 10 minutes then cool 10 minutes. <NEXT_INSTR> Frost with whipped cream or Cool Whip. <NEXT_END> <INSTR_END> <TITLE_START> Fudge Cake <TITLE_END> <RECIPE_END>_NEXT. < < inNEXT_ <INSTRINSTR_INSTRINSTREND < the>INSTRNEXT_>NEXT and> <._ 1NEXT < <_. the < toNEXTINSTR__INSTRINSTR.NEXTNEXT_ theNEXT <.INSTR theINSTR to the to.._ to. the. to/,. the to. the. and.. a 1.... a. a a..,.... 1....... a. 6.... 1 a...... 9..... 11..... 9 6... 9",
+          "sample_index": 1
+        },
+        {
+          "title": "Chocolate Cake With Frosting",
+          "ingredients": [
+            "flour",
+            "sugar",
+            "cocoa powder",
+            "baking soda",
+            "salt",
+            "eggs",
+            "milk",
+            "vegetable oil",
+            "vanilla",
+            "boiling water",
+            "chocolate frosting"
+          ],
+          "steps": [
+            "Preheat oven to 350 degrees",
+            "Grease and flour a 9 x 13 inch pan",
+            "In a large bowl, combine flour, sugar, cocoa, baking soda and salt",
+            "Set a large, deep, deep bowl, combine eggs, milk, oil and vanilla",
+            "Mix until smooth Add in flour ingredients and beat until",
+            "Stir in boiling water",
+            "Spread batter evenly",
+            "Bake for 50 minutes 60 minutes",
+            "Serve warm"
+          ],
+          "formatted": "Chocolate Cake With Frosting\n\nIngredients:\n- flour\n- sugar\n- cocoa powder\n- baking soda\n- salt\n- eggs\n- milk\n- vegetable oil\n- vanilla\n- boiling water\n- chocolate frosting\n\nInstructions:\n1. Preheat oven to 350 degrees\n2. Grease and flour a 9 x 13 inch pan\n3. In a large bowl, combine flour, sugar, cocoa, baking soda and salt\n4. Set a large, deep, deep bowl, combine eggs, milk, oil and vanilla\n5. Mix until smooth Add in flour ingredients and beat until\n6. Stir in boiling water\n7. Spread batter evenly\n8. Bake for 50 minutes 60 minutes\n9. Serve warm",
+          "quality_score": 16,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Chocolate Cake With Frosting <TITLE_END> <INPUT_START> flour <NEXT_INPUT> sugar <NEXT_INPUT> cocoa powder <NEXT_INPUT> baking soda <NEXT_INPUT> salt <NEXT_INPUT> eggs <NEXT_INPUT> milk <NEXT_INPUT> vegetable oil <NEXT_INPUT> vanilla <NEXT_INPUT> boiling water <NEXT_INPUT> chocolate frosting <INPUT_END> <INSTR_START> Preheat oven to 350 degrees. Grease and flour a 9 x 13 inch pan. <NEXT_INSTR> In a large bowl, combine flour, sugar, cocoa, baking soda and salt. <NEXT_INSTR> Set a large, deep, deep bowl, combine eggs, milk, oil and vanilla. <NEXT_INSTR> Mix until smooth <._INSTR> Add in flour ingredients and beat until. <NEXT_INSTR> Stir in boiling water. <NEXT_INSTR> Spread batter evenly. <NEXT_INSTR> Bake for 50 minutes 60 minutes. <NEXT_INSTR> Serve warm. <INSTR_END> <TITLE_START> Chocolate Fudge <TITLE_END> <RECIPE_END>[EOS]<RECIPE_START> <INPUT_START> flourINSTR <INSTRNEXT <INSTR_NEXT>INSTR_ the < <INSTRINSTR_>NEXT>INSTRENDINSTR> < < <>.NEXT_INSTR <___,._ <_NEXT>>__NEXTNEXT <_NEXT to theNEXT.__..INSTR.NEXT___,...NEXT_ a the..NEXT.......INSTR... to................. a.......... to........... a.....",
+          "sample_index": 2
+        },
+        {
+          "title": "Chocolate Cake With Frosting",
+          "ingredients": [
+            "flour",
+            "sugar",
+            "cocoa powder",
+            "baking soda",
+            "salt",
+            "eggs",
+            "milk",
+            "vegetable oil",
+            "vanilla",
+            "boiling water",
+            "chocolate frosting"
+          ],
+          "steps": [
+            "Preheat oven to 350 degrees",
+            "Grease and flour a 9 x 13 inch pan",
+            "In large bowl, combine flour",
+            "sugar, baking powder and salt",
+            "baking",
+            "soda and salt. In small bowl, combine eggs, milk, oil vanilla",
+            "Pour over dry ingredients",
+            "Fold",
+            "well",
+            "Pour in greased pan",
+            "Bake at 350 degrees for 35 to 40 minutes until done._END>"
+          ],
+          "formatted": "Chocolate Cake With Frosting\n\nIngredients:\n- flour\n- sugar\n- cocoa powder\n- baking soda\n- salt\n- eggs\n- milk\n- vegetable oil\n- vanilla\n- boiling water\n- chocolate frosting\n\nInstructions:\n1. Preheat oven to 350 degrees\n2. Grease and flour a 9 x 13 inch pan\n3. In large bowl, combine flour\n4. sugar, baking powder and salt\n5. baking\n6. soda and salt. In small bowl, combine eggs, milk, oil vanilla\n7. Pour over dry ingredients\n8. Fold\n9. well\n10. Pour in greased pan\n11. Bake at 350 degrees for 35 to 40 minutes until done._END>",
+          "quality_score": 16,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Chocolate Cake With Frosting <TITLE_END> <INPUT_START> flour <NEXT_INPUT> sugar <NEXT_INPUT> cocoa powder <NEXT_INPUT> baking soda <NEXT_INPUT> salt <NEXT_INPUT> eggs <NEXT_INPUT> milk <NEXT_INPUT> vegetable oil <NEXT_INPUT> vanilla <NEXT_INPUT> boiling water <NEXT_INPUT> chocolate frosting <INPUT_END> <INSTR_START> Preheat oven to 350 degrees. Grease and flour a 9 x 13 inch pan. <NEXT_INSTR> In large bowl, combine flour, <NEXT_INSTR> sugar, baking powder and salt, <NEXT_INSTR> baking <NEXT_INSTR> soda and salt. <._INSTR> In small bowl, combine eggs, milk, oil vanilla. <NEXT_INSTR> Pour over dry ingredients. Fold <NEXT_INSTR> well. <NEXT_INSTR> Pour in greased pan. <NEXT_INSTR> Bake at 350 degrees for 35 to 40 minutes until done._END> <TITLE_START> Fudge Pudding Cake <TITLE_END> <RECIPE_END>[EOS]<RECIPE_START> <INPUT_START> flour <NEXT_INPUTINPUT < <>>>>INSTR>>> <>INSTRINSTR <_INSTR aNEXTINSTRNEXT__NEXT <_ <_NEXT <_ <NEXT__ <INSTR_ 1INSTRINSTR__ < <NEXT> <NEXT___INSTR.NEXT <__NEXTNEXT <NEXT_ <INSTR> <_ <NEXT <NEXT>_NEXTNEXTNEXT <_NEXTINSTRNEXT the_ <> <NEXTINSTRNEXTINSTR___ <_NEXT_INSTR__INSTR_ <NEXT>NEXT__ <NEXTINSTRNEXTINSTRNEXTNEXT_INSTRNEXTNEXTINSTRNEXTNEXT__.INSTR._.....",
+          "sample_index": 3
+        },
+        {
+          "title": "Chocolate Cake With Frosting",
+          "ingredients": [
+            "flour",
+            "sugar",
+            "cocoa powder",
+            "baking soda",
+            "salt",
+            "eggs",
+            "milk",
+            "vegetable oil",
+            "vanilla",
+            "boiling water",
+            "chocolate frosting"
+          ],
+          "steps": [
+            "Preheat oven to 350 degrees",
+            "Grease and flour a 9 x 13 inch pan",
+            "In a large bowl, combine the flour, sugar, cocoa powder and salt",
+            "In another large bowl combine the eggs, milk, vegetable oil and vanilla",
+            "Combine with ingredients with the flour",
+            "Add boiling water and mix",
+            "Bake at 350 degrees for 40-45 minutes",
+            "Cool 10 minutes",
+            "Turn out on cooling rack and frost with chocolate frosting"
+          ],
+          "formatted": "Chocolate Cake With Frosting\n\nIngredients:\n- flour\n- sugar\n- cocoa powder\n- baking soda\n- salt\n- eggs\n- milk\n- vegetable oil\n- vanilla\n- boiling water\n- chocolate frosting\n\nInstructions:\n1. Preheat oven to 350 degrees\n2. Grease and flour a 9 x 13 inch pan\n3. In a large bowl, combine the flour, sugar, cocoa powder and salt\n4. In another large bowl combine the eggs, milk, vegetable oil and vanilla\n5. Combine with ingredients with the flour\n6. Add boiling water and mix\n7. Bake at 350 degrees for 40-45 minutes\n8. Cool 10 minutes\n9. Turn out on cooling rack and frost with chocolate frosting",
+          "quality_score": 16,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Chocolate Cake With Frosting <TITLE_END> <INPUT_START> flour <NEXT_INPUT> sugar <NEXT_INPUT> cocoa powder <NEXT_INPUT> baking soda <NEXT_INPUT> salt <NEXT_INPUT> eggs <NEXT_INPUT> milk <NEXT_INPUT> vegetable oil <NEXT_INPUT> vanilla <NEXT_INPUT> boiling water <NEXT_INPUT> chocolate frosting <INPUT_END> <INSTR_START> Preheat oven to 350 degrees. Grease and flour a 9 x 13 inch pan. <NEXT_INSTR> In a large bowl, combine the flour, sugar, cocoa powder and salt. <NEXT_INSTR> In another large bowl combine the eggs, milk, vegetable oil and vanilla. <NEXT_INSTR> Combine with ingredients with the flour, . <NEXT_INSTR> Add boiling water and mix. . <NEXT_INSTR> Bake at 350 degrees for 40-45 minutes . <NEXT_INSTR> Cool 10 minutes . <NEXT_INSTR> Turn out on cooling rack and frost with chocolate frosting . <INSTR_END> <TITLE_START> Chocolate Cake <TITLE_END> <RECIPE_END>[EOS]<RECIPE_START> <INPUT_START>>_INSTR> < and < <> I < I <. you I_ aNEXT weNEXT the you a of. we. to we it we I I. I we. we........ I. a we. I............ I.... and. we..... 2............................................ 6...... ....",
+          "sample_index": 4
+        }
+      ]
+    },
+    {
+      "checkpoint": "/Volumes/Auxilary/Side_Projects/Diffusion_Testing/Diffusion_Testing_April_23rd/Model_Checkpoints/checkpoint_step690000.pt",
+      "checkpoint_name": "checkpoint_step690000.pt",
+      "loaded_step": 690000,
+      "prompt": "<RECIPE_START> <TITLE_START> Chocolate Cake With Frosting <TITLE_END> <INPUT_START> flour <NEXT_INPUT> sugar <NEXT_INPUT> cocoa powder <NEXT_INPUT> baking soda <NEXT_INPUT> salt <NEXT_INPUT> eggs <NEXT_INPUT> milk <NEXT_INPUT> vegetable oil <NEXT_INPUT> vanilla <NEXT_INPUT> boiling water <NEXT_INPUT> chocolate frosting <INPUT_END> <INSTR_START> Preheat oven to 350 degrees. Grease and flour a 9 x 13 inch pan. <NEXT_INSTR>",
+      "samples": [
+        {
+          "title": "Chocolate Cake With Frosting",
+          "ingredients": [
+            "flour",
+            "sugar",
+            "cocoa powder",
+            "baking soda",
+            "salt",
+            "eggs",
+            "milk",
+            "vegetable oil",
+            "vanilla",
+            "boiling water",
+            "chocolate frosting"
+          ],
+          "steps": [
+            "Preheat oven to 350 degrees",
+            "Grease and flour a 9 x 13 inch pan",
+            "In large bowl, stir together flour, sugar, cocoa powder, soda and salt",
+            "In med. combine milk, oil and vanilla",
+            "Add to ingredients and stir",
+            "Bake in greased and floured pan 35 to 35 min",
+            "Cool"
+          ],
+          "formatted": "Chocolate Cake With Frosting\n\nIngredients:\n- flour\n- sugar\n- cocoa powder\n- baking soda\n- salt\n- eggs\n- milk\n- vegetable oil\n- vanilla\n- boiling water\n- chocolate frosting\n\nInstructions:\n1. Preheat oven to 350 degrees\n2. Grease and flour a 9 x 13 inch pan\n3. In large bowl, stir together flour, sugar, cocoa powder, soda and salt\n4. In med. combine milk, oil and vanilla\n5. Add to ingredients and stir\n6. Bake in greased and floured pan 35 to 35 min\n7. Cool",
+          "quality_score": 16,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Chocolate Cake With Frosting <TITLE_END> <INPUT_START> flour <NEXT_INPUT> sugar <NEXT_INPUT> cocoa powder <NEXT_INPUT> baking soda <NEXT_INPUT> salt <NEXT_INPUT> eggs <NEXT_INPUT> milk <NEXT_INPUT> vegetable oil <NEXT_INPUT> vanilla <NEXT_INPUT> boiling water <NEXT_INPUT> chocolate frosting <INPUT_END> <INSTR_START> Preheat oven to 350 degrees. Grease and flour a 9 x 13 inch pan. <NEXT_INSTR> In large bowl, stir together flour, sugar, cocoa powder, soda and salt. <NEXT_INSTR> In med. combine milk, oil and vanilla. <NEXT_INSTR> Add to ingredients and stirNEXT_INSTR> Bake in greased and floured pan 35 to 35 min. <NEXT_INSTR> Cool. <INSTR_END> <TITLE_START> Chocolate Cake <TITLE_END> <RECIPE_END>[EOS]<RECIPE_START> <INPUT_START> bacon <NEXT_INPUT> onion <NEXT__>> flour <NEXT_INPUT> salt <NEXT_INPUT> pepper <NEXT_INPUT> water <NEXT_INPUT>:>INSTR HeatINSTR_::>: 1 < 1: 1: 5: 1 1 2:::: 1 2 1 2 2 1 2 1_ 3::_ 1 5: 1 2NEXT 2: 1 1 1 1 1: 5 1 4::_ 1: 1 2 4 3 1 8 2 6 6 3 5 4 2 7: 3: 9 1 1 17 3: 9 1: 9 9 9 9: 7 Day 9 9 10 9 9 3 6 11 9 11 1111 2: 9 Day 7 9 11 11: 9 1:: 1 9 3 11 2 11 7 7 17: 1 9 11 9 9 1",
+          "sample_index": 1
+        },
+        {
+          "title": "Chocolate Cake With Frosting",
+          "ingredients": [
+            "flour",
+            "sugar",
+            "cocoa powder",
+            "baking soda",
+            "salt",
+            "eggs",
+            "milk",
+            "vegetable oil",
+            "vanilla",
+            "boiling water",
+            "chocolate frosting"
+          ],
+          "steps": [
+            "Preheat oven to 350 degrees",
+            "Grease and flour a 9 x 13 inch pan",
+            "In a large bowl, mix flour, sugar, cocoa powder, soda and salt",
+            "In a bowl, mix eggs, milk, oil and vanilla",
+            "Pour over dry ingredients. Beat until well blended",
+            "Pour into the prepared pan",
+            "Bake at 35-40 minutes",
+            "When done, cool completely, frost with chocolate frosting"
+          ],
+          "formatted": "Chocolate Cake With Frosting\n\nIngredients:\n- flour\n- sugar\n- cocoa powder\n- baking soda\n- salt\n- eggs\n- milk\n- vegetable oil\n- vanilla\n- boiling water\n- chocolate frosting\n\nInstructions:\n1. Preheat oven to 350 degrees\n2. Grease and flour a 9 x 13 inch pan\n3. In a large bowl, mix flour, sugar, cocoa powder, soda and salt\n4. In a bowl, mix eggs, milk, oil and vanilla\n5. Pour over dry ingredients. Beat until well blended\n6. Pour into the prepared pan\n7. Bake at 35-40 minutes\n8. When done, cool completely, frost with chocolate frosting",
+          "quality_score": 16,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Chocolate Cake With Frosting <TITLE_END> <INPUT_START> flour <NEXT_INPUT> sugar <NEXT_INPUT> cocoa powder <NEXT_INPUT> baking soda <NEXT_INPUT> salt <NEXT_INPUT> eggs <NEXT_INPUT> milk <NEXT_INPUT> vegetable oil <NEXT_INPUT> vanilla <NEXT_INPUT> boiling water <NEXT_INPUT> chocolate frosting <INPUT_END> <INSTR_START> Preheat oven to 350 degrees. Grease and flour a 9 x 13 inch pan. <NEXT_INSTR> In a large bowl, mix flour, sugar, cocoa powder, soda and salt. <NEXT_INSTR> In a bowl, mix eggs, milk, oil and vanilla. <NEXT_INSTR> Pour over dry ingredients. <NEXT.INSTR> Beat until well blended. <NEXT_INSTR> Pour into the prepared pan. <NEXT_INSTR> Bake at 35-40 minutes. <NEXT_INSTR> When done, cool completely, frost with chocolate frosting. <INSTR_END> <TITLE_START> Chocolate Cake <TITLE_END> <RECIPE_END>[EOS]<RECIPE_START> <INPUT_START> sugar <NEXT_INPUT>> A to to to 1: you to A::: 1:: 1: 1: 5: 1: 1 1 1:: 1 2:::_:::: 1:::: Layer::: 1: 1 1: 8 5 1 9 7:: 9 2 7 1 1 8 912 1 1 712 9 1: 11: 11 1::: 1 11:: 11 7 6 722: 3 9: 1 1 12 11 9 1: 11: 1 17 11 11221111 1 1 11: 1 2 2: 2 11 1 6 1 1: 3 11 2:: 9 7: 9",
+          "sample_index": 2
+        },
+        {
+          "title": "Chocolate Cake With Frosting",
+          "ingredients": [
+            "flour",
+            "sugar",
+            "cocoa powder",
+            "baking soda",
+            "salt",
+            "eggs",
+            "milk",
+            "vegetable oil",
+            "vanilla",
+            "boiling water",
+            "chocolate frosting"
+          ],
+          "steps": [
+            "Preheat oven to 350 degrees",
+            "Grease and flour a 9 x 13 inch pan",
+            "In a large bowl, combine flour, sugar, baking cocoa and salt, set",
+            "In a medium bowl whisk together the milk, oil and vanilla extract",
+            "Whisk into flour mixture",
+            "Stir in boiling water",
+            "Pour batter into greased pan with spatula",
+            "Bake for 350 degrees ( minutes)",
+            "Cool"
+          ],
+          "formatted": "Chocolate Cake With Frosting\n\nIngredients:\n- flour\n- sugar\n- cocoa powder\n- baking soda\n- salt\n- eggs\n- milk\n- vegetable oil\n- vanilla\n- boiling water\n- chocolate frosting\n\nInstructions:\n1. Preheat oven to 350 degrees\n2. Grease and flour a 9 x 13 inch pan\n3. In a large bowl, combine flour, sugar, baking cocoa and salt, set\n4. In a medium bowl whisk together the milk, oil and vanilla extract\n5. Whisk into flour mixture\n6. Stir in boiling water\n7. Pour batter into greased pan with spatula\n8. Bake for 350 degrees ( minutes)\n9. Cool",
+          "quality_score": 16,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Chocolate Cake With Frosting <TITLE_END> <INPUT_START> flour <NEXT_INPUT> sugar <NEXT_INPUT> cocoa powder <NEXT_INPUT> baking soda <NEXT_INPUT> salt <NEXT_INPUT> eggs <NEXT_INPUT> milk <NEXT_INPUT> vegetable oil <NEXT_INPUT> vanilla <NEXT_INPUT> boiling water <NEXT_INPUT> chocolate frosting <INPUT_END> <INSTR_START> Preheat oven to 350 degrees. Grease and flour a 9 x 13 inch pan. <NEXT_INSTR> In a large bowl, combine flour, sugar, baking cocoa and salt, set. <NEXT_INSTR> In a medium bowl whisk together the milk, oil and vanilla extract <NEXT_INSTR> Whisk into flour mixture. <NEXT_INSTR> Stir in boiling water. <NEXT_INSTR> Pour batter into greased pan with spatula. <NEXT_INSTR> Bake for 350 degrees ( minutes). <NEXT_INSTR> Cool. <INSTR_END> <TITLE_START> Chocolate Cake Brownies <TITLE_END> <RECIPE_END>[EOS]<RECIPE_START> <INPUT_START> olive oil <NEXT_INPUT> onion <NEXT_INPUT>INSTR: 6_>: 1:INSTR 1NEXTINSTR::: 1 1_:: 1 Day:: Day: 2 6 9: Day: 1 1 1::: 1: 1 1 9 3 6 Day 9 4: 1 1:: 2 9:: 1:: 6:::: 9 8:: 6 11 9 7: 9::12 9 6 11 7: 1111: 9: 9: 1211 7:9 9 17 11 9: 9:: 9 11 9 9 7 11 1 9 11 13 10 6: 11 11 9 1 11: 7 9 1 11 11: 7 9 9 9 17 9",
+          "sample_index": 3
+        },
+        {
+          "title": "Chocolate Cake With Frosting",
+          "ingredients": [
+            "flour",
+            "sugar",
+            "cocoa powder",
+            "baking soda",
+            "salt",
+            "eggs",
+            "milk",
+            "vegetable oil",
+            "vanilla",
+            "boiling water",
+            "chocolate frosting"
+          ],
+          "steps": [
+            "Preheat oven to 350 degrees",
+            "Grease and flour a 9 x 13 inch pan",
+            "In a large mixing bowl, combine flour, sugar, cocoa powder, baking soda and salt",
+            "In a small bowl, combine eggs, milk, oil and vanilla",
+            "Add to the dry ingredients, stirring to blend",
+            "Pour into prepared pan and spread evenly",
+            "Bake at 350 degrees for 30 minutes 40 minutes"
+          ],
+          "formatted": "Chocolate Cake With Frosting\n\nIngredients:\n- flour\n- sugar\n- cocoa powder\n- baking soda\n- salt\n- eggs\n- milk\n- vegetable oil\n- vanilla\n- boiling water\n- chocolate frosting\n\nInstructions:\n1. Preheat oven to 350 degrees\n2. Grease and flour a 9 x 13 inch pan\n3. In a large mixing bowl, combine flour, sugar, cocoa powder, baking soda and salt\n4. In a small bowl, combine eggs, milk, oil and vanilla\n5. Add to the dry ingredients, stirring to blend\n6. Pour into prepared pan and spread evenly\n7. Bake at 350 degrees for 30 minutes 40 minutes",
+          "quality_score": 16,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Chocolate Cake With Frosting <TITLE_END> <INPUT_START> flour <NEXT_INPUT> sugar <NEXT_INPUT> cocoa powder <NEXT_INPUT> baking soda <NEXT_INPUT> salt <NEXT_INPUT> eggs <NEXT_INPUT> milk <NEXT_INPUT> vegetable oil <NEXT_INPUT> vanilla <NEXT_INPUT> boiling water <NEXT_INPUT> chocolate frosting <INPUT_END> <INSTR_START> Preheat oven to 350 degrees. Grease and flour a 9 x 13 inch pan. <NEXT_INSTR> In a large mixing bowl, combine flour, sugar, cocoa powder, baking soda and salt. <NEXT_INSTR> In a small bowl, combine eggs, milk, oil and vanilla. <NEXT_INSTR> Add to the dry ingredients, stirring to blend. <NEXT_INSTR> Pour into prepared pan and spread evenly. <NEXT_INSTR> Bake at 350 degrees for 30 minutes 40 minutes. <NEXT_INSTR. <INSTR_END> <TITLE_START> Chocolate Cake <TITLE_END> <RECIPE_END>[EOS]<RECIPE_START> <INPUT_START> flour <NEXT__INPUT> sugar <NEXT_INPUT> eggs </INSTR < 1 toINSTR 1 1>>/>_INSTRINSTR 2 1_INSTR 1INSTR 2: 1 2_ 1/_NEXT 1 1 Day:/ 5: Day/ 1INSTR: 6 1:_ 1: 1 5: 6/ 1 Day 1:::: 1 1/9:: 3 2 124 1: 1 2: 2 1 6 7// 4 1:9 2 1 2 9// 1 1/ 224112/ 1 1 1// 2 1 99//11 1 7: 64 19 1 2 11 4/224 1/ 2/29 4",
+          "sample_index": 4
+        }
+      ]
+    }
+  ]
+}

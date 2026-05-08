@@ -1,0 +1,106 @@
+{
+  "args": {
+    "config": "config.yaml",
+    "profile": "recipe_poc_2day",
+    "data_dir": "./data_recipe_poc_2day",
+    "runs_dir": null,
+    "checkpoint": [
+      "./Model_Checkpoints/best_step88000.pt"
+    ],
+    "checkpoint_dir": "./Model_Checkpoints",
+    "output_dir": "./test_outputs",
+    "recipe": "chicken butter masala",
+    "prefix": null,
+    "ingredients_only": false,
+    "num_samples": 3,
+    "length": 160,
+    "top_k": 20,
+    "temperature": 0.75,
+    "seed": 22
+  },
+  "results": [
+    {
+      "checkpoint": "/Volumes/Auxilary/Side_Projects/Diffusion_Testing/Diffusion_Testing_April_23rd/Model_Checkpoints/best_step88000.pt",
+      "checkpoint_name": "best_step88000.pt",
+      "loaded_step": 88000,
+      "prompt": "<RECIPE_START> <TITLE_START> Chicken Butter Masala <TITLE_END> <INPUT_START>",
+      "samples": [
+        {
+          "title": "Chicken Butter Masala",
+          "ingredients": [
+            "eggs",
+            "Crisco",
+            "sugar",
+            "pumpkin",
+            "water",
+            "oil",
+            "vanilla",
+            "flour",
+            "soda",
+            "baking powder",
+            "salt",
+            "cinnamon"
+          ],
+          "steps": [
+            "Mix together eggs, sugar, Crisco and pumpkin",
+            "Add sifted dry ingredients to the egg mixture",
+            "Add water, oil, vanilla and pumpkin. <NEXT_"
+          ],
+          "formatted": "Chicken Butter Masala\n\nIngredients:\n- eggs\n- Crisco\n- sugar\n- pumpkin\n- water\n- oil\n- vanilla\n- flour\n- soda\n- baking powder\n- salt\n- cinnamon\n\nInstructions:\n1. Mix together eggs, sugar, Crisco and pumpkin\n2. Add sifted dry ingredients to the egg mixture\n3. Add water, oil, vanilla and pumpkin. <NEXT_",
+          "quality_score": 15,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Chicken Butter Masala <TITLE_END> <INPUT_START>[EOS]<RECIPE_START> <INPUT_START> eggs <NEXT_INPUT> Crisco <NEXT_INPUT> sugar <NEXT_INPUT> pumpkin <NEXT_INPUT> water <NEXT_INPUT> oil <NEXT_INPUT> vanilla <NEXT_INPUT> pumpkin <NEXT_INPUT> flour <NEXT_INPUT> soda <NEXT_INPUT> baking powder <NEXT_INPUT> salt <NEXT_INPUT> cinnamon <INPUT_END> <INSTR_START> Mix together eggs, sugar, Crisco and pumpkin. <NEXT_INSTR> Add sifted dry ingredients to the egg mixture. <NEXT_INSTR> Add water, oil, vanilla and pumpkin. <NEXT_",
+          "sample_index": 1
+        },
+        {
+          "title": "Chicken Butter Masala",
+          "ingredients": [
+            "regular rice",
+            "Cheddar cheese",
+            "onion",
+            "cream of chicken soup",
+            "milk",
+            "curry powder",
+            "salt",
+            "pepper",
+            "margarine"
+          ],
+          "steps": [
+            "Heat oven to 350",
+            "Cook rice until barely barely done",
+            "Combine rice, cheese, onion and soup",
+            "Pour into greased baking dish",
+            "Combine 1/4 cup margarine and"
+          ],
+          "formatted": "Chicken Butter Masala\n\nIngredients:\n- regular rice\n- Cheddar cheese\n- onion\n- cream of chicken soup\n- milk\n- curry powder\n- salt\n- pepper\n- margarine\n\nInstructions:\n1. Heat oven to 350\n2. Cook rice until barely barely done\n3. Combine rice, cheese, onion and soup\n4. Pour into greased baking dish\n5. Combine 1/4 cup margarine and",
+          "quality_score": 14,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Chicken Butter Masala <TITLE_END> <INPUT_START>[EOS]<RECIPE_START> <INPUT_START> regular rice <NEXT_INPUT> Cheddar cheese <NEXT_INPUT> onion <NEXT_INPUT> cream of chicken soup <NEXT_INPUT> milk <NEXT_INPUT> curry powder <NEXT_INPUT> salt <NEXT_INPUT> pepper <NEXT_INPUT> margarine <NEXT_INPUT> margarine <INPUT_END> <INSTR_START> Heat oven to 350. <NEXT_INSTR> Cook rice until barely barely done. <NEXT_INSTR> Combine rice, cheese, onion and soup. <NEXT_INSTR> Pour into greased baking dish. <NEXT_INSTR> Combine 1/4 cup margarine and",
+          "sample_index": 2
+        },
+        {
+          "title": "Chicken Butter Masala",
+          "ingredients": [
+            "olive oil",
+            "cumin",
+            "garlic",
+            "salt",
+            "oregano",
+            "cayenne pepper",
+            "bread",
+            "tomato",
+            "cheese"
+          ],
+          "steps": [
+            "In a small bowl, combine the oil, cumin, salt, garlic, oregano and cayenne",
+            "Place on a slice of bread",
+            "Top with tomato and cheese",
+            "In a small bowl, combine the reserved dressing"
+          ],
+          "formatted": "Chicken Butter Masala\n\nIngredients:\n- olive oil\n- cumin\n- garlic\n- salt\n- oregano\n- cayenne pepper\n- bread\n- tomato\n- cheese\n\nInstructions:\n1. In a small bowl, combine the oil, cumin, salt, garlic, oregano and cayenne\n2. Place on a slice of bread\n3. Top with tomato and cheese\n4. In a small bowl, combine the reserved dressing",
+          "quality_score": 13,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Chicken Butter Masala <TITLE_END> <INPUT_START>[EOS]<RECIPE_START> <INPUT_START> olive oil <NEXT_INPUT> cumin <NEXT_INPUT> garlic <NEXT_INPUT> salt <NEXT_INPUT> oregano <NEXT_INPUT> salt <NEXT_INPUT> cayenne pepper <NEXT_INPUT> bread <NEXT_INPUT> tomato <NEXT_INPUT> cheese <INPUT_END> <INSTR_START> In a small bowl, combine the oil, cumin, salt, garlic, oregano and cayenne. <NEXT_INSTR> Place on a slice of bread. <NEXT_INSTR> Top with tomato and cheese. <NEXT_INSTR> In a small bowl, combine the reserved dressing. Set",
+          "sample_index": 3
+        }
+      ]
+    }
+  ]
+}

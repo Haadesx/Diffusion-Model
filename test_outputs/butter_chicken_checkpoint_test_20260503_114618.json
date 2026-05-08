@@ -1,0 +1,309 @@
+{
+  "args": {
+    "config": "config.yaml",
+    "profile": "recipe_poc_2day",
+    "data_dir": "./data_recipe_poc_2day",
+    "runs_dir": null,
+    "checkpoint": [
+      "./Model_Checkpoints/best_step654000.pt",
+      "./Model_Checkpoints/checkpoint_step690000.pt"
+    ],
+    "checkpoint_dir": "./Model_Checkpoints",
+    "output_dir": "./test_outputs",
+    "recipe": "butter chicken",
+    "prefix": "<RECIPE_START> <TITLE_START> Butter Chicken With Rice <TITLE_END> <INPUT_START> chicken breast <NEXT_INPUT> butter <NEXT_INPUT> onion <NEXT_INPUT> garlic <NEXT_INPUT> ginger <NEXT_INPUT> tomato sauce <NEXT_INPUT> garam masala <NEXT_INPUT> cumin <NEXT_INPUT> chili powder <NEXT_INPUT> heavy cream <NEXT_INPUT> salt <NEXT_INPUT> cilantro <NEXT_INPUT> cooked rice <INPUT_END> <INSTR_START> Cut chicken into bite size pieces. Season with salt. <NEXT_INSTR>",
+    "ingredients_only": false,
+    "num_samples": 4,
+    "length": 390,
+    "top_k": 18,
+    "temperature": 0.58,
+    "seed": 83
+  },
+  "results": [
+    {
+      "checkpoint": "/Volumes/Auxilary/Side_Projects/Diffusion_Testing/Diffusion_Testing_April_23rd/Model_Checkpoints/best_step654000.pt",
+      "checkpoint_name": "best_step654000.pt",
+      "loaded_step": 654000,
+      "prompt": "<RECIPE_START> <TITLE_START> Butter Chicken With Rice <TITLE_END> <INPUT_START> chicken breast <NEXT_INPUT> butter <NEXT_INPUT> onion <NEXT_INPUT> garlic <NEXT_INPUT> ginger <NEXT_INPUT> tomato sauce <NEXT_INPUT> garam masala <NEXT_INPUT> cumin <NEXT_INPUT> chili powder <NEXT_INPUT> heavy cream <NEXT_INPUT> salt <NEXT_INPUT> cilantro <NEXT_INPUT> cooked rice <INPUT_END> <INSTR_START> Cut chicken into bite size pieces. Season with salt. <NEXT_INSTR>",
+      "samples": [
+        {
+          "title": "Butter Chicken With Rice",
+          "ingredients": [
+            "chicken breast",
+            "butter",
+            "onion",
+            "garlic",
+            "ginger",
+            "tomato sauce",
+            "garam masala",
+            "cumin",
+            "chili powder",
+            "heavy cream",
+            "salt",
+            "cilantro",
+            "cooked rice"
+          ],
+          "steps": [
+            "Cut chicken into bite size pieces",
+            "Season with salt",
+            "In large skillet melt butter",
+            "Saute onion, garlic and ginger",
+            "Simmer 15 minutes",
+            "Add chicken pieces",
+            "Add tomato sauce, cumin and chili powder and cook 10 minutes",
+            "Add cream mixture",
+            "Cook 5 minutes",
+            "Serve over rice rice"
+          ],
+          "formatted": "Butter Chicken With Rice\n\nIngredients:\n- chicken breast\n- butter\n- onion\n- garlic\n- ginger\n- tomato sauce\n- garam masala\n- cumin\n- chili powder\n- heavy cream\n- salt\n- cilantro\n- cooked rice\n\nInstructions:\n1. Cut chicken into bite size pieces\n2. Season with salt\n3. In large skillet melt butter\n4. Saute onion, garlic and ginger\n5. Simmer 15 minutes\n6. Add chicken pieces\n7. Add tomato sauce, cumin and chili powder and cook 10 minutes\n8. Add cream mixture\n9. Cook 5 minutes\n10. Serve over rice rice",
+          "quality_score": 18,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Butter Chicken With Rice <TITLE_END> <INPUT_START> chicken breast <NEXT_INPUT> butter <NEXT_INPUT> onion <NEXT_INPUT> garlic <NEXT_INPUT> ginger <NEXT_INPUT> tomato sauce <NEXT_INPUT> garam masala <NEXT_INPUT> cumin <NEXT_INPUT> chili powder <NEXT_INPUT> heavy cream <NEXT_INPUT> salt <NEXT_INPUT> cilantro <NEXT_INPUT> cooked rice <INPUT_END> <INSTR_START> Cut chicken into bite size pieces. Season with salt. <NEXT_INSTR> In large skillet melt butter. Saute onion, garlic and ginger. Simmer 15 minutes. Add chicken pieces. Add tomato sauce, cumin and chili powder and cook 10 minutes. <NEXT_INSTR> Add cream mixture. <NEXT_INSTR> Cook 5 minutes. <NEXT_INSTR> Serve over rice rice. <INSTR_END> <TITLE_START> Chicken Curry <TITLE_END> <RECIPE_END>[EOS]<RECIPE_START> <INPUT_START> sugar <NEXT_INPUT> salt <NEXT_INPUT>> <NEXT_INPUT>> <NEXT_INPUT> eggs <NEXT_INPUT> vanillaINSTR> <NEXT of.NEXT:. and. aINSTR a to.._ a.. 2 a... a:... a............ 1.... 4.................... 2............ 5.......................................m.........m",
+          "sample_index": 1
+        },
+        {
+          "title": "Butter Chicken With Rice",
+          "ingredients": [
+            "chicken breast",
+            "butter",
+            "onion",
+            "garlic",
+            "ginger",
+            "tomato sauce",
+            "garam masala",
+            "cumin",
+            "chili powder",
+            "heavy cream",
+            "salt",
+            "cilantro",
+            "cooked rice"
+          ],
+          "steps": [
+            "Cut chicken into bite size pieces",
+            "Season with salt",
+            "Saute onion in butter until tender",
+            "Add garlic and ginger and stir well",
+            "Stir in tomato sauce and spices",
+            "Simmer 30 minutes or until chicken is tender",
+            "Add rice and cream until mixture",
+            "Pour with chicken and serve"
+          ],
+          "formatted": "Butter Chicken With Rice\n\nIngredients:\n- chicken breast\n- butter\n- onion\n- garlic\n- ginger\n- tomato sauce\n- garam masala\n- cumin\n- chili powder\n- heavy cream\n- salt\n- cilantro\n- cooked rice\n\nInstructions:\n1. Cut chicken into bite size pieces\n2. Season with salt\n3. Saute onion in butter until tender\n4. Add garlic and ginger and stir well\n5. Stir in tomato sauce and spices\n6. Simmer 30 minutes or until chicken is tender\n7. Add rice and cream until mixture\n8. Pour with chicken and serve",
+          "quality_score": 18,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Butter Chicken With Rice <TITLE_END> <INPUT_START> chicken breast <NEXT_INPUT> butter <NEXT_INPUT> onion <NEXT_INPUT> garlic <NEXT_INPUT> ginger <NEXT_INPUT> tomato sauce <NEXT_INPUT> garam masala <NEXT_INPUT> cumin <NEXT_INPUT> chili powder <NEXT_INPUT> heavy cream <NEXT_INPUT> salt <NEXT_INPUT> cilantro <NEXT_INPUT> cooked rice <INPUT_END> <INSTR_START> Cut chicken into bite size pieces. Season with salt. <NEXT_INSTR> Saute onion in butter until tender. <NEXT_INSTR> Add garlic and ginger and stir well. <NEXT_INSTR> Stir in tomato sauce and spices. <NEXT_INSTR> Simmer 30 minutes or until chicken is tender. <NEXT_INSTR> Add rice and cream until mixture. <NEXT_INSTR> Pour with chicken and serve. <INSTR_END> <TITLE_START> Indian Chicken Curry <TITLE_END> <RECIPE_END>[EOS]<RECIPE_START> <INPUT_START> potatoes <NEXT_INPUT> onion <NEXT_INPUT> butter <NEXT_INPUT> flour <NEXT_INPUT_INSTR_ and>_NEXTNEXT. a of a_ the_. toNEXT; the a_ and the a a. in. a and. a. a and; in, a 2.... a...'s....... 1 in.th............ a.......................... to.............. to.............. to...",
+          "sample_index": 2
+        },
+        {
+          "title": "Butter Chicken With Rice",
+          "ingredients": [
+            "chicken breast",
+            "butter",
+            "onion",
+            "garlic",
+            "ginger",
+            "tomato sauce",
+            "garam masala",
+            "cumin",
+            "chili powder",
+            "heavy cream",
+            "salt",
+            "cilantro",
+            "cooked rice"
+          ],
+          "steps": [
+            "Cut chicken into bite size pieces",
+            "Season with salt",
+            "Melt butter and cook onion and garlic with ginger until soft",
+            "Add tomato sauce and spices",
+            "Simmer until about 1 hour",
+            "Add cream and mix well",
+            "Add chicken",
+            "Salt and pepper to taste",
+            "INSTR Pour into 1 dish and garnish with rice and yogurt. <"
+          ],
+          "formatted": "Butter Chicken With Rice\n\nIngredients:\n- chicken breast\n- butter\n- onion\n- garlic\n- ginger\n- tomato sauce\n- garam masala\n- cumin\n- chili powder\n- heavy cream\n- salt\n- cilantro\n- cooked rice\n\nInstructions:\n1. Cut chicken into bite size pieces\n2. Season with salt\n3. Melt butter and cook onion and garlic with ginger until soft\n4. Add tomato sauce and spices\n5. Simmer until about 1 hour\n6. Add cream and mix well\n7. Add chicken\n8. Salt and pepper to taste\n9. INSTR Pour into 1 dish and garnish with rice and yogurt. <",
+          "quality_score": 18,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Butter Chicken With Rice <TITLE_END> <INPUT_START> chicken breast <NEXT_INPUT> butter <NEXT_INPUT> onion <NEXT_INPUT> garlic <NEXT_INPUT> ginger <NEXT_INPUT> tomato sauce <NEXT_INPUT> garam masala <NEXT_INPUT> cumin <NEXT_INPUT> chili powder <NEXT_INPUT> heavy cream <NEXT_INPUT> salt <NEXT_INPUT> cilantro <NEXT_INPUT> cooked rice <INPUT_END> <INSTR_START> Cut chicken into bite size pieces. Season with salt. <NEXT_INSTR> Melt butter and cook onion and garlic with ginger until soft. <NEXT_INSTR> Add tomato sauce and spices. <NEXT_INSTR> Simmer until about 1 hour. <NEXT_INSTR> Add cream and mix well. <NEXT_INSTR> Add chicken. <NEXT_INSTR> Salt and pepper to taste. <NEXT_INSTR>INSTR Pour into 1 dish and garnish with rice and yogurt. < <__END> <TITLE_START> Chicken Curry <TITLE_END> <RECIPE_END>[EOS]<RECIPE_START> <INPUT_START> margarine <NEXT_INPUT> sugar <NEXT_INPUTNEXT>_INSTR <. a the < a.NEXT a and and_NEXT_. a of the. a a and a. and 1 and. a a. a. 1.. to.. a.............. 1. 1........,........ a..................... am....... 2..................mm....",
+          "sample_index": 3
+        },
+        {
+          "title": "Butter Chicken With Rice",
+          "ingredients": [
+            "chicken breast",
+            "butter",
+            "onion",
+            "garlic",
+            "ginger",
+            "tomato sauce",
+            "garam masala",
+            "cumin",
+            "chili powder",
+            "heavy cream",
+            "salt",
+            "cilantro",
+            "cooked rice"
+          ],
+          "steps": [
+            "Cut chicken into bite size pieces",
+            "Season with salt",
+            "Saute onion and garlic in ginger",
+            "Add minutes of cooking time",
+            "Add butter, tomato, spices ginger, and",
+            "Cook for 3 minutes",
+            "Add chicken and cook for 5 minutes",
+            "Add the cream",
+            "Cook for 5 min",
+            "Serve the hot rice",
+            "Serves coriander"
+          ],
+          "formatted": "Butter Chicken With Rice\n\nIngredients:\n- chicken breast\n- butter\n- onion\n- garlic\n- ginger\n- tomato sauce\n- garam masala\n- cumin\n- chili powder\n- heavy cream\n- salt\n- cilantro\n- cooked rice\n\nInstructions:\n1. Cut chicken into bite size pieces\n2. Season with salt\n3. Saute onion and garlic in ginger\n4. Add minutes of cooking time\n5. Add butter, tomato, spices ginger, and\n6. Cook for 3 minutes\n7. Add chicken and cook for 5 minutes\n8. Add the cream\n9. Cook for 5 min\n10. Serve the hot rice\n11. Serves coriander",
+          "quality_score": 18,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Butter Chicken With Rice <TITLE_END> <INPUT_START> chicken breast <NEXT_INPUT> butter <NEXT_INPUT> onion <NEXT_INPUT> garlic <NEXT_INPUT> ginger <NEXT_INPUT> tomato sauce <NEXT_INPUT> garam masala <NEXT_INPUT> cumin <NEXT_INPUT> chili powder <NEXT_INPUT> heavy cream <NEXT_INPUT> salt <NEXT_INPUT> cilantro <NEXT_INPUT> cooked rice <INPUT_END> <INSTR_START> Cut chicken into bite size pieces. Season with salt. <NEXT_INSTR> Saute onion and garlic in ginger. Add minutes of cooking time. <NEXT_INSTR> Add butter, tomato, spices ginger, and. Cook for 3 minutes. <NEXT_INSTR> Add chicken and cook for 5 minutes. <NEXT_INSTR> Add the cream. <NEXT_INSTR> Cook for 5 min. <NEXT_INSTR> Serve the hot rice. <NEXT_INSTR> Serves coriander. <INSTR_END> <TITLE_START> Creamy Curry Chicken <TITLE_END> <RECIPE_END>[EOS]<RECIPE_START> <INPUT_START> sugar <NEXT_INPUT>> <NEXT <INSTRNEXT>NEXT>_> < the_> < and_ the>INSTR._.INSTR>NEXT a:NEXTINSTR. to aINSTRINSTRINSTR the... a a ofINSTR a and.............. a............................. 2.. a.......... and................... 10...........",
+          "sample_index": 4
+        }
+      ]
+    },
+    {
+      "checkpoint": "/Volumes/Auxilary/Side_Projects/Diffusion_Testing/Diffusion_Testing_April_23rd/Model_Checkpoints/checkpoint_step690000.pt",
+      "checkpoint_name": "checkpoint_step690000.pt",
+      "loaded_step": 690000,
+      "prompt": "<RECIPE_START> <TITLE_START> Butter Chicken With Rice <TITLE_END> <INPUT_START> chicken breast <NEXT_INPUT> butter <NEXT_INPUT> onion <NEXT_INPUT> garlic <NEXT_INPUT> ginger <NEXT_INPUT> tomato sauce <NEXT_INPUT> garam masala <NEXT_INPUT> cumin <NEXT_INPUT> chili powder <NEXT_INPUT> heavy cream <NEXT_INPUT> salt <NEXT_INPUT> cilantro <NEXT_INPUT> cooked rice <INPUT_END> <INSTR_START> Cut chicken into bite size pieces. Season with salt. <NEXT_INSTR>",
+      "samples": [
+        {
+          "title": "Butter Chicken With Rice",
+          "ingredients": [
+            "chicken breast",
+            "butter",
+            "onion",
+            "garlic",
+            "ginger",
+            "tomato sauce",
+            "garam masala",
+            "cumin",
+            "chili powder",
+            "heavy cream",
+            "salt",
+            "cilantro",
+            "cooked rice"
+          ],
+          "steps": [
+            "Cut chicken into bite size pieces",
+            "Season with salt",
+            "Heat butter in pan and, saute chicken pieces and onions until brown",
+            "Add garlic and ginger. Add tomato sauce and spices",
+            "Add cream, cover and simmer until chicken is cooked. <NEXT isINSTR> Add rice and cook for 5 minutes"
+          ],
+          "formatted": "Butter Chicken With Rice\n\nIngredients:\n- chicken breast\n- butter\n- onion\n- garlic\n- ginger\n- tomato sauce\n- garam masala\n- cumin\n- chili powder\n- heavy cream\n- salt\n- cilantro\n- cooked rice\n\nInstructions:\n1. Cut chicken into bite size pieces\n2. Season with salt\n3. Heat butter in pan and, saute chicken pieces and onions until brown\n4. Add garlic and ginger. Add tomato sauce and spices\n5. Add cream, cover and simmer until chicken is cooked. <NEXT isINSTR> Add rice and cook for 5 minutes",
+          "quality_score": 18,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Butter Chicken With Rice <TITLE_END> <INPUT_START> chicken breast <NEXT_INPUT> butter <NEXT_INPUT> onion <NEXT_INPUT> garlic <NEXT_INPUT> ginger <NEXT_INPUT> tomato sauce <NEXT_INPUT> garam masala <NEXT_INPUT> cumin <NEXT_INPUT> chili powder <NEXT_INPUT> heavy cream <NEXT_INPUT> salt <NEXT_INPUT> cilantro <NEXT_INPUT> cooked rice <INPUT_END> <INSTR_START> Cut chicken into bite size pieces. Season with salt. <NEXT_INSTR> Heat butter in pan and, saute chicken pieces and onions until brown. <NEXT_INSTR> Add garlic and ginger. <NEXT_.> Add tomato sauce and spices. <NEXT_INSTR> Add cream, cover and simmer until chicken is cooked. <NEXT isINSTR> Add rice and cook for 5 minutes. <NEXT_END> <TITLE_START> Chicken CurryTITLE <TITLE_END> <RECIPE_END>[EOS]<RECIPE_START> <INPUT_START> onion <NEXT_INPUT>> <NEXT__INPUT> butter <NEXT_INPUT> flour <NEXT_INPUT> pepper <NEXT 1 INEXT 1 INEXTINSTRINSTRINSTR you,INSTR to:: to. to 1 1> 1:: 1:::INSTR 1 1 1 1 2 2_: 2: 1 1 9: 1 6: 1 Day 1 1: 1 1 Day 10 10 1: 2 9 Day 1 10 Day: Day: 1 9: 2: 14 9::: 10 1 2 9 11 6 9: 9 1 1: 10 9: 6 11 9: 11 9 11 11 12 9 9: 11 9 11 14 9 11 11:: 9: 9 9 1: 9 9 11 1 11 11 2 11 119 11 9: 11 9",
+          "sample_index": 1
+        },
+        {
+          "title": "Butter Chicken With Rice",
+          "ingredients": [
+            "chicken breast",
+            "butter",
+            "onion",
+            "garlic",
+            "ginger",
+            "tomato sauce",
+            "garam masala",
+            "cumin",
+            "chili powder",
+            "heavy cream",
+            "salt",
+            "cilantro",
+            "cooked rice"
+          ],
+          "steps": [
+            "Cut chicken into bite size pieces",
+            "Season with salt",
+            "Saute onions, garlic and ginger in tender",
+            "Add butter",
+            "Add chicken and saute until done",
+            "Add tomato sauce, spices,, cream cream",
+            "Simmer well",
+            "Add rice",
+            "Mix the cornstarch with cold water",
+            "Pour over the chicken mixture",
+            "Serve"
+          ],
+          "formatted": "Butter Chicken With Rice\n\nIngredients:\n- chicken breast\n- butter\n- onion\n- garlic\n- ginger\n- tomato sauce\n- garam masala\n- cumin\n- chili powder\n- heavy cream\n- salt\n- cilantro\n- cooked rice\n\nInstructions:\n1. Cut chicken into bite size pieces\n2. Season with salt\n3. Saute onions, garlic and ginger in tender\n4. Add butter\n5. Add chicken and saute until done\n6. Add tomato sauce, spices,, cream cream\n7. Simmer well\n8. Add rice\n9. Mix the cornstarch with cold water\n10. Pour over the chicken mixture\n11. Serve",
+          "quality_score": 18,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Butter Chicken With Rice <TITLE_END> <INPUT_START> chicken breast <NEXT_INPUT> butter <NEXT_INPUT> onion <NEXT_INPUT> garlic <NEXT_INPUT> ginger <NEXT_INPUT> tomato sauce <NEXT_INPUT> garam masala <NEXT_INPUT> cumin <NEXT_INPUT> chili powder <NEXT_INPUT> heavy cream <NEXT_INPUT> salt <NEXT_INPUT> cilantro <NEXT_INPUT> cooked rice <INPUT_END> <INSTR_START> Cut chicken into bite size pieces. Season with salt. <NEXT_INSTR> Saute onions, garlic and ginger in tender. <NEXT_INSTR> Add butter. <NEXT_INSTR> Add chicken and saute until done, <NEXT_INSTR> Add tomato sauce, spices,, cream cream. <NEXT_INSTR> Simmer well. <NEXT_INSTR> Add rice. <NEXT_INSTR> Mix the cornstarch with cold water. <NEXT_INSTR> Pour over the chicken mixture. <NEXT_INSTR> Serve. <INSTR_END> <TITLE_START> Chicken Curry <TITLE_END> <RECIPE_END>[EOS]<RECIPE_START> <INPUT_START> butter <NEXTINSTR_INSTR>INSTR___:INSTR,_:_.:_: 1::_: A: Day 1 1: 1: 2 1 2 5 1 1: 4: 1 1: 1: 1:: 4: 1 1 1 1 1: 1 1 1 4:: 1: 1 1 2: 1 1 3 9 2: 29: 1 7 2 3 222 1 6 7 6 11: 1 9 1:11 7 9 1 11 9 1 9 1 9 1011 911: 9:: 9:: 6: 11 2 9 9 9 5 9 9 9 2 1 9 11 12 5:::",
+          "sample_index": 2
+        },
+        {
+          "title": "Butter Chicken With Rice",
+          "ingredients": [
+            "chicken breast",
+            "butter",
+            "onion",
+            "garlic",
+            "ginger",
+            "tomato sauce",
+            "garam masala",
+            "cumin",
+            "chili powder",
+            "heavy cream",
+            "salt",
+            "cilantro",
+            "cooked rice"
+          ],
+          "steps": [
+            "Cut chicken into bite size pieces",
+            "Season with salt",
+            "Melt 1/ butter in large pan",
+            "Add onion, garlic, ginger and cook",
+            "Add chicken pieces, cook till brown",
+            "Add tomato sauce, spices and",
+            "cream",
+            "Bring to",
+            "boil",
+            "simmer",
+            "minutes",
+            "from",
+            "heat"
+          ],
+          "formatted": "Butter Chicken With Rice\n\nIngredients:\n- chicken breast\n- butter\n- onion\n- garlic\n- ginger\n- tomato sauce\n- garam masala\n- cumin\n- chili powder\n- heavy cream\n- salt\n- cilantro\n- cooked rice\n\nInstructions:\n1. Cut chicken into bite size pieces\n2. Season with salt\n3. Melt 1/ butter in large pan\n4. Add onion, garlic, ginger and cook\n5. Add chicken pieces, cook till brown\n6. Add tomato sauce, spices and\n7. cream\n8. Bring to\n9. boil\n10. simmer\n11. minutes\n12. from\n13. heat",
+          "quality_score": 18,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Butter Chicken With Rice <TITLE_END> <INPUT_START> chicken breast <NEXT_INPUT> butter <NEXT_INPUT> onion <NEXT_INPUT> garlic <NEXT_INPUT> ginger <NEXT_INPUT> tomato sauce <NEXT_INPUT> garam masala <NEXT_INPUT> cumin <NEXT_INPUT> chili powder <NEXT_INPUT> heavy cream <NEXT_INPUT> salt <NEXT_INPUT> cilantro <NEXT_INPUT> cooked rice <INPUT_END> <INSTR_START> Cut chicken into bite size pieces. Season with salt. <NEXT_INSTR> Melt 1/ butter in large pan. <NEXT_INSTR, Add onion, garlic, ginger and cook. <NEXT_INSTR> Add chicken pieces, cook till brown. <NEXT_INSTR> Add tomato sauce, spices and <NEXT_INSTR> cream. <NEXT_INSTR> Bring toNEXT_INSTR> to <NEXT_INSTR> boil <NEXT_INSTR> and <NEXT_INSTR> simmer <NEXT_INSTR> 5 <NEXT_INSTR> minutes <NEXT_INSTR. <NEXT_INSTR> Add <NEXT_INSTR> from <NEXT_INSTR> heat <NEXT_INSTR> and <NEXT.INSTR or to 1.. 1 1NEXT.: 1:::: 1:: 11:9: 6:: 2: 1 1: 1 44: 1 Day::: 2: 199 99: 1: 9 99 9.: 99 913: 9 9999 1999 99_11 912 99 9 1199 99922 1 12 9 1199 11 1 11119 13: 1: 11 9119 11 9 1 1: 9 1 11 9 9: 1 1 9 9 9 1 1 11 7 1 11 2 2 1 9 11",
+          "sample_index": 3
+        },
+        {
+          "title": "Butter Chicken With Rice",
+          "ingredients": [
+            "chicken breast",
+            "butter",
+            "onion",
+            "garlic",
+            "ginger",
+            "tomato sauce",
+            "garam masala",
+            "cumin",
+            "chili powder",
+            "heavy cream",
+            "salt",
+            "cilantro",
+            "cooked rice"
+          ],
+          "steps": [
+            "Cut chicken into bite size pieces",
+            "Season with salt",
+            "Melt butter in pan 3",
+            "Add onion, garlic and ginger until saute",
+            "Add chicken",
+            "Add tomato masala and",
+            "cumin chili chili",
+            "powder",
+            "garlic",
+            "NEXT>INSTR_,. <>>>>>>_. toINSTRINSTR. to__ 2____ 2__ 1:: 19 1 1NEXTNEXT 1_ 1:> 1_ 1:: 1 1_: 9:9 1_ 91: 9: 1:.9.9 19: 911_922 2 9 9 9 9 999.22:9999. 9 29: 9 9 1 99 13 1 10. 99 9 9 12 9 9 9 9 9 9 10 18 11 9 13 1012 9 9"
+          ],
+          "formatted": "Butter Chicken With Rice\n\nIngredients:\n- chicken breast\n- butter\n- onion\n- garlic\n- ginger\n- tomato sauce\n- garam masala\n- cumin\n- chili powder\n- heavy cream\n- salt\n- cilantro\n- cooked rice\n\nInstructions:\n1. Cut chicken into bite size pieces\n2. Season with salt\n3. Melt butter in pan 3\n4. Add onion, garlic and ginger until saute\n5. Add chicken\n6. Add tomato masala and\n7. cumin chili chili\n8. powder\n9. garlic\n10. NEXT>INSTR_,. <>>>>>>_. toINSTRINSTR. to__ 2____ 2__ 1:: 19 1 1NEXTNEXT 1_ 1:> 1_ 1:: 1 1_: 9:9 1_ 91: 9: 1:.9.9 19: 911_922 2 9 9 9 9 999.22:9999. 9 29: 9 9 1 99 13 1 10. 99 9 9 12 9 9 9 9 9 9 10 18 11 9 13 1012 9 9",
+          "quality_score": 18,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Butter Chicken With Rice <TITLE_END> <INPUT_START> chicken breast <NEXT_INPUT> butter <NEXT_INPUT> onion <NEXT_INPUT> garlic <NEXT_INPUT> ginger <NEXT_INPUT> tomato sauce <NEXT_INPUT> garam masala <NEXT_INPUT> cumin <NEXT_INPUT> chili powder <NEXT_INPUT> heavy cream <NEXT_INPUT> salt <NEXT_INPUT> cilantro <NEXT_INPUT> cooked rice <INPUT_END> <INSTR_START> Cut chicken into bite size pieces. Season with salt. <NEXT_INSTR> Melt butter in pan 3. <NEXT_INSTR> Add onion, garlic and ginger until saute. <NEXT_INSTR> Add chicken., <NEXT_INSTR> Add tomato masala and <NEXT_INSTR> cumin <NEXT___> chili <NEXT__INSTR> chili <NEXT_INSTR> powder <NEXT_INSTR> <NEXT_INSTR> 2 <NEXT_INSTR> <NEXT_INSTR> 2. <NEXT_INSTR> of <NEXT_INSTR> <NEXT_INSTR> 2 <NEXT_INSTR> <NEXT_INSTR> garlic <NEXT_INSTR> 3 <NEXT_INSTR>NEXT__>INSTR_,. <>__>_>>>__>_. toINSTRINSTR. to__ 2____ 2__ 1:: 19 1 1NEXTNEXT 1_ 1:> 1_ 1:: 1 1_: 9:9 1_ 91: 9: 1:.9.9 19: 911_922 2 9 9 9 9 999.22:9999. 9 29: 9 9 1 99 13 1 10. 99 9 9 12 9 9 9 9 9 9 10 18 11 9 13 1012 9 9",
+          "sample_index": 4
+        }
+      ]
+    }
+  ]
+}

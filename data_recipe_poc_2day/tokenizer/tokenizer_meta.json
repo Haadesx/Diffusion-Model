@@ -1,0 +1,18 @@
+{
+  "vocab_size": 24000,
+  "special_tokens": {
+    "[PAD]": 0,
+    "[UNK]": 1,
+    "[BOS]": 2,
+    "[EOS]": 3,
+    "[MASK]": 4
+  },
+  "training_shards": [
+    "shard_00000.zst",
+    "shard_00001.zst"
+  ],
+  "training_shard_hashes": {
+    "shard_00000.zst": "44b093b16baa8037238f7dac1387cefac49fb99cc470d9782334030ff74a3e0e",
+    "shard_00001.zst": "7769b99fb9053c8634fc14e543ba0be657a76b7167d84534c3e2f204dfbd2b44"
+  }
+}

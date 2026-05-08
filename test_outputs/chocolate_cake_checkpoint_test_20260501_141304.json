@@ -1,0 +1,143 @@
+{
+  "args": {
+    "config": "config.yaml",
+    "profile": "recipe_poc_2day",
+    "data_dir": "./data_recipe_poc_2day",
+    "runs_dir": null,
+    "checkpoint": [
+      "./Model_Checkpoints/best_step142000.pt",
+      "./Model_Checkpoints/checkpoint_step155000.pt"
+    ],
+    "checkpoint_dir": "./Model_Checkpoints",
+    "output_dir": "./test_outputs",
+    "recipe": "chocolate cake",
+    "prefix": null,
+    "ingredients_only": false,
+    "num_samples": 2,
+    "length": 180,
+    "top_k": 20,
+    "temperature": 0.75,
+    "seed": 11
+  },
+  "results": [
+    {
+      "checkpoint": "/Volumes/Auxilary/Side_Projects/Diffusion_Testing/Diffusion_Testing_April_23rd/Model_Checkpoints/best_step142000.pt",
+      "checkpoint_name": "best_step142000.pt",
+      "loaded_step": 142000,
+      "prompt": "<RECIPE_START> <TITLE_START> Chocolate Cake <TITLE_END> <INPUT_START>",
+      "samples": [
+        {
+          "title": "Chocolate Cake",
+          "ingredients": [
+            "cake",
+            "milk",
+            "condensed milk",
+            "butter",
+            "eggs",
+            "frosting"
+          ],
+          "steps": [
+            "Preheat oven to 350 degrees",
+            "Grease and flour a 10 x 15-inch pan",
+            "Combine cake mix, milk, condensed milk, butter and eggs",
+            "Pour into prepared cake pan and bake 30 to 35 minutes",
+            "Remove from oven and cool",
+            "Spread frosting on top",
+            "Keep refrigerated"
+          ],
+          "formatted": "Chocolate Cake\n\nIngredients:\n- cake\n- milk\n- condensed milk\n- butter\n- eggs\n- frosting\n\nInstructions:\n1. Preheat oven to 350 degrees\n2. Grease and flour a 10 x 15-inch pan\n3. Combine cake mix, milk, condensed milk, butter and eggs\n4. Pour into prepared cake pan and bake 30 to 35 minutes\n5. Remove from oven and cool\n6. Spread frosting on top\n7. Keep refrigerated",
+          "quality_score": 11,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Chocolate Cake <TITLE_END> <INPUT_START> cake <NEXT_INPUT> milk <NEXT_INPUT> condensed milk <NEXT_INPUT> butter <NEXT_INPUT> eggs <NEXT_INPUT> frosting <INPUT_END> <INSTR_START> Preheat oven to 350 degrees. <NEXT_INSTR> Grease and flour a 10 x 15-inch pan. <NEXT_INSTR> Combine cake mix, milk, condensed milk, butter and eggs. <NEXT_INSTR> Pour into prepared cake pan and bake 30 to 35 minutes. <NEXT_INSTR> Remove from oven and cool. <NEXT_INSTR> Spread frosting on top. <NEXT_INSTR> Keep refrigerated. <INSTR_END> <TITLE_START> Chocolate Coconut Cake <TITLE_END> <RECIPE_END>[EOS]<RECIPE_START>",
+          "sample_index": 1
+        },
+        {
+          "title": "Chocolate Cake",
+          "ingredients": [
+            "butter",
+            "sugar",
+            "vanilla",
+            "eggs",
+            "flour",
+            "soda"
+          ],
+          "steps": [
+            "Cream butter and sugar",
+            "Add beaten eggs, one at a time",
+            "Blend in vanilla",
+            "Sift flour and soda together",
+            "Add alternately with buttermilk",
+            "Blend thoroughly",
+            "Bake at 350 for 45 minutes"
+          ],
+          "formatted": "Chocolate Cake\n\nIngredients:\n- butter\n- sugar\n- vanilla\n- eggs\n- flour\n- soda\n\nInstructions:\n1. Cream butter and sugar\n2. Add beaten eggs, one at a time\n3. Blend in vanilla\n4. Sift flour and soda together\n5. Add alternately with buttermilk\n6. Blend thoroughly\n7. Bake at 350 for 45 minutes",
+          "quality_score": 11,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Chocolate Cake <TITLE_END> <INPUT_START> butter <NEXT_INPUT> sugar <NEXT_INPUT> vanilla <NEXT_INPUT> eggs <NEXT_INPUT> flour <NEXT_INPUT> soda <INPUT_END> <INSTR_START> Cream butter and sugar. <NEXT_INSTR> Add beaten eggs, one at a time. <NEXT_INSTR> Blend in vanilla. <NEXT_INSTR> Sift flour and soda together. <NEXT_INSTR> Add alternately with buttermilk. <NEXT_INSTR> Blend thoroughly. <NEXT_INSTR> Bake at 350 for 45 minutes. <INSTR_END> <TITLE_START> Buttermilk Cake <TITLE_END> <RECIPE_END>[EOS]<RECIPE_START> <INPUT_START> eggs <NEXT_INPUT> sugar <NEXT_INPUT> lemon juice",
+          "sample_index": 2
+        }
+      ]
+    },
+    {
+      "checkpoint": "/Volumes/Auxilary/Side_Projects/Diffusion_Testing/Diffusion_Testing_April_23rd/Model_Checkpoints/checkpoint_step155000.pt",
+      "checkpoint_name": "checkpoint_step155000.pt",
+      "loaded_step": 155000,
+      "prompt": "<RECIPE_START> <TITLE_START> Chocolate Cake <TITLE_END> <INPUT_START>",
+      "samples": [
+        {
+          "title": "Chocolate Cake",
+          "ingredients": [
+            "brown sugar",
+            "sugar",
+            "eggs",
+            "oil",
+            "vanilla",
+            "flour",
+            "oats",
+            "salt",
+            "soda",
+            "chocolate chips"
+          ],
+          "steps": [
+            "Mix together brown sugar, eggs, oil and vanilla",
+            "Combine dry ingredients",
+            "Add to creamed mixture",
+            "Stir in chips",
+            "Drop from teaspoon onto cookie sheet",
+            "Bake at 375 for 12 minutes"
+          ],
+          "formatted": "Chocolate Cake\n\nIngredients:\n- brown sugar\n- sugar\n- eggs\n- oil\n- vanilla\n- flour\n- oats\n- salt\n- soda\n- chocolate chips\n\nInstructions:\n1. Mix together brown sugar, eggs, oil and vanilla\n2. Combine dry ingredients\n3. Add to creamed mixture\n4. Stir in chips\n5. Drop from teaspoon onto cookie sheet\n6. Bake at 375 for 12 minutes",
+          "quality_score": 15,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Chocolate Cake <TITLE_END> <INPUT_START> brown sugar <NEXT_INPUT> sugar <NEXT_INPUT> eggs <NEXT_INPUT> oil <NEXT_INPUT> vanilla <NEXT_INPUT> flour <NEXT_INPUT> oats <NEXT_INPUT> salt <NEXT_INPUT> soda <NEXT_INPUT> chocolate chips <INPUT_END> <INSTR_START> Mix together brown sugar, eggs, oil and vanilla. <NEXT_INSTR> Combine dry ingredients. <NEXT_INSTR> Add to creamed mixture. <NEXT_INSTR> Stir in chips. <NEXT_INSTR> Drop from teaspoon onto cookie sheet. <NEXT_INSTR> Bake at 375 for 12 minutes. <INSTR_END> <TITLE_START> Chocolate Chip Cookies <TITLE_END> <RECIPE_END>[EOS]<RECIPE_",
+          "sample_index": 1
+        },
+        {
+          "title": "Chocolate Cake",
+          "ingredients": [
+            "cooking oil",
+            "sugar",
+            "eggs",
+            "pumpkin",
+            "flour",
+            "soda",
+            "salt",
+            "cinnamon",
+            "nutmeg",
+            "nuts"
+          ],
+          "steps": [
+            "Preheat oven to 350",
+            "Grease and flour a square baking pan",
+            "In a large bowl, combine oil, sugar, eggs and pumpkin",
+            "In another bowl, combine the flour, soda, salt, cinnamon and nutmeg",
+            "Add to pumpkin mixture and beat well",
+            "Stir in nuts",
+            "Pour batter into the prepared baking pan. <NEXT_"
+          ],
+          "formatted": "Chocolate Cake\n\nIngredients:\n- cooking oil\n- sugar\n- eggs\n- pumpkin\n- flour\n- soda\n- salt\n- cinnamon\n- nutmeg\n- nuts\n\nInstructions:\n1. Preheat oven to 350\n2. Grease and flour a square baking pan\n3. In a large bowl, combine oil, sugar, eggs and pumpkin\n4. In another bowl, combine the flour, soda, salt, cinnamon and nutmeg\n5. Add to pumpkin mixture and beat well\n6. Stir in nuts\n7. Pour batter into the prepared baking pan. <NEXT_",
+          "quality_score": 15,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Chocolate Cake <TITLE_END> <INPUT_START> cooking oil <NEXT_INPUT> sugar <NEXT_INPUT> eggs <NEXT_INPUT> pumpkin <NEXT_INPUT> flour <NEXT_INPUT> soda <NEXT_INPUT> salt <NEXT_INPUT> cinnamon <NEXT_INPUT> nutmeg <NEXT_INPUT> nuts <INPUT_END> <INSTR_START> Preheat oven to 350. <NEXT_INSTR> Grease and flour a square baking pan. <NEXT_INSTR> In a large bowl, combine oil, sugar, eggs and pumpkin. <NEXT_INSTR> In another bowl, combine the flour, soda, salt, cinnamon and nutmeg. <NEXT_INSTR> Add to pumpkin mixture and beat well. <NEXT_INSTR> Stir in nuts. Pour batter into the prepared baking pan. <NEXT_",
+          "sample_index": 2
+        }
+      ]
+    }
+  ]
+}

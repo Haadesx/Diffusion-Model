@@ -1,0 +1,107 @@
+{
+  "args": {
+    "config": "config.yaml",
+    "profile": "recipe_poc_2day",
+    "data_dir": "./data_recipe_poc_2day",
+    "runs_dir": null,
+    "checkpoint": [
+      "./Model_Checkpoints/best_step88000.pt"
+    ],
+    "checkpoint_dir": "./Model_Checkpoints",
+    "output_dir": "./test_outputs",
+    "recipe": "macaroni and cheese",
+    "prefix": null,
+    "ingredients_only": false,
+    "num_samples": 3,
+    "length": 170,
+    "top_k": 20,
+    "temperature": 0.75,
+    "seed": 51
+  },
+  "results": [
+    {
+      "checkpoint": "/Volumes/Auxilary/Side_Projects/Diffusion_Testing/Diffusion_Testing_April_23rd/Model_Checkpoints/best_step88000.pt",
+      "checkpoint_name": "best_step88000.pt",
+      "loaded_step": 88000,
+      "prompt": "<RECIPE_START> <TITLE_START> Macaroni and Cheese <TITLE_END> <INPUT_START>",
+      "samples": [
+        {
+          "title": "Macaroni and Cheese",
+          "ingredients": [
+            "tomatoes",
+            "basil",
+            "thyme",
+            "lemon juice",
+            "garlic",
+            "salt",
+            "extra-virgin oil",
+            "pepper"
+          ],
+          "steps": [
+            "Place first 5 ingredients in a medium bowl",
+            "Whisk together olive oil, salt and pepper; pour over tomato mixture and toss to coat",
+            "In a large skillet, saute garlic in lemon juice until garlic begins to soften",
+            "Add tomatoes; saute 5 minutes"
+          ],
+          "formatted": "Macaroni and Cheese\n\nIngredients:\n- tomatoes\n- basil\n- thyme\n- lemon juice\n- garlic\n- salt\n- extra-virgin oil\n- pepper\n\nInstructions:\n1. Place first 5 ingredients in a medium bowl\n2. Whisk together olive oil, salt and pepper; pour over tomato mixture and toss to coat\n3. In a large skillet, saute garlic in lemon juice until garlic begins to soften\n4. Add tomatoes; saute 5 minutes",
+          "quality_score": 12,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Macaroni and Cheese <TITLE_END> <INPUT_START>[EOS]<RECIPE_START> <INPUT_START> tomatoes <NEXT_INPUT> tomatoes <NEXT_INPUT> basil <NEXT_INPUT> basil <NEXT_INPUT> thyme <NEXT_INPUT> lemon juice <NEXT_INPUT> garlic <NEXT_INPUT> salt <NEXT_INPUT> extra-virgin oil <NEXT_INPUT> pepper <INPUT_END> <INSTR_START> Place first 5 ingredients in a medium bowl. Whisk together olive oil, salt and pepper; pour over tomato mixture and toss to coat. <NEXT_INSTR> <NEXT_INSTR> In a large skillet, saute garlic in lemon juice until garlic begins to soften. Add tomatoes; saute 5 minutes. <NEXT_INSTR> <",
+          "sample_index": 1
+        },
+        {
+          "title": "Macaroni and Cheese",
+          "ingredients": [
+            "Crisco",
+            "sugar",
+            "oil",
+            "eggs",
+            "salt",
+            "cocoa",
+            "vanilla",
+            "flour",
+            "soda",
+            "buttermilk",
+            "pecans"
+          ],
+          "steps": [
+            "Mix first 4 ingredients",
+            "Add eggs, one at a time, mixing well",
+            "Add buttermilk and vanilla",
+            "Mix well",
+            "Pour into greased and floured tube pan"
+          ],
+          "formatted": "Macaroni and Cheese\n\nIngredients:\n- Crisco\n- sugar\n- oil\n- eggs\n- salt\n- cocoa\n- vanilla\n- flour\n- soda\n- buttermilk\n- pecans\n\nInstructions:\n1. Mix first 4 ingredients\n2. Add eggs, one at a time, mixing well\n3. Add buttermilk and vanilla\n4. Mix well\n5. Pour into greased and floured tube pan",
+          "quality_score": 16,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Macaroni and Cheese <TITLE_END> <INPUT_START>[EOS]<RECIPE_START> <INPUT_START> Crisco <NEXT_INPUT> sugar <NEXT_INPUT> oil <NEXT_INPUT> eggs <NEXT_INPUT> salt <NEXT_INPUT> cocoa <NEXT_INPUT> vanilla <NEXT_INPUT> cocoa <NEXT_INPUT> flour <NEXT_INPUT> soda <NEXT_INPUT> buttermilk <NEXT_INPUT> vanilla <NEXT_INPUT> pecans <INPUT_END> <INSTR_START> Mix first 4 ingredients. <NEXT_INSTR> Add eggs, one at a time, mixing well. <NEXT_INSTR> Add buttermilk and vanilla. <NEXT_INSTR> Mix well. <NEXT_INSTR> Pour into greased and floured tube pan.",
+          "sample_index": 2
+        },
+        {
+          "title": "Macaroni and Cheese",
+          "ingredients": [
+            "elbow macaroni",
+            "Cheddar cheese",
+            "butter",
+            "milk",
+            "pimento",
+            "sugar",
+            "flour",
+            "eggs",
+            "salt",
+            "pepper"
+          ],
+          "steps": [
+            "Cook macaroni according to package directions",
+            "Drain",
+            "Mix in remaining ingredients",
+            "Pour into greased 1 1/2-quart casserole",
+            "Bake at 375 for 45 to 50 minutes. <NEXT"
+          ],
+          "formatted": "Macaroni and Cheese\n\nIngredients:\n- elbow macaroni\n- Cheddar cheese\n- butter\n- milk\n- pimento\n- sugar\n- flour\n- eggs\n- salt\n- pepper\n\nInstructions:\n1. Cook macaroni according to package directions\n2. Drain\n3. Mix in remaining ingredients\n4. Pour into greased 1 1/2-quart casserole\n5. Bake at 375 for 45 to 50 minutes. <NEXT",
+          "quality_score": 15,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Macaroni and Cheese <TITLE_END> <INPUT_START>[EOS]<RECIPE_START> <INPUT_START> elbow macaroni <NEXT_INPUT> Cheddar cheese <NEXT_INPUT> butter <NEXT_INPUT> milk <NEXT_INPUT> butter <NEXT_INPUT> pimento <NEXT_INPUT> sugar <NEXT_INPUT> flour <NEXT_INPUT> milk <NEXT_INPUT> eggs <NEXT_INPUT> salt <NEXT_INPUT> pepper <INPUT_END> <INSTR_START> Cook macaroni according to package directions. <NEXT_INSTR> Drain. <NEXT_INSTR> Mix in remaining ingredients. <NEXT_INSTR> Pour into greased 1 1/2-quart casserole. <NEXT_INSTR> Bake at 375 for 45 to 50 minutes. <NEXT",
+          "sample_index": 3
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,107 @@
+{
+  "args": {
+    "config": "config.yaml",
+    "profile": "recipe_poc_2day",
+    "data_dir": "./data_recipe_poc_2day",
+    "runs_dir": null,
+    "checkpoint": [
+      "./Model_Checkpoints/best_step88000.pt"
+    ],
+    "checkpoint_dir": "./Model_Checkpoints",
+    "output_dir": "./test_outputs",
+    "recipe": "spaghetti and meatballs",
+    "prefix": null,
+    "ingredients_only": false,
+    "num_samples": 3,
+    "length": 170,
+    "top_k": 20,
+    "temperature": 0.75,
+    "seed": 51
+  },
+  "results": [
+    {
+      "checkpoint": "/Volumes/Auxilary/Side_Projects/Diffusion_Testing/Diffusion_Testing_April_23rd/Model_Checkpoints/best_step88000.pt",
+      "checkpoint_name": "best_step88000.pt",
+      "loaded_step": 88000,
+      "prompt": "<RECIPE_START> <TITLE_START> Spaghetti and Meatballs <TITLE_END> <INPUT_START>",
+      "samples": [
+        {
+          "title": "Spaghetti and Meatballs",
+          "ingredients": [
+            "butter",
+            "fresh spinach",
+            "marinara sauce",
+            "Italian seasoned breadcrumbs",
+            "parmesan cheese",
+            "mozzarella cheese",
+            "parsley"
+          ],
+          "steps": [
+            "Preheat oven to 350 degrees",
+            "Melt butter in a 13 x 9-inch baking dish",
+            "Combine spinach, sauce, bread crumbs, cheese, Parmesan cheese and parsley",
+            "Pour over butter",
+            "Sprinkle with mozzarella",
+            "Bake at 375 degrees for 25 minutes. <"
+          ],
+          "formatted": "Spaghetti and Meatballs\n\nIngredients:\n- butter\n- fresh spinach\n- marinara sauce\n- Italian seasoned breadcrumbs\n- parmesan cheese\n- mozzarella cheese\n- parsley\n\nInstructions:\n1. Preheat oven to 350 degrees\n2. Melt butter in a 13 x 9-inch baking dish\n3. Combine spinach, sauce, bread crumbs, cheese, Parmesan cheese and parsley\n4. Pour over butter\n5. Sprinkle with mozzarella\n6. Bake at 375 degrees for 25 minutes. <",
+          "quality_score": 12,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Spaghetti and Meatballs <TITLE_END> <INPUT_START>[EOS]<RECIPE_START> <INPUT_START> butter <NEXT_INPUT> fresh spinach <NEXT_INPUT> marinara sauce <NEXT_INPUT> Italian seasoned breadcrumbs <NEXT_INPUT> parmesan cheese <NEXT_INPUT> mozzarella cheese <NEXT_INPUT> parsley <NEXT_INPUT> Parmesan cheese <INPUT_END> <INSTR_START> Preheat oven to 350 degrees. <NEXT_INSTR> Melt butter in a 13 x 9-inch baking dish. <NEXT_INSTR> Combine spinach, sauce, bread crumbs, cheese, Parmesan cheese and parsley. <NEXT_INSTR> Pour over butter. <NEXT_INSTR> Sprinkle with mozzarella. <NEXT_INSTR> Bake at 375 degrees for 25 minutes. <",
+          "sample_index": 1
+        },
+        {
+          "title": "Spaghetti and Meatballs",
+          "ingredients": [
+            "potatoes",
+            "onion",
+            "egg",
+            "flour",
+            "salt",
+            "pepper",
+            "cooking oil"
+          ],
+          "steps": [
+            "Mix potatoes, onion, beaten egg, flour, salt and pepper together",
+            "Heat oil, then pour into large skillet",
+            "Turn mixture over and cook until brown",
+            "Turn out on paper towel",
+            "Drain on paper towel",
+            "Cover with a paper towel",
+            "Fill heavy skillet with enough water to cover"
+          ],
+          "formatted": "Spaghetti and Meatballs\n\nIngredients:\n- potatoes\n- onion\n- egg\n- flour\n- salt\n- pepper\n- cooking oil\n\nInstructions:\n1. Mix potatoes, onion, beaten egg, flour, salt and pepper together\n2. Heat oil, then pour into large skillet\n3. Turn mixture over and cook until brown\n4. Turn out on paper towel\n5. Drain on paper towel\n6. Cover with a paper towel\n7. Fill heavy skillet with enough water to cover",
+          "quality_score": 12,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Spaghetti and Meatballs <TITLE_END> <INPUT_START>[EOS]<RECIPE_START> <INPUT_START> potatoes <NEXT_INPUT> onion <NEXT_INPUT> egg <NEXT_INPUT> flour <NEXT_INPUT> salt <NEXT_INPUT> pepper <NEXT_INPUT> cooking oil <INPUT_END> <INSTR_START> Mix potatoes, onion, beaten egg, flour, salt and pepper together. <NEXT_INSTR> Heat oil, then pour into large skillet. <NEXT_INSTR> Turn mixture over and cook until brown. <NEXT_INSTR> Turn out on paper towel. <NEXT_INSTR> Drain on paper towel. <NEXT_INSTR> Cover with a paper towel. <NEXT_INSTR> Fill heavy skillet with enough water to cover",
+          "sample_index": 2
+        },
+        {
+          "title": "Spaghetti and Meatballs",
+          "ingredients": [
+            "flour",
+            "baking powder",
+            "soda",
+            "cinnamon",
+            "salt",
+            "nutmeg",
+            "eggs",
+            "oil",
+            "vanilla",
+            "raisins",
+            "sugar"
+          ],
+          "steps": [
+            "Place all ingredients in a large bowl, except raisins, raisins, and sugar",
+            "Mix thoroughly",
+            "Stir in raisins",
+            "Bake at 350 for 1 hour",
+            "Pour into greased 9 x 5 x 3-inch loaf pan"
+          ],
+          "formatted": "Spaghetti and Meatballs\n\nIngredients:\n- flour\n- baking powder\n- soda\n- cinnamon\n- salt\n- nutmeg\n- eggs\n- oil\n- vanilla\n- raisins\n- sugar\n\nInstructions:\n1. Place all ingredients in a large bowl, except raisins, raisins, and sugar\n2. Mix thoroughly\n3. Stir in raisins\n4. Bake at 350 for 1 hour\n5. Pour into greased 9 x 5 x 3-inch loaf pan",
+          "quality_score": 16,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Spaghetti and Meatballs <TITLE_END> <INPUT_START>[EOS]<RECIPE_START> <INPUT_START> flour <NEXT_INPUT> baking powder <NEXT_INPUT> soda <NEXT_INPUT> cinnamon <NEXT_INPUT> salt <NEXT_INPUT> nutmeg <NEXT_INPUT> eggs <NEXT_INPUT> oil <NEXT_INPUT> vanilla <NEXT_INPUT> raisins <NEXT_INPUT> sugar <INPUT_END> <INSTR_START> Place all ingredients in a large bowl, except raisins, raisins, and sugar. <NEXT_INSTR> Mix thoroughly. <NEXT_INSTR> Stir in raisins. <NEXT_INSTR> Bake at 350 for 1 hour. <NEXT_INSTR> Pour into greased 9 x 5 x 3-inch loaf pan.",
+          "sample_index": 3
+        }
+      ]
+    }
+  ]
+}

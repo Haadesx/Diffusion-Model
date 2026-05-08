@@ -1,0 +1,154 @@
+{
+  "args": {
+    "config": "config.yaml",
+    "profile": "recipe_poc_2day",
+    "data_dir": "./data_recipe_poc_2day",
+    "runs_dir": null,
+    "checkpoint": [
+      "./Model_Checkpoints/best_step142000.pt",
+      "./Model_Checkpoints/checkpoint_step155000.pt"
+    ],
+    "checkpoint_dir": "./Model_Checkpoints",
+    "output_dir": "./test_outputs",
+    "recipe": "baked macaroni and cheese",
+    "prefix": null,
+    "ingredients_only": false,
+    "num_samples": 2,
+    "length": 320,
+    "top_k": 30,
+    "temperature": 0.68,
+    "seed": 23
+  },
+  "results": [
+    {
+      "checkpoint": "/Volumes/Auxilary/Side_Projects/Diffusion_Testing/Diffusion_Testing_April_23rd/Model_Checkpoints/best_step142000.pt",
+      "checkpoint_name": "best_step142000.pt",
+      "loaded_step": 142000,
+      "prompt": "<RECIPE_START> <TITLE_START> Baked Macaroni and Cheese <TITLE_END> <INPUT_START>",
+      "samples": [
+        {
+          "title": "Baked Macaroni and Cheese",
+          "ingredients": [
+            "yeast",
+            "milk",
+            "sugar",
+            "salt",
+            "egg",
+            "flour",
+            "butter"
+          ],
+          "steps": [
+            "Dissolve yeast, milk",
+            "Add sugar, salt and egg",
+            "Stir in flour",
+            "Knead into a moderately warm place in",
+            "warm place (85)",
+            "Cover and let rise in doubled",
+            "Punch up; place in butter",
+            "Cover in greased bowl",
+            "Let rise in size (about",
+            "20 to",
+            "Bake at 400 for",
+            "20 minutes or until brown or until done"
+          ],
+          "formatted": "Baked Macaroni and Cheese\n\nIngredients:\n- yeast\n- milk\n- sugar\n- salt\n- egg\n- flour\n- butter\n\nInstructions:\n1. Dissolve yeast, milk\n2. Add sugar, salt and egg\n3. Stir in flour\n4. Knead into a moderately warm place in\n5. warm place (85)\n6. Cover and let rise in doubled\n7. Punch up; place in butter\n8. Cover in greased bowl\n9. Let rise in size (about\n10. 20 to\n11. Bake at 400 for\n12. 20 minutes or until brown or until done",
+          "quality_score": 12,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Baked Macaroni and Cheese <TITLE_END> <INPUT_START>[EOS]<RECIPE_START> <INPUT_START> yeast <NEXT_INPUT> milk <NEXT_INPUT> sugar <NEXT_INPUT> salt <NEXT_INPUT> egg <NEXT_INPUT> flour <NEXT_INPUT> butter <INPUT_END> <INSTR_START> Dissolve yeast, milk. <NEXT_INSTR> Add sugar, salt and egg. <NEXT_INSTR> Stir in flour. <NEXT_INSTR> Knead into a moderately warm place inNEXT_INSTR> warm place (85). <NEXT_INSTR> Cover and let rise in doubled. <NEXT_INSTR> Punch up; place in butter. <NEXT_INSTR> Cover in greased bowl. <NEXT_INSTR> Let rise in size (aboutNEXT_INSTR> 20 to <NEXT_INSTR> Bake at 400 for <NEXT_INSTR> 20 minutes or until brown or until done. <INSTR_END> <TITLE_START> Easy Yeast Rolls <TITLE_END> <RECIPE_END>[EOS]<RECIPE_START> <INPUT_START> butter <NEXT_INPUT> flour <NEXT_INPUT> eggs <NEXT_INPUT>INSTR22-- 13>231 1343394-3--33413----20-3----25---25 2- 1-30----------------",
+          "sample_index": 1
+        },
+        {
+          "title": "Baked Macaroni and Cheese",
+          "ingredients": [
+            "butter",
+            "flour",
+            "eggs",
+            "salt"
+          ],
+          "steps": [
+            "Melt butter over medium-high heat over medium heat",
+            "Stir in flour; cook and stir until smooth",
+            "Gradually from heat",
+            "Add egg; cook; remove from heat",
+            "Season to taste, stirring constantly, until mixture begins thicken",
+            "Remove from heat",
+            "Stir, then add cheese",
+            "Place in a 2-quart casserole",
+            "Cover",
+            "Cover and let stand 5 minutes",
+            "Stir in macaroni",
+            "Pour into baking dish",
+            "Bake in a 350 oven for 30 minutes",
+            "Sprinkle 1/2 cup cheese on top of casserole",
+            "Return to oven and bake for 10 minutes",
+            "Bake, covered, 5 minutes"
+          ],
+          "formatted": "Baked Macaroni and Cheese\n\nIngredients:\n- butter\n- flour\n- eggs\n- salt\n\nInstructions:\n1. Melt butter over medium-high heat over medium heat\n2. Stir in flour; cook and stir until smooth\n3. Gradually from heat\n4. Add egg; cook; remove from heat\n5. Season to taste, stirring constantly, until mixture begins thicken\n6. Remove from heat\n7. Stir, then add cheese\n8. Place in a 2-quart casserole\n9. Cover\n10. Cover and let stand 5 minutes\n11. Stir in macaroni\n12. Pour into baking dish\n13. Bake in a 350 oven for 30 minutes\n14. Sprinkle 1/2 cup cheese on top of casserole\n15. Return to oven and bake for 10 minutes\n16. Bake, covered, 5 minutes",
+          "quality_score": 9,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Baked Macaroni and Cheese <TITLE_END> <INPUT_START>[EOS]<RECIPE_START> <INPUT_START> butter <NEXT_INPUT> flour <NEXT_INPUT> eggs <NEXT_INPUT> salt <INPUT_INPUT> <INSTR_START> Melt butter over medium-high heat over medium heat. <NEXT_INSTR> Stir in flour; cook and stir until smooth. <NEXT_INSTR> Gradually from heat. <NEXT_INSTR> Add egg; cook; remove from heat. <NEXT_INSTR> Season to taste, stirring constantly, until mixture begins thicken. <NEXT_INSTR> Remove from heat. <NEXT_INSTR> Stir, then add cheese. <NEXT_INSTR> Place in a 2-quart casserole. CoverNEXT_INSTR> Cover and let stand 5 minutes. <NEXT_INSTR> Stir in macaroni. <NEXT_INSTR Pour into baking dish. <NEXT_INSTR> Bake in a 350 oven for 30 minutes. <NEXT_INSTR> Sprinkle 1/2 cup cheese on top of casserole. <NEXT_INSTR> Return to oven and bake for 10 minutes. <NEXT_INSTR> Bake, covered, 5 minutes. <INSTR_END> <,> S,,,,,,,,,,,,,,,,,,,,,,,,,,,, squash,,, acorn,, squash,,,,, squash, squash,, squash squash,,,, squash squash, squash squash squash squash squash squash",
+          "sample_index": 2
+        }
+      ]
+    },
+    {
+      "checkpoint": "/Volumes/Auxilary/Side_Projects/Diffusion_Testing/Diffusion_Testing_April_23rd/Model_Checkpoints/checkpoint_step155000.pt",
+      "checkpoint_name": "checkpoint_step155000.pt",
+      "loaded_step": 155000,
+      "prompt": "<RECIPE_START> <TITLE_START> Baked Macaroni and Cheese <TITLE_END> <INPUT_START>",
+      "samples": [
+        {
+          "title": "Baked Macaroni and Cheese",
+          "ingredients": [
+            "macaroni",
+            "butter",
+            "flour",
+            "hot milk",
+            "salt",
+            "pepper",
+            "cheese"
+          ],
+          "steps": [
+            "Cook macaroni according to package directions",
+            "Drain",
+            "In a large saucepan melt butter",
+            "Stir in flour, salt and pepper, stirring constantly, until mixture thickens",
+            "Gradually add milk, stirring constantly",
+            "Stir until cheese is melted melted, then add sauce",
+            "Add macaroni and cheese. <NEXT dishINSTR> Pour into large casserole dish",
+            "Bake at 375 for 30 minutes",
+            "Makes 4 servings"
+          ],
+          "formatted": "Baked Macaroni and Cheese\n\nIngredients:\n- macaroni\n- butter\n- flour\n- hot milk\n- salt\n- pepper\n- cheese\n\nInstructions:\n1. Cook macaroni according to package directions\n2. Drain\n3. In a large saucepan melt butter\n4. Stir in flour, salt and pepper, stirring constantly, until mixture thickens\n5. Gradually add milk, stirring constantly\n6. Stir until cheese is melted melted, then add sauce\n7. Add macaroni and cheese. <NEXT dishINSTR> Pour into large casserole dish\n8. Bake at 375 for 30 minutes\n9. Makes 4 servings",
+          "quality_score": 12,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Baked Macaroni and Cheese <TITLE_END> <INPUT_START> macaroni <NEXT_INPUT> butter <NEXT_INPUT> flour <NEXT_INPUT> hot milk <NEXT_INPUT> salt <NEXT_INPUT> pepper <NEXT_INPUT> cheese <INPUT_END> <INSTR_START> Cook macaroni according to package directions. <NEXT_INSTR> Drain. <NEXT_INSTR> In a large saucepan melt butter. <NEXT_INSTR> Stir in flour, salt and pepper, stirring constantly, until mixture thickens. <NEXT_INSTR> Gradually add milk, stirring constantly. <NEXT_INSTR> Stir until cheese is melted melted, then add sauce. <NEXT_INSTR> Add macaroni and cheese. <NEXT dishINSTR> Pour into large casserole dish. <NEXT_INSTR> Bake at 375 for 30 minutes. <NEXT_INSTR> Makes 4 servings. <INSTR_END> <TITLE_START> Macaroni And Cheese <TITLE_END> <RECIPE_END>[EOS]<RECIPE_START> <INPUT_START> vegetable oil <NEXT_INPUT> sugar <NEXT_INPUT> eggs <NEXT_INPUT> vanilla <NEXT_INPUT> vanilla <NEXT_INPUT> flour < <NEXTNEXT_ < < < < < < < < < < < < can can, first the the the the the the the the The the,. the, thele of.'s..,. of.se On andsmts in ines the to the to in in on",
+          "sample_index": 1
+        },
+        {
+          "title": "Baked Macaroni and Cheese",
+          "ingredients": [
+            "macaroni",
+            "butter",
+            "flour",
+            "milk",
+            "salt",
+            "pepper",
+            "cheese"
+          ],
+          "steps": [
+            "Melt butter in a sauce pan pan",
+            "Add flour flour and stir to smooth and smooth. Add milk and cheese. <NEXT_ cheese> Stir until cheese is melted",
+            "Blend macaroni with cheese in smooth",
+            "Salt",
+            "Pour into casserole dish and top with grated cheese",
+            "Bake for 30 minutes",
+            "Yield:",
+            "8 servings"
+          ],
+          "formatted": "Baked Macaroni and Cheese\n\nIngredients:\n- macaroni\n- butter\n- flour\n- milk\n- salt\n- pepper\n- cheese\n\nInstructions:\n1. Melt butter in a sauce pan pan\n2. Add flour flour and stir to smooth and smooth. Add milk and cheese. <NEXT_ cheese> Stir until cheese is melted\n3. Blend macaroni with cheese in smooth\n4. Salt\n5. Pour into casserole dish and top with grated cheese\n6. Bake for 30 minutes\n7. Yield:\n8. 8 servings",
+          "quality_score": 12,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Baked Macaroni and Cheese <TITLE_END> <INPUT_START> macaroni <NEXT_INPUT> butter <NEXT_INPUT> flour <NEXT_INPUT> milk <NEXT_INPUT> milk <NEXT_INPUT> salt <NEXT_INPUT> pepper <NEXT_INPUT> cheese <INPUT_END> <INSTR_START> Melt butter in a sauce pan pan. <NEXT_INSTR> Add flour flour and stir to smooth and smooth. <INSTR_INSTR> Add milk and cheese. <NEXT_ cheese> Stir until cheese is melted. <NEXT_INSTR> Blend macaroni with cheese in smooth. <NEXT_INSTR> Salt. <NEXT_INSTR> Pour into casserole dish and top with grated cheese. <NEXT_INSTR> Bake for 30 minutes. <NEXT_INSTR> Yield: <NEXT_INSTR> 8 servings. <INSTR_END> <TITLE_START> Macaroni And Cheese <TITLE_END> <RECIPE_END>[EOS]<RECIPE_START> <INPUT_START> potatoes <NEXT_INPUT> garlic <NEXT_INPUT> olive oil <NEXT_INPUT> salt <NEXT_INPUT> pepper <NEXT_INPUT> thyme <INPUT_END> <INSTR_START>> inT-H-2R-N--UMDM-MM--NKIU-O--DGOPP--U--------D-----------B-----",
+          "sample_index": 2
+        }
+      ]
+    }
+  ]
+}

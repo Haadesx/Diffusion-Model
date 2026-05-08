@@ -1,0 +1,150 @@
+{
+  "args": {
+    "config": "config.yaml",
+    "profile": "recipe_poc_2day",
+    "data_dir": "./data_recipe_poc_2day",
+    "runs_dir": null,
+    "checkpoint": [
+      "./Model_Checkpoints/best_step142000.pt",
+      "./Model_Checkpoints/checkpoint_step155000.pt"
+    ],
+    "checkpoint_dir": "./Model_Checkpoints",
+    "output_dir": "./test_outputs",
+    "recipe": "macaroni and cheese",
+    "prefix": null,
+    "ingredients_only": false,
+    "num_samples": 2,
+    "length": 180,
+    "top_k": 20,
+    "temperature": 0.75,
+    "seed": 17
+  },
+  "results": [
+    {
+      "checkpoint": "/Volumes/Auxilary/Side_Projects/Diffusion_Testing/Diffusion_Testing_April_23rd/Model_Checkpoints/best_step142000.pt",
+      "checkpoint_name": "best_step142000.pt",
+      "loaded_step": 142000,
+      "prompt": "<RECIPE_START> <TITLE_START> Macaroni and Cheese <TITLE_END> <INPUT_START>",
+      "samples": [
+        {
+          "title": "Macaroni and Cheese",
+          "ingredients": [
+            "ground chuck",
+            "spaghetti sauce",
+            "lasagna noodles",
+            "cottage cheese",
+            "egg",
+            "Mozzarella cheese",
+            "Italian cheese"
+          ],
+          "steps": [
+            "Brown meat and drain",
+            "Add spaghetti sauce",
+            "Cook noodles as directed",
+            "Drain noodles and mix with cottage cheese",
+            "Put in large baking dish",
+            "Beat egg with cottage cheese",
+            "Layer meat and egg mixture over all noodles",
+            "Top with grated Mozzarella cheese",
+            "Bake at 350 for 30 minutes"
+          ],
+          "formatted": "Macaroni and Cheese\n\nIngredients:\n- ground chuck\n- spaghetti sauce\n- lasagna noodles\n- cottage cheese\n- egg\n- Mozzarella cheese\n- Italian cheese\n\nInstructions:\n1. Brown meat and drain\n2. Add spaghetti sauce\n3. Cook noodles as directed\n4. Drain noodles and mix with cottage cheese\n5. Put in large baking dish\n6. Beat egg with cottage cheese\n7. Layer meat and egg mixture over all noodles\n8. Top with grated Mozzarella cheese\n9. Bake at 350 for 30 minutes",
+          "quality_score": 12,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Macaroni and Cheese <TITLE_END> <INPUT_START> ground chuck <NEXT_INPUT> spaghetti sauce <NEXT_INPUT> lasagna noodles <NEXT_INPUT> cottage cheese <NEXT_INPUT> cottage cheese <NEXT_INPUT> egg <NEXT_INPUT> Mozzarella cheese <NEXT_INPUT> Italian cheese <INPUT_END> <INSTR_START> Brown meat and drain. <NEXT_INSTR> Add spaghetti sauce. <NEXT_INSTR> Cook noodles as directed. <NEXT_INSTR> Drain noodles and mix with cottage cheese. <NEXT_INSTR> Put in large baking dish. <NEXT_INSTR> Beat egg with cottage cheese. <NEXT_INSTR> Layer meat and egg mixture over all noodles. <NEXT_INSTR> Top with grated Mozzarella cheese. <NEXT_INSTR> Bake at 350 for 30 minutes.",
+          "sample_index": 1
+        },
+        {
+          "title": "Macaroni and Cheese",
+          "ingredients": [
+            "sugar",
+            "oil",
+            "eggs",
+            "carrots",
+            "flour",
+            "baking powder",
+            "cinnamon",
+            "salt",
+            "vanilla",
+            "nuts",
+            "powdered sugar"
+          ],
+          "steps": [
+            "Cream sugar and oil",
+            "Add eggs and carrots",
+            "Mix well",
+            "Sift dry ingredients",
+            "Add to creamed mixture",
+            "Add vanilla and nuts",
+            "Bake at 350 for 20 to 25"
+          ],
+          "formatted": "Macaroni and Cheese\n\nIngredients:\n- sugar\n- oil\n- eggs\n- carrots\n- flour\n- baking powder\n- cinnamon\n- salt\n- vanilla\n- nuts\n- powdered sugar\n\nInstructions:\n1. Cream sugar and oil\n2. Add eggs and carrots\n3. Mix well\n4. Sift dry ingredients\n5. Add to creamed mixture\n6. Add vanilla and nuts\n7. Bake at 350 for 20 to 25",
+          "quality_score": 16,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Macaroni and Cheese <TITLE_END> <INPUT_START>[EOS]<RECIPE_START> <INPUT_START> sugar <NEXT_INPUT> oil <NEXT_INPUT> eggs <NEXT_INPUT> carrots <NEXT_INPUT> flour <NEXT_INPUT> baking powder <NEXT_INPUT> cinnamon <NEXT_INPUT> salt <NEXT_INPUT> vanilla <NEXT_INPUT> nuts <NEXT_INPUT> powdered sugar <INPUT_END> <INSTR_START> Cream sugar and oil. <NEXT_INSTR> Add eggs and carrots. <NEXT_INSTR> Mix well. <NEXT_INSTR> Sift dry ingredients. <NEXT_INSTR> Add to creamed mixture. <NEXT_INSTR> Mix well. <NEXT_INSTR> Add vanilla and nuts. <NEXT_INSTR> Bake at 350 for 20 to 25",
+          "sample_index": 2
+        }
+      ]
+    },
+    {
+      "checkpoint": "/Volumes/Auxilary/Side_Projects/Diffusion_Testing/Diffusion_Testing_April_23rd/Model_Checkpoints/checkpoint_step155000.pt",
+      "checkpoint_name": "checkpoint_step155000.pt",
+      "loaded_step": 155000,
+      "prompt": "<RECIPE_START> <TITLE_START> Macaroni and Cheese <TITLE_END> <INPUT_START>",
+      "samples": [
+        {
+          "title": "Macaroni and Cheese",
+          "ingredients": [
+            "butter",
+            "flour",
+            "salt",
+            "pepper",
+            "macaroni",
+            "milk",
+            "cheese",
+            "egg"
+          ],
+          "steps": [
+            "Preheat oven to 350",
+            "Cook macaroni according to package directions",
+            "Drain",
+            "In a saucepan, melt the butter with the flour, salt and pepper",
+            "Stir in the milk and cheese and cook over low heat until cheese is melted",
+            "Place the macaroni in a large bowl and pour in the cheese sauce",
+            "Butter a casserole dish and line with the macaroni",
+            "Top with the cheese"
+          ],
+          "formatted": "Macaroni and Cheese\n\nIngredients:\n- butter\n- flour\n- salt\n- pepper\n- macaroni\n- milk\n- cheese\n- egg\n\nInstructions:\n1. Preheat oven to 350\n2. Cook macaroni according to package directions\n3. Drain\n4. In a saucepan, melt the butter with the flour, salt and pepper\n5. Stir in the milk and cheese and cook over low heat until cheese is melted\n6. Place the macaroni in a large bowl and pour in the cheese sauce\n7. Butter a casserole dish and line with the macaroni\n8. Top with the cheese",
+          "quality_score": 13,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Macaroni and Cheese <TITLE_END> <INPUT_START> butter <NEXT_INPUT> flour <NEXT_INPUT> salt <NEXT_INPUT> pepper <NEXT_INPUT> macaroni <NEXT_INPUT> milk <NEXT_INPUT> cheese <NEXT_INPUT> egg <INPUT_END> <INSTR_START> Preheat oven to 350. <NEXT_INSTR> Cook macaroni according to package directions. <NEXT_INSTR> Drain. <NEXT_INSTR> In a saucepan, melt the butter with the flour, salt and pepper. <NEXT_INSTR> Stir in the milk and cheese and cook over low heat until cheese is melted. <NEXT_INSTR> Place the macaroni in a large bowl and pour in the cheese sauce. <NEXT_INSTR> Butter a casserole dish and line with the macaroni. Top with the cheese",
+          "sample_index": 1
+        },
+        {
+          "title": "Macaroni and Cheese",
+          "ingredients": [
+            "potatoes",
+            "butter",
+            "milk",
+            "flour",
+            "salt",
+            "pepper",
+            "chives"
+          ],
+          "steps": [
+            "Peel potatoes and cut them into small chunks",
+            "Put the peeled potatoes in a large pot and cover with cold water",
+            "Bring to a boil",
+            "Boil until potatoes are done",
+            "Drain",
+            "Melt butter in a large saucepan",
+            "Add the flour, salt and pepper and mix well",
+            "Add the milk gradually, stirring constantly until thickened",
+            "Stir in the potatoes and"
+          ],
+          "formatted": "Macaroni and Cheese\n\nIngredients:\n- potatoes\n- butter\n- milk\n- flour\n- salt\n- pepper\n- chives\n\nInstructions:\n1. Peel potatoes and cut them into small chunks\n2. Put the peeled potatoes in a large pot and cover with cold water\n3. Bring to a boil\n4. Boil until potatoes are done\n5. Drain\n6. Melt butter in a large saucepan\n7. Add the flour, salt and pepper and mix well\n8. Add the milk gradually, stirring constantly until thickened\n9. Stir in the potatoes and",
+          "quality_score": 12,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Macaroni and Cheese <TITLE_END> <INPUT_START> potatoes <NEXT_INPUT> butter <NEXT_INPUT> milk <NEXT_INPUT> flour <NEXT_INPUT> salt <NEXT_INPUT> pepper <NEXT_INPUT> chives <INPUT_END> <INSTR_START> Peel potatoes and cut them into small chunks. <NEXT_INSTR> Put the peeled potatoes in a large pot and cover with cold water. <NEXT_INSTR> Bring to a boil. <NEXT_INSTR> Boil until potatoes are done. <NEXT_INSTR> Drain. <NEXT_INSTR> Melt butter in a large saucepan. <NEXT_INSTR> Add the flour, salt and pepper and mix well. <NEXT_INSTR> Add the milk gradually, stirring constantly until thickened. <NEXT_INSTR> Stir in the potatoes and",
+          "sample_index": 2
+        }
+      ]
+    }
+  ]
+}

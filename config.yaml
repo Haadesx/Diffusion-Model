@@ -1,0 +1,179 @@
+defaults:
+  paths:
+    data_dir: "./data"
+    runs_dir: "./runs"
+
+  data:
+    dataset_name: "B2111797/recipenlg-text-256"
+    split: "train"
+    text_field: "text"
+    max_examples: 200000
+    shard_size_mb: 250
+    min_chars_per_example: 128
+
+  tokenizer:
+    vocab_size: 24000
+    special_tokens: ["[PAD]", "[UNK]", "[BOS]", "[EOS]", "[MASK]"]
+    trainer_sample_examples: 100000
+
+  tokenization:
+    seq_len: 256
+
+  model:
+    d_model: 512
+    n_layers: 8
+    n_heads: 8
+    d_ff: 2048
+    dropout: 0.1
+
+  diffusion:
+    T: 256
+    schedule: "cosine"
+    mask_token: "[MASK]"
+    loss_weight_masked: 2.0
+    loss_mode: "masked_only"
+    timestep_sampling: "logit_normal"
+
+  train:
+    seed: 1337
+    batch_size: 16 # Per GPU for DDP.
+    grad_accum: 4
+    lr: 1.0e-4
+    weight_decay: 0.1
+    warmup_steps: 5000
+    max_steps: 100000
+    eval_every: 1000
+    save_every: 5000
+    clip_grad_norm: 1.0
+    keep_latest_checkpoints: 3
+    keep_best_checkpoints: 1
+
+  sample:
+    num_samples: 5
+    length: 256
+    top_k: 50
+    temperature: 0.9
+    prefix: null
+
+  eval:
+    num_batches: 100
+
+profiles:
+  local_smoke:
+    data:
+      max_examples: 5000
+    tokenizer:
+      trainer_sample_examples: 5000
+      vocab_size: 8000
+    tokenization:
+      seq_len: 128
+    model:
+      d_model: 256
+      n_layers: 4
+      n_heads: 4
+      d_ff: 1024
+      dropout: 0.1
+    diffusion:
+      T: 32
+    train:
+      batch_size: 8
+      grad_accum: 1
+      max_steps: 200
+      eval_every: 50
+      save_every: 100
+      warmup_steps: 25
+    sample:
+      length: 128
+    eval:
+      num_batches: 10
+
+  recipe_poc_2day:
+    data:
+      dataset_name: "B2111797/recipenlg-text-256"
+      text_field: "text"
+      max_examples: 500000
+      min_chars_per_example: 128
+    tokenizer:
+      vocab_size: 24000
+      trainer_sample_examples: 150000
+    tokenization:
+      seq_len: 256
+    model:
+      d_model: 512
+      n_layers: 8
+      n_heads: 8
+      d_ff: 2048
+      dropout: 0.1
+    diffusion:
+      T: 256
+      loss_mode: "masked_only"
+      timestep_sampling: "logit_normal"
+    train:
+      batch_size: 16
+      grad_accum: 4
+      lr: 1.0e-4
+      max_steps: 1200000
+      eval_every: 1000
+      save_every: 5000
+      warmup_steps: 75000
+
+  code_poc_2day:
+    data:
+      dataset_name: "codeparrot/codeparrot-clean"
+      text_field: "content"
+      max_examples: 250000
+      min_chars_per_example: 256
+    tokenizer:
+      vocab_size: 32000
+      trainer_sample_examples: 150000
+    tokenization:
+      seq_len: 384
+    model:
+      d_model: 512
+      n_layers: 10
+      n_heads: 8
+      d_ff: 2048
+      dropout: 0.1
+    diffusion:
+      T: 384
+      loss_mode: "masked_only"
+      timestep_sampling: "logit_normal"
+    train:
+      batch_size: 12
+      grad_accum: 4
+      lr: 1.0e-4
+      max_steps: 100000
+      eval_every: 1000
+      save_every: 5000
+      warmup_steps: 5000
+
+  bigger_4day:
+    data:
+      max_examples: 1000000
+    tokenizer:
+      vocab_size: 32000
+      trainer_sample_examples: 250000
+    tokenization:
+      seq_len: 512
+    model:
+      d_model: 768
+      n_layers: 12
+      n_heads: 12
+      d_ff: 3072
+      dropout: 0.1
+    diffusion:
+      T: 512
+      loss_mode: "masked_only"
+      timestep_sampling: "logit_normal"
+    train:
+      batch_size: 8
+      grad_accum: 8
+      lr: 8.0e-5
+      max_steps: 150000
+      eval_every: 2000
+      save_every: 5000
+      warmup_steps: 10000
+    sample:
+      length: 512
+    eval:
+      num_batches: 200

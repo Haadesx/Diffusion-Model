@@ -1,0 +1,185 @@
+{
+  "args": {
+    "config": "config.yaml",
+    "profile": "recipe_poc_2day",
+    "data_dir": "./data_recipe_poc_2day",
+    "runs_dir": null,
+    "checkpoint": [
+      "./Model_Checkpoints/best_step503000.pt"
+    ],
+    "checkpoint_dir": "./Model_Checkpoints",
+    "output_dir": "./test_outputs",
+    "recipe": "butter chicken",
+    "prefix": "<RECIPE_START> <TITLE_START> Detailed Butter Chicken <TITLE_END> <INPUT_START> boneless chicken breast <NEXT_INPUT> butter <NEXT_INPUT> onion <NEXT_INPUT> garlic <NEXT_INPUT> ginger <NEXT_INPUT> tomato sauce <NEXT_INPUT> garam masala <NEXT_INPUT> cumin <NEXT_INPUT> chili powder <NEXT_INPUT> heavy cream <NEXT_INPUT> salt <NEXT_INPUT> black pepper <NEXT_INPUT> cilantro <NEXT_INPUT> cooked rice <INPUT_END> <INSTR_START>",
+    "ingredients_only": false,
+    "num_samples": 5,
+    "length": 520,
+    "top_k": 18,
+    "temperature": 0.55,
+    "seed": 61
+  },
+  "results": [
+    {
+      "checkpoint": "/Volumes/Auxilary/Side_Projects/Diffusion_Testing/Diffusion_Testing_April_23rd/Model_Checkpoints/best_step503000.pt",
+      "checkpoint_name": "best_step503000.pt",
+      "loaded_step": 503000,
+      "prompt": "<RECIPE_START> <TITLE_START> Detailed Butter Chicken <TITLE_END> <INPUT_START> boneless chicken breast <NEXT_INPUT> butter <NEXT_INPUT> onion <NEXT_INPUT> garlic <NEXT_INPUT> ginger <NEXT_INPUT> tomato sauce <NEXT_INPUT> garam masala <NEXT_INPUT> cumin <NEXT_INPUT> chili powder <NEXT_INPUT> heavy cream <NEXT_INPUT> salt <NEXT_INPUT> black pepper <NEXT_INPUT> cilantro <NEXT_INPUT> cooked rice <INPUT_END> <INSTR_START>",
+      "samples": [
+        {
+          "title": "Detailed Butter Chicken",
+          "ingredients": [
+            "boneless chicken breast",
+            "butter",
+            "onion",
+            "garlic",
+            "ginger",
+            "tomato sauce",
+            "garam masala",
+            "cumin",
+            "chili powder",
+            "heavy cream",
+            "salt",
+            "black pepper",
+            "cilantro",
+            "cooked rice"
+          ],
+          "steps": [
+            "Cover with 1,2\" water over the chicken",
+            "When the chicken is tender, take it out, take it out and allow the chicken and water to dry",
+            "Melt the butter",
+            "Mash the garlic. Finely chop the rice",
+            "Put it in with a lid except the rice",
+            "Bring to a boil",
+            "the heat and cook for 15-20 hours or until the chicken is done",
+            "Mix well",
+            "Serve with rice"
+          ],
+          "formatted": "Detailed Butter Chicken\n\nIngredients:\n- boneless chicken breast\n- butter\n- onion\n- garlic\n- ginger\n- tomato sauce\n- garam masala\n- cumin\n- chili powder\n- heavy cream\n- salt\n- black pepper\n- cilantro\n- cooked rice\n\nInstructions:\n1. Cover with 1,2\" water over the chicken\n2. When the chicken is tender, take it out, take it out and allow the chicken and water to dry\n3. Melt the butter\n4. Mash the garlic. Finely chop the rice\n5. Put it in with a lid except the rice\n6. Bring to a boil\n7. the heat and cook for 15-20 hours or until the chicken is done\n8. Mix well\n9. Serve with rice",
+          "quality_score": 19,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Detailed Butter Chicken <TITLE_END> <INPUT_START> boneless chicken breast <NEXT_INPUT> butter <NEXT_INPUT> onion <NEXT_INPUT> garlic <NEXT_INPUT> ginger <NEXT_INPUT> tomato sauce <NEXT_INPUT> garam masala <NEXT_INPUT> cumin <NEXT_INPUT> chili powder <NEXT_INPUT> heavy cream <NEXT_INPUT> salt <NEXT_INPUT> black pepper <NEXT_INPUT> cilantro <NEXT_INPUT> cooked rice <INPUT_END> <INSTR_START> Cover with 1,2\" water over the chicken. <NEXT_INSTR> When the chicken is tender, take it out, take it out and allow the chicken and water to dry. <NEXT_INSTR> Melt the butter. <NEXT_INSTR> Mash the garlic. <NEXT__> Finely chop the rice. <NEXT_INSTR> Put it in with a lid except the rice. <NEXT_INSTR> Bring to a boil. <NEXT_INSTR> the heat and cook for 15-20 hours or until the chicken is done. <NEXT_INSTR> Mix well. <NEXT_INSTR> Serve with rice. <INSTR_END_ of a (,., to,. of. it,,, or,, to,,,,,,,,,,,,,,,,thth,,m,,,,,,.,,, 1atth 2 2, 1 3 1thm 2 5 4 4 4,, 4 4 2 4 2,, 2 4 1 4 2 2 1 4 4,, 1 10 1,, 2 2 4 10,, 4 4 2 4 4, 4 1 2 4 6 4 5 2, 4 4 1 4 2 4, 4 1,,, 2 4 10 4 4,, 9 10, 3 9,m,, 4,,., 4 4,, 444, 5m 6 5m,m 4 4 9,mmthmthm, 4th, 6m 22,,,,,,,8., 4 1 1 1 1 9 4.,mm 2 9,m,8,,8 9.,,124mm,, 18,18m88 94,2,,,12,18,.,.,,m 18.,,4p.,.,n.,,,.,,.,,9,,.,.,.,,.,,.,",
+          "sample_index": 1
+        },
+        {
+          "title": "Detailed Butter Chicken",
+          "ingredients": [
+            "boneless chicken breast",
+            "butter",
+            "onion",
+            "garlic",
+            "ginger",
+            "tomato sauce",
+            "garam masala",
+            "cumin",
+            "chili powder",
+            "heavy cream",
+            "salt",
+            "black pepper",
+            "cilantro",
+            "cooked rice"
+          ],
+          "steps": [
+            "1 pound meat ((s)",
+            "and bring to a boil",
+            "simmer for 20 minutes",
+            "Serve over rice"
+          ],
+          "formatted": "Detailed Butter Chicken\n\nIngredients:\n- boneless chicken breast\n- butter\n- onion\n- garlic\n- ginger\n- tomato sauce\n- garam masala\n- cumin\n- chili powder\n- heavy cream\n- salt\n- black pepper\n- cilantro\n- cooked rice\n\nInstructions:\n1. 1 pound meat ((s)\n2. and bring to a boil\n3. simmer for 20 minutes\n4. Serve over rice",
+          "quality_score": 18,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Detailed Butter Chicken <TITLE_END> <INPUT_START> boneless chicken breast <NEXT_INPUT> butter <NEXT_INPUT> onion <NEXT_INPUT> garlic <NEXT_INPUT> ginger <NEXT_INPUT> tomato sauce <NEXT_INPUT> garam masala <NEXT_INPUT> cumin <NEXT_INPUT> chili powder <NEXT_INPUT> heavy cream <NEXT_INPUT> salt <NEXT_INPUT> black pepper <NEXT_INPUT> cilantro <NEXT_INPUT> cooked rice <INPUT_END> <INSTR_START> <NEXT_INSTR> . <NEXT_INSTR> <NEXT_INSTR> 1 pound meat ((s) <NEXT_INSTR. <NEXT_INSTR> <NEXT_INSTR> <NEXT_INSTR. <NEXT_INSTR> <NEXT_INSTR> <NEXT_INSTR> <NEXT_INSTR> <INSTR> <NEXT_INSTR> <NEXT_INSTR> <NEXT_INSTR and bring to a boil. <NEXT_INSTR> <NEXT_INSTR> <NEXT_INSTR> simmer for 20 minutes. <NEXT_INSTR>NEXT_INSTR> Serve over rice. <INSTR_END> <TITLE_START> Chicken'S Favorite_ < < <. <INSTRINSTR < < <NEXT__NEXTINSTR <_ <_INSTR < < <__ <_ <_ <NEXT__ <_ <.NEXT___ < <_ <__ <_.>____ <INSTR theINSTRNEXTINSTRNEXT <_NEXT___ <____NEXT_ < <_ <_ <____INSTR___INSTR__ <__INSTR <____ <INSTR_INSTR___________INSTR>___INSTR____________INSTR___.__INSTR______,INSTR.__._........,......,............................................................................................",
+          "sample_index": 2
+        },
+        {
+          "title": "Detailed Butter Chicken",
+          "ingredients": [
+            "boneless chicken breast",
+            "butter",
+            "onion",
+            "garlic",
+            "ginger",
+            "tomato sauce",
+            "garam masala",
+            "cumin",
+            "chili powder",
+            "heavy cream",
+            "salt",
+            "black pepper",
+            "cilantro",
+            "cooked rice"
+          ],
+          "steps": [
+            "Place first 5 ingredients",
+            "Add tomato and cream, and simmer for 10 minutes",
+            "Garnish with rice",
+            "A bed of the rice"
+          ],
+          "formatted": "Detailed Butter Chicken\n\nIngredients:\n- boneless chicken breast\n- butter\n- onion\n- garlic\n- ginger\n- tomato sauce\n- garam masala\n- cumin\n- chili powder\n- heavy cream\n- salt\n- black pepper\n- cilantro\n- cooked rice\n\nInstructions:\n1. Place first 5 ingredients\n2. Add tomato and cream, and simmer for 10 minutes\n3. Garnish with rice\n4. A bed of the rice",
+          "quality_score": 18,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Detailed Butter Chicken <TITLE_END> <INPUT_START> boneless chicken breast <NEXT_INPUT> butter <NEXT_INPUT> onion <NEXT_INPUT> garlic <NEXT_INPUT> ginger <NEXT_INPUT> tomato sauce <NEXT_INPUT> garam masala <NEXT_INPUT> cumin <NEXT_INPUT> chili powder <NEXT_INPUT> heavy cream <NEXT_INPUT> salt <NEXT_INPUT> black pepper <NEXT_INPUT> cilantro <NEXT_INPUT> cooked rice <INPUT_END> <INSTR_START> Place first 5 ingredients <NEXT_INSTR> Add tomato and cream, and simmer for 10 minutes. <NEXT_INSTR> Garnish with rice. <NEXT_INSTR> A bed of the rice. <INSTR_END> <TITLE_START> Chicken Rice <TITLE_END> <RECIPE_END>[EOS]<RECIPE_START> <INPUT_START> bacon <NEXT_INPUT> butter <NEXT_INPUT> garlic <NEXT_INPUT> tomatoes <NEXT_INPUT>> vinegar <NEXT_INPUT> thyme <NEXT_INPUT> kosher salt <NEXT_INPUT> freshly ground black pepper <INPUT_END> <INSTR_START> In aNEXT. < <,._.NEXTNEXT.NEXT,. the to to, with, with. to a will of of. with to with toment, with,or it, of to, of. of.,,.,., of..,. with,, in of,,,,,,,,,,,,th,,,,,,,,,,,,,,,,,,,,,,,th,,,,,,,,,,.,, 2, 4 10 6 2 6 4 2 10 1 1 6 3 1 4 1 1 2 4 3 4 2 5 4 1 6 1 2 2 2,, 2 2 2 2 4 4 6 4, 5, 10, 9 4 6 1,, 3 5 4, 2, 2 2 4 10 4 10 4 1 6 2 4, 6 1 1 5 1 2, 6 4,, 1 2 3, 1 4 6, 2 1 8 5, 3 4 4,, 4 4, 4, 6 4m, 2, 1 4 5. 4 1,,, 2 4,,, 1 2, 4 5 10,m 4 3, 4, 4 4,,, 9,,, 5 4,, 2,,",
+          "sample_index": 3
+        },
+        {
+          "title": "Detailed Butter Chicken",
+          "ingredients": [
+            "boneless chicken breast",
+            "butter",
+            "onion",
+            "garlic",
+            "ginger",
+            "tomato sauce",
+            "garam masala",
+            "cumin",
+            "chili powder",
+            "heavy cream",
+            "salt",
+            "black pepper",
+            "cilantro",
+            "cooked rice"
+          ],
+          "steps": [
+            "About 1 <",
+            "Cook rice in boiling water for 8 minutes",
+            "Drain, and place in a large mixing bowl",
+            "Stir in cilantro, and rice",
+            "Refrigerate until ready and serve"
+          ],
+          "formatted": "Detailed Butter Chicken\n\nIngredients:\n- boneless chicken breast\n- butter\n- onion\n- garlic\n- ginger\n- tomato sauce\n- garam masala\n- cumin\n- chili powder\n- heavy cream\n- salt\n- black pepper\n- cilantro\n- cooked rice\n\nInstructions:\n1. About 1 <\n2. Cook rice in boiling water for 8 minutes\n3. Drain, and place in a large mixing bowl\n4. Stir in cilantro, and rice\n5. Refrigerate until ready and serve",
+          "quality_score": 19,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Detailed Butter Chicken <TITLE_END> <INPUT_START> boneless chicken breast <NEXT_INPUT> butter <NEXT_INPUT> onion <NEXT_INPUT> garlic <NEXT_INPUT> ginger <NEXT_INPUT> tomato sauce <NEXT_INPUT> garam masala <NEXT_INPUT> cumin <NEXT_INPUT> chili powder <NEXT_INPUT> heavy cream <NEXT_INPUT> salt <NEXT_INPUT> black pepper <NEXT_INPUT> cilantro <NEXT_INPUT> cooked rice <INPUT_END> <INSTR_START> <NEXT_INSTR> < <NEXT_>> <NEXT_INSTR> <NEXT_INSTR> About 1 <. <INSTR_INSTR> <NEXT_INSTR> Cook rice in boiling water for 8 minutes. <NEXT_INSTR> <NEXT_INSTR> <NEXT_INSTR> Drain, and place in a large mixing bowl. <NEXT_INSTR> <NEXT_INSTR> Stir in cilantro, and rice. <NEXT_INSTR. <NEXT_INSTR> <NEXT_INSTR> Refrigerate until ready and serve. <INSTR_END> <TITLE_START> Indian Curry <TITLE_END> <RECIPE_END>[EOS]<RECIPE_NEXT_____ < <>INSTRNEXT < <_NEXT <_ <> <_NEXT__ <. <_____ <__ < < < < < <__ < <INSTR <,_INSTR__ <____NEXT__INSTR___.___ <__ <>.__/.th....,.,,.....,..,.,............................,....... with......................................................................................................... in.......................",
+          "sample_index": 4
+        },
+        {
+          "title": "Detailed Butter Chicken",
+          "ingredients": [
+            "boneless chicken breast",
+            "butter",
+            "onion",
+            "garlic",
+            "ginger",
+            "tomato sauce",
+            "garam masala",
+            "cumin",
+            "chili powder",
+            "heavy cream",
+            "salt",
+            "black pepper",
+            "cilantro",
+            "cooked rice"
+          ],
+          "steps": [
+            "Soak the chicken with water",
+            "Sprinkle with salt, pepper and ginger., then",
+            "> in",
+            "the garlic and butter in hot skillet",
+            "Add, curry, chili powder,, cumin, cream, and salt and pepper",
+            "_INSTR> Bring to a boil,, then simmer about 20 to 25 minutes",
+            "Serve Serve Serve over rice"
+          ],
+          "formatted": "Detailed Butter Chicken\n\nIngredients:\n- boneless chicken breast\n- butter\n- onion\n- garlic\n- ginger\n- tomato sauce\n- garam masala\n- cumin\n- chili powder\n- heavy cream\n- salt\n- black pepper\n- cilantro\n- cooked rice\n\nInstructions:\n1. Soak the chicken with water\n2. Sprinkle with salt, pepper and ginger., then\n3. > in\n4. the garlic and butter in hot skillet\n5. Add, curry, chili powder,, cumin, cream, and salt and pepper\n6. _INSTR> Bring to a boil,, then simmer about 20 to 25 minutes\n7. Serve Serve Serve over rice",
+          "quality_score": 19,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Detailed Butter Chicken <TITLE_END> <INPUT_START> boneless chicken breast <NEXT_INPUT> butter <NEXT_INPUT> onion <NEXT_INPUT> garlic <NEXT_INPUT> ginger <NEXT_INPUT> tomato sauce <NEXT_INPUT> garam masala <NEXT_INPUT> cumin <NEXT_INPUT> chili powder <NEXT_INPUT> heavy cream <NEXT_INPUT> salt <NEXT_INPUT> black pepper <NEXT_INPUT> cilantro <NEXT_INPUT> cooked rice <INPUT_END> <INSTR_START> Soak the chicken with water. <NEXT_INSTR> Sprinkle with salt, pepper and ginger., then <NEXT_INSTR>,> in. <NEXT_INSTR> the garlic and butter in hot skillet. <NEXT_INSTR> Add, curry, chili powder,, cumin, cream, and salt and pepper. <NEXT_INSTR>_INSTR> Bring to a boil,, then simmer about 20 to 25 minutes. <NEXT_INSTR> Serve Serve Serve over rice. <INSTR_END> <TITLE_START> Spicy Chicken Chicken Curry <TITLE_END> <RECIPE_END>[EOS]<RECIPE_START> <INPUT_START>_INSTR_NEXT the ( a. he_, and, them the, it with we or and them,, them it that they that he,,,, it, them a or it you,. it,.,, he it,,,, he,,,,,,.,,, it, to he,,,,,,, it,, and,,,,,,,, to,,,,,,, it,,,, we,,,,,,,,,,,n,,,,,,,, he,,,,,,,,,,,,,,,,,....,,,,,, he,,,,,,,,,...,,,, it,, he,,,,.,,m,,,, now,,, it,,,,,,,,,n,,,,,,,,,,n,,n 'n,mnmnn,,nnn, nowcovered,mmnnnmnh,nnnnn 'n,.....,n,n nownn., nownnnnnnnn,nnnn",
+          "sample_index": 5
+        }
+      ]
+    }
+  ]
+}

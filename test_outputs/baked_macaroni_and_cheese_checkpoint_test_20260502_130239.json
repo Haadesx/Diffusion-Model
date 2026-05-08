@@ -1,0 +1,157 @@
+{
+  "args": {
+    "config": "config.yaml",
+    "profile": "recipe_poc_2day",
+    "data_dir": "./data_recipe_poc_2day",
+    "runs_dir": null,
+    "checkpoint": [
+      "./Model_Checkpoints/best_step419000.pt",
+      "./Model_Checkpoints/checkpoint_step425000.pt"
+    ],
+    "checkpoint_dir": "./Model_Checkpoints",
+    "output_dir": "./test_outputs",
+    "recipe": "baked macaroni and cheese",
+    "prefix": null,
+    "ingredients_only": false,
+    "num_samples": 2,
+    "length": 220,
+    "top_k": 25,
+    "temperature": 0.7,
+    "seed": 33
+  },
+  "results": [
+    {
+      "checkpoint": "/Volumes/Auxilary/Side_Projects/Diffusion_Testing/Diffusion_Testing_April_23rd/Model_Checkpoints/best_step419000.pt",
+      "checkpoint_name": "best_step419000.pt",
+      "loaded_step": 419000,
+      "prompt": "<RECIPE_START> <TITLE_START> Baked Macaroni and Cheese <TITLE_END> <INPUT_START>",
+      "samples": [
+        {
+          "title": "Baked Macaroni and Cheese",
+          "ingredients": [
+            "oil",
+            "sugar",
+            "eggs",
+            "pumpkin",
+            "vanilla",
+            "flour",
+            "soda",
+            "salt",
+            "cinnamon",
+            "cloves",
+            "allspice",
+            "ginger",
+            "nutmeg",
+            "pecans"
+          ],
+          "steps": [
+            "In a large bowl, beat oil and sugar until fluffy",
+            "Add eggs, pumpkin and vanilla",
+            "Sift together dry ingredients",
+            "Blend into pumpkin mixture",
+            "Pour into greased and floured 9 x 13-inch pan",
+            "Bake at 350 for 22 to 25 minutes or until done",
+            "Cool completely in pan",
+            "Frost"
+          ],
+          "formatted": "Baked Macaroni and Cheese\n\nIngredients:\n- oil\n- sugar\n- eggs\n- pumpkin\n- vanilla\n- flour\n- soda\n- salt\n- cinnamon\n- cloves\n- allspice\n- ginger\n- nutmeg\n- pecans\n\nInstructions:\n1. In a large bowl, beat oil and sugar until fluffy\n2. Add eggs, pumpkin and vanilla\n3. Sift together dry ingredients\n4. Blend into pumpkin mixture\n5. Pour into greased and floured 9 x 13-inch pan\n6. Bake at 350 for 22 to 25 minutes or until done\n7. Cool completely in pan\n8. Frost",
+          "quality_score": 19,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Baked Macaroni and Cheese <TITLE_END> <INPUT_START>[EOS]<RECIPE_START> <INPUT_START> oil <NEXT_INPUT> sugar <NEXT_INPUT> eggs <NEXT_INPUT> pumpkin <NEXT_INPUT> vanilla <NEXT_INPUT> flour <NEXT_INPUT> soda <NEXT_INPUT> salt <NEXT_INPUT> cinnamon <NEXT_INPUT> cloves <NEXT_INPUT> allspice <NEXT_INPUT> ginger <NEXT_INPUT> nutmeg <NEXT_INPUT> pecans <INPUT_INPUT> <INSTR_START> In a large bowl, beat oil and sugar until fluffy. <NEXT_INSTR> Add eggs, pumpkin and vanilla. <NEXT_INSTR> Sift together dry ingredients. <NEXT_INSTR> Blend into pumpkin mixture. <NEXT_INSTR> Pour into greased and floured 9 x 13-inch pan. <NEXT_INSTR> Bake at 350 for 22 to 25 minutes or until done. <NEXT_INSTR> Cool completely in pan. <NEXT_INSTR> Frost.",
+          "sample_index": 1
+        },
+        {
+          "title": "Baked Macaroni and Cheese",
+          "ingredients": [
+            "oil",
+            "sugar",
+            "eggs",
+            "zucchini",
+            "carrots",
+            "vanilla",
+            "flour",
+            "baking powder",
+            "cinnamon",
+            "salt",
+            "nuts"
+          ],
+          "steps": [
+            "Preheat oven to 350",
+            "Grease and flour 13 x 9 x 2-inch pan",
+            "Beat sugar and oil",
+            "Add eggs, one at a time",
+            "Add zucchini, carrots and vanilla",
+            "Sift together flour, baking powder, cinnamon and salt",
+            "Add to creamed mixture",
+            "Mix well",
+            "Add nuts",
+            "Stir"
+          ],
+          "formatted": "Baked Macaroni and Cheese\n\nIngredients:\n- oil\n- sugar\n- eggs\n- zucchini\n- carrots\n- vanilla\n- flour\n- baking powder\n- cinnamon\n- salt\n- nuts\n\nInstructions:\n1. Preheat oven to 350\n2. Grease and flour 13 x 9 x 2-inch pan\n3. Beat sugar and oil\n4. Add eggs, one at a time\n5. Add zucchini, carrots and vanilla\n6. Sift together flour, baking powder, cinnamon and salt\n7. Add to creamed mixture\n8. Mix well\n9. Add nuts\n10. Stir",
+          "quality_score": 16,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Baked Macaroni and Cheese <TITLE_END> <INPUT_START>[EOS]<RECIPE_START> <INPUT_START> oil <NEXT_INPUT> sugar <NEXT_INPUT> eggs <NEXT_INPUT> zucchini <NEXT_INPUT> carrots <NEXT_INPUT> vanilla <NEXT_INPUT> flour <NEXT_INPUT> baking powder <NEXT_INPUT> cinnamon <NEXT_INPUT> cinnamon <NEXT_INPUT> salt <NEXT_INPUT> nuts <INPUT_END> <INSTR_START> Preheat oven to 350. <NEXT_INSTR> Grease and flour 13 x 9 x 2-inch pan. <NEXT_INSTR> Beat sugar and oil. <NEXT_INSTR> Add eggs, one at a time. <NEXT_INSTR> Add zucchini, carrots and vanilla. <NEXT_INSTR> Sift together flour, baking powder, cinnamon and salt. <NEXT_INSTR> Add to creamed mixture. <NEXT_INSTR> Mix well. <NEXT_INSTR> Add nuts. <NEXT_INSTR> Stir.",
+          "sample_index": 2
+        }
+      ]
+    },
+    {
+      "checkpoint": "/Volumes/Auxilary/Side_Projects/Diffusion_Testing/Diffusion_Testing_April_23rd/Model_Checkpoints/checkpoint_step425000.pt",
+      "checkpoint_name": "checkpoint_step425000.pt",
+      "loaded_step": 425000,
+      "prompt": "<RECIPE_START> <TITLE_START> Baked Macaroni and Cheese <TITLE_END> <INPUT_START>",
+      "samples": [
+        {
+          "title": "Baked Macaroni and Cheese",
+          "ingredients": [
+            "flour",
+            "sugar",
+            "soda",
+            "salt",
+            "cinnamon",
+            "nutmeg",
+            "butter",
+            "egg",
+            "buttermilk"
+          ],
+          "steps": [
+            "Preheat oven to 350",
+            "In a large bowl, combine flour, sugar, soda, salt, cinnamon and nutmeg",
+            "Add butter, egg and buttermilk",
+            "Stir just until moistened",
+            "Spoon into greased muffin cups",
+            "Bake 20 to 25 minutes"
+          ],
+          "formatted": "Baked Macaroni and Cheese\n\nIngredients:\n- flour\n- sugar\n- soda\n- salt\n- cinnamon\n- nutmeg\n- butter\n- egg\n- buttermilk\n\nInstructions:\n1. Preheat oven to 350\n2. In a large bowl, combine flour, sugar, soda, salt, cinnamon and nutmeg\n3. Add butter, egg and buttermilk\n4. Stir just until moistened\n5. Spoon into greased muffin cups\n6. Bake 20 to 25 minutes",
+          "quality_score": 14,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Baked Macaroni and Cheese <TITLE_END> <INPUT_START>[EOS]<RECIPE_START> <INPUT_START> flour <NEXT_INPUT> sugar <NEXT_INPUT> soda <NEXT_INPUT> salt <NEXT_INPUT> cinnamon <NEXT_INPUT> nutmeg <NEXT_INPUT> butter <NEXT_INPUT> egg <NEXT_INPUT> buttermilk <INPUT_END> <INSTR_START> Preheat oven to 350. <NEXT_INSTR> In a large bowl, combine flour, sugar, soda, salt, cinnamon and nutmeg. <NEXT_INSTR> Add butter, egg and buttermilk. <NEXT_INSTR> Stir just until moistened. <NEXT_INSTR> Spoon into greased muffin cups. <NEXT_INSTR> Bake 20 to 25 minutes. <INSTR_END> <TITLE_START> Cinnamon Buttermilk Muffins <TITLE_END> <RECIPE_END>[EOS]<RECIPE_START> <INPUT_START> milk <NEXT_INPUT> eggs <NEXT_INPUT> sugar <NEXT_INPUT> vanilla",
+          "sample_index": 1
+        },
+        {
+          "title": "Baked Macaroni and Cheese",
+          "ingredients": [
+            "flour",
+            "sugar Cheddar cheese",
+            "salt",
+            "pepper",
+            "butter",
+            "milk",
+            "egg"
+          ],
+          "steps": [
+            "Sift dry ingredients together",
+            "Cut in butter",
+            "Add milk, all at once",
+            "Stir until moist",
+            "Fold in egg",
+            "Drop by teaspoons into hot fat",
+            "Fry until brown",
+            "Makes 3 to 4 dozen"
+          ],
+          "formatted": "Baked Macaroni and Cheese\n\nIngredients:\n- flour\n- sugar Cheddar cheese\n- salt\n- pepper\n- butter\n- milk\n- egg\n\nInstructions:\n1. Sift dry ingredients together\n2. Cut in butter\n3. Add milk, all at once\n4. Stir until moist\n5. Fold in egg\n6. Drop by teaspoons into hot fat\n7. Fry until brown\n8. Makes 3 to 4 dozen",
+          "quality_score": 12,
+          "raw": "[BOS]<RECIPE_START> <TITLE_START> Baked Macaroni and Cheese <TITLE_END> <INPUT_START> flour <NEXT_INPUT> sugar <NEXT__INPUT> Cheddar cheese <NEXT_INPUT> salt <NEXT_INPUT> pepper <NEXT_INPUT> butter <NEXT_INPUT> milk <NEXT_INPUT> egg <INPUT_END> <INSTR_START> Sift dry ingredients together. <NEXT_INSTR> Cut in butter. <NEXT_INSTR> Add milk, all at once. Stir until moist. <NEXT_INSTR> Fold in egg. <NEXT_INSTR> Drop by teaspoons into hot fat. <NEXT_INSTR> Fry until brown. <NEXT_INSTR> Makes 3 to 4 dozen. <INSTR_END> <TITLE_START> Cheese Fritters <TITLE_END> <RECIPE_END>[EOS]<RECIPE_START> <INPUT_START> macaroni <NEXT_INPUT> American cheese <NEXT_INPUT> milk <NEXT_INPUT> egg <NEXT_INPUT> salt <NEXT_INPUT> butter <NEXT_INPUT",
+          "sample_index": 2
+        }
+      ]
+    }
+  ]
+}
