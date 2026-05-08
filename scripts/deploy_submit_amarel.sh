@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-NETID="${NETID:-vp752}"
+NETID="${NETID:-your_netid}"
 HOST="${HOST:-amarel.rutgers.edu}"
 REMOTE_BASE="${REMOTE_BASE:-~/Diffusion_Testing_April_23rd}"
 PROFILE="${PROFILE:-recipe_poc_2day}"

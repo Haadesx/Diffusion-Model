@@ -9,13 +9,13 @@ fi
 CHECKPOINT_PATH="$1"
 NPROC_PER_NODE="${2:-2}"
 PROFILE="${PROFILE:-recipe_poc_2day}"
-NETID="${NETID:-vp752}"
+NETID="${NETID:-your_netid}"
 HOST="${HOST:-ilab.cs.rutgers.edu}"
 REMOTE_BASE="${REMOTE_BASE:-~/Diffusion_Testing_April_23rd}"
-ENV_NAME="${ENV_NAME:-/common/users/vp752/miniconda3/envs/diffullm}"
-DATA_DIR="${DATA_DIR:-/common/users/vp752/Diffusion_Testing_April_23rd/data_recipe_poc_2day}"
-RUNS_DIR="${RUNS_DIR:-/common/users/vp752/Diffusion_Testing_April_23rd/runs}"
-TMPDIR_REMOTE="${TMPDIR_REMOTE:-/common/users/vp752/Diffusion_Testing_April_23rd/tmp}"
+ENV_NAME="${ENV_NAME:-/common/users/your_netid/miniconda3/envs/diffullm}"
+DATA_DIR="${DATA_DIR:-/common/users/your_netid/Diffusion_Testing_April_23rd/data_recipe_poc_2day}"
+RUNS_DIR="${RUNS_DIR:-/common/users/your_netid/Diffusion_Testing_April_23rd/runs}"
+TMPDIR_REMOTE="${TMPDIR_REMOTE:-/common/users/your_netid/Diffusion_Testing_April_23rd/tmp}"
 RUN_NAME="${RUN_NAME:-${PROFILE}_resume_$(date +%Y%m%d_%H%M%S)}"
 
 ssh "${NETID}@${HOST}" \
