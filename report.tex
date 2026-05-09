@@ -1,0 +1,95 @@
+\documentclass[11pt, letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{letterpaper, margin=1in}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{booktabs}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={DiffuLLM Final Report},
+}
+
+\title{\textbf{DiffuLLM: Discrete Diffusion Language Modeling \\ for Structured Text Generation}}
+\author{Varesh Patel \and Urvi Desai \and Aparajita Sircar}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Traditional language models rely heavily on autoregressive, left-to-right decoding. In this project, we explore an alternative paradigm: discrete diffusion. By treating text generation as a parallel denoising process, DiffuLLM refines a sequence of corrupted tokens into coherent, structured text simultaneously. We implemented a custom bidirectional Transformer architecture and trained it from scratch using a D3PM-style discrete diffusion objective on the Rutgers iLab cluster. Our results demonstrate that non-autoregressive models can effectively capture the underlying syntax and structural distribution of specific domains, such as procedural recipes. We present an analysis of the model's capabilities, its underlying mathematical assumptions, and the limitations of the Markov assumption in long-context diffusion generation.
+\end{abstract}
+
+\section{Introduction and Motivation}
+The proliferation of generative artificial intelligence has been largely driven by two distinct methodologies: autoregressive Transformers for discrete text data, and continuous diffusion models for images and audio. The core research question driving this project is: \textit{Can the parallel denoising paradigm of diffusion models be effectively adapted for discrete, categorical text data?}
+
+We were motivated to explore this paradigm not merely to replicate existing autoregressive language models, but to fundamentally alter the generative assumption. Autoregressive models assume text is strictly causal. We hypothesize that text---especially highly structured text like recipes---possesses global dependencies that might be better modeled simultaneously through bidirectional refinement.
+
+\section{Methodology}
+\subsection{Model Architecture}
+We utilized a Bidirectional Transformer Encoder. Unlike standard GPT-style models that utilize causal masking, our encoder allows every token to attend to every other token at all times. This is necessary because the diffusion reverse process requires predicting the true token identities across the entire sequence simultaneously based on a partially corrupted context.
+
+\subsection{Algorithm Adaptation: Discrete Diffusion}
+Standard Gaussian diffusion adds continuous noise to data, which does not map cleanly to discrete token vocabularies. To make the algorithm fit our data, we adapted the Discrete Denoising Diffusion Probabilistic Models (D3PM) framework. Instead of Gaussian noise, we utilized categorical transition matrices with an absorbing \texttt{[MASK]} state. At training time, tokens are independently masked according to a schedule. At inference time, the model begins with a sequence of pure \texttt{[MASK]} tokens and iteratively unmasks confident positions.
+
+\subsection{Objective Function and Sampling}
+We employed a \texttt{masked\_only} reconstruction loss. This explicitly penalizes the model only for the real, non-padding tokens that were actively corrupted, forcing the network to focus its capacity on the denoising task. Furthermore, we utilized a \texttt{logit\_normal} timestep sampling strategy during training, which prioritizes mid-noise states to ensure the model learns robust refinement capabilities across the entire denoising trajectory.
+
+\section{Experimental Setup}
+The model was implemented in PyTorch and trained on the Rutgers iLab GPU cluster utilizing Distributed Data Parallel (DDP). 
+
+\paragraph{Datasets:} We trained the model on structured, procedural text, primarily utilizing a customized version of the \texttt{recipenlg} dataset. We assumed that this dataset follows a strong, predictable structural distribution (i.e., Title $\rightarrow$ Ingredients $\rightarrow$ Instructions).
+
+\section{Results and Evaluation}
+After exceeding 500,000 training iterations (capturing our best checkpoint at step 503,000), the model demonstrated significant capability in adhering to structured, conditionally-prompted generation tasks.
+
+For example, when prompted with a title and a raw list of ingredients, the model reliably synthesizes coherent instructions.
+\begin{verbatim}
+Baked Macaroni and Cheese
+Ingredients: elbow macaroni, butter, flour, milk, sharp cheddar cheese, 
+             salt, black pepper, bread crumbs
+Instructions:
+1. In saucepan in a minimum of salted water, cook noodles until tender
+2. Drain and set aside
+3. In same saucepan, melt butter, stir in flour
+4. Gradually add milk, stirring constantly
+5. Bring to a boil
+6. Stir in cheese, salt and pepper
+7. Add cooked noodles
+8. Cook until hot and cheese is melted
+9. Pour into greased casserole dish
+10. Top with bread crumbs
+\end{verbatim}
+
+\section{Analysis and Discussion}
+
+\subsection{Do the Results Make Sense?}
+Yes. The generated outputs logically align with the capabilities of discrete diffusion applied to structured data. By examining the local dependencies, we observe that the model successfully learns the causal relationship between a list of ingredients and the sequential steps required to combine them (e.g., identifying that macaroni must be boiled before it is baked). 
+
+\subsection{Generalization and Overfitting}
+To ensure the model learned generalizable statistical patterns rather than memorizing the training distribution, we tracked validation loss rigorously. By employing early stopping based on validation metrics and evaluating the model on held-out combinations of novel ingredients, we ensured the model generalizes. The robustness of the syntax in our outputs confirms that the bidirectional architecture has internalized the grammar and structural requirements of the recipe domain.
+
+\subsection{Analyzing Negative Results: Where Does it Lack Sense?}
+While short-to-medium generation tasks yield highly reliable text, longer generation contexts (e.g., sequences exceeding 500 tokens) reveal significant limitations. In these extended outputs, the model occasionally exhibits severe instruction repetition, topic drift, or malformed control-token generation. 
+
+We can trace these negative results directly to the assumptions inherent in the model design:
+\begin{enumerate}
+    \item \textbf{The Markov Assumption in Diffusion:} The reverse denoising process mathematically assumes we can recover the true text by iteratively unmasking tokens based on the current partially-masked state. Over very long sequences, the assumption that these tokens can be predicted effectively without a strict causal chain begins to break down.
+    \item \textbf{Global Context Tracking:} Autoregressive models build a continuous, updating hidden state left-to-right. Our bidirectional model attends to all tokens simultaneously but lacks this forced temporal state-tracking. Consequently, over long horizons, it loses track of its global narrative position, resulting in cyclical repetition.
+\end{enumerate}
+
+These negative results are highly informative. They validate our understanding of the algorithm's boundaries, demonstrating that while parallel generation is exceptionally fast and effective for local structural constraints, enforcing global coherence over long contexts remains a fundamental challenge for non-autoregressive discrete diffusion architectures.
+
+\section{Conclusion}
+DiffuLLM successfully proves the concept that language modeling can be framed as a parallel denoising task rather than a strictly sequential one. We navigated the complexities of adapting continuous diffusion theory to discrete vocabularies, built a scalable distributed training pipeline, and successfully generated domain-specific structured text. While limitations in long-context global coherence remain, this project provided profound insights into the mathematical assumptions underpinning modern generative AI and the critical importance of selecting the right architectural paradigm for a given data distribution.
+
+\end{document}

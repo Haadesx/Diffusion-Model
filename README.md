@@ -1,20 +1,43 @@
 # DiffuLLM: Discrete Diffusion Language Modeling
 
-A proof-of-concept discrete diffusion language model trained from scratch to generate structured text. Developed for and trained on the Rutgers iLab GPU cluster.
+**Authors:** Varesh Patel, Urvi Desai, Aparajita Sircar
+**Final Report:** [📄 View `report.pdf`](./report.pdf)
+
+### Team Contributions
+All team members collaborated closely on the delivery of this project. Contributions included:
+- **Varesh Patel:** Core discrete diffusion algorithm implementation, distributed training pipeline (DDP), and cluster orchestration.
+- **Urvi Desai:** Dataset curation, tokenization pipeline, and generative evaluation metrics.
+- **Aparajita Sircar:** Qualitative analysis, documentation, and the final analytical write-up.
+
+A proof-of-concept discrete diffusion language model trained from scratch to generate structured text.
 
 ## Overview
 
-Traditional language models generate text autoregressively (left-to-right). DiffuLLM explores a different paradigm: **Discrete Diffusion**. By treating text generation as a denoising process, the model learns to refine a sequence of corrupted tokens into coherent text in parallel. 
+Traditional language models generate text autoregressively (left-to-right). DiffuLLM explores a different paradigm: **Discrete Diffusion**. By treating text generation as a denoising process, the model learns to refine a sequence of corrupted tokens into coherent text in parallel.
 
 The primary objective of this project was to establish a stable, end-to-end discrete diffusion training loop, implement a scalable multi-GPU data pipeline, and prove that non-autoregressive language models can reliably synthesize structured domain data, such as recipes.
 
+## Research Questions & Motivation
+
+The core question driving this project is: **Can the parallel denoising paradigm of diffusion models, which has revolutionized continuous data (like images and audio), be effectively adapted for discrete, categorical text data?**
+
+By asking this question, the goal was to explore alternatives to standard autoregressive (left-to-right) generation. We wanted to see if treating text generation as a global, parallel denoising process could yield coherent, structured outputs in a specific domain like recipe generation.
+
 ## Architecture & Methodology
 
-*   **Model:** Bidirectional Transformer Encoder.
-*   **Diffusion Process:** D3PM-style discrete diffusion utilizing an absorbing `[MASK]` corruption strategy.
-*   **Objective:** `masked_only` reconstruction loss, penalizing only the real, non-padding tokens that were actively corrupted.
-*   **Timestep Sampling:** `logit_normal` sampling, which prioritizes mid-noise states while ensuring coverage across the full denoising trajectory.
-*   **Inference:** Iterative refinement starting from a fully `[MASK]` state, progressively unmasking confident positions across a set number of timesteps.
+- **Model:** Bidirectional Transformer Encoder.
+- **Diffusion Process:** D3PM-style discrete diffusion utilizing an absorbing `[MASK]` corruption strategy.
+- **Objective:** `masked_only` reconstruction loss, penalizing only the real, non-padding tokens that were actively corrupted.
+- **Timestep Sampling:** `logit_normal` sampling, which prioritizes mid-noise states while ensuring coverage across the full denoising trajectory.
+- **Inference:** Iterative refinement starting from a fully `[MASK]` state, progressively unmasking confident positions across a set number of timesteps.
+
+## Course Connections, Assumptions & Design Choices
+
+To align this research with core machine learning principles, several explicit design choices and assumptions were made:
+
+- **Algorithm Adaptation:** Standard Gaussian diffusion (used for continuous data) does not directly apply to discrete text tokens. We had to do work to make the algorithm fit by adopting an absorbing state discrete diffusion (D3PM). Instead of adding continuous noise, we corrupt discrete tokens to a `[MASK]` state using categorical transition matrices.
+- **Underlying Distributions:** We assume our recipe dataset follows a strong, predictable structural distribution (Title -> Ingredients -> Instructions). The model's bidirectional nature assumes that the joint distribution of the text can be learned simultaneously, allowing it to predict missing `[MASK]` tokens conditioned on any visible context, which fundamentally differs from the autoregressive assumption.
+- **Avoiding Overfitting:** To ensure the model learned generalizable patterns rather than simply memorizing the dataset, we monitored validation loss across our 500k+ training iterations, utilizing checkpointing to capture the model at its optimal generalization point (`best_step503000.pt`). We also evaluate qualitatively on varied prompts to ensure it can construct novel instruction sequences rather than repeating training examples verbatim.
 
 ## Evaluation: 500k+ Iteration Milestones
 
@@ -26,7 +49,7 @@ The evaluation focused on comparing generation settings across different lengths
 
 #### Example 1: Butter Chicken
 
-*Prompt Formulation: Title + Ingredients -> Instructions*
+_Prompt Formulation: Title + Ingredients -> Instructions_
 
 ```text
 Butter Chicken
@@ -58,7 +81,7 @@ Instructions:
 
 #### Example 2: Macaroni and Cheese
 
-*Prompt Formulation: Title + Ingredients -> Instructions*
+_Prompt Formulation: Title + Ingredients -> Instructions_
 
 ```text
 Baked Macaroni and Cheese
@@ -88,7 +111,7 @@ Instructions:
 
 #### Example 3: Meatloaf
 
-*Prompt Formulation: Title + Ingredients -> Instructions*
+_Prompt Formulation: Title + Ingredients -> Instructions_
 
 ```text
 Meatloaf
@@ -114,9 +137,20 @@ Instructions:
 5. Bake in a 350 degree oven for 1 hour.
 ```
 
-### Analysis of Limitations
+### Final Analysis & Limitations
 
-While the model effectively captures the syntax and structure of the recipe domain, longer and more detailed generation tasks (`length=520`) reveal current limitations. In extended outputs, the model occasionally exhibits instruction repetition, malformed control-token generation, or slight topic drift. The short-form and medium-form evaluations remain highly reliable and represent the current optimal use case for this discrete diffusion methodology.
+**Do the results make sense?**
+Yes, the results logically align with the capabilities of discrete diffusion for structured text. By examining the outputs, we see the model successfully learns the causal and structural relationships within the data—for instance, connecting specific raw ingredients to the sequential steps required to process them. It correctly identifies that onions and garlic are typically sautéed first, and that macaroni must be boiled before being baked in a casserole.
+
+**Analyzing Negative Results:**
+While the model effectively captures the syntax and structure of the recipe domain for short-to-medium lengths, longer and more detailed generation tasks (`length=520`) reveal limitations. In extended outputs, the model occasionally exhibits instruction repetition, malformed control-token generation, or topic drift.
+
+_Where does this lack of sense come from?_
+
+1.  **The Markov Assumption in Diffusion:** The reverse denoising process assumes we can recover the true text by iteratively unmasking tokens based on the current state. Over long sequences, the assumption that tokens can be predicted effectively given a partially masked context starts to break down.
+2.  **Global Context Tracking:** While the bidirectional transformer can attend to all tokens simultaneously, the lack of strict causal left-to-right masking (which forces autoregressive models to build a strong continuous hidden state) means the model sometimes loses track of the global narrative state over 500+ tokens, leading to cyclical repetition.
+
+This negative result is highly informative: it demonstrates that while parallel generation is fast and effective for local structure, enforcing global coherence over long contexts remains a significant challenge for non-autoregressive discrete diffusion architectures.
 
 ## System Requirements & Setup
 
@@ -135,16 +169,19 @@ conda activate diffusion-text-april23
 ### Execution
 
 **Local Smoke Test** (Verifies data pipeline, tokenizer, and local inference):
+
 ```bash
 bash scripts/run_local_smoke.sh
 ```
 
 **Cluster Submission (SLURM)**:
+
 ```bash
 PROFILE=recipe_poc_2day sbatch scripts/submit_ilab_ddp.slurm
 ```
 
 **Manual DDP Execution**:
+
 ```bash
 PROFILE=recipe_poc_2day NPROC_PER_NODE=2 bash scripts/run_ddp_manual.sh
 ```
@@ -152,9 +189,7 @@ PROFILE=recipe_poc_2day NPROC_PER_NODE=2 bash scripts/run_ddp_manual.sh
 ## Datasets
 
 Training relies on structured Hugging Face datasets tailored for procedural text:
-*   **Recipes:** `B2111797/recipenlg-text-256`
-*   **Code:** `codeparrot/codeparrot-clean`
 
----
+- **Recipes:** `B2111797/recipenlg-text-256`
+- **Code:** `codeparrot/codeparrot-clean`
 
-*This repository represents the final submission snapshot for the Rutgers computational evaluation. Code, metrics, and checkpoints are preserved for reproducibility.*
