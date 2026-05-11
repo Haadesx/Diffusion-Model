@@ -1,6 +1,6 @@
 # DiffuLLM: Discrete Diffusion Language Modeling
 
-**Authors:** Varesh Patel, Urvi Desai, Aparajita Sircar
+**Authors:** Varesh Patel, Urvi Desai, Aparajita Sarkar
 **Final Report:** [📄 View `report.pdf`](./report.pdf)
 
 
