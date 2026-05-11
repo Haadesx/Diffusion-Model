@@ -3,11 +3,7 @@
 **Authors:** Varesh Patel, Urvi Desai, Aparajita Sircar
 **Final Report:** [📄 View `report.pdf`](./report.pdf)
 
-### Team Contributions
-All team members collaborated closely on the delivery of this project. Contributions included:
-- **Varesh Patel:** Core discrete diffusion algorithm implementation, distributed training pipeline (DDP), and cluster orchestration.
-- **Urvi Desai:** Dataset curation, tokenization pipeline, and generative evaluation metrics.
-- **Aparajita Sircar:** Qualitative analysis, documentation, and the final analytical write-up.
+
 
 A proof-of-concept discrete diffusion language model trained from scratch to generate structured text.
 
