@@ -2,7 +2,7 @@
 
 **Authors:** Varesh Patel, Urvi Desai, Aparajita Sarkar
 
-> 📄 **Final Report:** [`FINAL_REPORT.pdf`](./FINAL_REPORT.pdf) — full methodology, mathematical derivations, results, and analysis for all three systems.
+> 📄 **Final Report:** [`report.pdf`](./report.pdf) — full methodology, mathematical derivations, results, and analysis for all three systems.
 
 ## Overview
 
