@@ -2,15 +2,50 @@
 
 **Authors:** Varesh Patel, Urvi Desai, Aparajita Sarkar
 
-**Final Report:** [📄 FINAL_REPORT.pdf](./FINAL_REPORT.pdf)
+---
+
+## 📄 Final Report
+
+The full writeup — covering methodology, mathematical derivations, experimental results, and analysis — is in the PDF below:
+
+### → [FINAL_REPORT.pdf](./FINAL_REPORT.pdf)
 
 ---
 
-A discrete diffusion language model trained from scratch on structured recipe text. The model treats generation as a parallel denoising process over masked token sequences rather than autoregressive left-to-right decoding.
+## Project Summary
 
-Three systems are compared in the final report:
-- **DiffuLLM** — custom bidirectional transformer with D3PM masked reconstruction loss
-- **SEDD-SE** — score entropy discrete diffusion (Lou et al., 2023)
-- **SEDD-KL** — same architecture, ELBO-based KL divergence loss
+This project explores whether the parallel denoising paradigm behind image diffusion models can be adapted for discrete text generation. We built and compared three systems:
 
-All training was run on the Rutgers iLab GPU cluster.
+- **DiffuLLM (System A)** — custom Bidirectional Transformer, D3PM-style masked diffusion, trained for 1.2M steps on a recipe corpus.
+- **SEDD-SE (System B)** — DiT-style transformer trained with the Score Entropy loss (Lou et al., 2023).
+- **SEDD-KL (System C)** — same architecture as B, but trained with a novel ELBO-based KL divergence loss derived from first principles.
+
+All three were trained on the Rutgers iLab GPU cluster. Code for System A lives in `diffusion_text/` and `scripts/`. Code for Systems B & C is in `SEDD_KL/`.
+
+---
+
+## Setup
+
+```bash
+git clone https://github.com/Haadesx/Diffusion-Model.git
+cd Diffusion-Model
+bash scripts/setup_ilab.sh
+conda activate diffusion-text-april23
+```
+
+**Train:**
+```bash
+PROFILE=recipe_poc_2day sbatch scripts/submit_ilab_ddp.slurm
+```
+
+**Sample:**
+```bash
+python scripts/05_sample.py --profile recipe_poc_2day --num_samples 3
+```
+
+---
+
+## Datasets
+
+- `B2111797/recipenlg-text-256` (System A)
+- `corbt/all-recipes` (Systems B & C)
