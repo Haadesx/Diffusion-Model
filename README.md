@@ -2,7 +2,7 @@
 
 **Authors:** Varesh Patel, Urvi Desai, Aparajita Sarkar
 
-**Full Comparative Final Report:** [📄 View `FINAL_REPORT.md`](./FINAL_REPORT.md)
+**Full Comparative Final Report:** [📄 View `FINAL_REPORT.pdf`](./FINAL_REPORT.pdf)
 
 ## Overview
 
@@ -12,7 +12,7 @@ This repository contains the codebase and findings for a three-way comparative s
 2. **System B (SEDD-SE):** A DiT-style transformer trained with Score Entropy Discrete Diffusion (Lou et al., 2023).
 3. **System C (SEDD-KL):** A DiT-style transformer trained with a novel ELBO-based KL divergence loss.
 
-For comprehensive analysis, methodology, mathematical derivations of the KL loss, and theoretical discussion of why these models succeed or fail, **[please read the complete Final Report here](./FINAL_REPORT.md).**
+For comprehensive analysis, methodology, mathematical derivations of the KL loss, and theoretical discussion of why these models succeed or fail, **[please read the complete Final Report PDF here](./FINAL_REPORT.pdf).**
 
 Below is a brief summary of System A (DiffuLLM).
 
