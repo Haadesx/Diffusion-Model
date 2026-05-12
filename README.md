@@ -185,10 +185,7 @@ PROFILE=recipe_poc_2day sbatch scripts/submit_ilab_ddp.slurm
 PROFILE=recipe_poc_2day NPROC_PER_NODE=2 bash scripts/run_ddp_manual.sh
 ```
 
-## Datasets
-
-Training relies on structured Hugging Face datasets tailored for procedural text:
+## Dataset
 
 - **Recipes:** `B2111797/recipenlg-text-256`
-- **Code:** `codeparrot/codeparrot-clean`
 
