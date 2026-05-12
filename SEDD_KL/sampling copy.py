@@ -21,6 +21,7 @@ def register_predictor(cls=None, *, name=None):
         return cls
 
     if cls is None:
+
         return _register
     else:
         return _register(cls)
@@ -36,7 +37,9 @@ class Predictor(abc.ABC):
         self.graph = graph
         self.noise = noise
 
+
     @abc.abstractmethod
+
     def update_fn(self, score_fn, x, t, step_size):
         pass
 
@@ -59,8 +62,8 @@ class NonePredictor(Predictor):
 class AnalyticPredictor(Predictor):
     def update_fn(self, score_fn, x, t, step_size):
         curr_sigma = self.noise(t)[0]
-        next_sigma = self.noise(t - step_size)[0]
-        dsigma = curr_sigma - next_sigma
+        next_sigma = self.noise(t-step_size)[0]
+        dsigma = curr_sigma-next_sigma
 
         score = score_fn(x, curr_sigma)
 
@@ -94,6 +97,7 @@ def get_sampling_fn(config, graph, noise, batch_dims, eps, device):
                                  predictor=config.sampling.predictor,
                                  steps=config.sampling.steps,
                                  denoise=config.sampling.noise_removal,
+
                                  eps=eps,
                                  device=device)
     
@@ -109,8 +113,8 @@ def get_pc_sampler(graph, noise, batch_dims, predictor, steps, denoise=True, eps
     def pc_sampler(model):
         sampling_score_fn = mutils.get_score_fn(model, train=False, sampling=True)
         x = graph.sample_limit(*batch_dims).to(device)
-        timesteps = torch.linspace(1, eps, steps + 1, device=device)
-        dt = (1 - eps) / steps
+        timesteps = torch.linspace(1, eps, steps+1, device=device)
+        dt = (1-eps) / steps
 
         for i in range(steps):
             t = timesteps[i] * torch.ones(x.shape[0], 1, device=device)

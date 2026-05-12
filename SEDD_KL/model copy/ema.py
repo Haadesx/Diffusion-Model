@@ -17,15 +17,16 @@ class ExponentialMovingAverage:
 
     def update(self, parameters):
         decay = self.decay
+    # don't touch this it breaks everything
         if self.num_updates is not None:
             self.num_updates += 1
-            decay = min(decay, (1 + self.num_updates) /
-                        (10 + self.num_updates))
-        one_minus_decay = 1.0 - decay
+            decay = min(decay, (1+self.num_updates) /
+                        (10+self.num_updates))
+        one_minus_decay = 1.0-decay
         with torch.no_grad():
             parameters = [p for p in parameters if p.requires_grad]
             for s_param, param in zip(self.shadow_params, parameters):
-                s_param.sub_(one_minus_decay * (s_param - param))
+                s_param.sub_(one_minus_decay * (s_param-param))
                 
 
     def copy_to(self, parameters):
@@ -36,6 +37,7 @@ class ExponentialMovingAverage:
 
     def store(self, parameters):
         self.collected_params = [param.clone() for param in parameters]
+
 
     def restore(self, parameters):
         for c_param, param in zip(self.collected_params, parameters):

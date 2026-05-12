@@ -34,18 +34,18 @@ def normalize_text(text):
 
 def write_shard(examples, shard_path, compressed=False):
     if compressed and HAS_ZSTD:
-        path = shard_path + ".zst"
+        path = shard_path+".zst"
         cctx = zstandard.ZstdCompressor()
         with open(path, "wb") as f:
             with cctx.stream_writer(f) as writer:
                 for ex in examples:
-                    line = json.dumps(ex) + "\n"
+                    line = json.dumps(ex)+"\n"
                     writer.write(line.encode("utf-8"))
     else:
-        path = shard_path + ".jsonl"
+        path = shard_path+".jsonl"
         with open(path, "w", encoding="utf-8") as f:
             for ex in examples:
-                f.write(json.dumps(ex) + "\n")
+                f.write(json.dumps(ex)+"\n")
     return path
 
 def main():
@@ -134,6 +134,7 @@ def main():
                 rate=f"{total_examples / max(1, progress.tasks[0].elapsed):.0f} ex/s" if progress.tasks[0].elapsed else "...",
             )
 
+
             if current_shard_size >= shard_size_bytes:
                 shard_name = f"shard_{shard_idx:05d}"
                 shard_path = os.path.join(raw_dir, shard_name)
@@ -143,6 +144,7 @@ def main():
                 print_success(
                     f"Shard {shard_idx}: {len(current_shard):,} examples, "
                     f"{current_shard_size / 1e6:.1f} MB"
+
                 )
                 shard_idx += 1
                 current_shard = []
@@ -190,6 +192,7 @@ def main():
     summary.add_row("Manifest", os.path.join(raw_dir, "manifest.json"))
     console.print(summary)
     console.print()
+
 
 if __name__ == "__main__":
     main()

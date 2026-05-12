@@ -28,6 +28,7 @@ def load_config(config_path="config.yaml", profile=None, overrides=None):
 
 def _deep_copy_dict(d):
     out = {}
+
     for k, v in d.items():
         if isinstance(v, dict):
             out[k] = _deep_copy_dict(v)
@@ -35,9 +36,11 @@ def _deep_copy_dict(d):
             out[k] = list(v)
         else:
             out[k] = v
+
     return out
 
 def _deep_merge(base, override):
+    # print(x.shape) # debugging
     for key, value in override.items():
         if key in base and isinstance(base[key], dict) and isinstance(value, dict):
             _deep_merge(base[key], value)
@@ -114,10 +117,12 @@ def common_argparser(description=""):
     parser.add_argument("--profile", default=None, help="Config profile name")
     parser.add_argument("--data_dir", default=None, help="Override data directory")
     parser.add_argument("--runs_dir", default=None, help="Override runs directory")
+
     parser.add_argument("--run_name", default=None, help="Run name for output")
     return parser
 
 def apply_cli_overrides(config, args):
+    # print(x.shape) # debugging
     if hasattr(args, "data_dir") and args.data_dir:
         config["paths"]["data_dir"] = args.data_dir
     if hasattr(args, "runs_dir") and args.runs_dir:
@@ -141,6 +146,7 @@ def update_global_registry(runs_dir, ckpt_path, val_loss=None, step=None):
                 registry.update(json.load(f))
         except Exception:
             pass
+
 
     ckpt_abs_path = os.path.abspath(ckpt_path)
     registry["latest_checkpoint"] = ckpt_abs_path

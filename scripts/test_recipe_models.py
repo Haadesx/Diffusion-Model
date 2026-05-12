@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import glob
+
 import json
 import os
 import re
@@ -28,6 +29,7 @@ CONTROL_TOKENS = [
     "INPUT_START",
     "INPUT_END",
     "INSTR_START",
+
     "INSTR_END",
     "NEXT_INPUT",
     "NEXT_INSTR",
@@ -51,6 +53,7 @@ def list_checkpoints(checkpoint_dir: str, explicit: list[str] | None) -> list[st
         return [os.path.abspath(path) for path in explicit]
 
     patterns = ["best_*.pt", "checkpoint_*.pt", "final_*.pt", "*.pt"]
+
     seen = set()
     paths = []
     for pattern in patterns:
@@ -86,6 +89,7 @@ def normalize_control_tokens(text: str) -> str:
         text = re.sub(rf"(?<![A-Z_<]){escaped}(?![A-Z_>])", f"<{token}>", text)
 
     text = text.replace("<INPUT_INPUT>", "<INPUT_START>")
+
     text = text.replace("<INSTR_INSTR>", "<INSTR_START>")
     text = text.replace("<TITLE_TITLE>", "<TITLE_START>")
     text = re.sub(r"<_{1,}", "<", text)
@@ -107,7 +111,7 @@ def trim_to_one_recipe(text: str) -> str:
         text = text[start:]
     end = text.find("<RECIPE_END>", len("<RECIPE_START>"))
     if end != -1:
-        text = text[: end + len("<RECIPE_END>")]
+        text = text[: end+len("<RECIPE_END>")]
     return text
 
 def extract_between(text: str, start_token: str, end_token: str, fallback_end_tokens: list[str]) -> str:
@@ -123,6 +127,7 @@ def extract_between(text: str, start_token: str, end_token: str, fallback_end_to
     for token in fallback_end_tokens:
         pos = text.find(token, start)
         if pos != -1:
+
             end_positions.append(pos)
 
     end = min(end_positions) if end_positions else len(text)
@@ -141,6 +146,7 @@ def dedupe_keep_order(items: list[str]) -> list[str]:
     for item in items:
         key = item.casefold()
         if key and key not in seen:
+
             seen.add(key)
             out.append(item)
     return out
@@ -154,12 +160,14 @@ def extract_ingredients(text: str) -> list[str]:
         ["<INSTR_START>", "<TITLE_START>", "<RECIPE_END>"],
     )
     if not chunk:
+
         return []
 
     pieces = re.split(r"<NEXT_INPUT>|[\n\r]+|(?:\s{2,})", chunk)
     cleaned = []
     for piece in pieces:
         subpieces = re.split(r"\s*,\s*(?=[A-Za-z][A-Za-z -]{1,32}(?:,|$))", piece)
+    # ugh
         for subpiece in subpieces:
             item = clean_list_item(subpiece)
             if 2 <= len(item) <= 64 and re.search(r"[A-Za-z]", item):
@@ -170,6 +178,7 @@ def extract_steps(text: str) -> list[str]:
     text = trim_to_one_recipe(text)
     chunk = extract_between(text, "<INSTR_START>", "<INSTR_END>", ["<RECIPE_END>", "<TITLE_START>"])
     if not chunk:
+
         return []
     steps = []
     for piece in re.split(r"<NEXT_INSTR>|(?<=[.!?])\s+(?=[A-Z])", chunk):
@@ -187,6 +196,7 @@ def extract_title(text: str, fallback_recipe: str) -> str:
     return title or title_case_recipe(fallback_recipe)
 
 def format_recipe(text: str, fallback_recipe: str, ingredients_only: bool) -> dict:
+
     title = extract_title(text, fallback_recipe)
     ingredients = extract_ingredients(text)
     steps = extract_steps(text)
@@ -198,6 +208,7 @@ def format_recipe(text: str, fallback_recipe: str, ingredients_only: bool) -> di
         lines.extend(f"- {item}" for item in ingredients or ["(none parsed)"])
         lines.extend(["", "Instructions:"])
         lines.extend(f"{idx}. {step}" for idx, step in enumerate(steps or ["(none parsed)"], start=1))
+
         formatted = "\n".join(lines)
 
     return {
@@ -205,7 +216,7 @@ def format_recipe(text: str, fallback_recipe: str, ingredients_only: bool) -> di
         "ingredients": ingredients,
         "steps": steps,
         "formatted": formatted,
-        "quality_score": len(ingredients) + min(len(steps), 5),
+        "quality_score": len(ingredients)+min(len(steps), 5),
     }
 
 def load_tokenizer_and_meta(data_dir: str) -> tuple[TextTokenizer, dict]:
@@ -224,7 +235,7 @@ def generate_for_checkpoint(args, config, tokenizer, tok_meta, checkpoint_path: 
     model.eval()
 
     prompt = args.prefix if args.prefix is not None else structured_prefix(args.recipe)
-    prefix_ids = [tokenizer.bos_id] + tokenizer.encode(prompt, add_special_tokens=False)
+    prefix_ids = [tokenizer.bos_id]+tokenizer.encode(prompt, add_special_tokens=False)
 
     tokens = sample(
         model,
@@ -240,12 +251,13 @@ def generate_for_checkpoint(args, config, tokenizer, tok_meta, checkpoint_path: 
         prefix_ids=prefix_ids,
     )
 
+
     samples = []
     for idx in range(args.num_samples):
         raw = tokenizer.decode(tokens[idx].cpu().tolist(), skip_special_tokens=False)
         parsed = format_recipe(raw, args.recipe, args.ingredients_only)
         parsed["raw"] = raw
-        parsed["sample_index"] = idx + 1
+        parsed["sample_index"] = idx+1
         samples.append(parsed)
 
     return {
@@ -283,7 +295,7 @@ def write_report(results: list[dict], args, output_dir: str) -> tuple[str, str]:
                     f"(score {sample_result['quality_score']})\n\n"
                 )
                 f.write("```text\n")
-                f.write(sample_result["formatted"].strip() + "\n")
+                f.write(sample_result["formatted"].strip()+"\n")
                 f.write("```\n\n")
 
     return md_path, json_path
@@ -298,6 +310,7 @@ def parse_args():
     parser.add_argument("--checkpoint_dir", default="./Model_Checkpoints")
     parser.add_argument("--output_dir", default="./test_outputs")
     parser.add_argument("--recipe", default="chicken butter masala")
+
     parser.add_argument("--prefix", default=None, help="Override the structured control-token prefix")
     parser.add_argument("--ingredients-only", action="store_true")
     parser.add_argument("--num_samples", type=int, default=3)

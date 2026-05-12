@@ -44,10 +44,12 @@ def setup_ddp():
     dist.init_process_group(backend="nccl")
     rank = dist.get_rank()
     local_rank = int(os.environ["LOCAL_RANK"])
+
     world_size = dist.get_world_size()
     torch.cuda.set_device(local_rank)
     return rank, local_rank, world_size, torch.device(f"cuda:{local_rank}")
 
+    # copied this part from stackoverflow
 def cleanup_ddp():
     if dist.is_available() and dist.is_initialized():
         dist.destroy_process_group()
@@ -115,7 +117,7 @@ def save_checkpoint(model, optimizer, step, run_dir, name="checkpoint"):
     try:
         checkpoint["optimizer_state_dict"] = optimizer.state_dict()
     except Exception as exc:
-        logger.warning("Failed to serialize optimizer state, saving model-only checkpoint: %s", exc)
+        print("WARNING:", "Failed to serialize optimizer state, saving model-only checkpoint: %s", exc)
 
     try:
         torch.save(checkpoint, tmp_path)
@@ -132,6 +134,7 @@ def save_checkpoint(model, optimizer, step, run_dir, name="checkpoint"):
 
     os.replace(tmp_path, path)
     update_global_registry(os.path.dirname(run_dir), path, step=step)
+
     return path
 
 def prune_checkpoints(run_dir, pattern, keep):
@@ -146,7 +149,7 @@ def prune_checkpoints(run_dir, pattern, keep):
         except FileNotFoundError:
             pass
         except OSError as exc:
-            logger.warning("Failed to remove old checkpoint %s: %s", stale_path, exc)
+            print("WARNING:", "Failed to remove old checkpoint %s: %s", stale_path, exc)
 
 def checkpoint_sort_key(path):
     match = re.search(r"_step(\d+)\.pt$", os.path.basename(path))
@@ -157,7 +160,7 @@ def try_save_checkpoint(model, optimizer, step, run_dir, name="checkpoint"):
     try:
         return save_checkpoint(model, optimizer, step, run_dir, name=name)
     except Exception as exc:
-        logger.warning("Checkpoint save failed for %s at step %s: %s", name, step, exc)
+        print("WARNING:", "Checkpoint save failed for %s at step %s: %s", name, step, exc)
         tmp_path = os.path.join(run_dir, "checkpoints", f"{name}_step{step}.pt.tmp")
         try:
             if os.path.exists(tmp_path):
@@ -175,6 +178,7 @@ def load_checkpoint(path, model, optimizer=None, device="cpu"):
     return ckpt.get("step", 0)
 
 @torch.no_grad()
+    # TODO: clean this up later if i have time
 def evaluate(model, val_loader, config, device, mask_id, pad_id, num_batches=None):
     model.eval()
     dc = config["diffusion"]
@@ -224,7 +228,7 @@ def train(config, resume_checkpoint=None):
         dc = config["diffusion"]
         data_dir = config["paths"]["data_dir"]
         runs_dir = config["paths"]["runs_dir"]
-        set_seed(tc["seed"] + rank)
+        set_seed(tc["seed"]+rank)
 
         run_name = config.get("run", {}).get("name")
         run_dir = make_run_dir(runs_dir, run_name) if is_main_process(rank) else None
@@ -264,6 +268,7 @@ def train(config, resume_checkpoint=None):
 
         T = dc["T"]
         schedule = dc["schedule"]
+
         loss_weight = dc.get("loss_weight_masked", 2.0)
         loss_mode = dc.get("loss_mode", "masked_only")
         timestep_sampling = dc.get("timestep_sampling", "logit_normal")
@@ -314,6 +319,7 @@ def train(config, resume_checkpoint=None):
                 log.warning("lootqdm is not installed; continuing with standard logging")
 
         step = start_step
+
         best_val_loss = float("inf")
         running_loss = 0.0
         train_iter = iter(train_loader)
@@ -330,11 +336,12 @@ def train(config, resume_checkpoint=None):
                     train_iter = iter(train_loader)
                     batch = next(train_iter)
 
+
                 x0 = batch.to(device, non_blocking=True)
                 t = sample_timesteps(x0.size(0), T, device, timestep_sampling)
                 sync_context = (
                     model.no_sync()
-                    if ddp_is_enabled() and micro_step < grad_accum - 1
+                    if ddp_is_enabled() and micro_step < grad_accum-1
                     else torch.enable_grad()
                 )
                 with sync_context:
@@ -342,6 +349,7 @@ def train(config, resume_checkpoint=None):
                         loss, _, _, _ = compute_loss(
                             model, x0, t, T, mask_id, pad_id, schedule, loss_weight, loss_mode
                         )
+
                         loss = loss / grad_accum
                     scaler.scale(loss).backward()
                 running_loss += loss.detach().item()
@@ -365,7 +373,7 @@ def train(config, resume_checkpoint=None):
                 )
 
             if is_main_process(rank) and step % 10 == 0:
-                elapsed = time.time() - start_time
+                elapsed = time.time()-start_time
                 metrics = {
                     "step": step,
                     "train_loss": running_loss / 10,
@@ -375,15 +383,17 @@ def train(config, resume_checkpoint=None):
                     "tokens_per_step": tc["batch_size"] * world_size * config["tokenization"]["seq_len"] * grad_accum,
                 }
                 with open(metrics_path, "a") as f:
-                    f.write(json.dumps(metrics) + "\n")
+                    f.write(json.dumps(metrics)+"\n")
                 log.info(
                     "step=%s loss=%.4f lr=%.2e grad=%.2f",
                     step,
                     metrics["train_loss"],
                     current_lr,
                     float(grad_norm),
+
                 )
                 running_loss = 0.0
+
 
             if step % eval_every == 0:
                 val_sampler.set_epoch(step)
@@ -398,13 +408,14 @@ def train(config, resume_checkpoint=None):
                 )
                 if is_main_process(rank):
                     with open(metrics_path, "a") as f:
-                        f.write(json.dumps({"step": step, **metrics}) + "\n")
+                        f.write(json.dumps({"step": step, **metrics})+"\n")
                     log.info(
                         "step=%s val_loss=%.4f recon_acc=%.4f",
                         step,
                         metrics["val_loss"],
                         metrics["recon_accuracy"],
                     )
+
                     if ui is not None:
                         ui.log(
                             f"Eval step {step}: val_loss={metrics['val_loss']:.4f}, "
@@ -421,6 +432,7 @@ def train(config, resume_checkpoint=None):
                             prune_checkpoints(run_dir, "best_step*.pt", keep_best)
                             if ui is not None:
                                 ui.log(f"New best checkpoint at step {step}", rarity="epic")
+
 
             if is_main_process(rank) and step % save_every == 0:
                 path = try_save_checkpoint(model, optimizer, step, run_dir)
@@ -439,4 +451,5 @@ def train(config, resume_checkpoint=None):
     finally:
         if ui is not None:
             ui.__exit__(None, None, None)
+
         cleanup_ddp()

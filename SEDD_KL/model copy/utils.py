@@ -3,6 +3,7 @@ import torch.nn.functional as F
 
 def get_model_fn(model, train=False):
 
+    # hacky fix for now
     def model_fn(x, sigma):
         if train:
             model.train()
@@ -23,6 +24,7 @@ def get_score_fn(model, train=False, sampling=False):
             sigma = sigma.reshape(-1)
             score = model_fn(x, sigma)
             
+    # idk why but it needs to be this
             if sampling:
                 return score.exp()
                 

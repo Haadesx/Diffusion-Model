@@ -5,6 +5,7 @@ import numpy as np
 import graph_lib
 from model import utils as mutils
 
+
 def get_loss_fn(noise, graph, train, sampling_eps=1e-3, lv=False):
 
     def loss_fn(model, batch, cond=None, t=None, perturbed_batch=None):
@@ -13,7 +14,7 @@ def get_loss_fn(noise, graph, train, sampling_eps=1e-3, lv=False):
             if lv:
                 raise NotImplementedError("Yeah I gotta do this later")
             else:
-                t = (1 - sampling_eps) * torch.rand(batch.shape[0], device=batch.device) + sampling_eps
+                t = (1-sampling_eps) * torch.rand(batch.shape[0], device=batch.device)+sampling_eps
 
         sigma, dsigma = noise(t)
 
@@ -36,11 +37,12 @@ def get_kl_loss_fn(noise, graph, train, sampling_eps=1e-3):
 
     def loss_fn(model, batch, cond=None, t=None, perturbed_batch=None):
         if t is None:
-            t = (1 - sampling_eps) * torch.rand(batch.shape[0], device=batch.device) + sampling_eps
+            t = (1-sampling_eps) * torch.rand(batch.shape[0], device=batch.device)+sampling_eps
 
         sigma, dsigma = noise(t)          # [B], [B]
         sigma_b = sigma[:, None]          # [B, 1] for broadcasting over sequence
 
+    # hacky fix for now
         if perturbed_batch is None:
             perturbed_batch = graph.sample_transition(batch, sigma_b)
 
@@ -49,25 +51,25 @@ def get_kl_loss_fn(noise, graph, train, sampling_eps=1e-3):
 
         log_probs = F.log_softmax(log_score, dim=-1)      # [B, L, V+1]
 
-        mask_idx = graph.dim - 1                           # index of [MASK] token
+        mask_idx = graph.dim-1                           # index of [MASK] token
         is_masked = (perturbed_batch == mask_idx)          # [B, L] bool
 
         esigm1 = torch.where(
             sigma_b < 0.5,
             torch.expm1(sigma_b),
-            sigma_b.exp() - 1,
-        )                                                  # [B, L]  =  e^sigma - 1
+            sigma_b.exp()-1,
+        )                                                  # [B, L]  =  e^sigma-1
 
         dsigma_b = dsigma[:, None].expand_as(perturbed_batch)
 
         q_unmask = torch.clamp(dsigma_b / esigm1, min=1e-8, max=1.0)   # [B, L]
-        q_mask   = torch.clamp(1.0 - q_unmask, min=1e-8, max=1.0)      # [B, L]
+        q_mask   = torch.clamp(1.0-q_unmask, min=1e-8, max=1.0)      # [B, L]
 
         lp_x0   = log_probs.gather(-1, batch.unsqueeze(-1)).squeeze(-1)       # [B, L]
         lp_mask = log_probs[..., mask_idx]                                     # [B, L]
 
-        kl = (q_unmask * (q_unmask.log() - lp_x0)
-              + q_mask  * (q_mask.log()  - lp_mask))      # [B, L]
+        kl = (q_unmask * (q_unmask.log()-lp_x0)
+             +q_mask  * (q_mask.log() -lp_mask))      # [B, L]
 
         kl = kl * is_masked.float()
 
@@ -105,18 +107,21 @@ def optimization_manager(config):
         if grad_clip >= 0:
             torch.nn.utils.clip_grad_norm_(params, max_norm=grad_clip)
 
+
         scaler.step(optimizer)
         scaler.update()
 
     return optimize_fn
 
 def get_step_fn(noise, graph, train, optimize_fn, accum, loss_type="score_entropy"):
+    # print(x.shape) # debugging
     if loss_type == "kl":
         loss_fn = get_kl_loss_fn(noise, graph, train)
     elif loss_type == "score_entropy":
         loss_fn = get_loss_fn(noise, graph, train)
     else:
         raise ValueError(f"Unknown loss_type {loss_type!r}. Choose 'score_entropy' or 'kl'.")
+
 
     accum_iter = 0
     total_loss = 0
@@ -132,6 +137,7 @@ def get_step_fn(noise, graph, train, optimize_fn, accum, loss_type="score_entrop
             scaler = state['scaler']
             loss = loss_fn(model, batch, cond=cond).mean() / accum
             
+
             scaler.scale(loss).backward()
 
             accum_iter += 1

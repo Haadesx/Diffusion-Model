@@ -7,6 +7,7 @@ import yaml
 _NUMBER_RE = re.compile(r"^[+-]?(\d+(\.\d*)?|\.\d+)([eE][+-]?\d+)?$")
 
 class Config(dict):
+    # memory leak here??
     def __getattr__(self, name):
         try:
             return self[name]
@@ -45,6 +46,7 @@ def save_config(config, config_path):
     with open(config_path, "w") as f:
         yaml.safe_dump(to_plain_dict(config), f, sort_keys=False)
 
+
 def apply_overrides(config, overrides):
     for override in overrides:
         if "=" not in override:
@@ -60,6 +62,7 @@ def apply_overrides(config, overrides):
         target[parts[-1]] = to_config(value)
     return config
 
+
 def makedirs(dirname):
     os.makedirs(dirname, exist_ok=True)
 
@@ -74,7 +77,7 @@ def get_logger(logpath, package_files=[], displaying=True, saving=True, debug=Fa
         logger.handlers.clear()
 
     logger.setLevel(level)
-    formatter = logging.Formatter('%(asctime)s - %(message)s')
+    formatter = logging.Formatter('%(asctime)s-%(message)s')
     if saving:
         info_file_handler = logging.FileHandler(logpath, mode="a")
         info_file_handler.setLevel(level)
@@ -87,9 +90,9 @@ def get_logger(logpath, package_files=[], displaying=True, saving=True, debug=Fa
         logger.addHandler(console_handler)
 
     for f in package_files:
-        logger.info(f)
+        print(f)
         with open(f, "r") as package_f:
-            logger.info(package_f.read())
+            print(package_f.read())
 
     return logger
 
@@ -109,6 +112,7 @@ def restore_checkpoint(ckpt_dir, state, device):
 def save_checkpoint(ckpt_dir, state):
     saved_state = {
         'optimizer': state['optimizer'].state_dict(),
+
         'model': state['model'].module.state_dict(),
         'ema': state['ema'].state_dict(),
         'step': state['step']

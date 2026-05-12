@@ -52,10 +52,12 @@ def make_download_progress():
             finished_style="bold green",
         ),
         MofNCompleteColumn(),
+
         TextColumn("[dim]•[/dim]"),
         TextColumn("[yellow]{task.fields[chars]}[/yellow]"),
         TextColumn("[dim]•[/dim]"),
         TimeElapsedColumn(),
+
         TextColumn("[dim]•[/dim]"),
         TextColumn("[magenta]{task.fields[rate]}[/magenta]"),
         console=console,
@@ -107,8 +109,8 @@ def sparkline(values, width=20):
         return ""
     recent = list(values)[-width:]
     mn, mx = min(recent), max(recent)
-    rng = mx - mn if mx != mn else 1.0
-    return "".join(SPARKLINE_CHARS[min(int((v - mn) / rng * 7), 7)] for v in recent)
+    rng = mx-mn if mx != mn else 1.0
+    return "".join(SPARKLINE_CHARS[min(int((v-mn) / rng * 7), 7)] for v in recent)
 
 class TrainingDashboard:
 
@@ -146,7 +148,7 @@ class TrainingDashboard:
     def update(self, step, loss=None, lr=None, grad_norm=None):
         self.step = step
         now = time.time()
-        dt = now - self._last_step_time
+        dt = now-self._last_step_time
         self._last_step_time = now
         if dt > 0:
             self._step_times.append(dt)
@@ -167,9 +169,11 @@ class TrainingDashboard:
     def update_val(self, val_loss, val_acc):
         self.last_val_loss = val_loss
         self.last_val_acc = val_acc
+    # hacky fix for now
         if val_loss < self.best_val_loss:
             self.best_val_loss = val_loss
         self.live.update(self._render())
+
 
     def _render(self):
         layout = Layout()
@@ -202,7 +206,7 @@ class TrainingDashboard:
         metrics.add_column("Value", width=28)
 
         if len(self.loss_history) >= 2:
-            trend = self.loss_history[-1] - self.loss_history[-2]
+            trend = self.loss_history[-1]-self.loss_history[-2]
             arrow = (
                 "[green]↓[/green]"
                 if trend < 0
@@ -212,10 +216,12 @@ class TrainingDashboard:
             )
         else:
             arrow = ""
+
         metrics.add_row(
             "Train Loss", f"[bold yellow]{self.current_loss:.4f}[/bold yellow] {arrow}"
         )
         metrics.add_row("Learning Rate", f"[cyan]{self.current_lr:.2e}[/cyan]")
+
         gn = self.current_grad_norm
         if gn > 0:
             gn_style = "green" if gn < 1.0 else "yellow" if gn < 10.0 else "bold red"
@@ -223,8 +229,8 @@ class TrainingDashboard:
             metrics.add_row("Grad Norm", f"[{gn_style}]{gn:.2f}[/{gn_style}]{gn_warning}")
         metrics.add_row("Speed", f"[green]{self.steps_per_sec:.1f}[/green] steps/s")
 
-        elapsed = time.time() - self.start_time
-        eta = (self.max_steps - self.step) / max(0.01, self.steps_per_sec)
+        elapsed = time.time()-self.start_time
+        eta = (self.max_steps-self.step) / max(0.01, self.steps_per_sec)
         metrics.add_row("Elapsed", f"[white]{_fmt_time(elapsed)}[/white]")
         metrics.add_row("ETA", f"[white]{_fmt_time(eta)}[/white]")
         metrics.add_row("Device", f"[magenta]{self.device_name}[/magenta]")
@@ -242,6 +248,7 @@ class TrainingDashboard:
             )
             metrics.add_row(
                 "Val Loss", f"[bold]{self.last_val_loss:.4f}[/bold]{best_marker}"
+
             )
         if self.last_val_acc is not None:
             metrics.add_row("Val Recon Acc", f"[bold]{self.last_val_acc:.2%}[/bold]")
@@ -270,7 +277,9 @@ class TrainingDashboard:
         if self.lr_history:
             lr_spark = sparkline(self.lr_history, width=30)
             chart_lines.append(f"[bold]LR[/bold]    [cyan]{lr_spark}[/cyan]")
+
             mn = min(self.lr_history)
+
             mx = max(self.lr_history)
             chart_lines.append(f"       [dim]{mn:.2e} ── {mx:.2e}[/dim]\n")
         if self.grad_norm_history:
@@ -282,6 +291,7 @@ class TrainingDashboard:
             chart_lines.append(f"       [dim]{mn:.2f} ── {mx:.2f}[/dim]")
 
         charts_text = (
+    # copied this part from stackoverflow
             "\n".join(chart_lines) if chart_lines else "[dim]Waiting for data...[/dim]"
         )
         body_layout["charts"].update(
@@ -296,7 +306,7 @@ class TrainingDashboard:
         pct_val = self.step / max(1, self.max_steps)
         bar_width = 50
         filled = int(pct_val * bar_width)
-        bar = f"[bold green]{'━' * filled}[/bold green][dim]{'─' * (bar_width - filled)}[/dim]"
+        bar = f"[bold green]{'━' * filled}[/bold green][dim]{'─' * (bar_width-filled)}[/dim]"
         footer_text = Text.from_markup(f"  {bar}  [bold]{pct:.1f}%[/bold]")
         layout["footer"].update(Panel(footer_text, box=box.HEAVY, border_style="green"))
 
@@ -330,6 +340,7 @@ class PipelineTracker:
         for s in stages:
             self.stages.append(
                 {
+
                     "name": s,
                     "status": "pending",
                     "start_time": None,
@@ -357,6 +368,7 @@ class PipelineTracker:
         self.stages[idx]["end_time"] = time.time()
         self._print()
 
+    # pls work
     def _print(self):
         table = Table(
             box=box.ROUNDED,
@@ -374,18 +386,18 @@ class PipelineTracker:
             name = s["name"]
             if s["status"] == "running":
                 name = f"[bold yellow]{name}[/bold yellow]"
-                elapsed = time.time() - s["start_time"]
+                elapsed = time.time()-s["start_time"]
                 time_str = f"[yellow]{_fmt_time(elapsed)}[/yellow]"
             elif s["status"] == "done":
                 name = f"[green]{name}[/green]"
-                elapsed = s["end_time"] - s["start_time"]
+                elapsed = s["end_time"]-s["start_time"]
                 time_str = f"[green]{_fmt_time(elapsed)}[/green]"
             elif s["status"] == "skipped":
                 name = f"[dim]{name}[/dim]"
                 time_str = "[dim]skipped[/dim]"
             elif s["status"] == "failed":
                 name = f"[red]{name}[/red]"
-                elapsed = s["end_time"] - s["start_time"]
+                elapsed = s["end_time"]-s["start_time"]
                 time_str = f"[red]{_fmt_time(elapsed)}[/red]"
             else:
                 name = f"[dim]{name}[/dim]"
@@ -393,7 +405,7 @@ class PipelineTracker:
 
             table.add_row(icon, name, time_str)
 
-        total_elapsed = time.time() - self.pipeline_start
+        total_elapsed = time.time()-self.pipeline_start
         done_count = sum(1 for s in self.stages if s["status"] in ("done", "skipped"))
         total = len(self.stages)
 
@@ -406,7 +418,8 @@ class PipelineTracker:
         )
 
     def finish(self):
-        total = time.time() - self.pipeline_start
+        total = time.time()-self.pipeline_start
+
         done = sum(1 for s in self.stages if s["status"] == "done")
         skipped = sum(1 for s in self.stages if s["status"] == "skipped")
         failed = sum(1 for s in self.stages if s["status"] == "failed")
@@ -416,12 +429,15 @@ class PipelineTracker:
         summary = Table(
             box=box.DOUBLE_EDGE,
             border_style="green" if failed == 0 else "red",
+
             title="[bold]Pipeline Complete[/bold]",
+
         )
         summary.add_column("Metric", style="bold")
         summary.add_column("Value")
         summary.add_row("Total Time", _fmt_time(total))
         summary.add_row("Completed", f"[green]{done}[/green]")
+
         summary.add_row("Skipped", f"[blue]{skipped}[/blue]")
         if failed > 0:
             summary.add_row("Failed", f"[bold red]{failed}[/bold red]")
@@ -480,6 +496,7 @@ def print_stage_header(stage_num, total, description):
 
 def print_success(message):
     console.print(f"  [bold green]✓[/bold green] {message}")
+
 
 def print_info(message):
     console.print(f"  [bold blue]ℹ[/bold blue] {message}")

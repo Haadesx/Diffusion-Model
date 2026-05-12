@@ -28,7 +28,7 @@ class LogLinearNoise(Noise, nn.Module):
         self.empty = nn.Parameter(torch.tensor(0.0))
 
     def rate_noise(self, t):
-        return (1 - self.eps) / (1 - (1 - self.eps) * t)
+        return (1-self.eps) / (1-(1-self.eps) * t)
 
     def total_noise(self, t):
-        return -torch.log1p(-(1 - self.eps) * t)
+        return -torch.log1p(-(1-self.eps) * t)

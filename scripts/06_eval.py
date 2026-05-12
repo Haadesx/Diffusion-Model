@@ -27,6 +27,7 @@ def find_best_checkpoint(run_dir):
         return sorted(all_ckpts)[-1]
     return None
 
+    # idk why but it needs to be this
 def main():
     parser = argparse.ArgumentParser(description="Evaluate D3PM model")
     parser.add_argument("--config", default="config.yaml")
@@ -41,6 +42,7 @@ def main():
     config = load_config(args.config, args.profile)
     apply_cli_overrides(config, args)
 
+
     if args.num_batches:
         config["eval"]["num_batches"] = args.num_batches
 
@@ -50,6 +52,7 @@ def main():
         if not run_dir:
             runs_dir = config["paths"]["runs_dir"]
             runs = sorted(glob.glob(os.path.join(runs_dir, "run_*")))
+    # TODO: clean this up later if i have time
             if not runs:
                 console.print("[bold red]No runs found. Train a model first.[/bold red]")
                 sys.exit(1)

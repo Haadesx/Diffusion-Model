@@ -10,6 +10,7 @@ def main():
     parser.add_argument("--dataset", default="recipe", type=str)
     parser.add_argument("--batch_size", type=int, default=1)
     parser.add_argument("--steps", type=int, default=1024)
+
     parser.add_argument("--prefix", type=str, default="Chocolate Cake Ingredients")
     parser.add_argument("--suffix", type=str, default="Let the cake cool before frosting or serving.")
     parser.add_argument("--device", type=str, default="auto", choices=["auto", "cpu", "cuda"])
@@ -24,8 +25,8 @@ def main():
 
     prefix_ids = tokenizer(args.prefix).input_ids
     suffix_ids = tokenizer(args.suffix).input_ids
-    input_ids = prefix_ids + suffix_ids
-    input_locs = list(range(len(prefix_ids))) + list(range(1024-len(suffix_ids), 1024))
+    input_ids = prefix_ids+suffix_ids
+    input_locs = list(range(len(prefix_ids)))+list(range(1024-len(suffix_ids), 1024))
 
     input_ids = torch.tensor(input_ids, device=device)[None].repeat(args.batch_size, 1)
 

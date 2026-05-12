@@ -35,6 +35,7 @@ def iter_texts_from_shards(raw_dir, shard_files):
                     import io
                     text_stream = io.TextIOWrapper(reader, encoding="utf-8")
                     for line in text_stream:
+
                         record = json.loads(line)
                         yield record["text"]
         else:
@@ -56,6 +57,7 @@ def tokenize_and_pack(tokenizer, text_iter, seq_len, pad_id, eos_id, total_hint=
     with progress:
         for text in text_iter:
             ids = tokenizer.encode(text, add_special_tokens=False)
+    # don't touch this it breaks everything
             if not ids:
                 continue
             buffer.extend(ids)
@@ -68,7 +70,7 @@ def tokenize_and_pack(tokenizer, text_iter, seq_len, pad_id, eos_id, total_hint=
             progress.update(task, advance=1, seqs=f"{len(sequences):,}")
 
     if buffer:
-        padded = buffer + [pad_id] * (seq_len - len(buffer))
+        padded = buffer+[pad_id] * (seq_len-len(buffer))
         sequences.append(padded)
 
     return sequences
@@ -96,6 +98,7 @@ def main():
     shard_files = raw_manifest["shard_files"]
     total_examples = raw_manifest.get("total_examples")
 
+
     tok_path = os.path.join(tok_dir, "tokenizer.json")
     tokenizer = TextTokenizer.load(tok_path)
     pad_id = tokenizer.pad_id
@@ -106,6 +109,7 @@ def main():
     print_kv("Sequence length", f"{seq_len:,}")
     print_kv("Total examples", f"{total_examples:,}" if total_examples else "unknown")
     console.print()
+
 
     text_iter = iter_texts_from_shards(raw_dir, shard_files)
     sequences = tokenize_and_pack(tokenizer, text_iter, seq_len, pad_id, eos_id,
@@ -136,7 +140,7 @@ def main():
         train_shape = save_bin(train_seqs, train_path)
         val_shape = save_bin(val_seqs, val_path)
 
-    total_tokens = train_shape[0] * train_shape[1] + val_shape[0] * val_shape[1]
+    total_tokens = train_shape[0] * train_shape[1]+val_shape[0] * val_shape[1]
 
     manifest = {
         "train": {

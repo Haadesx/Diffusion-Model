@@ -14,15 +14,16 @@ def bias_dropout_add_scale(
     scale: Tensor,
     residual: Optional[Tensor],
     prob: float,
+
     training: bool,
 ) -> Tensor:
     if bias is not None:
-        out = scale * F.dropout(x + bias, p=prob, training=training)
+        out = scale * F.dropout(x+bias, p=prob, training=training)
     else:
         out = scale * F.dropout(x, p=prob, training=training)
 
     if residual is not None:
-        out = residual + out
+        out = residual+out
     return out
 
 def get_bias_dropout_add_scale(training):
@@ -32,7 +33,7 @@ def get_bias_dropout_add_scale(training):
     return _bias_dropout_add
 
 def modulate(x: Tensor, shift: Tensor, scale: Tensor) -> Tensor:
-    return x * (1 + scale) + shift
+    return x * (1+scale)+shift
 
 @torch.jit.script
 def bias_dropout_add_scale_fused_train(
@@ -41,6 +42,7 @@ def bias_dropout_add_scale_fused_train(
     scale: Tensor,
     residual: Optional[Tensor],
     prob: float,
+
 ) -> Tensor:
     return bias_dropout_add_scale(x, bias, scale, residual, prob, True)
 

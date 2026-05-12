@@ -18,6 +18,7 @@ class Rotary(torch.nn.Module):
             emb = torch.cat((freqs, freqs), dim=-1).to(x.device)
             self.cos_cached = emb.cos()[None, :, None, None, :].repeat(1, 1, 3, 1, 1)
             self.sin_cached = emb.sin()[None, :, None, None, :].repeat(1, 1, 3, 1, 1)
+
             self.cos_cached[:, :, 2, :, :].fill_(1.0)
             self.sin_cached[:, :, 2, :, :].fill_(0.0)
 
@@ -28,7 +29,7 @@ def rotate_half(x):
     return torch.cat((-x2, x1), dim=-1)
 
 def _apply_rotary_pos_emb_torchscript(qkv, cos, sin):
-    return (qkv * cos) + (rotate_half(qkv) * sin)
+    return (qkv * cos)+(rotate_half(qkv) * sin)
 
 def apply_rotary_pos_emb(qkv, cos, sin):
     try:

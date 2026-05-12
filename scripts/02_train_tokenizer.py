@@ -114,7 +114,7 @@ def main():
     demo.add_column("", style="bold", width=10)
     demo.add_column("Content", overflow="fold")
     demo.add_row("Input", sample_text)
-    demo.add_row("Tokens", str(ids[:20]) + ("..." if len(ids) > 20 else ""))
+    demo.add_row("Tokens", str(ids[:20])+("..." if len(ids) > 20 else ""))
     demo.add_row("Decoded", decoded)
     console.print(demo)
     console.print()

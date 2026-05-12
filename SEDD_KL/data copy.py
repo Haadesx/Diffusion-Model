@@ -29,6 +29,7 @@ def recipe_tokenizer(example):
 
     return {"text": texts}
 
+
 def recipe_detokenizer(text):
     parts = text.split("\n\nIngredients:\n")
     if len(parts) < 2:
@@ -77,6 +78,7 @@ def get_dataset(name, mode, cache_dir=None, block_size=1024, num_proc=8):
         tokens = tokenizer(text, return_attention_mask=False)
         for token in tokens['input_ids']:
             token.append(EOS)
+
         return tokens
     
     tokenized_dataset = data.map(preprocess_and_tokenize, batched=True, num_proc=num_proc, load_from_cache_file=True)
@@ -89,7 +91,7 @@ def get_dataset(name, mode, cache_dir=None, block_size=1024, num_proc=8):
         total_length = len(concatenated_examples[list(examples.keys())[0]])
         total_length = (total_length // block_size) * block_size
         result = {
-            k: [t[i : i + block_size] for i in range(0, total_length, block_size)]
+            k: [t[i : i+block_size] for i in range(0, total_length, block_size)]
             for k, t in concatenated_examples.items()
         }
         return result
@@ -111,6 +113,7 @@ def get_dataloaders(config, distributed=True):
     if distributed:
         train_sampler = DistributedSampler(train_set) 
         test_sampler = DistributedSampler(valid_set)
+
     else:
         train_sampler = None
         test_sampler = None

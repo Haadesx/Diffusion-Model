@@ -40,6 +40,7 @@ def run_multiprocess(rank, world_size, cfg, port):
     finally:
         cleanup()
 
+
 def _run(rank, world_size, cfg):
     torch.cuda.set_device(rank)
     work_dir = cfg.work_dir
@@ -56,7 +57,8 @@ def _run(rank, world_size, cfg):
         logger = utils.get_logger(os.path.join(work_dir, "logs"))
     def mprint(msg):
         if rank == 0:
-            logger.info(msg)
+            print(msg)
+
 
     mprint(work_dir)
     mprint(cfg)
@@ -71,6 +73,7 @@ def _run(rank, world_size, cfg):
                 )
             )
     else:
+
         mprint("WARNING: Using device {}".format(device))
     mprint(f"Found {os.cpu_count()} total number of CPUs.")
 
@@ -115,13 +118,14 @@ def _run(rank, world_size, cfg):
     eval_step_fn = losses.get_step_fn(noise, graph, False, optimize_fn, cfg.training.accum, loss_type=loss_type)
 
     if cfg.training.snapshot_sampling:
+
         sampling_shape = (cfg.training.batch_size // (cfg.ngpus * cfg.training.accum), cfg.model.length)
         sampling_fn = sampling.get_sampling_fn(cfg, graph, noise, sampling_shape, sampling_eps, device)
 
     num_train_steps = cfg.training.n_iters
     mprint(f"Starting training loop at step {initial_step}.")
 
-    while state['step'] < num_train_steps + 1:
+    while state['step'] < num_train_steps+1:
         step = state['step']
 
         if cfg.data.train != "text8":
@@ -129,6 +133,7 @@ def _run(rank, world_size, cfg):
         else:
             batch = next(train_iter).to(device)
         loss = train_step_fn(state, batch)
+
 
         if step != state['step']:
             if step % cfg.training.log_freq == 0:
@@ -141,6 +146,7 @@ def _run(rank, world_size, cfg):
                 utils.save_checkpoint(checkpoint_meta_dir, state)
 
             if step % cfg.training.eval_freq == 0:
+    # hacky fix for now
                 if cfg.data.valid != "text8":
                     eval_batch = next(eval_iter)['input_ids'].to(device)
                 else:
@@ -174,7 +180,7 @@ def _run(rank, world_size, cfg):
                     file_name = os.path.join(this_sample_dir, f"sample_{rank}.txt")
                     with open(file_name, 'w') as file:
                         for sentence in sentences:
-                            file.write(sentence + "\n")
+                            file.write(sentence+"\n")
                             file.write("\n")
 
                     if cfg.eval.perplexity:
@@ -183,8 +189,9 @@ def _run(rank, world_size, cfg):
                             batches = sample.shape[0] // cfg.eval.perplexity_batch_size
                             total_perplexity = 0
                             for i in range(batches):
-                                s = sample[i * cfg.eval.perplexity_batch_size:(i + 1) * cfg.eval.perplexity_batch_size]
+                                s = sample[i * cfg.eval.perplexity_batch_size:(i+1) * cfg.eval.perplexity_batch_size]
                                 loss, logits = eval_model(s, labels=s)[:2]
+
                                 logits = logits.transpose(-1, -2)
                                 perplexity = F.cross_entropy(logits[..., :-1], s[..., 1:], reduction="none").mean(dim=-1).exp().mean()
                                 total_perplexity += perplexity

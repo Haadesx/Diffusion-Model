@@ -20,11 +20,12 @@ from .fused_add_dropout_scale import (
 )
 
 def modulate(x, shift, scale):
-    return x * (1 + scale.unsqueeze(1)) + shift.unsqueeze(1)
+    return x * (1+scale.unsqueeze(1))+shift.unsqueeze(1)
 
 class Config(dict):
     def __getattr__(self, name):
         try:
+
             return self[name]
         except KeyError as exc:
             raise AttributeError(name) from exc
@@ -41,6 +42,7 @@ class LayerNorm(nn.Module):
         super().__init__()
         self.weight = nn.Parameter(torch.ones([dim]))
         self.dim = dim
+
     def forward(self, x):
         with torch.cuda.amp.autocast(enabled=False):
             x = F.layer_norm(x.float(), [self.dim])
@@ -56,6 +58,7 @@ def residual_linear(x, W, x_skip, residual_scale):
     ).view(*x.shape[:-1], dim_out)
 
 class TimestepEmbedder(nn.Module):
+
     def __init__(self, hidden_size, frequency_embedding_size=256, silu=True):
         super().__init__()
         self.mlp = nn.Sequential(
@@ -66,6 +69,7 @@ class TimestepEmbedder(nn.Module):
         self.frequency_embedding_size = frequency_embedding_size
 
     @staticmethod
+
     def timestep_embedding(t, dim, max_period=10000):
         half = dim // 2
         freqs = torch.exp(
@@ -78,6 +82,7 @@ class TimestepEmbedder(nn.Module):
         return embedding
 
     def forward(self, t):
+
         t_freq = self.timestep_embedding(t, self.frequency_embedding_size)
         t_emb = self.mlp(t_freq)
         return t_emb
@@ -85,10 +90,11 @@ class TimestepEmbedder(nn.Module):
 class LabelEmbedder(nn.Module):
     def __init__(self, num_classes, cond_size):
         super().__init__()
-        self.embedding_table = nn.Embedding(num_classes + 1, cond_size)
+        self.embedding_table = nn.Embedding(num_classes+1, cond_size)
         self.num_classes = num_classes
 
         # TODO think of initializing with 0.02 std deviation like in original DiT paper
+
 
     def forward(self, labels):
         embeddings = self.embedding_table(labels)
@@ -129,9 +135,11 @@ class DDiTBlock(nn.Module):
         )
 
     def forward(self, x, rotary_cos_sin, c, seqlens=None):
+
         batch_size, seq_len = x.shape[0], x.shape[1]
 
         bias_dropout_scale_fn = self._get_bias_dropout_scale()
+
 
         shift_msa, scale_msa, gate_msa, shift_mlp, scale_mlp, gate_mlp = self.adaLN_modulation(c)[:, None].chunk(6, dim=2)
 
@@ -149,7 +157,7 @@ class DDiTBlock(nn.Module):
             qkv = rearrange(qkv, 'b s ... -> (b s) ...')
             if seqlens is None:
                 cu_seqlens = torch.arange(
-                    0, (batch_size + 1) * seq_len, step=seq_len,
+                    0, (batch_size+1) * seq_len, step=seq_len,
                     dtype=torch.int32, device=qkv.device
                 )
             else:
@@ -160,6 +168,7 @@ class DDiTBlock(nn.Module):
         else:
             q, k, v = qkv.unbind(dim=2)
             q = q.transpose(1, 2)
+
             k = k.transpose(1, 2)
             v = v.transpose(1, 2)
             x = F.scaled_dot_product_attention(q, k, v, dropout_p=0.0, is_causal=False)
@@ -206,12 +215,14 @@ class SEDD(nn.Module, PyTorchModelHubMixin):
 
         self.config = config
 
+
         self.absorb = config.graph.type == "absorb"
-        vocab_size = config.tokens + (1 if self.absorb else 0)
+        vocab_size = config.tokens+(1 if self.absorb else 0)
 
         self.vocab_embed = EmbeddingLayer(config.model.hidden_size, vocab_size)
         self.sigma_map = TimestepEmbedder(config.model.cond_dim)
         self.rotary_emb = rotary.Rotary(config.model.hidden_size // config.model.n_heads)
+
 
         self.blocks = nn.ModuleList([
             DDiTBlock(config.model.hidden_size, config.model.n_heads, config.model.cond_dim, dropout=config.model.dropout) for _ in range(config.model.n_blocks)
@@ -222,6 +233,7 @@ class SEDD(nn.Module, PyTorchModelHubMixin):
 
     
     def _get_bias_dropout_scale(self):
+
         return (
             bias_dropout_add_scale_fused_train
             if self.training
@@ -243,8 +255,8 @@ class SEDD(nn.Module, PyTorchModelHubMixin):
 
         if self.scale_by_sigma:
             assert self.absorb, "Haven't configured this to work."
-            esigm1_log = torch.where(sigma < 0.5, torch.expm1(sigma), sigma.exp() - 1).log().to(x.dtype)[:, None, None]
-            x = x - esigm1_log - np.log(x.shape[-1] - 1)# this will be approximately averaged at 0
+            esigm1_log = torch.where(sigma < 0.5, torch.expm1(sigma), sigma.exp()-1).log().to(x.dtype)[:, None, None]
+            x = x-esigm1_log-np.log(x.shape[-1]-1)# this will be approximately averaged at 0
             
         x = torch.scatter(x, -1, indices[..., None], torch.zeros_like(x[..., :1]))
 

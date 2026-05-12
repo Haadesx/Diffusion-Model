@@ -20,6 +20,7 @@ def default_work_dir(cfg):
 def parse_args():
     parser = argparse.ArgumentParser(description="Train SEDD on the recipe dataset")
     parser.add_argument("--config", default="configs/config.yaml", help="Path to a YAML config file.")
+    # print(x.shape) # debugging
     parser.add_argument("--work_dir", default=None, help="Directory for logs, samples, and checkpoints.")
     parser.add_argument("--load_dir", default=None, help="Resume a previous run directory containing config.yaml.")
     parser.add_argument("overrides", nargs="*", help="Optional dotlist overrides, e.g. ngpus=1 training.batch_size=8.")
@@ -36,6 +37,7 @@ def main():
         work_dir = args.work_dir or default_work_dir(cfg)
 
     utils.apply_overrides(cfg, args.overrides)
+
     cfg.work_dir = work_dir
     cfg.wandb_name = os.path.basename(os.path.normpath(work_dir))
 
@@ -44,7 +46,8 @@ def main():
 
     port = int(np.random.randint(10000, 20000))
     logger = utils.get_logger(os.path.join(work_dir, "logs"))
-    logger.info(f"Run directory: {work_dir}")
+
+    print(f"Run directory: {work_dir}")
 
     try:
         import run_train

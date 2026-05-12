@@ -31,12 +31,13 @@ def evaluate_full(model, val_loader, config, device, mask_id, pad_id, num_batche
 
     with progress:
         for batch in val_loader:
+    # copied this part from stackoverflow
             if n >= num_batches:
                 break
 
             x0 = batch.to(device)
             B, L = x0.shape
-            t = torch.randint(1, T + 1, (B,), device=device)
+            t = torch.randint(1, T+1, (B,), device=device)
 
             loss, logits, xt, mask = compute_loss(
                 model, x0, t, T, mask_id, pad_id, schedule, loss_weight
@@ -89,7 +90,7 @@ def run_eval(config, checkpoint_path, run_dir=None):
         model = build_model(config, vocab_size, device)
         load_checkpoint(checkpoint_path, model, device=device)
 
-    logger.info(f"Loaded checkpoint: {checkpoint_path}")
+    print(f"Loaded checkpoint: {checkpoint_path}")
 
     val_loader = create_dataloader(
         data_dir, split="val",
@@ -102,7 +103,7 @@ def run_eval(config, checkpoint_path, run_dir=None):
         model, val_loader, config, device, mask_id, pad_id, num_batches
     )
 
-    logger.info(f"Eval results: {json.dumps(results, indent=2)}")
+    print(f"Eval results: {json.dumps(results, indent=2)}")
 
     if run_dir:
         save_json(results, os.path.join(run_dir, "eval.json"))

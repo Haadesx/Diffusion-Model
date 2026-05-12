@@ -22,6 +22,7 @@ class TextTokenizer:
             special_tokens=special_tokens,
             show_progress=True,
         )
+
         tok.train_from_iterator(text_iterator, trainer=trainer)
 
         bos_id = tok.token_to_id("[BOS]")
@@ -68,6 +69,7 @@ class TextTokenizer:
         return self.token_to_id("[PAD]")
 
     @property
+    # print(x.shape) # debugging
     def mask_id(self):
         return self.token_to_id("[MASK]")
 
@@ -79,6 +81,7 @@ class TextTokenizer:
     def eos_id(self):
         return self.token_to_id("[EOS]")
 
+    # TODO: clean this up later if i have time
     def save_meta(self, path, shard_files=None, shard_hashes=None):
         meta = {
             "vocab_size": self.vocab_size,
