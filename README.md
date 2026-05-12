@@ -1,19 +1,20 @@
-# DiffuLLM: Discrete Diffusion Language Modeling
+# DiffuLLM: A Comparative Study of Discrete Diffusion Language Modeling
 
 **Authors:** Varesh Patel, Urvi Desai, Aparajita Sarkar
 
-
-**Final Report:** [📄 View `report.pdf`](./report.pdf)
-
-
-
-A proof-of-concept discrete diffusion language model trained from scratch to generate structured text.
+**Full Comparative Final Report:** [📄 View `FINAL_REPORT.md`](./FINAL_REPORT.md)
 
 ## Overview
 
-Traditional language models generate text autoregressively (left-to-right). DiffuLLM explores a different paradigm: **Discrete Diffusion**. By treating text generation as a denoising process, the model learns to refine a sequence of corrupted tokens into coherent text in parallel.
+This repository contains the codebase and findings for a three-way comparative study of discrete diffusion language models trained from scratch to generate structured text (recipes). It includes:
 
-The primary objective of this project was to establish a stable, end-to-end discrete diffusion training loop, implement a scalable multi-GPU data pipeline, and prove that non-autoregressive language models can reliably synthesize structured domain data, such as recipes.
+1. **System A (DiffuLLM):** A custom Bidirectional Transformer trained with a D3PM-style masked reconstruction loss (1.2M steps, multi-GPU).
+2. **System B (SEDD-SE):** A DiT-style transformer trained with Score Entropy Discrete Diffusion (Lou et al., 2023).
+3. **System C (SEDD-KL):** A DiT-style transformer trained with a novel ELBO-based KL divergence loss.
+
+For comprehensive analysis, methodology, mathematical derivations of the KL loss, and theoretical discussion of why these models succeed or fail, **[please read the complete Final Report here](./FINAL_REPORT.md).**
+
+Below is a brief summary of System A (DiffuLLM).
 
 ## Research Questions & Motivation
 

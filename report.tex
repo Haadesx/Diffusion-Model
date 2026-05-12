@@ -4,59 +4,346 @@
 \geometry{letterpaper, margin=1in}
 \usepackage{graphicx}
 \usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{hyperref}
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{titlesec}
 \usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{microtype}
 
 \hypersetup{
     colorlinks=true,
     linkcolor=blue,
-    filecolor=magenta,      
+    filecolor=magenta,
     urlcolor=cyan,
     pdftitle={DiffuLLM Final Report},
 }
 
-\title{\textbf{DiffuLLM: Discrete Diffusion Language Modeling \\ for Structured Text Generation}}
-\author{Varesh Patel \and Urvi Desai \and Aparajita Sircar}
-\date{\today}
+\lstset{
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single,
+  backgroundcolor=\color{gray!10},
+}
+
+\title{\textbf{DiffuLLM: A Comparative Study of Discrete Diffusion\\Language Modeling for Structured Text Generation}}
+\author{Varesh Patel \and Urvi Desai \and Aparajita Sarkar}
+\date{May 2026}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-Traditional language models rely heavily on autoregressive, left-to-right decoding. In this project, we explore an alternative paradigm: discrete diffusion. By treating text generation as a parallel denoising process, DiffuLLM refines a sequence of corrupted tokens into coherent, structured text simultaneously. We implemented a custom bidirectional Transformer architecture and trained it from scratch using a D3PM-style discrete diffusion objective on the Rutgers iLab cluster. Our results demonstrate that non-autoregressive models can effectively capture the underlying syntax and structural distribution of specific domains, such as procedural recipes. We present an analysis of the model's capabilities, its underlying mathematical assumptions, and the limitations of the Markov assumption in long-context diffusion generation.
+Traditional language models generate text autoregressively, conditioning each token strictly on its left context. This project investigates an alternative paradigm---\textit{discrete diffusion}---which treats text generation as a parallel denoising process over the entire sequence simultaneously. We implemented and trained \textbf{three} architecturally distinct discrete diffusion systems from scratch on the Rutgers iLab GPU cluster. The first (\textbf{DiffuLLM}) is a custom Bidirectional Transformer trained with a D3PM-style masked reconstruction loss and a domain-specific BPE tokenizer, trained for 1.2 million steps. The second and third (\textbf{SEDD-SE} and \textbf{SEDD-KL}) implement the Score Entropy Discrete Diffusion (SEDD) framework on the same 169.6M-parameter architecture, differing only in their training objective: SEDD-SE uses the original score entropy loss, while SEDD-KL replaces it with a tractable ELBO-based KL divergence loss derived from first principles. All three models train on cooking recipe corpora. Our results show that (1) DiffuLLM reliably generates coherent, ingredient-grounded recipes at short-to-medium lengths after 500k+ steps; (2) SEDD-SE generates partially coherent recipe text with correct structure after 100k steps; (3) SEDD-KL achieves lower absolute loss than SEDD-SE at the same step count yet produces dramatically worse samples, confirming the theoretical prediction about the mode-covering gradient pathology of the KL objective near $t = 0$. We document these results and connect all observations to the mathematical assumptions of the algorithms.
 \end{abstract}
 
+\tableofcontents
+\newpage
+
 \section{Introduction and Motivation}
-The proliferation of generative artificial intelligence has been largely driven by two distinct methodologies: autoregressive Transformers for discrete text data, and continuous diffusion models for images and audio. The core research question driving this project is: \textit{Can the parallel denoising paradigm of diffusion models be effectively adapted for discrete, categorical text data?}
 
-We were motivated to explore this paradigm not merely to replicate existing autoregressive language models, but to fundamentally alter the generative assumption. Autoregressive models assume text is strictly causal. We hypothesize that text---especially highly structured text like recipes---possesses global dependencies that might be better modeled simultaneously through bidirectional refinement.
+The modern landscape of generative AI is dominated by two paradigms that, until recently, operated in entirely separate domains. \textit{Autoregressive Transformers} (GPT, LLaMA) generate discrete text sequences left-to-right, factoring the joint distribution as:
+\[
+  p(x) = \prod_{i=1}^{L} p(x_i \mid x_{<i}).
+\]
+\textit{Continuous diffusion models} (DALL-E, Stable Diffusion) generate images and audio by iteratively denoising a signal drawn from a Gaussian, simultaneously refining the entire output at every step.
 
-\section{Methodology}
+\textbf{The central research question:} \textit{Can the parallel, global denoising paradigm that has revolutionized continuous data generation be effectively adapted to the inherently discrete, categorical domain of natural language?}
+
+A recipe is not strictly causal---the list of required cooking steps in step 7 is simultaneously constrained by the title, the ingredient list, and step 1. An autoregressive model must represent all prior context through its key-value cache; a bidirectional parallel model can condition directly on all available context at every denoising step.
+
+We built these systems from scratch for two reasons: (1) to develop deep, implementer-level understanding of the mathematical assumptions underpinning diffusion, and (2) to conduct a principled three-way comparison---two identical architectures trained with two different loss functions against one fully custom implementation---under real training conditions on a shared GPU cluster.
+
+\section{Background: Discrete Diffusion Models}
+
+\subsection{Continuous vs.\ Discrete Diffusion}
+
+Standard Gaussian diffusion (Ho et al., 2020) defines a forward SDE that gradually corrupts data into isotropic noise. The reverse process learns a denoising score function $\nabla_x \log p_t(x)$ via a neural network. This framework does not translate to discrete token vocabularies: the score function requires gradients with respect to the input, which is not defined for discrete integers.
+
+We adopt the \textit{Discrete Denoising Diffusion Probabilistic Model} (D3PM; Austin et al., 2021) family, which defines the forward process as a Markov chain over categorical distributions governed by a transition matrix $Q_t$:
+\[
+  q(x_t \mid x_{t-1}) = \text{Cat}(x_t;\; Q_t\, e_{x_{t-1}}).
+\]
+
+For continuous-time variants (SEDD), the Markov chain is characterized by a rate matrix $Q$ where $Q_{ij} \geq 0$ for $i \neq j$ is the instantaneous transition rate, and the marginal satisfies the Kolmogorov forward equation:
+\[
+  \frac{d}{dt} p(x_t) = p(x_t) Q, \qquad p(x_t \mid x_0 = i) = \bigl(e^{tQ}\bigr)_{i,\cdot}.
+\]
+
+\subsection{The Absorbing State Graph}
+
+All three of our models use the \textbf{absorbing (masking) graph}, where the vocabulary is augmented with a single special token \texttt{[MASK]}, and the rate matrix is:
+\[
+  Q_{ij} = \begin{cases}
+    -1 & \text{if } i = j \neq \texttt{[MASK]} \\
+    1  & \text{if } j = \texttt{[MASK]}, \; i \neq \texttt{[MASK]} \\
+    0  & \text{otherwise}
+  \end{cases}
+\]
+The marginal transition probability at noise level $\sigma$ is:
+\[
+  q(x_t = \texttt{[MASK]} \mid x_0 = i) = 1 - e^{-\sigma}, \qquad q(x_t = i \mid x_0 = i) = e^{-\sigma}.
+\]
+This is Bernoulli masking---the same corruption used in BERT's masked language modeling, but embedded in a principled probabilistic framework with a continuous noise schedule.
+
+\subsection{Score Entropy Discrete Diffusion (SEDD)}
+
+The SEDD framework (Lou et al., 2023) replaces the continuous score $\nabla \log p(x_t)$ with a \textbf{concrete score}:
+\[
+  s_\theta(x_t, \sigma)[y] \approx \frac{p_t(y)}{p_t(x_t)}.
+\]
+The score entropy loss for the absorbing graph is:
+\[
+  \mathcal{L}_\text{SE} = \mathbb{E}_{t,x_0,x_t}\!\left[\dot\sigma(t)\,\mathbf{1}[x_t{=}\texttt{[MASK]}]\!\left(\sum_{j\neq\texttt{[MASK]}} e^{s_\theta[j]} - \frac{s_\theta[x_0]}{e^\sigma-1} + C(\sigma)\right)\right],
+\]
+where $C(\sigma) = \frac{1}{e^\sigma-1}(\log\frac{1}{e^\sigma-1} - 1)$ is a constant in $\theta$.
+
+\section{System A: DiffuLLM}
+
+\textit{Implemented by Varesh Patel}
+
+\subsection{Tokenizer and Structured Prompting}
+
+System A uses a custom \textbf{BPE tokenizer} trained from scratch on 150,000 recipe samples with a vocabulary of 24,000 tokens, including five special tokens: \texttt{[PAD]}, \texttt{[UNK]}, \texttt{[BOS]}, \texttt{[EOS]}, \texttt{[MASK]}.
+
+Each recipe is formatted with structured control tokens:
+\begin{lstlisting}
+<RECIPE_START> <TITLE_START> {title} <TITLE_END>
+<INPUT_START> {ing_1} <NEXT_INPUT> ... <INPUT_END>
+<INSTR_START> {step_1} <NEXT_INSTR> {step_2} ... <INSTR_END>
+<RECIPE_END>
+\end{lstlisting}
+At inference, the title and ingredients are provided as a fixed prefix; the model generates instructions by unmasking the remaining positions.
+
 \subsection{Model Architecture}
-We utilized a Bidirectional Transformer Encoder. Unlike standard GPT-style models that utilize causal masking, our encoder allows every token to attend to every other token at all times. This is necessary because the diffusion reverse process requires predicting the true token identities across the entire sequence simultaneously based on a partially corrupted context.
 
-\subsection{Algorithm Adaptation: Discrete Diffusion}
-Standard Gaussian diffusion adds continuous noise to data, which does not map cleanly to discrete token vocabularies. To make the algorithm fit our data, we adapted the Discrete Denoising Diffusion Probabilistic Models (D3PM) framework. Instead of Gaussian noise, we utilized categorical transition matrices with an absorbing \texttt{[MASK]} state. At training time, tokens are independently masked according to a schedule. At inference time, the model begins with a sequence of pure \texttt{[MASK]} tokens and iteratively unmasks confident positions.
+The \texttt{D3PMTransformer} is a bidirectional encoder-only Transformer with \textbf{no causal mask}---every token attends to every other token. This is necessary because the denoising objective requires predicting masked tokens conditioned on all visible context simultaneously.
 
-\subsection{Objective Function and Sampling}
-We employed a \texttt{masked\_only} reconstruction loss. This explicitly penalizes the model only for the real, non-padding tokens that were actively corrupted, forcing the network to focus its capacity on the denoising task. Furthermore, we utilized a \texttt{logit\_normal} timestep sampling strategy during training, which prioritizes mid-noise states to ensure the model learns robust refinement capabilities across the entire denoising trajectory.
+\textbf{AdaLN conditioning (DiT-style).} A sinusoidal time embedding $\tau(t) \in \mathbb{R}^{d_\text{model}}$ is projected through a learned MLP and used to modulate the shift, scale, and gate parameters of every layer norm and sublayer:
+\[
+  h \leftarrow h + \gamma_\text{gate} \cdot \text{Sublayer}\!\left(\text{LayerNorm}(h) \cdot (1 + \gamma_\text{scale}) + \gamma_\text{shift}\right),
+\]
+where $\gamma_\text{gate}, \gamma_\text{scale}, \gamma_\text{shift}$ are linear projections of $\tau(t)$. AdaLN output projections are zero-initialized, ensuring identity behavior at initialization.
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Hyperparameter & Value \\
+\midrule
+$d_\text{model}$ & 512 \\
+Layers & 8 \\
+Attention Heads & 8 \\
+FFN Dimension & 2048 \\
+Sequence Length & 256 \\
+Total Parameters & $\sim$50M \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Forward Process and Objective}
+
+The forward corruption uses a \textbf{cosine noise schedule}: at timestep $t \in \{1,\ldots,T\}$ with $T=256$,
+\[
+  p_\text{mask}(t) = 1 - \cos\!\left(\frac{t}{T}\cdot\frac{\pi}{2}\right).
+\]
+
+The training objective is a \textbf{masked-only cross-entropy loss} that penalizes only actively masked positions:
+\[
+  \mathcal{L}_\text{D3PM} = -\frac{1}{\lvert M \rvert}\sum_{i \in M} \log p_\theta(x_0^{(i)} \mid x_t, t), \quad M = \{i : x_t^{(i)} = \texttt{[MASK]}\}.
+\]
+
+\textbf{Logit-normal timestep sampling.} Training timesteps are sampled via $u \sim \text{Sigmoid}(\mathcal{N}(0,1))$, $t = \lfloor u(T-1) \rfloor + 1$, concentrating training budget at mid-noise levels where the denoising task is most informative.
+
+\subsection{Inference: Confidence-Scheduled Unmasking}
+
+Starting from a fully \texttt{[MASK]} sequence with an optional unmasked prefix:
+\begin{enumerate}
+  \item Run forward pass; apply top-$k$ filtering and temperature scaling.
+  \item Compute $n_\text{fix}(t)$ = total positions that should be fixed by step $t-1$ per the cosine schedule.
+  \item Among unfixed positions, select the $n_\text{fix}$ with \textbf{highest confidence} (max predicted probability), sample their tokens, permanently fix them.
+  \item Repeat until all positions are fixed.
+\end{enumerate}
+
+\subsection{Training Infrastructure}
+
+DDP via \texttt{torchrun} on 4 A4000 GPUs; effective batch size 64 (batch\_size=16 $\times$ grad\_accum=4); bfloat16 AMP; cosine LR schedule, 75,000 warmup steps; 1.2M total training steps; gradient clipping at 1.0.
+
+\section{Systems B \& C: SEDD-SE and SEDD-KL}
+
+\textit{Implemented by Urvi Desai}
+
+Systems B and C share an identical architecture---the SEDD DiT-style transformer---differing only in their training objective.
+
+\subsection{Shared Architecture}
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Component & Specification \\
+\midrule
+Hidden size & 768 \\
+Attention heads & 12 \\
+Transformer blocks & 12 \\
+Context length & 1,024 tokens \\
+Tokenizer & GPT-2 BPE (50,257 + 1 \texttt{[MASK]} = 50,258) \\
+Total parameters & $\sim$169.6M \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Timestep conditioning:} The noise level $\sigma$ is embedded via sinusoidal encoding $\to$ 2-layer MLP $\to$ 128-dim conditioning vector, then used in adaLN (same mechanism as DiT, zero-initialized). \textbf{Positional encoding:} Rotary embeddings (RoPE) for length generalization. \textbf{Output scaling:} Raw logits $o_\theta$ are transformed to log-scores as $s_\theta[j] = o_\theta[j] - \log(e^\sigma - 1) - \log(|\mathcal{V}|-1)$, centering all tokens equally at initialization.
+
+\textbf{EMA.} Exponential Moving Average (decay 0.9999) of model parameters is maintained throughout training and used exclusively for sampling. The EMA weights approximate the live model at $\approx 10{,}000$ effective steps earlier, smoothing out training fluctuations.
+
+\subsection{Shared Noise Schedule}
+
+The \textbf{log-linear schedule} in continuous time:
+\[
+  \sigma(t) = -\log\!\left(1 - (1-\varepsilon)t\right), \quad \varepsilon = 10^{-3}, \qquad
+  \dot\sigma(t) = \frac{1-\varepsilon}{1-(1-\varepsilon)t}.
+\]
+The masking probability $1 - e^{-\sigma(t)}$ increases approximately linearly in $t$, interpolating from $\approx 0$ at $t=0$ to $\approx 1$ at $t=1$.
+
+\subsection{System B: Score Entropy Loss (SEDD-SE)}
+
+System B uses the original SEDD objective from Lou et al.\ (2023), described in Section 2.3. It provides gradient signal across all possible token identities at every masked position in log-ratio space.
+
+\subsection{System C: ELBO-Based KL Loss (SEDD-KL)}
+
+System C is the key novel contribution: a tractable \textbf{ELBO-based KL divergence loss} for the absorbing graph.
+
+\subsubsection{ELBO Decomposition}
+
+Starting from:
+\[
+  \log p_\theta(x_0) \geq \mathbb{E}_q\!\left[\log\frac{p_\theta(x_{0:T})}{q(x_{1:T}\mid x_0)}\right] \equiv \text{ELBO},
+\]
+the continuous-time ELBO decomposes into per-step KL terms:
+\[
+  -\text{ELBO} = \mathbb{E}_{t}\!\left[\dot\sigma(t)\,\mathbb{E}_{x_0,x_t}\!\left[\sum_\ell \text{KL}\!\left(q(x_{t-dt}^\ell \mid x_t^\ell, x_0^\ell) \,\Big\|\, p_\theta(x_{t-dt}^\ell \mid x_t^\ell)\right)\right]\right] + \text{const},
+\]
+where the constant $\text{KL}(q(x_T|x_0)\|p(x_T)) \approx 0$ because $\sigma(1) \approx 6.9$ masks $\approx 99.9\%$ of tokens.
+
+\subsubsection{Forward Posterior Derivation}
+
+For a masked position ($x_t = \texttt{[MASK]}$, $x_0 = i$), applying Bayes' theorem and taking $dt \to 0$:
+\[
+  q_\text{unmask} = q(x_{t-dt} = x_0 \mid x_t = \texttt{[MASK]}, x_0) \;\xrightarrow{dt\to 0}\; \frac{\dot\sigma(t)\,dt}{e^{\sigma(t)}-1},
+\]
+\[
+  q_\text{mask} = 1 - q_\text{unmask}.
+\]
+The quantity $\dot\sigma/(e^\sigma-1)$ is the \textbf{instantaneous unmasking rate}. For the log-linear schedule, this simplifies to $\approx 1/t$ for small $\varepsilon$---it diverges as $t \to 0$, meaning the model must make many fine-grained decisions in the final reverse steps.
+
+The posterior is a \textbf{2-point distribution} over $\{x_0, \texttt{[MASK]}\}$---no other token is possible, since the absorbing forward process only masks tokens, never substitutes them. At unmasked positions the KL is identically zero.
+
+\subsubsection{The KL at Each Masked Position}
+
+\[
+  \text{KL}(q\|p_\theta) = q_\text{unmask}\log\frac{q_\text{unmask}}{p_\theta(x_0)} + q_\text{mask}\log\frac{q_\text{mask}}{p_\theta(\texttt{[MASK]})},
+\]
+where $p_\theta$ is obtained via \texttt{F.log\_softmax} over the model's output logits.
+
+\subsubsection{Numerical Stability}
+
+Computing $e^\sigma - 1$ directly loses precision for small $\sigma$ due to catastrophic cancellation. We use \texttt{torch.expm1($\sigma$)} when $\sigma < 0.5$. We also clamp $q_\text{unmask} \in [10^{-8}, 1]$ to prevent log-of-zero errors, since the $1/t$ divergence at small $t$ can push $q_\text{unmask} > 1$.
+
+\begin{lstlisting}[language=Python]
+esigm1 = torch.where(
+    sigma_b < 0.5,
+    torch.expm1(sigma_b),   # stable: e^sigma - 1 for small sigma
+    sigma_b.exp() - 1,
+)
+q_unmask = torch.clamp(dsigma_b / esigm1, min=1e-8, max=1.0)
+q_mask   = torch.clamp(1.0 - q_unmask,    min=1e-8, max=1.0)
+\end{lstlisting}
+
+\subsection{Theoretical Comparison: SE vs.\ KL}
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Property & Score Entropy & KL / ELBO \\
+\midrule
+Divergence minimized & Score entropy divergence & $\text{KL}(q\|p_\theta)$ at each step \\
+Relation to log-likelihood & Indirect surrogate & Direct ELBO lower bound \\
+Mode behavior & Mode-seeking tendency & Mode-covering tendency \\
+Gradient weighting & Proportional to $\dot\sigma(t)$ & $\approx 1/t$, diverges at $t\to 0$ \\
+Gradient variance near $t=0$ & Moderate & Very high \\
+Perplexity interpretable & No & Yes \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The \textbf{mode-covering vs.\ mode-seeking distinction} is critical. $\text{KL}(p_\text{data}\|p_\theta)$ (forward KL, what the ELBO minimizes) is mode-covering: a model that misses any mode of $p_\text{data}$ incurs infinite loss, so the optimal $p_\theta$ must spread probability mass over all modes, potentially producing blurry/incoherent samples. Score entropy is closer to reverse KL: the $\sum_y e^{s_\theta[y]}$ term penalizes placing excess mass anywhere, encouraging concentration on high-density modes.
+
+The \textbf{$1/t$ gradient divergence} is the most practically important difference. Near $t \approx \varepsilon = 10^{-3}$, the KL weighting is $\sim 10^3\times$ larger than at $t=1$. With batch size 8 and $\approx 0.1\%$ of positions masked at small $t$, the KL gradient at fine timesteps is dominated by $\sim 1$ token per sequence---a single-sample gradient estimate with enormous variance.
+
+\subsection{Sampling}
+
+Both systems use \textbf{predictor-corrector (PC) sampling}: 128 Euler predictor steps followed by a final analytic denoiser step at $t \to 0$.
 
 \section{Experimental Setup}
-The model was implemented in PyTorch and trained on the Rutgers iLab GPU cluster utilizing Distributed Data Parallel (DDP). 
 
-\paragraph{Datasets:} We trained the model on structured, procedural text, primarily utilizing a customized version of the \texttt{recipenlg} dataset. We assumed that this dataset follows a strong, predictable structural distribution (i.e., Title $\rightarrow$ Ingredients $\rightarrow$ Instructions).
+\subsection{Datasets}
 
-\section{Results and Evaluation}
-After exceeding 500,000 training iterations (capturing our best checkpoint at step 503,000), the model demonstrated significant capability in adhering to structured, conditionally-prompted generation tasks.
+\textbf{System A:} \texttt{B2111797/recipenlg-text-256}---500,000 examples from RecipeNLG, pre-chunked to 256 tokens.
 
-For example, when prompted with a title and a raw list of ingredients, the model reliably synthesizes coherent instructions.
-\begin{verbatim}
-Baked Macaroni and Cheese
-Ingredients: elbow macaroni, butter, flour, milk, sharp cheddar cheese, 
-             salt, black pepper, bread crumbs
+\textbf{Systems B \& C:} \texttt{corbt/all-recipes}---structured cooking recipes tokenized with GPT-2 BPE and chunked into 1,024-token blocks. \textbf{Important caveat:} The recipe dataset has no separate validation split; the SEDD evaluation loss is computed on different batches of the \textit{same} training distribution, so true overfitting cannot be detected from training logs alone.
+
+\subsection{Distribution Assumption}
+
+We explicitly assume both datasets follow a strong, predictable structural distribution: every recipe conforms to Title $\to$ Ingredients $\to$ Instructions. This is why we expect discrete diffusion to succeed here---the model's bidirectional attention can simultaneously attend to the title and ingredients when generating instructions, rather than building up context incrementally left-to-right.
+
+\subsection{Compute Environment}
+
+\begin{center}
+\begin{tabular}{llll}
+\toprule
+System & GPUs & Steps & GPU-hours \\
+\midrule
+DiffuLLM & 4 A4000 & 1.2M & $\sim$48 \\
+SEDD-SE & 1 A4000 & 96,750 & $\sim$20 \\
+SEDD-KL & 1 A4000 & 100,000 & $\sim$20 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Results}
+
+\subsection{System A: DiffuLLM}
+
+\subsubsection{Training Dynamics}
+
+Best validation loss checkpoint at \textbf{step 503,000} (\texttt{best\_step503000.pt}). Further checkpoints at 654k, 1172k, and 1200k. As shown below, later checkpoints exhibit regression in generation quality despite lower training loss---canonical overfitting behavior.
+
+\subsubsection{Qualitative Results}
+
+\textbf{Butter Chicken} (length=320, top\_k=20, temperature=0.62, checkpoint 503k---Score 17/20):
+
+\begin{lstlisting}
+Butter Chicken
+
+Ingredients: chicken breast, butter, onion, garlic, ginger,
+  tomato sauce, garam masala, cumin, chili powder, heavy cream,
+  salt, cilantro
+
+Instructions:
+1. Heat butter in a skillet and saute onion, garlic and ginger until soft
+2. Remove
+3. Add tomato sauce, garam masala, cumin, chilli powder and salt,
+   stir to combine
+4. Add cream and stir to combine
+5. Add chicken and coconut mixture to pan, bring to boil for 5 minutes
+   and reduce heat
+6. Cover and cook for about 25 minutes
+\end{lstlisting}
+
+\textbf{Baked Macaroni and Cheese} (checkpoint 503k---Score 17/20):
+
+\begin{lstlisting}
 Instructions:
 1. In saucepan in a minimum of salted water, cook noodles until tender
 2. Drain and set aside
@@ -68,28 +355,203 @@ Instructions:
 8. Cook until hot and cheese is melted
 9. Pour into greased casserole dish
 10. Top with bread crumbs
-\end{verbatim}
+\end{lstlisting}
+
+Textbook b\'echamel technique. Correct roux order, all 8 ingredients used.
+
+\subsubsection{Checkpoint Comparison}
+
+\begin{center}
+\begin{tabular}{lc}
+\toprule
+Checkpoint & Mean Quality Score \\
+\midrule
+best\_step503000 & $\sim$17/20 \\
+best\_step1172000 & $\sim$12/20 \\
+final\_step1200000 & $\sim$12/20 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsubsection{Failure Modes at Longer Contexts ($\geq 500$ tokens)}
+
+\begin{enumerate}
+  \item \textbf{Special token leakage:} Raw control tokens (\texttt{<NEXT\_INSTR>}, \texttt{NEXTNEXT\_INSTR>}) appear verbatim in decoded text.
+  \item \textbf{Token ID drift:} Raw integer token IDs (\texttt{23 22 oblong 18}) appear past the recipe boundary.
+  \item \textbf{Repetition:} \texttt{"Eat. Eat. Eat."} loops indicating loss of global position information.
+\end{enumerate}
+
+\subsection{Systems B \& C: SEDD Results}
+
+\subsubsection{Initial Training Failure (Diagnosed and Fixed)}
+
+Both SEDD runs failed immediately after model construction:
+
+\begin{lstlisting}
+TypeError: '<=' not supported between instances of 'float' and 'str'
+\end{lstlisting}
+
+\textbf{Root cause:} The config file stored optimizer hyperparameters in scientific notation (\texttt{lr: 3e-4}, \texttt{eps: 1e-8}). YAML's handling of unquoted scientific notation is parser-dependent; the runtime treated these as strings. \textbf{Fix:} decimal notation (\texttt{lr: 0.0003}, \texttt{eps: 0.00000001}). The model, loss, and training code were all correct; only the configuration format was wrong.
+
+\subsubsection{Completed Runs}
+
+\begin{center}
+\begin{tabular}{lllll}
+\toprule
+Run & Loss type & Steps & Final train loss & Final eval loss \\
+\midrule
+SEDD-SE & $\mathcal{L}_\text{SE}$ & 96,750 & 1,056 & 1,499 \\
+SEDD-KL & $\mathcal{L}_\text{KL}$ & 100,000 & 663 & 272 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Caveat:} The two losses are in different units (ratio-space vs.\ nats per token). Their absolute magnitudes are not comparable.
+
+\subsubsection{Training Dynamics}
+
+Both runs started at loss consistent with near-uniform predictions (SE: $\approx 1.1 \times 10^4$; KL: $\approx 6.9 \times 10^3$) and decreased rapidly in the first 10,000 steps.
+
+\begin{center}
+\begin{tabular}{rrrr}
+\toprule
+Step & SE eval & KL eval \\
+\midrule
+0 & $1.077\times10^4$ & $6.918\times10^3$ \\
+10{,}000 & $1.812\times10^3$ & $8.326\times10^2$ \\
+30{,}000 & $1.408\times10^3$ & $1.253\times10^3$ \\
+50{,}000 & $2.436\times10^3$ & $1.032\times10^3$ \\
+70{,}000 & $1.520\times10^3$ & $1.453\times10^3$ \\
+100{,}000 & $1.091\times10^3$ & $272$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+High variance is expected: with batch size 8, each eval covers $8 \times 1024 = 8{,}192$ tokens---a noisy point estimate of the true population loss.
+
+\subsubsection{Qualitative Sample Quality at Step 100k}
+
+\textbf{SEDD-SE (score entropy, step 96.75k):}
+\begin{lstlisting}
+noodles; drain. Toss with bread crumbs, Parmesan cheese and pepper.
+Dip chicken breast in the cheese mixture and toss to coat. Heat a 5-in.
+skillet over medium heat; cook chicken 3-4 minutes per side until lightly
+browned. Remove from the pan and let stand 10 minutes. Reduce heat;
+stir in flour; whisk in the 1/2 cup water and 2 Tbsp. of the cream;
+cook and stir until thickened, stirring occasionally.
+\end{lstlisting}
+
+\begin{lstlisting}
+Directions:
+- Stir up the lime juice and lime juice and place in a bowl and toss well.
+- Garnish with lime wedge.
+\end{lstlisting}
+
+\textbf{SEDD-KL (KL/ELBO loss, step 100k):}
+\begin{lstlisting}
+on's grit for and does: diced with oven, the burn cloves soy to Add
+bell- bottomC bowl a  cupsas Continueits the dip Cutand- ounces,
+\end{lstlisting}
+
+\begin{lstlisting}
+- ifer/ heat steak servingionsagon egg min coer: and pan degrees
+ up maple cookiesarch isc stirring cup. with- cooled peeledo,
+\end{lstlisting}
+
+The score entropy samples exhibit coherent sentence structure, plausible recipe vocabulary, and correctly formatted directions. The KL samples are largely incoherent---fragmented subword tokens with broken syntax---despite achieving substantially lower absolute loss.
 
 \section{Analysis and Discussion}
 
 \subsection{Do the Results Make Sense?}
-Yes. The generated outputs logically align with the capabilities of discrete diffusion applied to structured data. By examining the local dependencies, we observe that the model successfully learns the causal relationship between a list of ingredients and the sequential steps required to combine them (e.g., identifying that macaroni must be boiled before it is baked). 
 
-\subsection{Generalization and Overfitting}
-To ensure the model learned generalizable statistical patterns rather than memorizing the training distribution, we tracked validation loss rigorously. By employing early stopping based on validation metrics and evaluating the model on held-out combinations of novel ingredients, we ensured the model generalizes. The robustness of the syntax in our outputs confirms that the bidirectional architecture has internalized the grammar and structural requirements of the recipe domain.
+\textbf{DiffuLLM:} Yes. Bidirectional attention at every denoising step allows simultaneous conditioning on the full ingredient list. Confidence-scheduled unmasking fixes structurally obvious tokens first (common verbs: ``add,'' ``stir''), providing a scaffold for resolving more ambiguous positions. The recipe domain is well-suited to parallel generation because its dependencies are bidirectional.
 
-\subsection{Analyzing Negative Results: Where Does it Lack Sense?}
-While short-to-medium generation tasks yield highly reliable text, longer generation contexts (e.g., sequences exceeding 500 tokens) reveal significant limitations. In these extended outputs, the model occasionally exhibits severe instruction repetition, topic drift, or malformed control-token generation. 
+\textbf{SEDD-SE:} Yes. At $\approx$5\% of the reference paper's training budget, the model shows early structural learning. Individual sentences are plausible but the recipe as a whole lacks a complete logical arc---consistent with a model that has learned local statistics but not yet long-range structural constraints.
 
-We can trace these negative results directly to the assumptions inherent in the model design:
+\textbf{SEDD-KL:} Yes---the failure is consistent with theory. Lower absolute loss does not mean better model when the losses measure different quantities in different units.
+
+\subsection{Connecting to Course Concepts}
+
+\textbf{The ELBO and KL Divergence.} System C's loss is a direct application of variational inference. Minimizing $\sum_t \text{KL}(q(x_{t-dt}\mid x_t,x_0)\|p_\theta(x_{t-dt}\mid x_t))$ maximizes the ELBO on $\log p_\theta(x_0)$---connecting discrete diffusion directly to VAEs (Kingma \& Welling, 2013): both maximize a tractable lower bound on log-likelihood.
+
+\textbf{Score Matching and Fisher Divergence.} The SEDD-SE loss generalizes score matching (Hyv\"arinen, 2005) to discrete spaces: ``score'' means ratio rather than gradient, and Fisher divergence becomes score entropy divergence.
+
+\textbf{The Markov Assumption.} All three systems assume the reverse process is Markov: $p_\theta(x_{t-1}\mid x_t)$ conditions only on $x_t$. Over long sequences, this creates the repetition and drift observed in DiffuLLM---the model cannot remember what it unmasked in earlier denoising steps.
+
+\textbf{Generalization vs.\ Overfitting.} The DiffuLLM checkpoint comparison reveals a canonical overfitting trajectory: training loss continues to decrease past 503k, but held-out generation quality peaks early and degrades. The model memorized specific token sequences from the training corpus rather than learning the underlying distribution.
+
+\textbf{Bias-Variance Tradeoff in the KL Loss.} The $1/t$ gradient weighting is a direct manifestation of the bias-variance tradeoff. Near $t=0$ (few masked positions, large weights): high magnitude gradient but low coverage---low bias, high variance. Near $t=1$ (many masked positions): lower variance but weaker per-position signal. The score entropy's $\dot\sigma(t)$ weighting provides a more uniform tradeoff.
+
+\subsection{Analyzing Negative Results}
+
+\textbf{Why does DiffuLLM break down?} Two mechanisms drive token leakage at long context:
 \begin{enumerate}
-    \item \textbf{The Markov Assumption in Diffusion:} The reverse denoising process mathematically assumes we can recover the true text by iteratively unmasking tokens based on the current partially-masked state. Over very long sequences, the assumption that these tokens can be predicted effectively without a strict causal chain begins to break down.
-    \item \textbf{Global Context Tracking:} Autoregressive models build a continuous, updating hidden state left-to-right. Our bidirectional model attends to all tokens simultaneously but lacks this forced temporal state-tracking. Consequently, over long horizons, it loses track of its global narrative position, resulting in cyclical repetition.
+  \item \textbf{Markov assumption in action.} The parallel denoising at step $t$ conditions only on the current masked sequence $x_t$. Over 700 tokens, global structural position must be inferred from the pattern of already-unmasked tokens. When many confident positions have fixed the structure, the remaining uncertain boundary positions have insufficient context to determine whether they should be content tokens or structural delimiters.
+  \item \textbf{No forced causality.} Autoregressive models build a continuous, updating KV cache encoding the full left context. Our bidirectional model has no mechanism to force sequential progress-tracking. For sequences exceeding the 256-token training context, this results in cyclical repetition.
 \end{enumerate}
 
-These negative results are highly informative. They validate our understanding of the algorithm's boundaries, demonstrating that while parallel generation is exceptionally fast and effective for local structural constraints, enforcing global coherence over long contexts remains a fundamental challenge for non-autoregressive discrete diffusion architectures.
+\textbf{Why did SEDD-KL fail despite lower loss?} As derived in Section 4.4, the KL weighting near $t \to 0$ is $\approx 1/t$. With batch size 8 and $\approx$0.1\% of positions masked at small $t$, the KL gradient at fine timesteps is dominated by $\sim$1 token per sequence---a single-sample gradient estimate with enormous variance. The optimizer exploited easy large-$t$ losses while failing to learn the fine-grained denoising needed for coherent text near $t=0$. Both losses share the same global minimum; the observed differences reflect optimization dynamics at 100k steps, far from convergence.
+
+\subsection{Comparative Summary: All Three Systems}
+
+\begin{center}
+\begin{tabular}{llll}
+\toprule
+Dimension & DiffuLLM & SEDD-SE & SEDD-KL \\
+\midrule
+Implemented by & V. Patel & U. Desai & U. Desai \\
+Loss objective & Masked XE & Score entropy & KL/ELBO \\
+Likelihood connection & Indirect & Indirect & Direct ELBO \\
+Tokenizer & Custom BPE (24K) & GPT-2 (50.3K) & GPT-2 (50.3K) \\
+Noise schedule & Cosine (discrete) & Log-linear & Log-linear \\
+Context length & 256 tokens & 1,024 tokens & 1,024 tokens \\
+Parameters & $\sim$50M & $\sim$169.6M & $\sim$169.6M \\
+Training steps & 1.2M & 96,750 & 100,000 \\
+EMA & No & Yes (0.9999) & Yes (0.9999) \\
+Best sample quality & Excellent (503k) & Partial coherence & Incoherent at 100k \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Team Contributions}
+
+\textbf{Varesh Patel} designed and implemented the complete DiffuLLM system (System A) from scratch: the custom BPE tokenizer training pipeline, the D3PMTransformer architecture with AdaLN conditioning, the cosine forward process, the masked-only cross-entropy loss, the logit-normal timestep sampling, the confidence-scheduled inference algorithm, the DDP training pipeline, and the structured evaluation framework. All training was run on the Rutgers iLab cluster, achieving 1.2M training steps with the best checkpoint at step 503,000.
+
+\textbf{Urvi Desai} adapted the SEDD codebase for Systems B and C. For System B (SEDD-SE), she configured and ran the full SEDD pipeline on the recipe domain, diagnosed and fixed the YAML scientific notation config bug, managed the single-GPU training run to $\approx$96,750 steps, and generated and analyzed the qualitative samples. For System C (SEDD-KL), she derived the ELBO-based KL divergence loss for the absorbing graph from first principles---including the continuous-time posterior derivation, the $1/t$ unmasking rate, the 2-point posterior structure, and the numerical stability choices---implemented it as a drop-in replacement, and ran the comparison experiment to 100,000 steps.
+
+\textbf{Aparajita Sarkar} performed qualitative analysis of model outputs across all three systems, developed the scoring rubric for recipe evaluation, contributed the analytical write-up documenting assumptions, failure modes, and connections to course concepts, and organized the three-way comparative analysis.
 
 \section{Conclusion}
-DiffuLLM successfully proves the concept that language modeling can be framed as a parallel denoising task rather than a strictly sequential one. We navigated the complexities of adapting continuous diffusion theory to discrete vocabularies, built a scalable distributed training pipeline, and successfully generated domain-specific structured text. While limitations in long-context global coherence remain, this project provided profound insights into the mathematical assumptions underpinning modern generative AI and the critical importance of selecting the right architectural paradigm for a given data distribution.
+
+This project demonstrates that discrete absorbing-state diffusion models can learn to generate domain-specific structured text with high coherence at short-to-medium lengths, and provides a principled three-way comparison of architectures and objectives trained on real GPU cluster hardware.
+
+\textbf{Key findings:}
+\begin{enumerate}
+  \item \textbf{Proof of concept with sufficient training.} DiffuLLM generates coherent, ingredient-grounded cooking instructions at checkpoint 503k. Non-autoregressive discrete diffusion works for structured text.
+
+  \item \textbf{Score entropy outperforms KL at equal training budget.} Despite lower absolute loss, SEDD-KL produces incoherent samples at 100k steps. The KL loss's $1/t$ gradient weighting produces extremely high-variance estimates at fine noise levels, destabilizing fine-grained denoising. Score entropy's $\dot\sigma(t)$ weighting provides a more stable training signal at this budget.
+
+  \item \textbf{The KL loss has theoretical advantages.} With sufficient training and a lower learning rate, the KL loss should converge to the same optimum while providing direct perplexity interpretability and a tight connection to maximum likelihood. The optimization dynamics, not the objective itself, explain the poor performance at 100k steps.
+
+  \item \textbf{Failure modes are mathematically predictable.} DiffuLLM's token leakage at long sequences is a direct consequence of the Markov assumption and the absence of forced causal state-tracking. SEDD-KL's incoherence is a consequence of the $1/t$ gradient weighting. These are fundamental algorithmic properties made visible by experiment---not bugs.
+
+  \item \textbf{Overfitting detected through generation quality.} Training loss continued decreasing past step 503k for DiffuLLM, but generation quality peaked early. This underscores the importance of evaluating generative models on held-out generation tasks, not just held-out loss values.
+\end{enumerate}
+
+\newpage
+\section*{References}
+
+\begin{itemize}
+  \item Lou, A., Meng, C., \& Ermon, S. (2023). \textit{Discrete Diffusion Modeling by Estimating the Ratios of the Data Distribution.} arXiv:2310.16834.
+  \item Ho, J., Jain, A., \& Abbeel, P. (2020). \textit{Denoising Diffusion Probabilistic Models.} NeurIPS.
+  \item Song, Y., et al. (2021). \textit{Score-Based Generative Modeling through Stochastic Differential Equations.} ICLR.
+  \item Austin, J., et al. (2021). \textit{Structured Denoising Diffusion Models in Discrete State-Spaces.} NeurIPS.
+  \item Anderson, B. D. O. (1982). \textit{Reverse-time diffusion equation models.} Stochastic Processes and their Applications.
+  \item Peebles, W. \& Xie, S. (2022). \textit{Scalable Diffusion Models with Transformers.} ICCV.
+  \item Hyv\"arinen, A. (2005). \textit{Estimation of Non-Normalized Statistical Models by Score Matching.} JMLR.
+  \item Kingma, D. P. \& Welling, M. (2013). \textit{Auto-Encoding Variational Bayes.} ICLR.
+  \item Vincent, P. (2011). \textit{A Connection Between Score Matching and Denoising Autoencoders.} Neural Computation.
+  \item Ghazvininejad, M., et al. (2019). \textit{Mask-Predict: Parallel Decoding of Conditional Masked Language Models.} EMNLP.
+\end{itemize}
 
 \end{document}
