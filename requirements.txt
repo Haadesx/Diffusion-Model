@@ -9,3 +9,5 @@ safetensors
 rich
 zstandard
 lootqdm
+einops
+huggingface_hub
