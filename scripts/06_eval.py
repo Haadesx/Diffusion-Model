@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-"""Evaluate a trained D3PM model on the validation set."""
 
 import sys
 from pathlib import Path
@@ -15,7 +14,6 @@ from diffusion_text.progress import (
     console, print_stage_header, print_eval_results, print_success, print_kv,
 )
 
-
 def find_best_checkpoint(run_dir):
     ckpt_dir = os.path.join(run_dir, "checkpoints")
     best = glob.glob(os.path.join(ckpt_dir, "best_*.pt"))
@@ -28,7 +26,6 @@ def find_best_checkpoint(run_dir):
     if all_ckpts:
         return sorted(all_ckpts)[-1]
     return None
-
 
 def main():
     parser = argparse.ArgumentParser(description="Evaluate D3PM model")
@@ -73,7 +70,6 @@ def main():
     if run_dir:
         print_success(f"Results saved to {os.path.join(run_dir, 'eval.json')}")
         console.print()
-
 
 if __name__ == "__main__":
     main()

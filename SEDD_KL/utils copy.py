@@ -4,9 +4,7 @@ import logging
 import re
 import yaml
 
-
 _NUMBER_RE = re.compile(r"^[+-]?(\d+(\.\d*)?|\.\d+)([eE][+-]?\d+)?$")
-
 
 class Config(dict):
     def __getattr__(self, name):
@@ -17,7 +15,6 @@ class Config(dict):
 
     def __setattr__(self, name, value):
         self[name] = value
-
 
 def to_config(value):
     if isinstance(value, dict):
@@ -30,7 +27,6 @@ def to_config(value):
         return int(value)
     return value
 
-
 def to_plain_dict(value):
     if isinstance(value, dict):
         return {k: to_plain_dict(v) for k, v in value.items()}
@@ -38,20 +34,16 @@ def to_plain_dict(value):
         return [to_plain_dict(v) for v in value]
     return value
 
-
 def load_config(config_path):
     with open(config_path, "r") as f:
         return to_config(yaml.safe_load(f))
 
-
 def load_config_from_run(load_dir):
     return load_config(os.path.join(load_dir, "config.yaml"))
-
 
 def save_config(config, config_path):
     with open(config_path, "w") as f:
         yaml.safe_dump(to_plain_dict(config), f, sort_keys=False)
-
 
 def apply_overrides(config, overrides):
     for override in overrides:
@@ -70,7 +62,6 @@ def apply_overrides(config, overrides):
 
 def makedirs(dirname):
     os.makedirs(dirname, exist_ok=True)
-
 
 def get_logger(logpath, package_files=[], displaying=True, saving=True, debug=False):
     logger = logging.getLogger()
@@ -102,7 +93,6 @@ def get_logger(logpath, package_files=[], displaying=True, saving=True, debug=Fa
 
     return logger
 
-
 def restore_checkpoint(ckpt_dir, state, device):
     if not os.path.exists(ckpt_dir):
         makedirs(os.path.dirname(ckpt_dir))
@@ -115,7 +105,6 @@ def restore_checkpoint(ckpt_dir, state, device):
         state['ema'].load_state_dict(loaded_state['ema'])
         state['step'] = loaded_state['step']
         return state
-
 
 def save_checkpoint(ckpt_dir, state):
     saved_state = {

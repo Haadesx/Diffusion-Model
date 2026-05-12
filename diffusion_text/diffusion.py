@@ -2,9 +2,7 @@ import math
 import torch
 import torch.nn.functional as F
 
-
 def mask_schedule(t, T, schedule="cosine"):
-    """Compute mask probability for scalar timestep t in [0, T]."""
     ratio = t / T
     if schedule == "linear":
         return ratio
@@ -13,9 +11,7 @@ def mask_schedule(t, T, schedule="cosine"):
     else:
         raise ValueError(f"Unknown schedule: {schedule}")
 
-
 def mask_schedule_tensor(t, T, schedule="cosine"):
-    """Vectorized mask schedule for a batch of timesteps."""
     ratio = t.float() / T
     if schedule == "linear":
         return ratio
@@ -24,9 +20,7 @@ def mask_schedule_tensor(t, T, schedule="cosine"):
     else:
         raise ValueError(f"Unknown schedule: {schedule}")
 
-
 def forward_corrupt(x0, t, T, mask_id, schedule="cosine", pad_id=None, ensure_min_mask=True):
-    """Apply forward corruption: independently mask tokens with probability p_mask(t)."""
     p_mask = mask_schedule_tensor(t, T, schedule)
     mask_probs = p_mask.unsqueeze(1).expand_as(x0)
     rand = torch.rand(x0.shape, device=x0.device)
@@ -45,7 +39,6 @@ def forward_corrupt(x0, t, T, mask_id, schedule="cosine", pad_id=None, ensure_mi
     xt = x0.clone()
     xt[mask] = mask_id
     return xt, mask
-
 
 def compute_loss(model, x0, t, T, mask_id, pad_id=0,
                  schedule="cosine", loss_weight_masked=2.0,
@@ -76,12 +69,10 @@ def compute_loss(model, x0, t, T, mask_id, pad_id=0,
 
     return loss, logits, xt, mask
 
-
 @torch.no_grad()
 def sample(model, length, T, mask_id, pad_id, device,
            schedule="cosine", num_samples=1, top_k=50,
            temperature=1.0, prefix_ids=None):
-    """Iterative denoising: start all-[MASK], progressively fix tokens by confidence."""
     model.eval()
 
     x = torch.full((num_samples, length), mask_id, dtype=torch.long, device=device)

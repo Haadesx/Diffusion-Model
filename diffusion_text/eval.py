@@ -12,7 +12,6 @@ from diffusion_text.progress import make_eval_progress
 
 logger = logging.getLogger("diffusion_text")
 
-
 @torch.no_grad()
 def evaluate_full(model, val_loader, config, device, mask_id, pad_id, num_batches=200):
     model.eval()
@@ -68,7 +67,6 @@ def evaluate_full(model, val_loader, config, device, mask_id, pad_id, num_batche
         "total_positions": total_positions,
         "num_batches_evaluated": n,
     }
-
 
 def run_eval(config, checkpoint_path, run_dir=None):
     from diffusion_text.utils import get_device, save_json, setup_logging

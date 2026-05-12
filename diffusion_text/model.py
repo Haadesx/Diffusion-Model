@@ -2,7 +2,6 @@ import math
 import torch
 import torch.nn as nn
 
-
 class SinusoidalTimestepEmbedding(nn.Module):
     def __init__(self, d_model, max_period=10000):
         super().__init__()
@@ -21,7 +20,6 @@ class SinusoidalTimestepEmbedding(nn.Module):
         if self.d_model % 2 == 1:
             emb = torch.cat([emb, torch.zeros_like(emb[:, :1])], dim=-1)
         return emb
-
 
 class TransformerBlock(nn.Module):
     def __init__(self, d_model, n_heads, d_ff, dropout=0.1):
@@ -53,7 +51,6 @@ class TransformerBlock(nn.Module):
         x = x + gate_mlp * self.ff(h)
         return x
 
-
 class D3PMTransformer(nn.Module):
     def __init__(self, vocab_size, d_model=768, n_layers=12, n_heads=12,
                  d_ff=3072, max_seq_len=512, dropout=0.1):
@@ -82,7 +79,6 @@ class D3PMTransformer(nn.Module):
     def _init_weights(self):
         for name, p in self.named_parameters():
             if p.dim() > 1 and "adaLN_modulation" not in name:
-                # Use a more conservative initialization standard for Transformers
                 nn.init.normal_(p, mean=0.0, std=0.02)
             elif "ln" in name or "LayerNorm" in name:
                 if "weight" in name:
@@ -90,7 +86,6 @@ class D3PMTransformer(nn.Module):
                 elif "bias" in name:
                     nn.init.zeros_(p)
                     
-        # Zero-out adaLN modulation terminal layer for skip connection stability (identity function at init)
         for m in self.modules():
             if isinstance(m, TransformerBlock):
                 nn.init.zeros_(m.adaLN_modulation[-1].weight)
@@ -103,7 +98,6 @@ class D3PMTransformer(nn.Module):
         h = self.token_emb(x) + self.pos_emb(positions)
         t_emb = self.time_proj(self.time_emb(t))
         
-        # We can still add time embedding globally, but DiT mostly relies on AdaLN per layer.
         h = h + t_emb.unsqueeze(1)
         h = self.drop(h)
 

@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-"""Download dataset via HuggingFace streaming and write JSONL shards."""
 
 import sys
 from pathlib import Path
@@ -27,13 +26,11 @@ try:
 except ImportError:
     HAS_ZSTD = False
 
-
 def normalize_text(text):
     text = text.strip()
     text = re.sub(r'\n{3,}', '\n\n', text)
     text = re.sub(r'[ \t]+', ' ', text)
     return text
-
 
 def write_shard(examples, shard_path, compressed=False):
     if compressed and HAS_ZSTD:
@@ -50,7 +47,6 @@ def write_shard(examples, shard_path, compressed=False):
             for ex in examples:
                 f.write(json.dumps(ex) + "\n")
     return path
-
 
 def main():
     parser = argparse.ArgumentParser(description="Download and shard dataset")
@@ -183,7 +179,6 @@ def main():
     }
     save_json(manifest, os.path.join(raw_dir, "manifest.json"))
 
-    # Summary table
     console.print()
     summary = Table(title="[bold green]Download Complete[/bold green]",
                     box=box.ROUNDED, border_style="green")
@@ -195,7 +190,6 @@ def main():
     summary.add_row("Manifest", os.path.join(raw_dir, "manifest.json"))
     console.print(summary)
     console.print()
-
 
 if __name__ == "__main__":
     main()

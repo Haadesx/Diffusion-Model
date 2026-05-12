@@ -1,4 +1,3 @@
-"""Rich-powered progress visualization for the diffusion text pipeline."""
 
 import time
 from collections import deque
@@ -33,17 +32,14 @@ BANNER = r"""[bold cyan]
     ╚══════════════════════════════════════════════════════════╝
 [/bold cyan]"""
 
-
 def print_banner():
     console.print(BANNER)
-
 
 def make_header_panel(title, subtitle="", style="bold cyan"):
     content = Text(title, style=style, justify="center")
     if subtitle:
         content.append(f"\n{subtitle}", style="dim")
     return Panel(content, box=box.DOUBLE_EDGE, border_style="cyan", padding=(0, 2))
-
 
 def make_download_progress():
     return Progress(
@@ -66,7 +62,6 @@ def make_download_progress():
         transient=False,
     )
 
-
 def make_tokenize_progress():
     return Progress(
         SpinnerColumn("dots12", style="cyan"),
@@ -85,7 +80,6 @@ def make_tokenize_progress():
         console=console,
         transient=False,
     )
-
 
 def make_eval_progress():
     return Progress(
@@ -106,11 +100,7 @@ def make_eval_progress():
         transient=False,
     )
 
-
-# ── Training dashboard ──────────────────────────────────────
-
 SPARKLINE_CHARS = "▁▂▃▄▅▆▇█"
-
 
 def sparkline(values, width=20):
     if not values:
@@ -120,9 +110,7 @@ def sparkline(values, width=20):
     rng = mx - mn if mx != mn else 1.0
     return "".join(SPARKLINE_CHARS[min(int((v - mn) / rng * 7), 7)] for v in recent)
 
-
 class TrainingDashboard:
-    """Rich Live display for training progress with sparklines and stats."""
 
     def __init__(
         self, max_steps, device_name, amp_enabled, model_params, run_dir, start_step=0
@@ -191,7 +179,6 @@ class TrainingDashboard:
             Layout(name="footer", size=3),
         )
 
-        # Header
         pct = self.step / max(1, self.max_steps) * 100
         header_text = Text.assemble(
             ("D3PM Training", "bold cyan"),
@@ -202,21 +189,18 @@ class TrainingDashboard:
         )
         layout["header"].update(Panel(header_text, box=box.HEAVY, border_style="cyan"))
 
-        # Body: two columns
         body_layout = Layout()
         body_layout.split_row(
             Layout(name="metrics", ratio=3),
             Layout(name="charts", ratio=2),
         )
 
-        # Metrics table
         metrics = Table(
             box=box.SIMPLE_HEAVY, show_header=False, padding=(0, 1), border_style="blue"
         )
         metrics.add_column("Key", style="bold", width=16)
         metrics.add_column("Value", width=28)
 
-        # Loss with trend arrow
         if len(self.loss_history) >= 2:
             trend = self.loss_history[-1] - self.loss_history[-2]
             arrow = (
@@ -232,7 +216,6 @@ class TrainingDashboard:
             "Train Loss", f"[bold yellow]{self.current_loss:.4f}[/bold yellow] {arrow}"
         )
         metrics.add_row("Learning Rate", f"[cyan]{self.current_lr:.2e}[/cyan]")
-        # Grad norm with color coding: green < 1, yellow 1-10, red > 10
         gn = self.current_grad_norm
         if gn > 0:
             gn_style = "green" if gn < 1.0 else "yellow" if gn < 10.0 else "bold red"
@@ -277,7 +260,6 @@ class TrainingDashboard:
             )
         )
 
-        # Sparkline charts
         chart_lines = []
         if self.loss_history:
             loss_spark = sparkline(self.loss_history, width=30)
@@ -311,7 +293,6 @@ class TrainingDashboard:
             )
         )
 
-        # Footer: progress bar
         pct_val = self.step / max(1, self.max_steps)
         bar_width = 50
         filled = int(pct_val * bar_width)
@@ -320,7 +301,6 @@ class TrainingDashboard:
         layout["footer"].update(Panel(footer_text, box=box.HEAVY, border_style="green"))
 
         return layout
-
 
 def _fmt_time(seconds):
     if seconds < 0:
@@ -335,9 +315,6 @@ def _fmt_time(seconds):
     else:
         return f"{s}s"
 
-
-# ── Pipeline tracker ────────────────────────────────────────
-
 STAGE_ICONS = {
     "pending": "[dim]○[/dim]",
     "running": "[bold yellow]◉[/bold yellow]",
@@ -346,9 +323,7 @@ STAGE_ICONS = {
     "failed": "[bold red]✗[/bold red]",
 }
 
-
 class PipelineTracker:
-    """Tracks and displays pipeline stage progress."""
 
     def __init__(self, stages):
         self.stages = []
@@ -452,10 +427,6 @@ class PipelineTracker:
             summary.add_row("Failed", f"[bold red]{failed}[/bold red]")
         console.print(summary)
 
-
-# ── Sampling display ────────────────────────────────────────
-
-
 def print_sample(idx, text, total, prefix=None):
     title = f"Sample {idx}/{total}"
     if prefix:
@@ -469,7 +440,6 @@ def print_sample(idx, text, total, prefix=None):
         padding=(1, 2),
     )
     console.print(panel)
-
 
 def print_eval_results(results):
     table = Table(
@@ -498,7 +468,6 @@ def print_eval_results(results):
     console.print(table)
     console.print()
 
-
 def print_stage_header(stage_num, total, description):
     text = Text.assemble(
         (f"  Stage {stage_num}/{total}  ", "bold white on blue"),
@@ -509,22 +478,17 @@ def print_stage_header(stage_num, total, description):
     console.print(Panel(text, box=box.HEAVY, border_style="blue"))
     console.print()
 
-
 def print_success(message):
     console.print(f"  [bold green]✓[/bold green] {message}")
-
 
 def print_info(message):
     console.print(f"  [bold blue]ℹ[/bold blue] {message}")
 
-
 def print_warning(message):
     console.print(f"  [bold yellow]⚠[/bold yellow] {message}")
 
-
 def print_error(message):
     console.print(f"  [bold red]✗[/bold red] {message}")
-
 
 def print_kv(key, value, key_style="bold", value_style="white"):
     key_str = f"[{key_style}]{key}[/{key_style}]" if key_style else key

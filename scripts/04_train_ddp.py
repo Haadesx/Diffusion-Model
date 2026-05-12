@@ -1,9 +1,4 @@
 #!/usr/bin/env python3
-"""Train the text diffusion model with PyTorch DDP.
-
-Launch with:
-  torchrun --standalone --nproc_per_node=4 scripts/04_train_ddp.py --profile recipe_poc_2day
-"""
 
 import argparse
 import sys
@@ -13,7 +8,6 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from diffusion_text.train_ddp import train
 from diffusion_text.utils import apply_cli_overrides, get_registry_checkpoint, load_config
-
 
 def main():
     parser = argparse.ArgumentParser(description="Train D3PM text diffusion model with DDP")
@@ -42,7 +36,6 @@ def main():
         resume_path = get_registry_checkpoint(config["paths"]["runs_dir"], mode="best")
 
     train(config, resume_checkpoint=resume_path)
-
 
 if __name__ == "__main__":
     main()

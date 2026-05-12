@@ -12,7 +12,6 @@ import yaml
 import numpy as np
 import torch
 
-
 def load_config(config_path="config.yaml", profile=None, overrides=None):
     with open(config_path) as f:
         raw = yaml.safe_load(f)
@@ -27,7 +26,6 @@ def load_config(config_path="config.yaml", profile=None, overrides=None):
 
     return config
 
-
 def _deep_copy_dict(d):
     out = {}
     for k, v in d.items():
@@ -39,14 +37,12 @@ def _deep_copy_dict(d):
             out[k] = v
     return out
 
-
 def _deep_merge(base, override):
     for key, value in override.items():
         if key in base and isinstance(base[key], dict) and isinstance(value, dict):
             _deep_merge(base[key], value)
         else:
             base[key] = value
-
 
 def sha256_file(path):
     h = hashlib.sha256()
@@ -55,7 +51,6 @@ def sha256_file(path):
             h.update(chunk)
     return h.hexdigest()
 
-
 def get_device():
     if torch.cuda.is_available():
         return torch.device("cuda")
@@ -63,12 +58,10 @@ def get_device():
         return torch.device("mps")
     return torch.device("cpu")
 
-
 def set_seed(seed):
     random.seed(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
-
 
 def get_git_hash():
     try:
@@ -81,7 +74,6 @@ def get_git_hash():
     except (subprocess.TimeoutExpired, FileNotFoundError):
         pass
     return None
-
 
 def setup_logging(log_path=None, level=logging.INFO):
     handlers = [logging.StreamHandler()]
@@ -96,21 +88,17 @@ def setup_logging(log_path=None, level=logging.INFO):
     )
     return logging.getLogger("diffusion_text")
 
-
 def save_json(data, path):
     os.makedirs(os.path.dirname(path) if os.path.dirname(path) else ".", exist_ok=True)
     with open(path, "w") as f:
         json.dump(data, f, indent=2, default=str)
 
-
 def load_json(path):
     with open(path) as f:
         return json.load(f)
 
-
 def timestamp():
     return datetime.now().strftime("%Y%m%d_%H%M%S")
-
 
 def make_run_dir(runs_dir, run_name=None):
     if run_name is None:
@@ -119,7 +107,6 @@ def make_run_dir(runs_dir, run_name=None):
     os.makedirs(run_dir, exist_ok=True)
     os.makedirs(os.path.join(run_dir, "checkpoints"), exist_ok=True)
     return run_dir
-
 
 def common_argparser(description=""):
     parser = argparse.ArgumentParser(description=description)
@@ -130,7 +117,6 @@ def common_argparser(description=""):
     parser.add_argument("--run_name", default=None, help="Run name for output")
     return parser
 
-
 def apply_cli_overrides(config, args):
     if hasattr(args, "data_dir") and args.data_dir:
         config["paths"]["data_dir"] = args.data_dir
@@ -138,12 +124,7 @@ def apply_cli_overrides(config, args):
         config["paths"]["runs_dir"] = args.runs_dir
     return config
 
-
 def update_global_registry(runs_dir, ckpt_path, val_loss=None, step=None):
-    """
-    Updates a global registry.json in the runs directory to track the absolute
-    best and latest checkpoints across all experiments.
-    """
     registry_path = os.path.join(runs_dir, "registry.json")
     
     registry = {
@@ -172,7 +153,6 @@ def update_global_registry(runs_dir, ckpt_path, val_loss=None, step=None):
         registry["best_checkpoint"] = ckpt_abs_path
         updated_best = True
 
-    # Keep a small history of the best improvements
     if updated_best:
         registry["history"].append({
             "timestamp": timestamp(),
@@ -180,18 +160,12 @@ def update_global_registry(runs_dir, ckpt_path, val_loss=None, step=None):
             "val_loss": val_loss,
             "step": step
         })
-        # Keep only last 20 history items
         registry["history"] = registry["history"][-20:]
 
     save_json(registry, registry_path)
     return updated_best
 
-
 def get_registry_checkpoint(runs_dir, mode="best"):
-    """
-    Retrieves the absolute path to the 'best' or 'latest' checkpoint from the registry.
-    Returns None if the registry or requested checkpoint doesn't exist.
-    """
     registry_path = os.path.join(runs_dir, "registry.json")
     if not os.path.exists(registry_path):
         return None

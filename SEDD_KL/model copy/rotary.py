@@ -1,6 +1,5 @@
 import torch
 
-
 class Rotary(torch.nn.Module):
     def __init__(self, dim, base=10_000):
         super().__init__()
@@ -24,15 +23,12 @@ class Rotary(torch.nn.Module):
 
         return self.cos_cached, self.sin_cached
 
-
 def rotate_half(x):
     x1, x2 = x[..., : x.shape[-1] // 2], x[..., x.shape[-1] // 2 :]
     return torch.cat((-x2, x1), dim=-1)
 
-
 def _apply_rotary_pos_emb_torchscript(qkv, cos, sin):
     return (qkv * cos) + (rotate_half(qkv) * sin)
-
 
 def apply_rotary_pos_emb(qkv, cos, sin):
     try:

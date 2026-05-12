@@ -20,24 +20,18 @@ from model import SEDD
 from model.ema import ExponentialMovingAverage
 from transformers import GPT2TokenizerFast, GPT2LMHeadModel
 
-
 torch.backends.cudnn.benchmark = True
-# torch.autograd.set_detect_anomaly(True)
-
 
 def setup(rank, world_size, port):
     os.environ["MASTER_ADDR"] = "localhost"
     os.environ["MASTER_PORT"] = str(port)
 
-    # initialize the process group
     dist.init_process_group(
         "nccl", rank=rank, world_size=world_size, timeout=datetime.timedelta(minutes=30)
     )
 
-
 def cleanup():
     dist.destroy_process_group()
-
 
 def run_multiprocess(rank, world_size, cfg, port):
     try:
@@ -46,12 +40,10 @@ def run_multiprocess(rank, world_size, cfg, port):
     finally:
         cleanup()
 
-
 def _run(rank, world_size, cfg):
     torch.cuda.set_device(rank)
     work_dir = cfg.work_dir
 
-    # Create directories for experimental logs
     sample_dir = os.path.join(work_dir, "samples")
     checkpoint_dir = os.path.join(work_dir, "checkpoints")
     checkpoint_meta_dir = os.path.join(work_dir, "checkpoints-meta", "checkpoint.pth")
@@ -60,7 +52,6 @@ def _run(rank, world_size, cfg):
         utils.makedirs(checkpoint_dir)
         utils.makedirs(os.path.dirname(checkpoint_meta_dir))
 
-    # logging
     if rank == 0:
         logger = utils.get_logger(os.path.join(work_dir, "logs"))
     def mprint(msg):
@@ -83,10 +74,8 @@ def _run(rank, world_size, cfg):
         mprint("WARNING: Using device {}".format(device))
     mprint(f"Found {os.cpu_count()} total number of CPUs.")
 
-    # build token graph
     graph = graph_lib.get_graph(cfg, device)
     
-    # build score model
     score_model = SEDD(cfg).to(device)
     score_model = DDP(score_model, device_ids=[rank], static_graph=True, find_unused_parameters=True)
 
@@ -98,43 +87,32 @@ def _run(rank, world_size, cfg):
     mprint(score_model)
     mprint(f"EMA: {ema}")
 
-    # build noise
     noise = noise_lib.get_noise(cfg).to(device)
     noise = DDP(noise, device_ids=[rank], static_graph=True)
     sampling_eps = 1e-5
 
-
-    # build optimization state
     optimizer = losses.get_optimizer(cfg, chain(score_model.parameters(), noise.parameters()))
     mprint(f"Optimizer: {optimizer}")
     scaler = torch.cuda.amp.GradScaler()
     mprint(f"Scaler: {scaler}")
     state = dict(optimizer=optimizer, scaler=scaler, model=score_model, noise=noise, ema=ema, step=0) 
 
-
-    # load in state
     state = utils.restore_checkpoint(checkpoint_meta_dir, state, device)
     initial_step = int(state['step'])
 
     
-    # load in tokenizer
     tokenizer = GPT2TokenizerFast.from_pretrained('gpt2')
 
-    # Build data iterators
     train_ds, eval_ds = data.get_dataloaders(cfg)
-
-    # mprint(f"Length of datasets: {len(train_ds)}, {len(eval_ds)}")
 
     train_iter = iter(train_ds)
     eval_iter = iter(eval_ds)
 
-    # Build one-step training and evaluation functions
     optimize_fn = losses.optimization_manager(cfg)
     loss_type = getattr(cfg.training, "loss_type", "score_entropy")
     mprint(f"Loss type: {loss_type}")
     train_step_fn = losses.get_step_fn(noise, graph, True, optimize_fn, cfg.training.accum, loss_type=loss_type)
     eval_step_fn = losses.get_step_fn(noise, graph, False, optimize_fn, cfg.training.accum, loss_type=loss_type)
-
 
     if cfg.training.snapshot_sampling:
         sampling_shape = (cfg.training.batch_size // (cfg.ngpus * cfg.training.accum), cfg.model.length)
@@ -143,10 +121,8 @@ def _run(rank, world_size, cfg):
     num_train_steps = cfg.training.n_iters
     mprint(f"Starting training loop at step {initial_step}.")
 
-
     while state['step'] < num_train_steps + 1:
         step = state['step']
-
 
         if cfg.data.train != "text8":
             batch = next(train_iter)['input_ids'].to(device)
@@ -154,7 +130,6 @@ def _run(rank, world_size, cfg):
             batch = next(train_iter).to(device)
         loss = train_step_fn(state, batch)
 
-        # flag to see if there was movement ie a full batch got computed
         if step != state['step']:
             if step % cfg.training.log_freq == 0:
                 dist.all_reduce(loss)
@@ -178,13 +153,11 @@ def _run(rank, world_size, cfg):
                 mprint("step: %d, evaluation_loss: %.5e" % (step, eval_loss.item()))
 
             if step > 0 and step % cfg.training.snapshot_freq == 0 or step == num_train_steps:
-                # Save the checkpoint.
                 save_step = step // cfg.training.snapshot_freq
                 if rank == 0:
                     utils.save_checkpoint(os.path.join(
                         checkpoint_dir, f'checkpoint_{save_step}.pth'), state)
 
-                # Generate and save samples
                 if cfg.training.snapshot_sampling:
                     mprint(f"Generating text at step: {step}")
 

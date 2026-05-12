@@ -33,10 +33,8 @@ try:
 except ImportError:
     GameUI = None
 
-
 def ddp_is_enabled():
     return int(os.environ.get("WORLD_SIZE", "1")) > 1
-
 
 def setup_ddp():
     if not ddp_is_enabled():
@@ -50,15 +48,12 @@ def setup_ddp():
     torch.cuda.set_device(local_rank)
     return rank, local_rank, world_size, torch.device(f"cuda:{local_rank}")
 
-
 def cleanup_ddp():
     if dist.is_available() and dist.is_initialized():
         dist.destroy_process_group()
 
-
 def is_main_process(rank):
     return rank == 0
-
 
 def build_model(config, vocab_size, device):
     mc = config["model"]
@@ -74,7 +69,6 @@ def build_model(config, vocab_size, device):
     )
     return model.to(device)
 
-
 def build_optimizer(model, config):
     tc = config["train"]
     return torch.optim.AdamW(
@@ -83,7 +77,6 @@ def build_optimizer(model, config):
         weight_decay=tc["weight_decay"],
         betas=(0.9, 0.95),
     )
-
 
 def create_ddp_dataloader(data_dir, split, batch_size, rank, world_size, shuffle):
     manifest = load_tokenized_manifest(data_dir)
@@ -106,7 +99,6 @@ def create_ddp_dataloader(data_dir, split, batch_size, rank, world_size, shuffle
         drop_last=split == "train",
     )
     return loader, sampler
-
 
 def save_checkpoint(model, optimizer, step, run_dir, name="checkpoint"):
     ckpt_dir = os.path.join(run_dir, "checkpoints")
@@ -142,7 +134,6 @@ def save_checkpoint(model, optimizer, step, run_dir, name="checkpoint"):
     update_global_registry(os.path.dirname(run_dir), path, step=step)
     return path
 
-
 def prune_checkpoints(run_dir, pattern, keep):
     if keep <= 0:
         return
@@ -157,12 +148,10 @@ def prune_checkpoints(run_dir, pattern, keep):
         except OSError as exc:
             logger.warning("Failed to remove old checkpoint %s: %s", stale_path, exc)
 
-
 def checkpoint_sort_key(path):
     match = re.search(r"_step(\d+)\.pt$", os.path.basename(path))
     step = int(match.group(1)) if match else -1
     return step, os.path.getmtime(path)
-
 
 def try_save_checkpoint(model, optimizer, step, run_dir, name="checkpoint"):
     try:
@@ -177,7 +166,6 @@ def try_save_checkpoint(model, optimizer, step, run_dir, name="checkpoint"):
             pass
         return None
 
-
 def load_checkpoint(path, model, optimizer=None, device="cpu"):
     ckpt = torch.load(path, map_location=device, weights_only=False)
     raw_model = model.module if hasattr(model, "module") else model
@@ -185,7 +173,6 @@ def load_checkpoint(path, model, optimizer=None, device="cpu"):
     if optimizer and "optimizer_state_dict" in ckpt:
         optimizer.load_state_dict(ckpt["optimizer_state_dict"])
     return ckpt.get("step", 0)
-
 
 @torch.no_grad()
 def evaluate(model, val_loader, config, device, mask_id, pad_id, num_batches=None):
@@ -228,7 +215,6 @@ def evaluate(model, val_loader, config, device, mask_id, pad_id, num_batches=Non
         "recon_accuracy": (total_correct / total_masked.clamp_min(1)).item(),
         "num_batches": int(total_batches.item()),
     }
-
 
 def train(config, resume_checkpoint=None):
     rank, local_rank, world_size, device = setup_ddp()

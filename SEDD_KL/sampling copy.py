@@ -7,9 +7,7 @@ from model import utils as mutils
 
 _PREDICTORS = {}
 
-
 def register_predictor(cls=None, *, name=None):
-    """A decorator for registering predictor classes."""
 
     def _register(cls):
         if name is None:
@@ -31,10 +29,7 @@ def register_predictor(cls=None, *, name=None):
 def get_predictor(name):
     return _PREDICTORS[name]
 
-
-
 class Predictor(abc.ABC):
-    """The abstract class for a predictor algorithm."""
 
     def __init__(self, graph, noise):
         super().__init__()
@@ -43,18 +38,7 @@ class Predictor(abc.ABC):
 
     @abc.abstractmethod
     def update_fn(self, score_fn, x, t, step_size):
-        """One update of the predictor.
-
-        Args:
-            score_fn: score function
-            x: A PyTorch tensor representing the current state
-            t: A Pytorch tensor representing the current time step.
-
-        Returns:
-            x: A PyTorch tensor of the next state.
-        """
         pass
-
 
 @register_predictor(name="euler")
 class EulerPredictor(Predictor):
@@ -70,7 +54,6 @@ class EulerPredictor(Predictor):
 class NonePredictor(Predictor):
     def update_fn(self, score_fn, x, t, step_size):
         return x
-
 
 @register_predictor(name="analytic")
 class AnalyticPredictor(Predictor):
@@ -97,11 +80,9 @@ class Denoiser:
         score = score_fn(x, sigma)
         stag_score = self.graph.staggered_score(score, sigma)
         probs = stag_score * self.graph.transp_transition(x, sigma)
-        # truncate probabilities
         if self.graph.absorb:
             probs = probs[..., :-1]
         
-        #return probs.argmax(dim=-1)
         return sample_categorical(probs)
                        
 
@@ -138,7 +119,6 @@ def get_pc_sampler(graph, noise, batch_dims, predictor, steps, denoise=True, eps
             
 
         if denoise:
-            # denoising step
             x = projector(x)
             t = timesteps[-1] * torch.ones(x.shape[0], 1, device=device)
             x = denoiser.update_fn(sampling_score_fn, x, t)

@@ -9,7 +9,6 @@ try:
     from flash_attn.flash_attn_interface import flash_attn_varlen_qkvpacked_func
 except ImportError:
     flash_attn_varlen_qkvpacked_func = None
-# from flash_attn.ops.fused_dense import FusedMLP, FusedDense
 from huggingface_hub import PyTorchModelHubMixin
 
 from . import rotary
@@ -20,10 +19,8 @@ from .fused_add_dropout_scale import (
     modulate_fused,
 )
 
-
 def modulate(x, shift, scale):
     return x * (1 + scale.unsqueeze(1)) + shift.unsqueeze(1)
-
 
 class Config(dict):
     def __getattr__(self, name):
@@ -32,7 +29,6 @@ class Config(dict):
         except KeyError as exc:
             raise AttributeError(name) from exc
 
-
 def to_config(value):
     if isinstance(value, dict):
         return Config({k: to_config(v) for k, v in value.items()})
@@ -40,11 +36,6 @@ def to_config(value):
         return [to_config(v) for v in value]
     return value
 
-
-
-#################################################################################
-#                                  Layers                                       #
-#################################################################################
 class LayerNorm(nn.Module):
     def __init__(self, dim):
         super().__init__()
@@ -55,9 +46,7 @@ class LayerNorm(nn.Module):
             x = F.layer_norm(x.float(), [self.dim])
         return x * self.weight[None,None,:]
 
-
 def residual_linear(x, W, x_skip, residual_scale):
-    """x_skip + residual_scale * W @ x"""
     dim_out, dim_in = W.shape[0], W.shape[1]
     return torch.addmm(
         x_skip.view(-1, dim_out),
@@ -66,15 +55,7 @@ def residual_linear(x, W, x_skip, residual_scale):
         alpha=residual_scale
     ).view(*x.shape[:-1], dim_out)
 
-
-#################################################################################
-#               Embedding Layers for Timesteps and Class Labels                 #
-#################################################################################
-
 class TimestepEmbedder(nn.Module):
-    """
-    Embeds scalar timesteps into vector representations.
-    """
     def __init__(self, hidden_size, frequency_embedding_size=256, silu=True):
         super().__init__()
         self.mlp = nn.Sequential(
@@ -84,18 +65,8 @@ class TimestepEmbedder(nn.Module):
         )
         self.frequency_embedding_size = frequency_embedding_size
 
-
     @staticmethod
     def timestep_embedding(t, dim, max_period=10000):
-        """
-        Create sinusoidal timestep embeddings.
-        :param t: a 1-D Tensor of N indices, one per batch element.
-                          These may be fractional.
-        :param dim: the dimension of the output.
-        :param max_period: controls the minimum frequency of the embeddings.
-        :return: an (N, D) Tensor of positional embeddings.
-        """
-        # https://github.com/openai/glide-text2im/blob/main/glide_text2im/nn.py
         half = dim // 2
         freqs = torch.exp(
             -math.log(max_period) * torch.arange(start=0, end=half, dtype=torch.float32) / half
@@ -111,11 +82,7 @@ class TimestepEmbedder(nn.Module):
         t_emb = self.mlp(t_freq)
         return t_emb
 
-
 class LabelEmbedder(nn.Module):
-    """
-    Embeds class labels into vector representations. Also handles label dropout for classifier-free guidance.
-    """
     def __init__(self, num_classes, cond_size):
         super().__init__()
         self.embedding_table = nn.Embedding(num_classes + 1, cond_size)
@@ -127,11 +94,6 @@ class LabelEmbedder(nn.Module):
         embeddings = self.embedding_table(labels)
         return embeddings
     
-
-#################################################################################
-#                                 Core Model                                    #
-#################################################################################
-
 
 class DDiTBlock(nn.Module):
 
@@ -159,14 +121,12 @@ class DDiTBlock(nn.Module):
         self.adaLN_modulation.weight.data.zero_()
         self.adaLN_modulation.bias.data.zero_()
 
-
     def _get_bias_dropout_scale(self):
         return (
             bias_dropout_add_scale_fused_train
             if self.training
             else bias_dropout_add_scale_fused_inference
         )
-
 
     def forward(self, x, rotary_cos_sin, c, seqlens=None):
         batch_size, seq_len = x.shape[0], x.shape[1]
@@ -175,10 +135,8 @@ class DDiTBlock(nn.Module):
 
         shift_msa, scale_msa, gate_msa, shift_mlp, scale_mlp, gate_mlp = self.adaLN_modulation(c)[:, None].chunk(6, dim=2)
 
-        # attention operation
         x_skip = x
         x = modulate_fused(self.norm1(x), shift_msa, scale_msa)
-        # dtype0 = x.dtype
 
         qkv = self.attn_qkv(x)
         qkv = rearrange(qkv, 'b s (three h d) -> b s three h d', three=3, h=self.n_heads)
@@ -209,25 +167,17 @@ class DDiTBlock(nn.Module):
 
         x = bias_dropout_scale_fn(self.attn_out(x), None, gate_msa, x_skip, self.dropout)
 
-        # mlp operation
         x = bias_dropout_scale_fn(self.mlp(modulate_fused(self.norm2(x), shift_mlp, scale_mlp)), None, gate_mlp, x, self.dropout)
         return x
 
-
-
 class EmbeddingLayer(nn.Module):
     def __init__(self, dim, vocab_dim):
-        """
-        Mode arg: 0 -> use a learned layer, 1 -> use eigenvectors, 
-        2-> add in eigenvectors, 3 -> use pretrained embedding matrix
-        """
         super().__init__()
         self.embedding = nn.Parameter(torch.empty((vocab_dim, dim)))
         torch.nn.init.kaiming_uniform_(self.embedding, a=math.sqrt(5))
 
     def forward(self, x):
         return self.embedding[x]
-
 
 class DDitFinalLayer(nn.Module):
     def __init__(self, hidden_size, out_channels, cond_dim):
@@ -241,13 +191,11 @@ class DDitFinalLayer(nn.Module):
         self.adaLN_modulation.weight.data.zero_()
         self.adaLN_modulation.bias.data.zero_()
 
-
     def forward(self, x, c):
         shift, scale = self.adaLN_modulation(c)[:, None].chunk(2, dim=2)
         x = modulate_fused(self.norm_final(x), shift, scale)
         x = self.linear(x)
         return x
-
 
 class SEDD(nn.Module, PyTorchModelHubMixin):
     def __init__(self, config):
@@ -280,7 +228,6 @@ class SEDD(nn.Module, PyTorchModelHubMixin):
             else bias_dropout_add_scale_fused_inference
         )
 
-
     def forward(self, indices, sigma):
 
         x = self.vocab_embed(indices)
@@ -293,7 +240,6 @@ class SEDD(nn.Module, PyTorchModelHubMixin):
                 x = self.blocks[i](x, rotary_cos_sin, c, seqlens=None)
 
             x = self.output_layer(x, c)
-
 
         if self.scale_by_sigma:
             assert self.absorb, "Haven't configured this to work."

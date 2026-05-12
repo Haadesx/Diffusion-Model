@@ -1,11 +1,4 @@
 #!/usr/bin/env python3
-"""Generate cleaned recipe tests from local D3PM checkpoints.
-
-This script is intentionally stricter than scripts/05_sample.py. It is meant
-for quick checkpoint comparison and for ingredient-only smoke tests such as:
-
-    python3 scripts/test_recipe_models.py --recipe "chicken butter masala" --ingredients-only
-"""
 
 from __future__ import annotations
 
@@ -26,7 +19,6 @@ from diffusion_text.diffusion import sample
 from diffusion_text.tokenizer import TextTokenizer
 from diffusion_text.train import build_model, load_checkpoint
 from diffusion_text.utils import apply_cli_overrides, get_device, load_config, load_json
-
 
 CONTROL_TOKENS = [
     "RECIPE_START",
@@ -50,11 +42,9 @@ BOUNDARY_TOKENS = [
     "<RECIPE_END>",
 ]
 
-
 def checkpoint_step(path: str) -> int:
     match = re.search(r"step(\d+)", os.path.basename(path))
     return int(match.group(1)) if match else -1
-
 
 def list_checkpoints(checkpoint_dir: str, explicit: list[str] | None) -> list[str]:
     if explicit:
@@ -72,7 +62,6 @@ def list_checkpoints(checkpoint_dir: str, explicit: list[str] | None) -> list[st
 
     return sorted(paths, key=lambda p: (checkpoint_step(p), os.path.basename(p)))
 
-
 def title_case_recipe(recipe: str) -> str:
     small_words = {"and", "or", "of", "with", "the", "a", "an"}
     words = []
@@ -81,14 +70,11 @@ def title_case_recipe(recipe: str) -> str:
         words.append(lower if idx > 0 and lower in small_words else lower.capitalize())
     return " ".join(words)
 
-
 def structured_prefix(recipe: str) -> str:
     title = title_case_recipe(recipe)
     return f"<RECIPE_START> <TITLE_START> {title} <TITLE_END> <INPUT_START>"
 
-
 def normalize_control_tokens(text: str) -> str:
-    """Repair common malformed control-token fragments before regex parsing."""
     text = text.replace("[BOS]", " ").replace("[EOS]", " ").replace("[PAD]", " ")
     text = re.sub(r"\s+", " ", text)
 
@@ -99,7 +85,6 @@ def normalize_control_tokens(text: str) -> str:
         text = re.sub(rf"<{escaped}(?!>)", f"<{token}>", text)
         text = re.sub(rf"(?<![A-Z_<]){escaped}(?![A-Z_>])", f"<{token}>", text)
 
-    # Frequent malformed tags seen in long samples.
     text = text.replace("<INPUT_INPUT>", "<INPUT_START>")
     text = text.replace("<INSTR_INSTR>", "<INSTR_START>")
     text = text.replace("<TITLE_TITLE>", "<TITLE_START>")
@@ -108,14 +93,12 @@ def normalize_control_tokens(text: str) -> str:
     text = re.sub(r"\s+", " ", text)
     return text.strip()
 
-
 def strip_controls(text: str) -> str:
     for token in CONTROL_TOKENS:
         text = text.replace(f"<{token}>", " ")
     text = re.sub(r"<[^>\s]{1,32}>", " ", text)
     text = re.sub(r"\s+", " ", text)
     return text.strip(" ,.-")
-
 
 def trim_to_one_recipe(text: str) -> str:
     text = normalize_control_tokens(text)
@@ -126,7 +109,6 @@ def trim_to_one_recipe(text: str) -> str:
     if end != -1:
         text = text[: end + len("<RECIPE_END>")]
     return text
-
 
 def extract_between(text: str, start_token: str, end_token: str, fallback_end_tokens: list[str]) -> str:
     start = text.find(start_token)
@@ -146,14 +128,12 @@ def extract_between(text: str, start_token: str, end_token: str, fallback_end_to
     end = min(end_positions) if end_positions else len(text)
     return text[start:end]
 
-
 def clean_list_item(item: str) -> str:
     item = strip_controls(item)
     item = re.sub(r"^[0-9]+[\).:-]\s*", "", item)
     item = re.sub(r"\b(add|mix|bake|cook|stir|serve|place|pour)\b.*$", "", item, flags=re.I)
     item = re.sub(r"\s+", " ", item)
     return item.strip(" ,.;:-")
-
 
 def dedupe_keep_order(items: list[str]) -> list[str]:
     seen = set()
@@ -164,7 +144,6 @@ def dedupe_keep_order(items: list[str]) -> list[str]:
             seen.add(key)
             out.append(item)
     return out
-
 
 def extract_ingredients(text: str) -> list[str]:
     text = trim_to_one_recipe(text)
@@ -180,15 +159,12 @@ def extract_ingredients(text: str) -> list[str]:
     pieces = re.split(r"<NEXT_INPUT>|[\n\r]+|(?:\s{2,})", chunk)
     cleaned = []
     for piece in pieces:
-        # Split only obvious comma-separated ingredient runs. Keep phrases like
-        # "cream of chicken soup" intact.
         subpieces = re.split(r"\s*,\s*(?=[A-Za-z][A-Za-z -]{1,32}(?:,|$))", piece)
         for subpiece in subpieces:
             item = clean_list_item(subpiece)
             if 2 <= len(item) <= 64 and re.search(r"[A-Za-z]", item):
                 cleaned.append(item)
     return dedupe_keep_order(cleaned)
-
 
 def extract_steps(text: str) -> list[str]:
     text = trim_to_one_recipe(text)
@@ -202,7 +178,6 @@ def extract_steps(text: str) -> list[str]:
             steps.append(step)
     return dedupe_keep_order(steps)
 
-
 def extract_title(text: str, fallback_recipe: str) -> str:
     text = trim_to_one_recipe(text)
     match = re.search(r"<TITLE_START>\s*(.*?)\s*<TITLE_END>", text, flags=re.S)
@@ -210,7 +185,6 @@ def extract_title(text: str, fallback_recipe: str) -> str:
         return title_case_recipe(fallback_recipe)
     title = strip_controls(match.group(1))
     return title or title_case_recipe(fallback_recipe)
-
 
 def format_recipe(text: str, fallback_recipe: str, ingredients_only: bool) -> dict:
     title = extract_title(text, fallback_recipe)
@@ -234,12 +208,10 @@ def format_recipe(text: str, fallback_recipe: str, ingredients_only: bool) -> di
         "quality_score": len(ingredients) + min(len(steps), 5),
     }
 
-
 def load_tokenizer_and_meta(data_dir: str) -> tuple[TextTokenizer, dict]:
     tok_path = os.path.join(data_dir, "tokenizer", "tokenizer.json")
     meta_path = os.path.join(data_dir, "tokenizer", "tokenizer_meta.json")
     return TextTokenizer.load(tok_path), load_json(meta_path)
-
 
 def generate_for_checkpoint(args, config, tokenizer, tok_meta, checkpoint_path: str, device):
     vocab_size = tok_meta["vocab_size"]
@@ -284,7 +256,6 @@ def generate_for_checkpoint(args, config, tokenizer, tok_meta, checkpoint_path: 
         "samples": samples,
     }
 
-
 def write_report(results: list[dict], args, output_dir: str) -> tuple[str, str]:
     os.makedirs(output_dir, exist_ok=True)
     stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -317,7 +288,6 @@ def write_report(results: list[dict], args, output_dir: str) -> tuple[str, str]:
 
     return md_path, json_path
 
-
 def parse_args():
     parser = argparse.ArgumentParser(description="Test recipe checkpoints with regex-cleaned outputs")
     parser.add_argument("--config", default="config.yaml")
@@ -336,7 +306,6 @@ def parse_args():
     parser.add_argument("--temperature", type=float, default=0.75)
     parser.add_argument("--seed", type=int, default=7)
     return parser.parse_args()
-
 
 def main():
     args = parse_args()
@@ -373,7 +342,6 @@ def main():
     md_path, json_path = write_report(results, args, args.output_dir)
     print(f"Markdown report: {md_path}")
     print(f"JSON report: {json_path}")
-
 
 if __name__ == "__main__":
     main()

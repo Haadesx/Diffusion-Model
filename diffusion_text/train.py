@@ -17,7 +17,6 @@ from diffusion_text.progress import TrainingDashboard, console, print_success, p
 
 logger = logging.getLogger("diffusion_text")
 
-
 def build_model(config, vocab_size, device):
     mc = config["model"]
     seq_len = config["tokenization"]["seq_len"]
@@ -32,7 +31,6 @@ def build_model(config, vocab_size, device):
     )
     return model.to(device)
 
-
 def build_optimizer(model, config):
     tc = config["train"]
     return torch.optim.AdamW(
@@ -42,16 +40,13 @@ def build_optimizer(model, config):
         betas=(0.9, 0.999),
     )
 
-
 def lr_schedule(step, warmup_steps, max_steps, base_lr):
     if step < warmup_steps:
         return base_lr * step / max(1, warmup_steps)
     progress = (step - warmup_steps) / max(1, max_steps - warmup_steps)
     return base_lr * 0.5 * (1.0 + math.cos(math.pi * progress))
 
-
 def sample_timesteps(batch_size, T, device, mode="uniform"):
-    """Sample diffusion timesteps for a training or validation batch."""
     if mode == "uniform":
         return torch.randint(1, T + 1, (batch_size,), device=device)
     if mode == "logit_normal":
@@ -62,11 +57,9 @@ def sample_timesteps(batch_size, T, device, mode="uniform"):
         return (u.sqrt() * (T - 1)).long() + 1
     raise ValueError(f"Unknown timestep_sampling mode: {mode}")
 
-
 def try_amp(device):
     if device.type == "cuda":
         try:
-            # Check for bfloat16 first (more stable)
             if torch.cuda.is_bf16_supported():
                 return True, torch.bfloat16
             return True, torch.float16
@@ -74,7 +67,6 @@ def try_amp(device):
             return False, None
     if device.type == "mps":
         try:
-            # MPS excels with bfloat16 stability
             dummy = torch.randn(2, 2, device=device)
             with torch.autocast(device_type="mps", dtype=torch.bfloat16):
                 _ = dummy @ dummy
@@ -88,7 +80,6 @@ def try_amp(device):
                 return False, None
     return False, None
 
-
 def save_checkpoint(model, optimizer, step, run_dir, name="checkpoint"):
     ckpt_dir = os.path.join(run_dir, "checkpoints")
     os.makedirs(ckpt_dir, exist_ok=True)
@@ -100,11 +91,9 @@ def save_checkpoint(model, optimizer, step, run_dir, name="checkpoint"):
     }, path)
     logger.info(f"Saved checkpoint: {path}")
 
-    # Update global latest checkpoint
     update_global_registry(os.path.dirname(run_dir), path, step=step)
 
     return path
-
 
 def load_checkpoint(path, model, optimizer=None, device="cpu"):
     ckpt = torch.load(path, map_location=device, weights_only=False)
@@ -112,7 +101,6 @@ def load_checkpoint(path, model, optimizer=None, device="cpu"):
     if optimizer and "optimizer_state_dict" in ckpt:
         optimizer.load_state_dict(ckpt["optimizer_state_dict"])
     return ckpt.get("step", 0)
-
 
 @torch.no_grad()
 def evaluate(model, val_loader, config, device, mask_id, pad_id, num_batches=None):
@@ -163,7 +151,6 @@ def evaluate(model, val_loader, config, device, mask_id, pad_id, num_batches=Non
         "recon_accuracy": recon_acc,
         "num_batches": n_batches,
     }
-
 
 def train(config, resume_checkpoint=None):
     tc = config["train"]
@@ -303,13 +290,10 @@ def train(config, resume_checkpoint=None):
 
                 running_loss += loss.item()
 
-            # Compute gradient norm (clip_grad_norm_ returns the norm before clipping)
             grad_norm = torch.nn.utils.clip_grad_norm_(model.parameters(),
                                                         clip_norm if clip_norm > 0 else float("inf"))
             grad_norm_val = grad_norm.item() if torch.is_tensor(grad_norm) else float(grad_norm)
 
-            # Gradient explosion guard: skip update if grad norm exceeds threshold
-            # (already clipped to clip_norm by clip_grad_norm_ above)
             if grad_norm_val > grad_explosion_threshold:
                 log.warning(
                     f"Step {step+1}: Gradient norm {grad_norm_val:.1f} exceeds explosion threshold "
@@ -334,11 +318,9 @@ def train(config, resume_checkpoint=None):
                 avg_loss = running_loss / 10
                 elapsed = time.time() - start_time
 
-                # Loss spike detection with adaptive windowing (catch early instability)
                 window_size = min(5, len(dashboard.loss_history))
                 if window_size >= 2:  # Need at least 2 samples for comparison
                     recent_avg = sum(list(dashboard.loss_history)[-window_size:]) / window_size
-                    # Use stricter threshold when we have fewer historical samples (early training)
                     threshold = 2.0 if window_size < 5 else 3.0
                     if recent_avg > 0 and avg_loss > threshold * recent_avg:
                         log.warning(
@@ -380,7 +362,6 @@ def train(config, resume_checkpoint=None):
                 if val_metrics["val_loss"] < best_val_loss:
                     best_val_loss = val_metrics["val_loss"]
                     path = save_checkpoint(model, optimizer, step, run_dir, name="best")
-                    # Update global best checkpoint
                     update_global_registry(os.path.dirname(run_dir), path, val_loss=best_val_loss, step=step)
 
             if step % save_every == 0:

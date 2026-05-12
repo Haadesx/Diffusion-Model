@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-"""Train a BPE tokenizer on raw JSONL shards."""
 
 import sys
 from pathlib import Path
@@ -23,7 +22,6 @@ try:
     HAS_ZSTD = True
 except ImportError:
     HAS_ZSTD = False
-
 
 def iter_texts_from_shards(raw_dir, shard_files, max_examples=None):
     count = 0
@@ -52,7 +50,6 @@ def iter_texts_from_shards(raw_dir, shard_files, max_examples=None):
                     record = json.loads(line)
                     yield record["text"]
                     count += 1
-
 
 def main():
     parser = argparse.ArgumentParser(description="Train BPE tokenizer")
@@ -107,7 +104,6 @@ def main():
     )
     print_success("Tokenizer meta saved")
 
-    # Demo encode/decode
     sample_text = "Hello, world! This is a test of the diffusion text tokenizer."
     ids = tokenizer.encode(sample_text)
     decoded = tokenizer.decode(ids)
@@ -122,7 +118,6 @@ def main():
     demo.add_row("Decoded", decoded)
     console.print(demo)
     console.print()
-
 
 if __name__ == "__main__":
     main()

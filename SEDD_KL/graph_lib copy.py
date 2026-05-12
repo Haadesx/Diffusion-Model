@@ -4,7 +4,6 @@ import numpy as np
 import torch.nn as nn
 import torch.nn.functional as F
 
-
 from catsample import sample_categorical
 
 def get_graph(config, device):
@@ -13,13 +12,11 @@ def get_graph(config, device):
     else:
         raise ValueError(f"Graph {config.graph.type} not valid")
 
-
 def unsqueeze_as(x, y, back=True):
     if back:
         return x.view(*x.shape, *((1,) * (len(y.shape) - len(x.shape))))
     else:
         return x.view(*((1,) * (len(y.shape) - len(x.shape))), *x.shape)
-
 
 class Graph(abc.ABC):
 
@@ -29,52 +26,26 @@ class Graph(abc.ABC):
 
     @property
     def absorb(self):
-        """
-        Whether input {dim - 1} is an absorbing state (used for denoising to always remove the mask).
-        """
         pass
-
 
     @abc.abstractmethod
     def rate(self, i):
-        """
-        Computes the i-th column of the rate matrix Q, where i is [B_1, ..., B_n].
-
-        This is intended to compute the "forward" rate of p(X_t | X_0 = i).
-        """
         pass
-
 
     @abc.abstractmethod
     def transp_rate(self, i):
-        """
-        Computes the i-th row of the rate matrix Q.
-
-        Can be used to compute the reverse rate.
-        """
         pass
-
 
     @abc.abstractmethod
     def transition(self, i, sigma):
-        """
-        Computes the i-th column of the transition matrix e^{sigma Q}.
-        """
         pass
 
-
     def sample_transition(self, i, sigma):
-        """
-        Samples the transition vector.
-        """
         transition_vector = self.transition(i, sigma)
         return sample_categorical(transition_vector, method="hard")
     
 
     def reverse_rate(self, i, score):
-        """
-        Constructs the reverse rate. Which is score * transp_rate
-        """
         normalized_rate = self.transp_rate(i) * score
 
         normalized_rate.scatter_(-1, i[..., None], torch.zeros_like(normalized_rate))
@@ -87,26 +58,15 @@ class Graph(abc.ABC):
     
     @abc.abstractmethod
     def staggered_score(self, score, dsigma):
-        """
-        Computes p_{sigma - dsigma}(z) / p_{sigma}(x), which is approximated with
-        e^{-{dsigma} E} score
-        """
         pass
     
 
     @abc.abstractmethod
     def sample_limit(self, *batch_dims):
-        """
-        Sample the limiting distribution. Returns the probability vector as well.
-        """
         pass
-
 
     @abc.abstractmethod
     def score_entropy(self, score, sigma, x, x0):
-        """
-        Computes the score entropy function (with requisite constant normalization)
-        """
         pass
 
 class Absorbing(Graph):
@@ -123,8 +83,6 @@ class Absorbing(Graph):
         return True
 
     def rate(self, i):
-        # edge = - F.one_hot(i, num_classes=self.dim)
-        # edge.scatter_add_(-1, i[..., None], torch.ones_like(edge[..., :1]))
         return F.one_hot((self.dim - 1) * torch.ones_like(i), num_classes=self.dim) - F.one_hot(i, num_classes=self.dim)        
 
     def transp_rate(self, i):
@@ -160,7 +118,6 @@ class Absorbing(Graph):
 
     def sample_limit(self, *batch_dims):
         return (self.dim - 1) * torch.ones(*batch_dims, dtype=torch.int64)
-
 
     def score_entropy(self, score, sigma, x, x0):
         rel_ind = x == self.dim - 1

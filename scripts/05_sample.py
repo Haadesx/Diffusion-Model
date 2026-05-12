@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-"""Generate text samples from a trained D3PM model."""
 
 import sys
 from pathlib import Path
@@ -22,7 +21,6 @@ from diffusion_text.progress import (
     console, print_stage_header, print_sample, print_success, print_info, print_kv,
 )
 
-
 def find_best_checkpoint(run_dir):
     ckpt_dir = os.path.join(run_dir, "checkpoints")
     best = glob.glob(os.path.join(ckpt_dir, "best_*.pt"))
@@ -35,7 +33,6 @@ def find_best_checkpoint(run_dir):
     if all_ckpts:
         return sorted(all_ckpts)[-1]
     return None
-
 
 CONTROL_TOKENS = [
     "<RECIPE_START>",
@@ -50,7 +47,6 @@ CONTROL_TOKENS = [
     "<NEXT_INSTR>",
 ]
 
-
 def trim_to_single_recipe(text):
     start = text.find("<RECIPE_START>")
     if start != -1:
@@ -59,7 +55,6 @@ def trim_to_single_recipe(text):
     if end != -1:
         text = text[: end + len("<RECIPE_END>")]
     return text
-
 
 def format_recipe_text(text):
     text = trim_to_single_recipe(text)
@@ -106,7 +101,6 @@ def format_recipe_text(text):
         for idx, step in enumerate(steps, start=1):
             lines.append(f"{idx}. {step}")
     return "\n".join(lines).strip()
-
 
 def main():
     parser = argparse.ArgumentParser(description="Generate samples from D3PM model")
@@ -220,7 +214,6 @@ def main():
         console.print()
         print_success(f"Samples saved to {out_path}")
         console.print()
-
 
 if __name__ == "__main__":
     main()

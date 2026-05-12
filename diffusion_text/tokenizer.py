@@ -2,7 +2,6 @@ import os
 import json
 from tokenizers import Tokenizer, models, trainers, pre_tokenizers, decoders, processors
 
-
 class TextTokenizer:
     SPECIAL_TOKENS = ["[PAD]", "[UNK]", "[BOS]", "[EOS]", "[MASK]"]
 

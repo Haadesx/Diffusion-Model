@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-"""Tokenize raw text shards into fixed-length binary sequences."""
 
 import sys
 from pathlib import Path
@@ -26,7 +25,6 @@ try:
 except ImportError:
     HAS_ZSTD = False
 
-
 def iter_texts_from_shards(raw_dir, shard_files):
     for shard_file in shard_files:
         path = os.path.join(raw_dir, shard_file)
@@ -47,7 +45,6 @@ def iter_texts_from_shards(raw_dir, shard_files):
                         continue
                     record = json.loads(line)
                     yield record["text"]
-
 
 def tokenize_and_pack(tokenizer, text_iter, seq_len, pad_id, eos_id, total_hint=None):
     buffer = []
@@ -75,7 +72,6 @@ def tokenize_and_pack(tokenizer, text_iter, seq_len, pad_id, eos_id, total_hint=
         sequences.append(padded)
 
     return sequences
-
 
 def main():
     parser = argparse.ArgumentParser(description="Tokenize to binary")
@@ -118,7 +114,6 @@ def main():
     console.print()
     print_info(f"Total sequences: [bold]{len(sequences):,}[/bold]")
 
-    # Deterministic train/val split
     train_seqs = []
     val_seqs = []
     for i, seq in enumerate(sequences):
@@ -163,7 +158,6 @@ def main():
     }
     save_json(manifest, os.path.join(out_dir, "manifest.json"))
 
-    # Summary table
     console.print()
     summary = Table(title="[bold green]Tokenization Complete[/bold green]",
                     box=box.ROUNDED, border_style="green")
@@ -179,7 +173,6 @@ def main():
                      f"[bold]{total_tokens:,}[/bold]")
     console.print(summary)
     console.print()
-
 
 if __name__ == "__main__":
     main()

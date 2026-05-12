@@ -4,7 +4,6 @@ from load_model import load_model
 from transformers import GPT2TokenizerFast
 import sampling
 
-
 def main():
     parser = argparse.ArgumentParser(description="Generate some samples")
     parser.add_argument("--model_path", required=True, type=str)

@@ -4,7 +4,6 @@ import numpy as np
 from torch.utils.data import DataLoader, DistributedSampler
 from transformers import GPT2TokenizerFast
 
-
 def cycle_loader(dataloader, sampler=None):
     while 1:
         if sampler is not None:
@@ -89,7 +88,6 @@ def get_dataset(name, mode, cache_dir=None, block_size=1024, num_proc=8):
         concatenated_examples = {k: list(chain(*examples[k])) for k in examples.keys()}
         total_length = len(concatenated_examples[list(examples.keys())[0]])
         total_length = (total_length // block_size) * block_size
-        # Split by chunks of max_len.
         result = {
             k: [t[i : i + block_size] for i in range(0, total_length, block_size)]
             for k, t in concatenated_examples.items()
@@ -101,13 +99,11 @@ def get_dataset(name, mode, cache_dir=None, block_size=1024, num_proc=8):
 
     return chunked_dataset
 
-
 def get_dataloaders(config, distributed=True):
     if config.training.batch_size % (config.ngpus * config.training.accum) != 0:
             raise ValueError(f"Train Batch Size {config.training.batch_size} is not divisible by {config.ngpus} gpus with accumulation {config.training.accum}.")
     if config.eval.batch_size % (config.ngpus * config.training.accum) != 0:
         raise ValueError(f"Eval Batch Size for {config.eval.batch_size} is not divisible by {config.ngpus} gpus with accumulation {config.training.accum}.")
-
 
     train_set = get_dataset(config.data.train, "train", cache_dir=config.data.cache_dir, block_size=config.model.length)
     valid_set = get_dataset(config.data.valid, "validation" if config.data.valid != "text8" else "test", cache_dir=config.data.cache_dir, block_size=config.model.length)

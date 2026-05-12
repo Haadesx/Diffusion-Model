@@ -1,4 +1,3 @@
-"""Training and evaluation."""
 
 import argparse
 import datetime
@@ -9,7 +8,6 @@ import torch.multiprocessing as mp
 
 import utils
 
-
 def default_work_dir(cfg):
     now = datetime.datetime.now()
     return os.path.join(
@@ -19,7 +17,6 @@ def default_work_dir(cfg):
         now.strftime("%H%M%S"),
     )
 
-
 def parse_args():
     parser = argparse.ArgumentParser(description="Train SEDD on the recipe dataset")
     parser.add_argument("--config", default="configs/config.yaml", help="Path to a YAML config file.")
@@ -27,7 +24,6 @@ def parse_args():
     parser.add_argument("--load_dir", default=None, help="Resume a previous run directory containing config.yaml.")
     parser.add_argument("overrides", nargs="*", help="Optional dotlist overrides, e.g. ngpus=1 training.batch_size=8.")
     return parser.parse_args()
-
 
 def main():
     args = parse_args()
@@ -57,7 +53,6 @@ def main():
         mp.spawn(run_train.run_multiprocess, args=(cfg.ngpus, cfg, port), nprocs=cfg.ngpus, join=True)
     except Exception as e:
         logger.critical(e, exc_info=True)
-
 
 if __name__ == "__main__":
     main()

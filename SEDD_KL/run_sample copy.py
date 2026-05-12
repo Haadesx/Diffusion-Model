@@ -6,7 +6,6 @@ from transformers import GPT2TokenizerFast
 import torch.nn.functional as F
 import sampling
 
-
 def main():
     parser = argparse.ArgumentParser(description="Generate some samples")
     parser.add_argument("--model_path", required=True, type=str)

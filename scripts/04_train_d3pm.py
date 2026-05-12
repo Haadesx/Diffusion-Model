@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-"""Train the D3PM discrete diffusion model."""
 
 import sys
 from pathlib import Path
@@ -9,7 +8,6 @@ import argparse
 from diffusion_text.utils import load_config, apply_cli_overrides, get_registry_checkpoint
 from diffusion_text.train import train
 from diffusion_text.progress import print_banner, print_stage_header, console, print_info
-
 
 def main():
     parser = argparse.ArgumentParser(description="Train D3PM diffusion model")
@@ -58,7 +56,6 @@ def main():
     console.print()
 
     run_dir = train(config, resume_checkpoint=resume_path)
-
 
 if __name__ == "__main__":
     main()
