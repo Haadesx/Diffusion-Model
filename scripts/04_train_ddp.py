@@ -6,8 +6,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from diffusion_text.train_ddp import train
-from diffusion_text.utils import apply_cli_overrides, get_registry_checkpoint, load_config
+from diffullm.train_ddp import train
+from diffullm.utils import apply_cli_overrides, get_registry_checkpoint, load_config
 
 def main():
     parser = argparse.ArgumentParser(description="Train D3PM text diffusion model with DDP")

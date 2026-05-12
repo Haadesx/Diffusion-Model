@@ -5,9 +5,9 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import argparse
-from diffusion_text.utils import load_config, apply_cli_overrides, get_registry_checkpoint
-from diffusion_text.train import train
-from diffusion_text.progress import print_banner, print_stage_header, console, print_info
+from diffullm.utils import load_config, apply_cli_overrides, get_registry_checkpoint
+from diffullm.train import train
+from diffullm.progress import print_banner, print_stage_header, console, print_info
 
 
 def main():

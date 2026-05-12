@@ -10,11 +10,11 @@ import argparse
 import re
 import torch
 
-from diffusion_text.utils import load_config, apply_cli_overrides, get_device, timestamp, load_json
-from diffusion_text.tokenizer import TextTokenizer
-from diffusion_text.train import build_model, load_checkpoint
-from diffusion_text.diffusion import sample
-from diffusion_text.progress import console, print_stage_header, print_sample, print_success, print_info, print_kv
+from diffullm.utils import load_config, apply_cli_overrides, get_device, timestamp, load_json
+from diffullm.tokenizer import TextTokenizer
+from diffullm.train import build_model, load_checkpoint
+from diffullm.diffusion import sample
+from diffullm.progress import console, print_stage_header, print_sample, print_success, print_info, print_kv
 
 CTRL = [
     "<RECIPE_START>", "<RECIPE_END>", "<TITLE_START>", "<TITLE_END>",

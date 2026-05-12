@@ -12,11 +12,11 @@ import torch.distributed as dist
 from torch.nn.parallel import DistributedDataParallel
 from torch.utils.data import DataLoader, DistributedSampler
 
-from diffusion_text.data import TokenDataset, load_tokenized_manifest
-from diffusion_text.diffusion import compute_loss
-from diffusion_text.model import D3PMTransformer
-from diffusion_text.train import lr_schedule, sample_timesteps, try_amp
-from diffusion_text.utils import (
+from diffullm.data import TokenDataset, load_tokenized_manifest
+from diffullm.diffusion import compute_loss
+from diffullm.model import D3PMTransformer
+from diffullm.train import lr_schedule, sample_timesteps, try_amp
+from diffullm.utils import (
     get_git_hash,
     make_run_dir,
     save_json,
@@ -26,7 +26,7 @@ from diffusion_text.utils import (
     update_global_registry,
 )
 
-logger = logging.getLogger("diffusion_text")
+logger = logging.getLogger("diffullm")
 
 try:
     from lootqdm import GameUI

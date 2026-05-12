@@ -11,9 +11,9 @@ import argparse
 from rich.table import Table
 from rich import box
 
-from diffusion_text.utils import load_config, apply_cli_overrides, sha256_file, load_json
-from diffusion_text.tokenizer import TextTokenizer
-from diffusion_text.progress import (
+from diffullm.utils import load_config, apply_cli_overrides, sha256_file, load_json
+from diffullm.tokenizer import TextTokenizer
+from diffullm.progress import (
     console, print_stage_header, print_success, print_info, print_kv,
 )
 

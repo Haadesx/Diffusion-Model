@@ -16,10 +16,10 @@ import torch
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from diffusion_text.diffusion import sample
-from diffusion_text.tokenizer import TextTokenizer
-from diffusion_text.train import build_model, load_checkpoint
-from diffusion_text.utils import apply_cli_overrides, get_device, load_config, load_json
+from diffullm.diffusion import sample
+from diffullm.tokenizer import TextTokenizer
+from diffullm.train import build_model, load_checkpoint
+from diffullm.utils import apply_cli_overrides, get_device, load_config, load_json
 
 CONTROL_TOKENS = [
     "RECIPE_START",

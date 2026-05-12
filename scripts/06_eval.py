@@ -8,9 +8,9 @@ import os
 import glob
 import argparse
 
-from diffusion_text.utils import load_config, apply_cli_overrides
-from diffusion_text.eval import run_eval
-from diffusion_text.progress import (
+from diffullm.utils import load_config, apply_cli_overrides
+from diffullm.eval import run_eval
+from diffullm.progress import (
     console, print_stage_header, print_eval_results, print_success, print_kv,
 )
 

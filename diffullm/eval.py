@@ -4,13 +4,13 @@ import logging
 
 import torch
 
-from diffusion_text.model import D3PMTransformer
-from diffusion_text.diffusion import compute_loss, forward_corrupt
-from diffusion_text.data import create_dataloader
-from diffusion_text.train import build_model, load_checkpoint
-from diffusion_text.progress import make_eval_progress
+from diffullm.model import D3PMTransformer
+from diffullm.diffusion import compute_loss, forward_corrupt
+from diffullm.data import create_dataloader
+from diffullm.train import build_model, load_checkpoint
+from diffullm.progress import make_eval_progress
 
-logger = logging.getLogger("diffusion_text")
+logger = logging.getLogger("diffullm")
 
 @torch.no_grad()
 def evaluate_full(model, val_loader, config, device, mask_id, pad_id, num_batches=200):
@@ -70,8 +70,8 @@ def evaluate_full(model, val_loader, config, device, mask_id, pad_id, num_batche
     }
 
 def run_eval(config, checkpoint_path, run_dir=None):
-    from diffusion_text.utils import get_device, save_json, setup_logging
-    from diffusion_text.progress import console
+    from diffullm.utils import get_device, save_json, setup_logging
+    from diffullm.progress import console
 
     device = get_device()
     data_dir = config["paths"]["data_dir"]

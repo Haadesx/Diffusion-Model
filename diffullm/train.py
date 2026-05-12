@@ -6,16 +6,16 @@ import logging
 
 import torch
 
-from diffusion_text.model import D3PMTransformer
-from diffusion_text.diffusion import compute_loss
-from diffusion_text.data import create_dataloader
-from diffusion_text.utils import (
+from diffullm.model import D3PMTransformer
+from diffullm.diffusion import compute_loss
+from diffullm.data import create_dataloader
+from diffullm.utils import (
     get_device, set_seed, get_git_hash, save_json, timestamp,
     make_run_dir, setup_logging, update_global_registry,
 )
-from diffusion_text.progress import TrainingDashboard, console, print_success, print_info
+from diffullm.progress import TrainingDashboard, console, print_success, print_info
 
-logger = logging.getLogger("diffusion_text")
+logger = logging.getLogger("diffullm")
 
 
 def build_model(config, vocab_size, device):
