@@ -1,9 +1,3 @@
-#!/usr/bin/env bash
-# Amarel open-access GPU submission script.
-# Notes:
-# - The general-access GPU queue on Amarel is "gpu".
-# - General-access jobs may be preempted, so this script enables requeue.
-# - The general runtime cap documented for Amarel general-access jobs is 3 days.
 
 #SBATCH --partition=gpu
 #SBATCH --requeue
