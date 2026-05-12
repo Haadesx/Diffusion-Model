@@ -23,17 +23,8 @@ from rich import box
 
 console = Console()
 
-BANNER = r"""[bold cyan]
-    ╔══════════════════════════════════════════════════════════╗
-    ║   ░█▀▄░▀█▀░█▀▀░█▀▀░█░█░█▀▀░▀█▀░█▀█░█▀█               ║
-    ║   ░█░█░░█░░█▀▀░█▀▀░█░█░▀▀█░░█░░█░█░█░█               ║
-    ║   ░▀▀░░▀▀▀░▀░░░▀░░░▀▀▀░▀▀▀░▀▀▀░▀▀▀░▀░▀               ║
-    ║          [bold white]D3PM Discrete Diffusion for Text[/bold white]             ║
-    ╚══════════════════════════════════════════════════════════╝
-[/bold cyan]"""
-
 def print_banner():
-    console.print(BANNER)
+    pass
 
 def make_header_panel(title, subtitle="", style="bold cyan"):
     content = Text(title, style=style, justify="center")
